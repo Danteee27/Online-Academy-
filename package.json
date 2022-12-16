@@ -1,5 +1,6 @@
 {
   "name": "online-academy",
+  "type": "module",
   "version": "1.0.0",
   "description": "No",
   "main": "app.js",
@@ -34,3 +35,4 @@
   },
   "homepage": "https://github.com/Danteee27/Online-Academy-#readme"
 }
+
