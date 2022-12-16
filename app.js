@@ -9,7 +9,7 @@ const app = express();
 app.use(express.urlencoded({
     extended: true
   }));
-app.use('/public', express.static('public'));
+app.use(express.static('public'));
 
 activate_locals_middleware(app);
 activate_views_middleware(app);
