@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a0868c9-05d5-4b25-97b2-f06d08696391" name="Changes" comment="First commit - Init project">
-      <change afterPath="$PROJECT_DIR$/public/imgs/1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/imgs/2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/imgs/3.jpg" afterDir="false" />
+    <list default="true" id="9a0868c9-05d5-4b25-97b2-f06d08696391" name="Changes" comment="+ update file home.hbs (create carousel for home page)&#10;+ insert img for demo home page">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/middlewares/error.mdw.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/404.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/500.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Online Academy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Online Academy.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/home.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.hbs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/layouts/layout1.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/layout1.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middlewares/routes.mdw.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/routes.mdw.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +27,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -41,11 +45,23 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Session 7/javacode/Online-Academy/Online-Academy-/views",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "JavaScript.Libraries"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Session 7\javacode\Online-Academy\Online-Academy-\views" />
+    </key>
+  </component>
   <component name="RunManager" selected="Node.js.app.js">
     <configuration name="app" type="NodeJSConfigurationType" working-dir="$PROJECT_DIR$">
       <method v="2" />
@@ -73,7 +89,8 @@
       <updated>1670845875855</updated>
       <workItem from="1670845877519" duration="595000" />
       <workItem from="1671172531805" duration="6812000" />
-      <workItem from="1671184854302" duration="1394000" />
+      <workItem from="1671184854302" duration="4344000" />
+      <workItem from="1671202209868" duration="1739000" />
     </task>
     <task id="LOCAL-00001" summary="First commit - Init project">
       <created>1670846200947</created>
@@ -82,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670846200947</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="+ update file home.hbs (create carousel for home page)&#10;+ insert img for demo home page">
+      <created>1671186354175</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1671186354175</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -102,7 +126,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="First commit - Init project" />
-    <option name="LAST_COMMIT_MESSAGE" value="First commit - Init project" />
+    <MESSAGE value="+ update file home.hbs (create carousel for home page)&#10;+ insert img for demo home page" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ update file home.hbs (create carousel for home page)&#10;+ insert img for demo home page" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
