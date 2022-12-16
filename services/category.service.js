@@ -7,5 +7,20 @@ export default {
 
     findAllByField(fieldID) {
         return db('categories').where('fieldID', fieldID);
+    },
+
+    async findCatIDByCatName(catName) {
+        const list = await db('categories').where('catName', catName);
+        return list[0].catID;
+    },
+
+    async findCatNameByCatID(catID) {
+        const list = await db('categories').where('catID', catID);
+        return list[0].catName;
+    },
+
+    async findFieldIDByCatID(catID) {
+        const list = await db('categories').where('catID', catID);
+        return list[0].fieldID;
     }
 };

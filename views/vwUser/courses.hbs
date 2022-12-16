@@ -1,0 +1,41 @@
+
+
+<div class="card">
+  <p class="card-header d-flex">
+    <a class="aPath" href="javascript:;">{{fieldName}}</a> ❯ <a class=""aPath href="javascript:;">{{catName}}</a>
+  </p>
+
+  <div class="card-body">
+    {{#if this.empty}}
+        <p class="card-title">Không có dữ liệu</p>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    {{else}}
+    <div class="row">
+        {{#each this.course}}
+        <div class="col-sm-4 mb-3">
+            <div class="card h-100">
+                <img class="card-img-top" src="/imgs/1.jpg">
+                <div class="card-body">
+                    <h5 class="card-title">{{courseTitle}}</h5>
+                    <p class="card-text">{{catName}}</p>
+                    <p class="card-text">{{instructor}}</p>
+                    <p class="card-text">{{rating}} - {{rating_num}}</p>
+                    <h5 class="card-title text-danger">{{format_number price}}</h5>
+                </div>
+                <div class="card-footer text-muted">
+                    <a class="btn btn-outline-primary btn-sm" href="#" role="button">
+                    <i class="fa fa-eye"></i>
+                    Details
+                    </a>
+                    <a class="btn btn-outline-success btn-sm" href="" role="button">
+                    <i class="fa fa-cart-plus"></i>
+                    Add to cart
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+  </div>
+</div>

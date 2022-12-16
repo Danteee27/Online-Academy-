@@ -10,9 +10,9 @@ import activate_error_middleware from './middlewares/error.mdw.js';
 const app = express();
 app.use(morgan('dev'));
 app.use(express.urlencoded({
-    extended: true
-  }));
-app.use('/public',express.static('public'));
+  extended: true
+}));
+app.use(express.static('public'));
 
 activate_locals_middleware(app);
 activate_views_middleware(app);
