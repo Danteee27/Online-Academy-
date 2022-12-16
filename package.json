@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "online-academy",
   "version": "1.0.0",
   "description": "No",
@@ -27,8 +28,7 @@
     "moment": "^2.29.4",
     "mysql2": "^2.3.3",
     "numeral": "^2.0.6"
-  }
-  ,
+  },
   "bugs": {
     "url": "https://github.com/Danteee27/Online-Academy-/issues"
   },
