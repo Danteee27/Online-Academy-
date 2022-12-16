@@ -6,10 +6,43 @@ export default {
         return await db('categories');
     },
 
-    async findById(catID) {
-        return await db('categories').where('catID', catID).first();
+    findById(catID) {
+        return db('categories').where('catID', catID).first();
     },
 
-    
+    findByFieldID(fieldID) {
+        return db('categories').where('fieldID', fieldID);
+    },
+    async countByFieldID(fieldID)
+    {
+        const list = await db('categories').where('fieldID', fieldID).count({amount: 'catID'});
+
+        return list[0].amount;
+    }
+    ,
+
+    add(category)
+    {
+        return db('categories').insert(category);
+    },
+    update(catID, newCategory)
+    {
+        return db('categories').where('catID', catID).update(newCategory);
+    },
+    hide(catID)
+    {
+        return db('categories').where('catID', catID).update({ hidden: 1 });
+    },
+    unhide(catID)
+    {
+        return db('categories').where('catID', catID).update({ hidden: 0 });
+    }
+    ,
+    del(catID)
+    {
+        return db('categories').where('catID', catID).del();
+    }
+
+
 
 }

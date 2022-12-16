@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a0868c9-05d5-4b25-97b2-f06d08696391" name="Changes" comment="Directories init">
+    <list default="true" id="9a0868c9-05d5-4b25-97b2-f06d08696391" name="Changes" comment="Route middlewares update, delete trash files">
       <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/courses.route.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/fields.route.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/database_fields_scripts.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/categories.service.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/courses.service.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/fields.service.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/home.hbs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/layouts/main.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/lectures.route.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/lectures.service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middlewares/view.mdw.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/view.mdw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/test.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/routes.mdw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/test.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/categories.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/categories.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/categories.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/courses.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/courses.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/fields.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/fields.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +40,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -58,6 +52,9 @@
   "keyToStringList": {
     "DatabaseDriversLRU": [
       "mysql"
+    ],
+    "com.intellij.ide.scratch.LRUPopupBuilder$1/": [
+      "MySQL"
     ]
   }
 }]]></component>
@@ -77,7 +74,7 @@
       <workItem from="1670845877519" duration="5188000" />
       <workItem from="1670906843322" duration="1200000" />
       <workItem from="1670989769108" duration="1196000" />
-      <workItem from="1671085686187" duration="8451000" />
+      <workItem from="1671085686187" duration="12858000" />
     </task>
     <task id="LOCAL-00001" summary="First commit - Init project">
       <created>1670846200947</created>
@@ -93,7 +90,28 @@
       <option name="project" value="LOCAL" />
       <updated>1670846553010</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fake hbs, package.json update, db knex init">
+      <created>1671168383336</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1671168383336</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fields, categories, courses routes and services init.&#10;Routes and view middlewares init with MySQL script">
+      <created>1671168512311</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1671168512311</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Route middlewares update, delete trash files">
+      <created>1671168586010</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1671168586010</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -114,7 +132,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="First commit - Init project" />
     <MESSAGE value="Directories init" />
-    <option name="LAST_COMMIT_MESSAGE" value="Directories init" />
+    <MESSAGE value="Fake hbs, package.json update, db knex init" />
+    <MESSAGE value="Fields, categories, courses routes and services init.&#10;Routes and view middlewares init with MySQL script" />
+    <MESSAGE value="Route middlewares update, delete trash files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Route middlewares update, delete trash files" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -6,10 +6,33 @@ export default {
         return await db('fields');
     },
 
-    async findById(fieldID) {
-        return await db('fields').where('fieldID', fieldID).first();
+    findById(fieldID) {
+        return db('fields').where('fieldID', fieldID).first();
     },
 
+    add(field)
+    {
+        return db('fields').insert(field);
+    },
+
+    update(fieldID, field)
+    {
+        return db('fields').where('fieldID',fieldID).update(field);
+    }
+    ,
+    hide(fieldID)
+    {
+        return db('fields').where('fieldID',fieldID).update({ hidden: 1 });
+    },
+    unhide(fieldID)
+    {
+        return db('fields').where('fieldID',fieldID).update({ hidden: 0 });
+    }
+    ,
+    del(fieldID)
+    {
+        return db('fields').where('fieldID',fieldID).del();
+    }
 
 
 }
