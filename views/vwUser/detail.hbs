@@ -1,1 +1,27 @@
-<h1>{{this.course.title}}</h1>
+<div class="card">
+  <p class="card-header d-flex aPath">
+    <a class="aPath" href="javascript:;">{{fieldName}}</a>
+    <span>&nbsp;&nbsp;❯&nbsp;&nbsp;</span>
+    <a class="aPath" href="javascript:;">{{catName}}</a>
+  </p>
+
+  <div class="card-body course-card-body">
+    <img class="course-img" src="https://drive.google.com/uc?export=view&id={{course.image}}">
+    <h1 class="card-title">{{course.title}}</h1>
+    <p class="card-text">{{course.tinydes}}</p>
+    <p class="card-text">
+        <span class="rating">{{course.rating}}</span>&nbsp;
+        {{#each course.star}}
+            <span class="fa fa-star {{#if this}}star-checked{{/if}}"></span>
+        {{/each}}
+        &nbsp;
+        <span class="course-rating-num">({{format_number course.rating_num}} ratings)</span>
+        &nbsp;
+        <span>{{format_number course.student_num}} students</span>
+    </p>
+    <p class="card-text">Instructor: <span class="course-instructor">{{course.instructor}}</span></p>
+    <p class="card-text">Last updated <span>{{course.update}}</span></p>
+  </div>
+</div>
+
+

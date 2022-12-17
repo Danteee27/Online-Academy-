@@ -37,6 +37,17 @@ router.get('/category/:id', async function (req, res) {
     }
     const list = await courseService.findPageByCatID(catID, limit, offset);
     categoryService.addCatNameToCourse(list, catName);
+
+    for (let i = 0; i < list.length; i++) {
+        const star = [];
+        for (let j = 1; j <= 5; j++) {
+            if (j <= +list[i].rating)
+                star.push(true);
+            else
+                star.push(false);
+        }
+        list[i].star = star;
+    }
     // console.log(list);
     res.render('vwUser/courses', {
         course: list,
@@ -56,9 +67,24 @@ router.get('/detail', async function (req, res) {
     const courseID = req.query.id;
 
     const course = await courseService.findByDetail(catID, courseID);
+    const fieldID = await categoryService.findFieldIDByCatID(catID);
+    const fieldName = await fieldService.findFieldNameByFieldID(fieldID);
+    const catName = await categoryService.findCatNameByCatID(catID);
+
+    const star = [];
+    for (let j = 1; j <= 5; j++) {
+        if (j <= +course.rating)
+            star.push(true);
+        else
+            star.push(false);
+    }
+    course.star = star;
+    res.locals.lcTitle = course.courseName + " | " + res.locals.lcTitle;
 
     res.render('vwUser/detail', {
-        course
+        course,
+        fieldName,
+        catName
     })
 });
 

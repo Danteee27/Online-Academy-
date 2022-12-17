@@ -66,8 +66,10 @@
     background-color: white;
 }
 
-.aPath {
-    color:rgb(27, 25, 145);
+.aPath, .aPath:hover {
+    font-weight: bold;
+    text-decoration: none;
+    color:black;
 }
 
 .course-card {
@@ -131,4 +133,24 @@
 
 .row {
     margin: 0 50px;
+}
+
+.course-card-body {
+    padding: 5px;
+}
+
+.course-rating-num {
+    color: purple;
+    text-decoration: underline;
+}
+.course-instructor {
+    color: purple;
+    text-decoration: underline;
+}
+
+.course-img {
+    width: 40%;
+    float: left;
+    margin-right: 20px;
+    border: 1px solid;
 }

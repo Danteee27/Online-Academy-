@@ -8,6 +8,7 @@ export default function (app) {
         for (let i = 0; i < fieldLen; i++) {
             res.locals.lcFields[i].lcCategories = await categoryService.findAllByField(res.locals.lcFields[i].fieldID);
         }
+        res.locals.lcTitle = "Online Academy";
         // res.locals.lcCategories = await categoryService.findAll();
 
         next();
