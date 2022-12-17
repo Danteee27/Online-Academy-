@@ -1,8 +1,10 @@
 
 
 <div class="card">
-  <p class="card-header d-flex">
-    <a class="aPath" href="javascript:;">{{fieldName}}</a> ❯ <a class=""aPath href="javascript:;">{{catName}}</a>
+  <p class="card-header d-flex aPath">
+    <a href="javascript:;">{{fieldName}}</a>
+    <span>&nbsp;❯&nbsp;</span>
+    <a href="javascript:;">{{catName}}</a>
   </p>
 
   <div class="card-body">
@@ -10,32 +12,44 @@
         <p class="card-title">Không có dữ liệu</p>
         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
     {{else}}
-    <div class="row">
+        <div class="row">
         {{#each this.course}}
-        <div class="col-sm-4 mb-3">
-            <div class="card h-100">
-                <img class="card-img-top" src="/imgs/1.jpg">
-                <div class="card-body">
-                    <h5 class="card-title">{{courseTitle}}</h5>
-                    <p class="card-text">{{catName}}</p>
-                    <p class="card-text">{{instructor}}</p>
-                    <p class="card-text">{{rating}} - {{rating_num}}</p>
-                    <h5 class="card-title text-danger">{{format_number price}}</h5>
-                </div>
-                <div class="card-footer text-muted">
-                    <a class="btn btn-outline-primary btn-sm" href="#" role="button">
-                    <i class="fa fa-eye"></i>
-                    Details
-                    </a>
-                    <a class="btn btn-outline-success btn-sm" href="" role="button">
-                    <i class="fa fa-cart-plus"></i>
-                    Add to cart
-                    </a>
-                </div>
+          <div class="col-sm-3 mb-3" type="button">
+            <a class="course-card-a" href="/course/detail?catID={{catID}}&id={{courseID}}">
+            <div class="course-card">
+                <img class= "course-card-img" src="/imgs/course1.jpeg" alt="">
+                <h5 class="course-card-title">{{title}}</h5>
+                <p class="course-card-instructor">{{instructor}}</p>
+                <span class="rating">{{rating}}</span>
+                <span class="fa fa-star star-checked"></span>
+                <span class="fa fa-star star-checked"></span>
+                <span class="fa fa-star star-checked"></span>
+                <span class="fa fa-star star-checked"></span>
+                <span class="fa fa-star"></span>
+                <span>&nbsp;({{format_number rating_num}})</span>
+                <p class="price">₫{{format_number price}}</p>
             </div>
-        </div>
+            </a>
+          </div>
         {{/each}}
-    </div>
-    {{/if}}
+        </div>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-end">
+            <li class="page-item {{#unless hasPrevPage}}disabled{{/unless}}">
+              <a class="page-link" href="?page={{this.prevPage}}">Previous</a>
+            </li>
+          {{#each this.pageNumbers}}
+            <li class="page-item  {{#if isCurrent}}active{{/if}}">
+              <a class="page-link" href="{{#if isCurrent}}javascript:;{{else}}?page={{value}}{{/if}}">
+                {{value}}
+              </a>
+            </li>
+          {{/each}}
+            <li class="page-item {{#unless hasNextPage}}disabled{{/unless}}">
+              <a class="page-link" href="?page={{this.nextPage}}">Next</a>
+            </li>
+          </ul>
+        </nav>
+  {{/if}}
   </div>
 </div>

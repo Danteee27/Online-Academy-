@@ -22,5 +22,11 @@ export default {
     async findFieldIDByCatID(catID) {
         const list = await db('categories').where('catID', catID);
         return list[0].fieldID;
+    },
+
+    addCatNameToCourse(list, catName) {
+        let n = list.length;
+        for (let i = 0; i < n; i++)
+            list[i].catName = catName;
     }
 };
