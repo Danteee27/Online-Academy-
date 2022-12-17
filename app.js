@@ -3,7 +3,11 @@ import activate_routes from './middlewares/routes.mdw.js';
 import activate_view from './middlewares/view.mdw.js';
 
 
+// import bodyParser from 'body-parser';
+// app.use(bodyParser.urlencoded({ extended: false }));
+
 const app = express();
+app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }));

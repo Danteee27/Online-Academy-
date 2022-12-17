@@ -9,8 +9,13 @@ export default function (app) {
         res.render('home');
     });
 
+    app.get('/admin', function (req, res) {
+        res.render('vwAdmin/index')
+    })
+
     app.use('/courses', coursesRoute);
     app.use('/fields', fieldsRoute);
     app.use('/categories', categoriesRoute);
     app.use('/lectures', lecturesRoute);
+
 }

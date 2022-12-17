@@ -17,6 +17,7 @@ export default {
 
     update(fieldID, field)
     {
+        console.log(field);
         return db('fields').where('fieldID',fieldID).update(field);
     }
     ,

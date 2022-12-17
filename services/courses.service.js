@@ -18,6 +18,7 @@ export default {
     async countByCategoryID(catID)
     {
         const list = db('courses').where('catID', catID).count({amount: 'courseID'});
+        console.log(list);
         return list[0].amount;
     },
 
