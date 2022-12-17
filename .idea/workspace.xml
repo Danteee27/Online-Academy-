@@ -1,26 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a0868c9-05d5-4b25-97b2-f06d08696391" name="Changes" comment="app.js for testing">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/vwAdmin/byCategory.hbs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/vwAdmin/byCourse.hbs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/vwAdmin/byField.hbs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/vwAdmin/byLecture.hbs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/vwAdmin/index.hbs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/vwAdmin/vwField/add.hbs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/vwAdmin/vwField/edit.hbs" afterDir="false" />
+    <list default="true" id="9a0868c9-05d5-4b25-97b2-f06d08696391" name="Changes" comment="Update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/middlewares/routes.mdw.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/routes.mdw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/categories.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/categories.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/courses.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/courses.route.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/fields.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/fields.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/lectures.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/lectures.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/courses.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/courses.service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/fields.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/fields.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/vwAdmin/byField.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/vwAdmin/byField.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/vwAdmin/vwField/add.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/vwAdmin/vwField/add.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/vwAdmin/vwField/edit.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/vwAdmin/vwField/edit.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +79,7 @@
       <workItem from="1670845877519" duration="5188000" />
       <workItem from="1670906843322" duration="1200000" />
       <workItem from="1670989769108" duration="1196000" />
-      <workItem from="1671085686187" duration="35102000" />
+      <workItem from="1671085686187" duration="37128000" />
     </task>
     <task id="LOCAL-00001" summary="First commit - Init project">
       <created>1670846200947</created>
@@ -143,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671250094830</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Update">
+      <created>1671293393371</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1671293393371</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -169,7 +163,8 @@
     <MESSAGE value="Route middlewares update, delete trash files" />
     <MESSAGE value="Lectures route, service. Update all route and service for general use" />
     <MESSAGE value="app.js for testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="app.js for testing" />
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -21,9 +21,17 @@ router.get('/view/:id', async function(req, res) {
 })
 
 // ROLE.ADMIN ONLY
-router.post('/add', async function(req, res) {
+router.get('/add', function (req, res) {
+    res.render('vwAdmin/vwField/add');
+});
+
+// ROLE.ADMIN ONLY
+router.post('/add', async function (req, res) {
+
     const ret = await fieldsService.add(req.body);
-})
+
+    res.render('vwAdmin/vwField/add');
+});
 
 // ROLE.ADMIN ONLY
 router.post('/del', async function(req, res) {
