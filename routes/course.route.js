@@ -77,6 +77,8 @@ router.get('/detail', async function (req, res) {
     const fieldName = await fieldService.findFieldNameByFieldID(fieldID);
     const catName = await categoryService.findCatNameByCatID(catID);
     const lecture = await lectureService.findAllByCourseID(courseID);
+    const recommendList = await courseService.find5BestSellerCoursesByCatID(courseID, catID);
+    const feedbackList = await feedbackService.findByCourseID(courseID);
 
     for (let i = 0; i < lecture.length; i++) {
         lecture[i].newLectureID = _.kebabCase(lecture[i].lecName);
@@ -97,8 +99,17 @@ router.get('/detail', async function (req, res) {
     course.star = star;
     res.locals.lcTitle = course.courseName + " | " + res.locals.lcTitle;
 
-    const recommendList = await courseService.find5BestSellerCoursesByCatID(courseID, catID);
-    const feedbackList = await feedbackService.findByCourseID(courseID);
+    for (let i = 0; i < feedbackList.length; i++) {
+        const star = [];
+        for (let j = 1; j <= 5; j++) {
+            if (j <= +feedbackList[i].rating)
+                star.push(true);
+            else
+                star.push(false);
+        }
+        feedbackList[i].star = star;
+    }
+
 
     res.render('vwUser/detail', {
         course,
