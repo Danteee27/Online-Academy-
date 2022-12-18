@@ -1,0 +1,79 @@
+<!--Phan Huy profile view-->
+<div class="row rounded-14.5 shadow-lg rounded-20 border-info">
+    <div class="col-lg-12 mx-auto mt-3">
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-3 pt-0 pb-3" style="background-image: url({{this.user.background}})">
+                <div class="media align-items-end profile-head">
+                    <div id="#head-profile" class="profile mr-3 mt-5">
+                        <img src="{{this.user.userAvatar}}" alt="..." width="350" class="rounded-circle mb-2 img-thumbnail">
+                        <a href="/profile/edit?id=1" class="btn btn-outline-dark btn-lg btn-block"><i class="fa fa-edit">Edit profile</i></a>
+                    </div>
+                </div>
+                <div class="media-body mb-5 text-white mt-3">
+                    <h4 class="mt-0 mb-0">{{this.user.name}}</h4>
+                    <p class="mb-4"> <i class="fa fa-location-arrow" aria-hidden="true">{{this.user.userAddr}}</i></p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-light p-4 d-flex justify-content-end text-center">
+            <ul class="list-inline mb-0" style="color: black;">
+                <li class="list-inline-item">
+                    <h5 class="font-weight-bold mb-0 d-block">{{this.user.courses_num}}</h5><small class="text-muted"> <i class="fa fa-book mr-1"></i>Courses</small>
+                </li>
+                <li class="list-inline-item">
+                    <h5 class="font-weight-bold mb-0 d-block">9999</h5><small class="text-muted"> <i class="fa fa-heart mr-1" style="color: red"></i>Followers</small>
+                </li>
+                <li class="list-inline-item">
+                    <h5 class="font-weight-bold mb-0 d-block">4.6</h5><small class="text-muted"> <i class="fa fa-star mr-1" style="color: yellowgreen"></i></small>
+                </li>
+            </ul>
+        </div>
+        <div class="px-4 py-3">
+            <h4 id="#about" class="mb-1">About</h4>
+            <div class="p-4 rounded shadow-sm bg-light">
+                <p class="font-italic mb-0">(Co the them truong about vao phan TT users)</p>
+                <p class="font-italic mb-0">Web Developer</p>
+                <p class="font-italic mb-0">HCMUSSSSSSSS</p>
+                <p class="font-italic mb-0">Song o Tay Ninh</p>
+                <p class="font-italic mb-0">Giao vien sieu cap vo dich giang phat hieu ngay khoa hoc sieu re sales 99%!!!!</p>
+            </div>
+        </div>
+        <div class="py-4 px-4">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h4 id="#courses" class="mb-0">My Courses</h4>
+                <a href="#" class="btn btn-group-sm btn-outline-dark">Add course</a>
+            </div>
+            <div class="row">
+                    {{#if this.empty}}
+                        <div class="card-body">
+                            Không có dữ liệu!
+                        </div>
+                    {{else}}
+                    <div class="card-body">
+                        <section id="gallery">
+                            <div class="container">
+                                <div class="row">
+                                    {{#each this.courses}}
+                                        <div class="col-lg-4 mb-4">
+                                            <a href="/course/{{courseID}}_{{courseName}}">
+                                                <div class="card" >
+                                                    <img src="https://img-c.udemycdn.com/course/480x270/2776760_f176_10.jpg" alt="" class="card-img-top">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">{{courseName}}</h5>
+                                                        <p class="card-text">{{description}}</p>
+                                                        <a href="" class="btn btn-outline-success btn-sm">Edit</a>
+                                                        <a href="" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i>Delete</a>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </section>
+                    {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
