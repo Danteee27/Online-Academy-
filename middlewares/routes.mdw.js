@@ -1,13 +1,23 @@
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 import coursesRoute from "../routes/courses.route.js";
 import fieldsRoute from "../routes/fields.route.js";
 import categoriesRoute from "../routes/categories.route.js";
+<<<<<<< Updated upstream
 import lecturesRoute from "../routes/lectures.route.js";
+=======
+import usersRoute from "../routes/users.route.js";
+>>>>>>> Stashed changes
 
 export default function (app) {
     app.get('/', function (req, res) {
         res.render('home');
     });
+    app.use('/user', usersRoute);
+
+
+
 
     app.get('/admin', function (req, res) {
         res.render('vwAdmin/index')
