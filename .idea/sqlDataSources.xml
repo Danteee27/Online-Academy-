@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="979b5a21-5d0e-4e50-bd92-3eeda837b2db" name="qlkh@localhost Mapping">
+      <data-sources db="3e844c47-926f-473e-bfbe-ebd8af279751" />
+      <scope>
+        <node kind="schema">
+          <name qname="performance_schema" />
+          <name qname="phpmyadmin" />
+          <name qname="qlbh" />
+          <name qname="qlkh" />
+        </node>
+      </scope>
+    </mapping>
+  </component>
+</project>
