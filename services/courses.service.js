@@ -9,8 +9,11 @@ export default {
     findById(courseID) {
         return db('courses').where('courseID', courseID).first();
     },
-
-    findByCategoryID(catID)
+    //Phan Huy - For show courses of teacher by role and id teacher number is teacher id
+    async findByUserId(userID) {
+        return await db('courses').where('teacherNumber', userID);
+    },
+    async findByCategoryID(catID)
     {
         return db('courses').where('catID', catID);
     },
@@ -45,5 +48,7 @@ export default {
     {
         return db('courses').where('courseID',courseID).del();
     }
+
+
 
 }
