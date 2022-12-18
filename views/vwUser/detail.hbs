@@ -73,9 +73,11 @@
 </div>
 
 <div class="card-body">
-  <div class="main-des">
+  <div class="recommend">
     <h4>Students also bought</h4>
-    <p class="card-text">{{course.maindes}}</p>
+    {{#each recommendItem}}
+      <a href="/course/detail?catID={{catID}}&id={{courseID}}" class="card-text">{{courseName}}</a><br>
+    {{/each}}
   </div>
 </div>
 
@@ -87,9 +89,16 @@
 </div>
 
 <div class="card-body">
-  <div class="main-des">
+  <div class="feedback">
     <h4>Feedbacks</h4>
-    <p class="card-text">{{course.maindes}}</p>
+    {{#each feedback}}
+      <p class="card-text">
+        <span>Author: {{author}}</span><br>
+        <span>Title: {{title}}</span><br>
+        <span>Content: {{content}}</span><br>
+        <span>Date: {{date}}</span><br>
+      </p>
+    {{/each}}
   </div>
 </div>
 

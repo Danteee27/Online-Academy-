@@ -29,5 +29,10 @@ export default {
         };
         list[0].update = event.toLocaleDateString("en-US", options);
         return list[0];
+    },
+
+    async find5BestSellerCoursesByCatID(curCourseID, catID) {
+        const list = await db('courses').where('catID', catID).whereNot('courseID', curCourseID).limit(5).orderBy('student_num', 'desc');
+        return list;
     }
 };

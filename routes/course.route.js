@@ -4,6 +4,7 @@ import courseService from '../services/course.service.js';
 import categoryService from '../services/category.service.js';
 import fieldService from '../services/field.service.js';
 import lectureService from '../services/lecture.service.js';
+import feedbackService from '../services/feedback.service.js';
 
 const router = express.Router();
 
@@ -79,7 +80,6 @@ router.get('/detail', async function (req, res) {
 
     for (let i = 0; i < lecture.length; i++) {
         lecture[i].newLectureID = _.kebabCase(lecture[i].lecName);
-        console.log(lecture[i].newLectureID);
     }
 
     course.hasPromotion = false;
@@ -97,11 +97,16 @@ router.get('/detail', async function (req, res) {
     course.star = star;
     res.locals.lcTitle = course.courseName + " | " + res.locals.lcTitle;
 
+    const recommendList = await courseService.find5BestSellerCoursesByCatID(courseID, catID);
+    const feedbackList = await feedbackService.findByCourseID(courseID);
+
     res.render('vwUser/detail', {
         course,
         fieldName,
         catName,
-        lecture
+        lecture,
+        recommendItem: recommendList,
+        feedback: feedbackList
     })
 });
 
