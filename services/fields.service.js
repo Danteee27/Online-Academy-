@@ -6,10 +6,35 @@ export default {
         return await db('fields');
     },
 
-    async findById(fieldID) {
-        return await db('fields').where('fieldID', fieldID).first();
+    findById(fieldID) {
+        return db('fields').where('fieldID', fieldID).first();
     },
 
+    add(field)
+    {
+        return db('fields').insert(field);
+    },
+
+    update(fieldID, field)
+    {
+        console.log(db('fields').where('fieldID',fieldID).update(field));
+        return db('fields').where('fieldID',fieldID).update(field);
+    }
+    ,
+    hide(fieldID)
+    {
+        console.log(db('fields').where('fieldID',fieldID).update({fieldID: '0', fieldName: 'Deleted'}))
+        return db('fields').where('fieldID',fieldID).update({fieldID: '0', fieldName: 'Deleted'});
+    },
+    unhide(fieldID)
+    {
+        return db('fields').where('fieldID',fieldID).update({ hidden: '0' });
+    }
+    ,
+    del(fieldID)
+    {
+        return db('fields').where('fieldID',fieldID).del();
+    }
 
 
 }

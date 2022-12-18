@@ -40,6 +40,13 @@
       <change beforePath="$PROJECT_DIR$/utils/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/db.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/home.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/layouts/main.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/main.hbs" afterDir="false" />
+    <list default="true" id="9a0868c9-05d5-4b25-97b2-f06d08696391" name="Changes" comment="Update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/fields.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/fields.route.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/fields.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/fields.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/vwAdmin/byField.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/vwAdmin/byField.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/vwAdmin/vwField/add.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/vwAdmin/vwField/add.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/vwAdmin/vwField/edit.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/vwAdmin/vwField/edit.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,25 +77,27 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/gohuy/Downloads/new_script.sql",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "E:\\IntelliJ IDEA 2022.2.3\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
       "mysql"
+    ],
+    "com.intellij.ide.scratch.LRUPopupBuilder$1/": [
+      "MySQL"
     ]
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Lenovo\OneDrive\Desktop\Workspace\Online Academy\views\vwAdmin\vwField" />
       <recent name="C:\Users\Lenovo\OneDrive\Desktop\Workspace\Online Academy\script" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -105,6 +114,11 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="RunManager">
+    <configuration name="start" type="NodeJSConfigurationType" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -118,6 +132,7 @@
       <workItem from="1670989769108" duration="1196000" />
       <workItem from="1671085686187" duration="8451000" />
       <workItem from="1671283810027" duration="23636000" />
+      <workItem from="1671085686187" duration="37128000" />
     </task>
     <task id="LOCAL-00001" summary="First commit - Init project">
       <created>1670846200947</created>
@@ -133,7 +148,49 @@
       <option name="project" value="LOCAL" />
       <updated>1670846553010</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fake hbs, package.json update, db knex init">
+      <created>1671168383336</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1671168383336</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fields, categories, courses routes and services init.&#10;Routes and view middlewares init with MySQL script">
+      <created>1671168512311</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1671168512311</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Route middlewares update, delete trash files">
+      <created>1671168586010</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1671168586010</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Lectures route, service. Update all route and service for general use">
+      <created>1671207676237</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1671207676237</updated>
+    </task>
+    <task id="LOCAL-00007" summary="app.js for testing">
+      <created>1671250094830</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1671250094830</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Update">
+      <created>1671293393371</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1671293393371</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,7 +211,13 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="First commit - Init project" />
     <MESSAGE value="Directories init" />
-    <option name="LAST_COMMIT_MESSAGE" value="Directories init" />
+    <MESSAGE value="Fake hbs, package.json update, db knex init" />
+    <MESSAGE value="Fields, categories, courses routes and services init.&#10;Routes and view middlewares init with MySQL script" />
+    <MESSAGE value="Route middlewares update, delete trash files" />
+    <MESSAGE value="Lectures route, service. Update all route and service for general use" />
+    <MESSAGE value="app.js for testing" />
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

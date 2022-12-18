@@ -1,0 +1,31 @@
+<form method="post">
+  <div class="card">
+    <h4 class="card-header">
+      Edit Field
+    </h4>
+    <div class="card-body">
+      <div class="form-group">
+        <label for="txtFieldID">#</label>
+        <input name="fieldID" type="text" class="form-control" id="txtFieldID" value="{{this.field.fieldID}}" readonly>
+      </div>
+      <div class="form-group">
+        <label for="txtFieldName">Field Name</label>
+        <input name="fieldName" type="text" class="form-control" id="txtFieldName" autofocus placeholder="Laptop" value="{{this.field.fieldName}}">
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      <a class="btn btn-outline-success" href="/fields" role="button">
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        List
+      </a>
+      <button type="submit" class="btn btn-danger" formaction="/fields/del">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        Delete
+      </button>
+      <button type="submit" class="btn btn-primary" formaction="/fields/edit">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Save
+      </button>
+    </div>
+  </div>
+</form>
