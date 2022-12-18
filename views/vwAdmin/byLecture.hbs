@@ -1,0 +1,14 @@
+<ul class="list-group">
+    <h1 class="list-header">
+        Lectures
+    </h1>
+    {{#if empty}}
+        No content!
+    {{else}}
+        {{#each this.list}}
+            <a href="/lectures/{{lecID}}" class="list-group-item list-group-item-action ">{{lecName}}</a>
+        {{/each}}
+    {{/if}}
+
+
+</ul>
