@@ -18,14 +18,19 @@
             <a class="course-card-a" href="/course/detail?catID={{catID}}&id={{courseID}}">
             <div class="course-card">
                 <img class= "course-card-img" src="https://drive.google.com/uc?export=view&id={{image}}" alt="">
-                <h5 class="course-card-title">{{title}}</h5>
+                <h5 class="course-card-title">{{courseName}}</h5>
                 <p class="course-card-instructor">{{instructor}}</p>
                 <span class="rating">{{rating}}</span>
                 {{#each star}}
                 <span class="fa fa-star {{#if this}}star-checked{{/if}}"></span>
                 {{/each}}
-                <span>&nbsp;({{format_number rating_num}})</span>
-                <p class="price">₫{{format_number price}}</p>
+                <span>&nbsp;({{format_number rating_num}})</span><br>
+                {{#if hasPromotion}}
+                  <span class="price">₫{{format_number promotion}}</span><br>
+                  <span class="old-price">₫{{format_number price}}</span>
+                {{else}}
+                  <span class="price">₫{{format_number price}}</span>
+                {{/if}}
             </div>
             </a>
           </div>

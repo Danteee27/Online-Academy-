@@ -1,7 +1,9 @@
 import express from 'express';
+import _ from 'lodash';
 import courseService from '../services/course.service.js';
 import categoryService from '../services/category.service.js';
 import fieldService from '../services/field.service.js';
+import lectureService from '../services/lecture.service.js';
 
 const router = express.Router();
 
@@ -46,6 +48,9 @@ router.get('/category/:id', async function (req, res) {
             else
                 star.push(false);
         }
+        list[i].hasPromotion = false;
+        if (list[i].promotion != 0)
+            list[i].hasPromotion = true;
         list[i].star = star;
     }
     // console.log(list);
@@ -70,6 +75,17 @@ router.get('/detail', async function (req, res) {
     const fieldID = await categoryService.findFieldIDByCatID(catID);
     const fieldName = await fieldService.findFieldNameByFieldID(fieldID);
     const catName = await categoryService.findCatNameByCatID(catID);
+    const lecture = await lectureService.findAllByCourseID(courseID);
+
+    for (let i = 0; i < lecture.length; i++) {
+        lecture[i].newLectureID = _.kebabCase(lecture[i].lecName);
+        console.log(lecture[i].newLectureID);
+    }
+
+    course.hasPromotion = false;
+    if (course.promotion != 0) {
+        course.hasPromotion = true;
+    }
 
     const star = [];
     for (let j = 1; j <= 5; j++) {
@@ -84,7 +100,8 @@ router.get('/detail', async function (req, res) {
     res.render('vwUser/detail', {
         course,
         fieldName,
-        catName
+        catName,
+        lecture
     })
 });
 
