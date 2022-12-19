@@ -103,7 +103,12 @@
                     <div role="tabpanel" id="courseContent" class="tab-pane active">
                         <div class="list-group">
                             {{#each this.lectures}}
-                                <a href="#" class="list-group-item list-group-item-action font-weight-bold text-secondary bg-light">{{lecName}}</a>
+                                <div class="d-flex flex-nowrap align-items-center border-bottom">
+                                    <div class="mr-3 bg-light"><i class="fa fa-check-square " aria-hidden="true"></i></div>
+
+                                    <a href="#" class="list-group-item list-group-item-action font-weight-bold text-secondary border-0">{{lecName}}</a>
+                                </div>
+
                             {{/each}}
                         </div>
                     </div>
@@ -111,7 +116,14 @@
                         <h3>About this course</h3>
                         {{this.lecture.description}}
                     </div>
-                    <div role="tabpanel" id="review" class="tab-pane">this is review content</div>
+                    <div role="tabpanel" id="review" class="tab-pane">
+                        <h4>Student feedback</h4>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                    </div>
                 </div>
             </div>
 
