@@ -23,6 +23,7 @@ export default {
 
     add(category)
     {
+        console.log(category);
         return db('categories').insert(category);
     },
     update(catID, newCategory)

@@ -17,18 +17,17 @@ export default {
 
     update(fieldID, field)
     {
-        console.log(db('fields').where('fieldID',fieldID).update(field));
         return db('fields').where('fieldID',fieldID).update(field);
     }
     ,
     hide(fieldID)
     {
-        console.log(db('fields').where('fieldID',fieldID).update({fieldID: '0', fieldName: 'Deleted'}))
-        return db('fields').where('fieldID',fieldID).update({fieldID: '0', fieldName: 'Deleted'});
+
+        return db('fields').where('fieldID',fieldID).update({hidden: 1});
     },
     unhide(fieldID)
     {
-        return db('fields').where('fieldID',fieldID).update({ hidden: '0' });
+        return db('fields').where('fieldID',fieldID).update({ hidden: 0 });
     }
     ,
     del(fieldID)

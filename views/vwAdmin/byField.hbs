@@ -16,8 +16,11 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Category</th>
-                    <th>&nbsp;</th>
+                    <th>Fields</th>
+                    <th>Hidden </th>
+                    <th> </th>
+                    <th></th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -25,9 +28,16 @@
                     <tr>
                         <td scope="row">{{fieldID}}</td>
                         <td>{{fieldName}}</td>
+                        <td>{{#if hidden}} true {{else}} false{{/if}}</td>
                         <td class="text-right">
-                            <a class="btn btn-primary btn-sm" href="/fields/edit?id={{fieldID}}" role="button" title="Edit Category">
+                            <a class="btn btn-primary btn-sm" href="/fields/edit?id={{fieldID}}" role="button" title="Edit Field">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+                        </td>
+
+                        <td class="text-right">
+                            <a class="btn btn-primary btn-sm" href="/categories/view/{{fieldID}}" role="button" title="View Field">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
                             </a>
                         </td>
 

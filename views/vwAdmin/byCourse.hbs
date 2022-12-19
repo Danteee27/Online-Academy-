@@ -1,14 +1,53 @@
-<ul class="list-group">
-    <h1 class="list-header">
+<div class="card">
+    <h4 class="card-header d-flex justify-content-between">
         Courses
-    </h1>
-    {{#if empty}}
-        No content!
+        <a class="btn btn-outline-success" href="/categories/view/{{fieldID}}" role="button">
+            <i class="fa fa-backward" aria-hidden="true"></i>
+            Courses
+        </a>
+    </h4>
+    {{#if this.empty}}
+        <div class="card-body">
+            Không có dữ liệu!
+        </div>
     {{else}}
-        {{#each this.list}}
-            <a href="/lectures/{{courseID}}" class="list-group-item list-group-item-action ">{{courseName}}</a>
-        {{/each}}
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Courses</th>
+                    <th>Hidden </th>
+                    <th> </th>
+                    <th></th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {{#each this.list}}
+                    <tr>
+                        <td scope="row">{{courseID}}</td>
+                        <td>{{courseName}}</td>
+                        <td>{{#if hidden}} true {{else}} false{{/if}}</td>
+                        <td class="text-right">
+                            <a class="btn btn-primary btn-sm" href="/courses/edit?id={{courseID}}" role="button" title="Edit Category">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+                        </td>
+
+                        <td class="text-right">
+                            <a class="btn btn-primary btn-sm" href="/lectures/view/{{courseID}}" role="button" title="Edit Category">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </a>
+                        </td>
+
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
     {{/if}}
-
-
-</ul>
+    <div class="card-footer text-muted">
+        2 days ago
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<form method="post">
+    <div class="card">
+        <h4 class="card-header">
+            New Category
+        </h4>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="txtFieldID">Field ID</label>
+                <input name="fieldID" type="text" class="form-control" id="txtFieldID"  value={{fieldID}} readonly>
+                <label for="txtCatName">Category Name</label>
+                <input name="catName" type="text" class="form-control" id="txtCatName" autofocus placeholder="Hardware">
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <a class="btn btn-outline-success" href="/categories/view/{{fieldID}}" role="button">
+                <i class="fa fa-backward" aria-hidden="true"></i>
+                List
+            </a>
+            <button type="submit" class="btn btn-primary" formaction="/categories/add">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Save
+            </button>
+        </div>
+    </div>
+</form>

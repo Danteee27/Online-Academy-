@@ -24,6 +24,7 @@ export default {
 
     add(course)
     {
+
         return db('courses').insert(course);
     },
 

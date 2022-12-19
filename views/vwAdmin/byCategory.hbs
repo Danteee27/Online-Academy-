@@ -1,9 +1,14 @@
 <div class="card">
     <h4 class="card-header d-flex justify-content-between">
         Categories
-        <a class="btn btn-sm btn-outline-primary" href="/categories/add" role="button">
+        <a class="btn btn-sm btn-outline-primary" href="/categories/add/{{this.fieldID}}" role="button">
             <i class="fa fa-plus" aria-hidden="true"></i>
             Add Category
+        </a>
+
+        <a class="btn btn-outline-success" href="/fields" role="button">
+            <i class="fa fa-backward" aria-hidden="true"></i>
+            Fields
         </a>
     </h4>
     {{#if this.empty}}
@@ -17,6 +22,7 @@
                 <tr>
                     <th>#</th>
                     <th>Category</th>
+                    <th>Hidden</th>
                     <th>&nbsp;</th>
                 </tr>
                 </thead>
@@ -25,14 +31,15 @@
                     <tr>
                         <td scope="row">{{catID}}</td>
                         <td>{{catName}}</td>
+                        <td>{{#if hidden}} true {{else}} false {{/if}}</td>
                         <td class="text-right">
                             <a class="btn btn-primary btn-sm" href="/categories/edit?id={{catID}}" role="button" title="Edit Category">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
                         </td>
                         <td class="text-right">
-                            <a class="btn btn-primary btn-sm" href="/categories/del?id={{catID}}" role="button" title="Delete Category">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
+                            <a class="btn btn-primary btn-sm" href="/courses/view/{{catID}}" role="button" title="View Category">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
                             </a>
                         </td>
                     </tr>

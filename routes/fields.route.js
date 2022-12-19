@@ -33,6 +33,29 @@ router.post('/add', async function (req, res) {
     res.render('vwAdmin/vwField/add');
 });
 
+router.post('/unhide', async function(req, res) {
+
+    const fieldID = req.body.fieldID || 0;
+
+
+
+    const ret = await fieldsService.unhide(fieldID);
+
+    res.redirect('/fields');
+
+})
+
+router.post('/hide', async function(req, res) {
+
+    const fieldID = req.body.fieldID || 0;
+
+
+    const ret = await fieldsService.hide(fieldID);
+
+    res.redirect('/fields');
+
+})
+
 // ROLE.ADMIN ONLY
 router.post('/del', async function(req, res) {
 
@@ -53,7 +76,7 @@ router.post('/del', async function(req, res) {
 
     if(existed == false) {
         console.log(fieldID);
-        const ret = fieldsService.hide(fieldID);
+        const ret = await fieldsService.del(fieldID);
         res.redirect('/fields');
     }
     else
