@@ -1,9 +1,13 @@
 import express from 'express';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import categoryService from '../services/users.service.js';
 import usersService from "../services/users.service.js";
 import coursesService from "../services/courses.service.js";
 
 const router = express.Router();
+const __dirname = dirname(fileURLToPath(import.meta.url)); 
+
 
 router.get('/', function (req, res) {
     res.render('home');
@@ -24,7 +28,7 @@ router.get('/profile', async function (req, res) {
 });
 
 router.get('/addCourse', function (req, res) {
-    res.render('vwCourse/add');
+    res.render('vwTeacher/addCourse'); 
 });
 
 router.post('/addCourse', async function (req, res) {

@@ -19,11 +19,7 @@ export default function (app) {
     app.get('/admin', function (req, res) {
         res.render('vwAdmin/index')
     })
-
-    app.get('/addCourse', function (req, res) {
-        res.render('Teacher/addCourse')
-    })
-
+    
     app.use('/courses', coursesRoute);
     app.use('/fields', fieldsRoute);
     app.use('/categories', categoriesRoute);
