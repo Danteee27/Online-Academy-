@@ -27,8 +27,21 @@ router.get('/profile', async function (req, res) {
     });
 });
 
+router.get('/editProfile', async function (req, res) {
+    //const userid = req.query.id;
+    //const user = await usersService.findById(userid);
+    //if (user === null) {
+     //   return res.render('/login');
+    //}
+    res.render('vwTeacher/editProfile');
+});
+
 router.get('/addCourse', function (req, res) {
     res.render('vwTeacher/addCourse'); 
+});
+
+router.get('/editCourse', function (req, res) {
+    res.render('vwTeacher/editCourse'); 
 });
 
 router.post('/addCourse', async function (req, res) {
