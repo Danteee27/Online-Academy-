@@ -33,7 +33,8 @@ export default function (app) {
                     year: 'numeric'
                 };
                 return event.toLocaleDateString("en-US", options);
-            }
+            },
+
         }
     }));
     app.set('view engine', 'hbs');

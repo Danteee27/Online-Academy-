@@ -1,47 +1,74 @@
 {{#section 'js'}}
 
-<script>
-    $('#dropdownbtn').on('click',function (id)
-    {
-        if(document.getElementById(id).getAttribute('data-visible') === "true")
-        {
-            document.getElementById(id).style.display = 'none';
-            document.getElementById(id).setAttribute('data-visible','false');
-            console.log("oke");
-        }
-        else
-        {
-            document.getElementById(id).style.display = 'flex';
-            document.getElementById(id).setAttribute('data-visible','true');
-            console.log(" not oke");
-        }
+    <script>
+        $('#dropdownbtn').on('click', function (id) {
+            if (document.getElementById(id).getAttribute('data-visible') === "true") {
+                document.getElementById(id).style.display = 'none';
+                document.getElementById(id).setAttribute('data-visible', 'false');
+                console.log("oke");
+            } else {
+                document.getElementById(id).style.display = 'flex';
+                document.getElementById(id).setAttribute('data-visible', 'true');
+                console.log(" not oke");
+            }
 
-    });
+        });
 
-    function showOrHide (id)
-    {
-        if(document.getElementById(id).getAttribute('data-visible') === "true")
-        {
-            document.getElementById(id).style.display = 'none';
-            document.getElementById(id).setAttribute('data-visible','false');
-            console.log("oke");
-        }
-        else
-        {
-            document.getElementById(id).style.display = 'flex';
-            document.getElementById(id).setAttribute('data-visible','true');
-            console.log(" not oke");
+        function showOrHide(id) {
+            if (document.getElementById(id).getAttribute('data-visible') === "true") {
+                document.getElementById(id).style.display = 'none';
+                document.getElementById(id).setAttribute('data-visible', 'false');
+                console.log("oke");
+            } else {
+                document.getElementById(id).style.display = 'flex';
+                document.getElementById(id).setAttribute('data-visible', 'true');
+                console.log(" not oke");
+            }
+
         }
 
-    }
+        function navButton(id) {
 
-    function navButton(id) {
+        }
 
-    }
+        // document.getElementById('dropdownbtn').addEventListener('click',function ())
 
-    // document.getElementById('dropdownbtn').addEventListener('click',function ())
+        let player = videojs('my-video', {
 
-</script>
+            playbackRates: [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2],
+        });
+
+        // update star for tutorial rating
+        function starRating() {
+            let list = ['#star1', '#star2', '#star3', '#star4', '#star5'];
+            let rate = +document.getElementById('star1').getAttribute('data-rate');
+            for (let item = 5; item > 0; item--) {
+                if (rate >= item) {
+                    continue;
+                }
+                if (rate >= (item - 0.5)) {
+                    $(list[item - 1]).removeClass('fa-star');
+                    $(list[item - 1]).addClass('fa-star-half-full');
+                } else {
+                    $(list[item - 1]).removeClass('fa-star');
+                    $(list[item - 1]).addClass('fa-star-o');
+                }
+            }
+        }
+
+        starRating();
+
+        function starProgress() {
+            let list = ['#star20', '#star30', '#star40', '#star50', '#star31', '#star41', '#star51', '#star42', '#star52', '#star53'];
+            for (let item of list)
+            {
+                        $(item).removeClass('fa-star');
+                        $(item).addClass('fa-star-o');
+            }
+        }
+        starProgress();
+
+    </script>
 {{/section}}
 
 <div class="container-fluid" style="height: 700px">
@@ -57,7 +84,7 @@
                     height="264"
                     data-setup='{"poster":"{{this.lecture.poster}}"}'
             >
-                <source src="{{this.lecture.videoURL}}" type="video/mp4" />
+                <source src="{{this.lecture.videoURL}}" type="video/mp4"/>
                 <!--    <source src="MY_VIDEO.webm" type="video/webm" />-->
                 <p class="vjs-no-js">
                     To view this video please enable JavaScript, and consider upgrading to a
@@ -68,34 +95,35 @@
                 </p>
             </video>
         </div>
-<!--        <div class="col-md-4">-->
-<!--            <div class="btn-lg">-->
-<!--                <div class="d-flex justify-content-between">-->
-<!--                    <div>lecture 1 </div>-->
-<!--                    <div id = "dropdownbtn" onclick="showOrHide('ul1')" class="btn"><i class="fa fa-angle-down" aria-hidden="true"></i></div>-->
-<!--                </div>-->
-<!--                <ul data-visible = "true" id="ul1" class="list-group">-->
-<!--                    <li class="list-group-item disabled" aria-disabled="true">A disabled item</li>-->
-<!--                    <li class="list-group-item">A second item</li>-->
-<!--                    <li class="list-group-item">A third item</li>-->
-<!--                    <li class="list-group-item">A fourth item</li>-->
-<!--                    <li class="list-group-item">And a fifth one</li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--            <div class="btn-lg"> lecture 2</div>-->
-<!--            <div class="btn-lg"> lecture 3</div>-->
-<!--        </div>-->
+        <!--        <div class="col-md-4">-->
+        <!--            <div class="btn-lg">-->
+        <!--                <div class="d-flex justify-content-between">-->
+        <!--                    <div>lecture 1 </div>-->
+        <!--                    <div id = "dropdownbtn" onclick="showOrHide('ul1')" class="btn"><i class="fa fa-angle-down" aria-hidden="true"></i></div>-->
+        <!--                </div>-->
+        <!--                <ul data-visible = "true" id="ul1" class="list-group">-->
+        <!--                    <li class="list-group-item disabled" aria-disabled="true">A disabled item</li>-->
+        <!--                    <li class="list-group-item">A second item</li>-->
+        <!--                    <li class="list-group-item">A third item</li>-->
+        <!--                    <li class="list-group-item">A fourth item</li>-->
+        <!--                    <li class="list-group-item">And a fifth one</li>-->
+        <!--                </ul>-->
+        <!--            </div>-->
+        <!--            <div class="btn-lg"> lecture 2</div>-->
+        <!--            <div class="btn-lg"> lecture 3</div>-->
+        <!--        </div>-->
         <div class="col-md-12">
             <div class="container">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active font-weight-bold" role="tab" href="#courseContent" data-toggle="tab">Course content</a>
+                        <a class="nav-link active font-weight-bold" role="tab" href="#courseContent" data-toggle="tab">Course
+                            content</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link font-weight-bold" role="tab"  href="#overview" data-toggle="tab">Overview</a>
+                        <a class="nav-link font-weight-bold" role="tab" href="#overview" data-toggle="tab">Overview</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link font-weight-bold" role="tab"  href="#review" data-toggle="tab">Review</a>
+                        <a class="nav-link font-weight-bold" role="tab" href="#review" data-toggle="tab">Review</a>
                     </li>
                 </ul>
 
@@ -104,9 +132,11 @@
                         <div class="list-group">
                             {{#each this.lectures}}
                                 <div class="d-flex flex-nowrap align-items-center border-bottom">
-                                    <div class="mr-3 bg-light"><i class="fa fa-check-square " aria-hidden="true"></i></div>
+                                    <div class="mr-3 bg-light"><i class="fa fa-check-square " aria-hidden="true"></i>
+                                    </div>
 
-                                    <a href="#" class="list-group-item list-group-item-action font-weight-bold text-secondary border-0">{{lecName}}</a>
+                                    <a href="#"
+                                       class="list-group-item list-group-item-action font-weight-bold text-secondary border-0">{{lecName}}</a>
                                 </div>
 
                             {{/each}}
@@ -118,40 +148,78 @@
                     </div>
                     <div role="tabpanel" id="review" class="tab-pane">
                         <h4>Student feedback</h4>
+                        <div class="d-flex flex-nowrap">
+                            <div class="d-flex flex-column" style="width: 120px;height: 150px;">
+
+                                <div class="checked font-weight-bold h1">{{this.tutorialRating}}</div>
+                                <div><span id="star1" class="fa fa-star checked"
+                                           data-rate="{{this.tutorialRating}}"></span>
+                                    <span id="star2" class="fa fa-star checked"
+                                          data-rate="{{this.tutorialRating}}"></span>
+                                    <span id="star3" class="fa fa-star checked"
+                                          data-rate="{{this.tutorialRating}}"></span>
+                                    <span id="star4" class="fa fa-star checked"
+                                          data-rate="{{this.tutorialRating}}"></span>
+                                    <span id="star5" class="fa fa-star checked"
+                                          data-rate="{{this.tutorialRating}}"></span>
+                                </div>
+                                <div class="checked">Tutorial rating</div>
+                            </div>
+                            <div class="w-75">
+                                {{#each this.countRateList}}
+                                    <div class="row">
+                                        <div class="progress col-md-8 p-0">
+                                            <div class="progress-bar bg-secondary" role="progressbar"
+                                                 style="width: {{this}}%" aria-valuenow="0" aria-valuemin="0"
+                                                 aria-valuemax="100"></div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span id="star1{{@index}}" class="fa fa-star checked"></span>
+                                            <span id="star2{{@index}}" class="fa fa-star checked"></span>
+                                            <span id="star3{{@index}}" class="fa fa-star checked"></span>
+                                            <span id="star4{{@index}}" class="fa fa-star checked"></span>
+                                            <span id="star5{{@index}}" class="fa fa-star checked"></span>
+                                        </div>
+                                    </div>
+
+                                {{/each}}
+                            </div>
+                        </div>
+
+                        <div>
                         <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
+                            {{#each this.starList.1star}}
+                                <span class="fa {{this}} checked"></span>
+                            {{/each}}
+
+                        </div>
                     </div>
                 </div>
             </div>
 
 
+            <!--            <div id="main">-->
+            <!--                <div class="container">-->
+            <!--                    <h1 class="title-page">Xác định vị trí và các thành phần liên quan trong Tabs</h1>-->
+            <!--                    <div class="group-tabs">-->
+            <!--                        &lt;!&ndash; Nav tabs &ndash;&gt;-->
+            <!--                        <ul class="nav nav-tabs" role="tablist">-->
+            <!--                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>-->
+            <!--                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>-->
+            <!--                            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>-->
+            <!--                            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>-->
+            <!--                        </ul>-->
 
-
-<!--            <div id="main">-->
-<!--                <div class="container">-->
-<!--                    <h1 class="title-page">Xác định vị trí và các thành phần liên quan trong Tabs</h1>-->
-<!--                    <div class="group-tabs">-->
-<!--                        &lt;!&ndash; Nav tabs &ndash;&gt;-->
-<!--                        <ul class="nav nav-tabs" role="tablist">-->
-<!--                            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>-->
-<!--                            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>-->
-<!--                            <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>-->
-<!--                            <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>-->
-<!--                        </ul>-->
-
-<!--                        &lt;!&ndash; Tab panes &ndash;&gt;-->
-<!--                        <div class="tab-content">-->
-<!--                            <div role="tabpanel" class="tab-pane active" id="home">This is Home content</div>-->
-<!--                            <div role="tabpanel" class="tab-pane" id="profile">This is Profile content</div>-->
-<!--                            <div role="tabpanel" class="tab-pane" id="messages">This is Messages content</div>-->
-<!--                            <div role="tabpanel" class="tab-pane" id="settings">This is Settings content</div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
+            <!--                        &lt;!&ndash; Tab panes &ndash;&gt;-->
+            <!--                        <div class="tab-content">-->
+            <!--                            <div role="tabpanel" class="tab-pane active" id="home">This is Home content</div>-->
+            <!--                            <div role="tabpanel" class="tab-pane" id="profile">This is Profile content</div>-->
+            <!--                            <div role="tabpanel" class="tab-pane" id="messages">This is Messages content</div>-->
+            <!--                            <div role="tabpanel" class="tab-pane" id="settings">This is Settings content</div>-->
+            <!--                        </div>-->
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--            </div>-->
 
 
         </div>

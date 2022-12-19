@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a0868c9-05d5-4b25-97b2-f06d08696391" name="Changes" comment="+ create hbs file for student watching video&#10;+ create lecture.route.js&#10;+ create lecture.service.js">
+    <list default="true" id="9a0868c9-05d5-4b25-97b2-f06d08696391" name="Changes" comment="+update review in lecture.hbs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middlewares/views.mdw.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/views.mdw.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/lecture.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/lecture.route.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/vwStudent/lecture.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/vwStudent/lecture.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +103,7 @@
       <workItem from="1671283203596" duration="9187000" />
       <workItem from="1671336810426" duration="12495000" />
       <workItem from="1671361290628" duration="57000" />
-      <workItem from="1671440242456" duration="1394000" />
+      <workItem from="1671440242456" duration="16158000" />
     </task>
     <task id="LOCAL-00001" summary="First commit - Init project">
       <created>1670846200947</created>
@@ -124,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671347310648</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="+update review in lecture.hbs">
+      <created>1671441825850</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1671441825850</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,7 +155,8 @@
     <MESSAGE value="First commit - Init project" />
     <MESSAGE value="+ update file home.hbs (create carousel for home page)&#10;+ insert img for demo home page" />
     <MESSAGE value="+ create hbs file for student watching video&#10;+ create lecture.route.js&#10;+ create lecture.service.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="+ create hbs file for student watching video&#10;+ create lecture.route.js&#10;+ create lecture.service.js" />
+    <MESSAGE value="+update review in lecture.hbs" />
+    <option name="LAST_COMMIT_MESSAGE" value="+update review in lecture.hbs" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
