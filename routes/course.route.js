@@ -9,12 +9,14 @@ import feedbackService from '../services/feedback.service.js';
 const router = express.Router();
 
 router.get("/", function (req, res) {
+    res.locals.lcCatPage = true;
     res.render('vwUser/courses');
 });
 
 router.get('/category/:id', async function (req, res) {
     const catID = req.params.id;
 
+    res.locals.lcCatPage = true;
 
     const catName = await categoryService.findCatNameByCatID(catID);
     const fieldID = await categoryService.findFieldIDByCatID(catID);
@@ -45,9 +47,20 @@ router.get('/category/:id', async function (req, res) {
         const star = [];
         for (let j = 1; j <= 5; j++) {
             if (j <= +list[i].rating)
-                star.push(true);
+                star.push({
+                    star: true,
+                    starHalf: false
+                });
+            else if (j - +list[i].rating < 1)
+                star.push({
+                    star: false,
+                    starHalf: true
+                });
             else
-                star.push(false);
+                star.push({
+                    star: false,
+                    starHalf: false
+                });
         }
         list[i].hasPromotion = false;
         if (list[i].promotion != 0)
@@ -69,6 +82,8 @@ router.get('/category/:id', async function (req, res) {
 });
 
 router.get('/detail', async function (req, res) {
+    res.locals.lcCatPage = true;
+
     const catID = req.query.catID;
     const courseID = req.query.id;
 
@@ -92,9 +107,20 @@ router.get('/detail', async function (req, res) {
     const star = [];
     for (let j = 1; j <= 5; j++) {
         if (j <= +course.rating)
-            star.push(true);
+            star.push({
+                star: true,
+                starHalf: false
+            });
+        else if (j - +course.rating < 1)
+            star.push({
+                star: false,
+                starHalf: true
+            });
         else
-            star.push(false);
+            star.push({
+                star: false,
+                starHalf: false
+            });
     }
     course.star = star;
     res.locals.lcTitle = course.courseName + " | " + res.locals.lcTitle;

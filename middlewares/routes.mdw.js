@@ -1,5 +1,9 @@
-import {dirname} from 'path';
-import {fileURLToPath} from 'url';
+import {
+    dirname
+} from 'path';
+import {
+    fileURLToPath
+} from 'url';
 import express from "express";
 
 import categoryRoute from '../routes/category.route.js';
@@ -11,6 +15,7 @@ const __dirname = dirname(fileURLToPath(
 
 export default function (app) {
     app.get('/', function (req, res) {
+        res.locals.lcHomePage = true;
         res.render('home');
     });
 
@@ -18,7 +23,7 @@ export default function (app) {
         throw new Error('Something broke!!!');
     });
 
-    app.use('/public',express.static('public'));
+    app.use('/public', express.static('public'));
     app.use('/course', courseRoute);
     app.use('/lecture', lectureRoute);
 

@@ -9,6 +9,11 @@ export default function (app) {
             res.locals.lcFields[i].lcCategories = await categoryService.findAllByField(res.locals.lcFields[i].fieldID);
         }
         res.locals.lcTitle = "Online Academy";
+
+        res.locals.lcHomePage = false;
+        res.locals.lcCatPage = false;
+        res.locals.lcAboutPage = false;
+        res.locals.lcContactPage = false;
         // res.locals.lcCategories = await categoryService.findAll();
 
         next();

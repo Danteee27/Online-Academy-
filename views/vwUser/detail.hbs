@@ -14,7 +14,7 @@
         <p class="card-text">
           <span class="rating">{{course.rating}}</span>&nbsp;
           {{#each course.star}}
-              <span class="fa fa-star {{#if this}}star-checked{{/if}}"></span>
+              <span class="fa fa-star{{#if starHalf}}-half-o star-checked{{/if}} {{#if star}}star-checked{{/if}}"></span>
           {{/each}}
           &nbsp;
           <span class="course-rating-num">({{format_number course.rating_num}} ratings)</span>
@@ -22,7 +22,7 @@
           <span>{{format_number course.student_num}} students</span>
         </p>
         <p class="card-text">Instructor: <span class="course-instructor">{{course.instructor}}</span></p>
-        <p class="card-text">Last updated <span>{{course.update}}</span></p>
+        <p class="card-text">Last updated <span>{{dateMonthYear course.update}}</span></p>
       </div>
       <div class="course-title-price">
         <div class="course-title-price-card">
@@ -43,6 +43,7 @@
   </div>
 </div>
 
+{{!-- MAIN DESCRIPTION CONTAINER --}}
 <div class="card-body">
   <div class="main-des">
     <h4>Description</h4>
@@ -50,7 +51,7 @@
   </div>
 </div>
 
-
+{{!-- COURSE CONTENT CONTAINER --}}
 <div class="card-body">
   <div class="course-content">
     <h4>Course Content</h4>
@@ -72,15 +73,43 @@
   </div>
 </div>
 
+{{!-- RECOMMENDED LIST CONTAINER --}}
 <div class="card-body">
-  <div class="recommend">
+  <div class="recommend-container">
     <h4>Students also bought</h4>
     {{#each recommendItem}}
-      <a href="/course/detail?catID={{catID}}&id={{courseID}}" class="card-text">{{courseName}}</a><br>
+      <div type="button">
+        <a href="/course/detail?catID={{catID}}&id={{courseID}}" class="recommend-card">
+          <img src="https://drive.google.com/uc?export=view&id={{image}}" alt="">
+          <div class="d-inline ml-4" style="width: 325px;">
+            <span class="recommend-card-header">{{courseName}}</span>
+            <br>
+            <span>{{lec_num}} lectures</span>
+            <span>Update {{dateMonthYear update}}</span>
+          </div>
+          <div class="d-inline ml-5 mr-3" style="width: 100px;">
+            <span class="rating">{{rating}}</span>
+            <i class="fa fa-star star-checked"></i>
+          </div>
+          <div class="d-inline ml-3 mr-3" style="width: 150px;">
+            <i class="fa fa-user"></i>
+            <span>{{format_number rating_num}}</span>
+          </div>
+          <div class="d-inline" style="width: 90px;">
+            {{#if hasPromotion}}
+              <span class="recommend-card-price">₫{{format_number promotion}}</span><br>
+              <span class="recommend-card-old-price">₫{{format_number price}}</span><br>
+            {{else}}
+              <span class="recommend-card-price">₫{{format_number price}}</span><br>
+            {{/if}}
+          </div>
+        </a>
+      </div>
     {{/each}}
   </div>
 </div>
 
+{{!-- INSTRUCTOR CONTAINER --}}
 <div class="card-body">
   <div class="main-des">
     <h4>Instructor</h4>
@@ -88,6 +117,7 @@
   </div>
 </div>
 
+{{!-- FEEDBACK CONTAINER --}}
 <div class="card-body">
   <div class="feedback">
     <h4>Feedbacks</h4>
@@ -113,7 +143,7 @@
                   <span class="fa fa-star {{#if this}}star-checked{{/if}}"></span>
                 {{/each}}
                 &nbsp;
-                <span>{{date}}</span>
+                <span>{{dateDayMonthYear date}}</span>
               </div>
             </div>
             <p class="card-text w-50">

@@ -143,6 +143,10 @@ body{
     color: orange;
 }
 
+.fa-star {
+    
+}
+
 .rating {
     font-weight: bold;
     color: orange;
@@ -156,6 +160,7 @@ body{
 
 .old-price {
     text-decoration: line-through;
+    font-weight: 300;
     margin-bottom: -1px;
 }
 
@@ -237,9 +242,49 @@ body{
     margin: 0 auto;
 }
 
-.recommend {
+.recommend-container {
     width: 60%;
     margin: 0 auto;
+}
+
+.recommend-card {
+    display: flex;
+    padding: 10px 15px;
+    border-bottom: 1px solid;
+    margin: 1px 0;
+    flex-direction: row;
+    height: 90px;
+    color: black;
+}
+
+.recommend-card:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.recommend-card img {
+    width: 80px;
+    height: 50px;
+    margin-left: -15px;
+    border: 0.5px solid;
+}
+
+.recommend-card-header {
+    color: black;
+    font-weight: 700;
+}
+
+.recommend-card .rating {
+    color: #b4690e;
+}
+
+.recommend-card-price {
+    font-weight: 700;
+}
+
+.recommend-card-old-price {
+    text-decoration: line-through;
+    font-weight: 300;
 }
 
 .feedback {
@@ -249,10 +294,6 @@ body{
 
 .row {
     margin: 0;
-}
-
-.feedback-card-header {
-
 }
 
 .feedback-card-author-avatar {

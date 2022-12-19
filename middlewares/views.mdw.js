@@ -14,10 +14,26 @@ export default function (app) {
                 return numeral(val).format('0,0');
             },
             section: hbs_sections(),
-            showOrHide(id)
-            {
+            showOrHide(id) {
                 showOrHideItem(id);
             },
+            dateMonthYear(date) {
+                const event = new Date(date);
+                const options = {
+                    month: 'numeric',
+                    year: 'numeric'
+                };
+                return event.toLocaleDateString("en-US", options);
+            },
+            dateDayMonthYear(date) {
+                const event = new Date(date);
+                const options = {
+                    day: 'numeric',
+                    month: 'numeric',
+                    year: 'numeric'
+                };
+                return event.toLocaleDateString("en-US", options);
+            }
         }
     }));
     app.set('view engine', 'hbs');

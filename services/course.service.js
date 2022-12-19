@@ -22,12 +22,6 @@ export default {
 
     async findByDetail(catID, id) {
         const list = await db('courses').where('catID', catID).where('courseID', id);
-        const event = new Date(list[0].update);
-        const options = {
-            month: 'numeric',
-            year: 'numeric'
-        };
-        list[0].update = event.toLocaleDateString("en-US", options);
         return list[0];
     },
 

@@ -22,7 +22,7 @@
                 <p class="course-card-instructor">{{instructor}}</p>
                 <span class="rating">{{rating}}</span>
                 {{#each star}}
-                <span class="fa fa-star {{#if this}}star-checked{{/if}}"></span>
+                <span class="fa fa-star{{#if starHalf}}-half-o star-checked{{/if}} {{#if star}}star-checked{{/if}}"></span>
                 {{/each}}
                 <span>&nbsp;({{format_number rating_num}})</span><br>
                 {{#if hasPromotion}}
