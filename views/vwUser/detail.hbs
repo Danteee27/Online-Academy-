@@ -5,37 +5,41 @@
     <a class="aPath" href="/course/category/{{course.catID}}">{{catName}}</a>
   </p>
 
-  <div class="card-body course-card-body bg-dark">
-    <img class="course-img m-3 border-light" src="https://drive.google.com/uc?export=view&id={{course.image}}">
-    <div class="course-title text-light m-3">
-      <h1 class="card-title">{{course.courseName}}</h1>
-      <p class="card-text">{{course.tinydes}}</p>
-      <div class="course-title-info">
-        <p class="card-text">
-          <span class="rating">{{course.rating}}</span>&nbsp;
-          {{#each course.star}}
-              <span class="fa fa-star{{#if starHalf}}-half-o star-checked{{/if}} {{#if star}}star-checked{{/if}}"></span>
-          {{/each}}
-          &nbsp;
-          <span class="course-rating-num">({{format_number course.rating_num}} ratings)</span>
-          &nbsp;
-          <span>{{format_number course.student_num}} students</span>
-        </p>
-        <p class="card-text">Instructor: <span class="course-instructor">{{course.instructor}}</span></p>
-        <p class="card-text">Last updated <span>{{dateMonthYear course.update}}</span></p>
+  <div class="bg-dark">
+    <div class="course-card-body">
+      <div class="course-title text-light">
+        <h1 class="card-title">{{course.courseName}}</h1>
+        <p class="card-text">{{course.tinydes}}</p>
+        <div class="course-title-info">
+          <p class="card-text">
+            <span class="rating">{{course.rating}}</span>&nbsp;
+            {{#each course.star}}
+                <span class="fa {{#if starHalf}}fa-star-half-o star-checked{{/if}} {{#if star}}fa-star star-checked{{else}}fa-star-o star-checked{{/if}}"></span>
+            {{/each}}
+            &nbsp;
+            <span class="course-rating-num">({{format_number course.rating_num}} ratings)</span>
+            &nbsp;
+            <span>{{format_number course.student_num}} students</span>
+          </p>
+          <p class="card-text">Instructor: <span class="course-instructor">{{course.instructor}}</span></p>
+          <p class="card-text">Last updated <span>{{dateMonthYear course.update}}</span></p>
+        </div>
+        
       </div>
-      <div class="course-title-price">
+      <img class="course-img border-light" src="https://drive.google.com/uc?export=view&id={{course.image}}">
+
+      <div class="course-title-price mt-2">
         <div class="course-title-price-card">
           <div class="price-box text-dark text-center">
             {{#if course.hasPromotion}}
-              <span class="price">₫{{format_number course.promotion}}</span><br>
-              <span class="old-price">₫{{format_number course.price}}</span><br>
+              <span class="price" style="font-size: 30px;">₫{{format_number course.promotion}}</span><br>
+              <span class="old-price" style="font-size: 24px;">₫{{format_number course.price}}</span>
             {{else}}
-              <span class="price">₫{{format_number course.price}}</span><br>
+              <span class="price" style="font-size: 30px;">₫{{format_number course.price}}</span>
             {{/if}}
           </div>
           <div class="buy-now text-center text-dark" type="button">
-            <h5>Buy now</h5>
+            <h5 style="font-weight: 500;">Buy now</h5>
           </div>
         </div>
       </div>
@@ -84,7 +88,10 @@
           <div class="d-inline ml-4" style="width: 325px;">
             <span class="recommend-card-header">{{courseName}}</span>
             <br>
-            <span>{{lec_num}} lectures</span>
+            <span><i>{{lec_num}} lectures</i></span>
+            &nbsp;
+            <i class="fa fa-minus"></i>
+            &nbsp;
             <span>Update {{dateMonthYear update}}</span>
           </div>
           <div class="d-inline ml-5 mr-3" style="width: 100px;">
@@ -127,15 +134,14 @@
       <i class="fa fa-circle"></i>
       {{format_number course.rating_num}} ratings
     </h5>
-    
     <div class="row mt-3">
     {{#each feedback}}
-      <div class="col-md-6 p-1">
-        <div class="border border-dark">
-          <div class="m-2">
+      <div id="{{kebabCase fbID}}" class="col-md-6 p-1">
+        <div class="border-top" style="width: 85%;">
+          <div class="m-2 pt-3 pb-3">
             <div class="feedback-card-header d-flex">
               <div class="mt-2">
-                <span class="feedback-card-author-avatar">N</span>
+                <span class="feedback-card-author-avatar">{{avatar}}</span>
               </div>
               <div class="ml-3" >
                 <span>{{author}}</span><br>
@@ -146,7 +152,7 @@
                 <span>{{dateDayMonthYear date}}</span>
               </div>
             </div>
-            <p class="card-text w-50">
+            <p class="card-text">
             <h5>{{title}}</h5>
             <span class="mt-3">{{content}}</span><br>
             </p>
@@ -154,6 +160,9 @@
         </div>
       </div>
     {{/each}}
+    </div>
+    <div class="text-center">
+      <a id="show-more" type="button" class="btn btn-outline-dark mt-3 mb-3 {{#unless hasNextFb}}disabled{{/unless}}" href="/course/detail?catID={{course.catID}}&id={{course.courseID}}&fbID={{nextFbID}}#show-more">Show more</a>
     </div>
   </div>
 </div>

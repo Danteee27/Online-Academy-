@@ -143,10 +143,6 @@ body{
     color: orange;
 }
 
-.fa-star {
-    
-}
-
 .rating {
     font-weight: bold;
     color: orange;
@@ -170,6 +166,7 @@ body{
 
 .course-card-body {
     padding: 5px;
+    margin: 0 auto;
 }
 
 .course-rating-num {
@@ -182,52 +179,55 @@ body{
 }
 
 .course-img {
-    width: 40%;
-    float: left;
-    margin-right: 10px;
+    width: 30%;
     border: 1px solid;
+    margin-top: 15px;
+    vertical-align: top;
 }
 
 .course-title {
-    float: right;
-    width: 55%;
+    margin-top: 10px;
+    margin-left: 15px;
+    display: inline-block;
+    width: 65%;
+    padding: 5px;
 }
 
 .course-title-info {
     width: 50%;
-    float: left;
-}
-
-.course-title-price {
-    width: 50%;
-    float: right;
-}
-
-.price-box {
-    background-color: orange;
-	border:none;
-	border-radius: 10px;
-	width: 200px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 10px;
-    margin: 0 auto;
-}
-
-.buy-now {
-    margin: 20px auto 10px;
-    width: 200px;
-    padding: 10px;
-    background-color: white;
 }
 
 .buy-now:hover {
     opacity: 0.8;
 }
 
+.course-title-price {
+}
+
 .course-title-price-card {
-    position: absolute;
-    right: 100px;
-    bottom: 5px;
+    margin: 15px 0 15px 65%;
+}
+
+.price-box {
+    display: inline-block;
+    background-color: orange;
+	border: none;
+	border-radius: 10px;
+	width: 250px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+    margin-right: 10px;
+}
+
+.buy-now {
+    position: relative;
+    bottom: 10px;
+    vertical-align: middle;
+    border-radius: 10px;
+    display: inline-block;
+    width: 200px;
+    padding: 15px;
+    background-color: white;
 }
 
 .main-des {

@@ -15,7 +15,7 @@ export default function (app) {
         res.locals.lcAboutPage = false;
         res.locals.lcContactPage = false;
         // res.locals.lcCategories = await categoryService.findAll();
-
+        res.locals.curCourse;
         next();
     });
 };

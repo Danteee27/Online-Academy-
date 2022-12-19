@@ -4,6 +4,7 @@ import {
 import numeral from 'numeral';
 import hbs_sections from 'express-handlebars-sections';
 import showOrHideItem from "../public/function/showOrHide.js";
+import _ from 'lodash';
 
 export default function (app) {
     app.engine('hbs', engine({
@@ -33,6 +34,12 @@ export default function (app) {
                     year: 'numeric'
                 };
                 return event.toLocaleDateString("en-US", options);
+            },
+            kebabCase(str) {
+                return _.kebabCase(str);
+            },
+            capitalize(str) {
+                return _.capitalize(str);
             }
         }
     }));

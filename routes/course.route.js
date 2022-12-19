@@ -87,13 +87,17 @@ router.get('/detail', async function (req, res) {
     const catID = req.query.catID;
     const courseID = req.query.id;
 
+    res.locals.curCourse = {
+        catID,
+        courseID
+    };
+
     const course = await courseService.findByDetail(catID, courseID);
     const fieldID = await categoryService.findFieldIDByCatID(catID);
     const fieldName = await fieldService.findFieldNameByFieldID(fieldID);
     const catName = await categoryService.findCatNameByCatID(catID);
     const lecture = await lectureService.findAllByCourseID(courseID);
     const recommendList = await courseService.find5BestSellerCoursesByCatID(courseID, catID);
-    const feedbackList = await feedbackService.findByCourseID(courseID);
 
     for (let i = 0; i < lecture.length; i++) {
         lecture[i].newLectureID = _.kebabCase(lecture[i].lecName);
@@ -125,6 +129,11 @@ router.get('/detail', async function (req, res) {
     course.star = star;
     res.locals.lcTitle = course.courseName + " | " + res.locals.lcTitle;
 
+    const feedbackNum = req.query.fbID || 1;
+    const total = await feedbackService.countByCourseID(courseID);
+    const limit = feedbackNum * 4;
+    const feedbackList = await feedbackService.findByCourseIDWithLimit(courseID, limit);
+
     for (let i = 0; i < feedbackList.length; i++) {
         const star = [];
         for (let j = 1; j <= 5; j++) {
@@ -134,8 +143,8 @@ router.get('/detail', async function (req, res) {
                 star.push(false);
         }
         feedbackList[i].star = star;
+        feedbackList[i].avatar = feedbackList[i].author[0];
     }
-
 
     res.render('vwUser/detail', {
         course,
@@ -143,7 +152,9 @@ router.get('/detail', async function (req, res) {
         catName,
         lecture,
         recommendItem: recommendList,
-        feedback: feedbackList
+        feedback: feedbackList,
+        nextFbID: +feedbackNum + 1,
+        hasNextFb: +limit < +total
     })
 });
 
