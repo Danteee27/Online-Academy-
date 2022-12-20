@@ -1,12 +1,58 @@
 {{#section 'js'}}
 <script>
-  $('').on('submit', function(e) {
-    alert('a');
-    $.ajax({
-      url: '/course/detail',
-      method: 'POST'
-    });
-  })
+
+  var offset = 4;
+
+  function getMoreFeedback() {
+    var ajax = new XMLHttpRequest();
+
+    ajax.open("POST", "http://localhost:3000/course/moreFB", true);
+
+    ajax.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        if (this.status == 200) {
+          var data = JSON.parse(this.responseText);
+          var html = "";
+          for (var a = 0; a < data.length; a++) {
+            html += "<div class=\"col-md-6 p-1\">";
+            html += "<div class=\"border-top\" style=\"width: 85%;\">";
+            html += "<div class=\"m-2 pt-3 pb-3\">";
+            html += "<div class=\"feedback-card-header d-flex\">";
+            html += "<div class=\"mt-2\">";
+            html += "<span class=\"feedback-card-author-avatar\">" + data[a].avatar + "</span>";
+            html += "</div>";
+            html += "<div class=\"ml-3\">";
+            html += "<span>" + data[a].author +"</span><br>";
+            for (var i = 0; i < 5; i++) {
+              if (data[a].star[i] === true) {
+                html += "<span class=\"fa fa-star star-checked\"></span>";
+              }
+              else {
+                html += "<span class=\"fa fa-star\"></span>";
+              }
+            }
+            html += "&nbsp;";
+            html += "<span>" + data[a].date + "</span>"
+            html += "</div>";
+            html += "</div>";
+            html += "<p class=\"card-text\">";
+            html += "<h5>" + data[a].title + "</h5>";
+            html += "<span class=\"mt-3\">" + data[a].content + "</span><br>";
+            html += "</p>";
+            html += "</div>";
+            html += "</div>";
+            html += "</div>";
+          }
+          document.getElementById("data").innerHTML += html;
+          var limit = 4;
+          offset = offset + limit;
+        }
+      }
+    };
+    var formData = new FormData();
+    formData.append("offset", offset);
+    ajax.send(formData);
+  }
 
 
 </script>
@@ -194,35 +240,13 @@
         </div>
       </div>
     {{/each}}
-
-    {{#each lcMoreFB}}
-      <div class="col-md-6 p-1">
-        <div class="border-top" style="width: 85%;">
-          <div class="m-2 pt-3 pb-3">
-            <div class="feedback-card-header d-flex">
-              <div class="mt-2">
-                <span class="feedback-card-author-avatar">{{avatar}}</span>
-              </div>
-              <div class="ml-3" >
-                <span>{{author}}</span><br>
-                {{#each star}}
-                  <span class="fa fa-star {{#if this}}star-checked{{/if}}"></span>
-                {{/each}}
-                &nbsp;
-                <span>{{dateDayMonthYear date}}</span>
-              </div>
-            </div>
-            <p class="card-text">
-            <h5>{{title}}</h5>
-            <span class="mt-3">{{content}}</span><br>
-            </p>
-          </div>
-        </div>
-      </div>
-    {{/each}}
     </div>
-    <div class="text-center">
+    <div id="data" class="row"></div>
+    {{!-- <div class="text-center">
       <a id="show-more" type="button" class="btn btn-outline-dark mt-3 mb-3 {{#unless hasNextFb}}disabled{{/unless}}" href="/course/detail?catID={{course.catID}}&id={{course.courseID}}&fbID={{nextFbID}}#show-more">Show more</a>
+    </div> --}}
+    <div class="text-center">
+      <a id="show-more" type="button" class="btn btn-outline-dark mt-3 mb-3" onclick="getMoreFeedback();">Show more</a>
     </div>
   </div>
 </div>

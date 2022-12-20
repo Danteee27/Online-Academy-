@@ -15,6 +15,11 @@ export default {
         return list;
     },
 
+    async findByCourseIDWithLimitOffset(courseID, limit, offset) {
+        const list = await db('feedbacks').where('courseID', courseID).limit(limit).offset(offset);
+        return list;
+    },
+
     async countByCourseID(courseID) {
         const list = await db('feedbacks').where('courseID', courseID).count({
             amount: 'fbID'

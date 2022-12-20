@@ -141,10 +141,7 @@ router.get('/detail', async function (req, res) {
     course.star = star;
     res.locals.lcTitle = course.courseName + " | " + res.locals.lcTitle;
 
-    const feedbackNum = req.query.fbID || 1;
-    const total = await feedbackService.countByCourseID(courseID);
-    const limit = feedbackNum * 4;
-    const feedbackList = await feedbackService.findByCourseIDWithLimit(courseID, limit);
+    const feedbackList = await feedbackService.findByCourseIDWithLimit(courseID, 4);
 
     for (let i = 0; i < feedbackList.length; i++) {
         const star = [];
@@ -166,21 +163,8 @@ router.get('/detail', async function (req, res) {
         lecture,
         recommendItem: recommendList,
         feedback: feedbackList,
-        nextFbID: +feedbackNum + 1,
-        hasNextFb: +limit < +total,
-        isInWishList,
-        prevPage: req.headers.referer
+        isInWishList
     })
-});
-
-router.get('/fb', async function (req, res) {
-    // const id = req.query.id;
-    const list = await feedbackService.findByCourseIDWithLimit(2, 1);
-    if (list.length === 0)
-        res.json(false);
-    res.locals.lcMoreFB = list;
-    console.log(list);
-    res.json(true);
 });
 
 router.post('/detail', async function (req, res) {
@@ -218,5 +202,33 @@ router.post('/buy-now', async function (req, res) {
     }
     res.redirect('back');
 });
+
+router.post('/moreFB', async function (req, res) {
+    var limit = 4;
+    var offset = parseInt(await req.fields.offset);
+    console.log(offset);
+
+    var list = await feedbackService.findByCourseIDWithLimitOffset(2, limit, offset);
+    for (let i = 0; i < list.length; i++) {
+        const star = [];
+        for (let j = 1; j <= 5; j++) {
+            if (j <= +list[i].rating)
+                star.push(true);
+            else
+                star.push(false);
+        }
+        list[i].star = star;
+        list[i].avatar = list[i].author[0];
+        const event = new Date(list[i].date);
+        const options = {
+            day: 'numeric',
+            month: 'numeric',
+            year: 'numeric'
+        };
+        list[i].date = event.toLocaleDateString("en-US", options);
+    }
+
+    res.json(list);
+})
 
 export default router;
