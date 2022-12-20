@@ -29,8 +29,10 @@ router.get('/', function (req, res) {
 
 router.get('/addCourse', async function (req,res){
     const teachID = req.query.id;
+    console.log(teachID);
     const teacher = await teachersService.findById(teachID);
-    res.render('vwTeacher/addCourse.hbs', {
+    console.teacher;
+    res.render('vwTeacher/addCourse', {
         teacher: teacher,
         layout: 'createC'
     });
@@ -53,28 +55,34 @@ const uploadFile = async (fileObject) => {
         fields: 'id,name',
     });
     console.log(`Uploaded file ${data.name} ${data.id}`);
+    return data.id;
 };
 router.post('/addCourse', upload.any(), async function (req,res)  {
 
     try {
         const { body, files } = req;
-        //console.log(body)
-        for (let f = 0; f < files.length; f += 1) {
-            await uploadFile(files[f]);
-        }
         const ret = await coursesService.add(body);
         console.log(ret);
+        //const id = await  coursesService.findMaxId();
+        //console.log(id)
+        var image = null;
+        for (let f = 0; f < files.length; f += 1) {
+            image = await uploadFile(files[f]);
+        }
+        console.log(image);
+        await coursesService.addImage(image, ret);
         //res.status(200).send('Form Submitted');
-        res.redirect('/teacher/addLectures');
     } catch (f) {
         res.send(f.message);
     }
+    res.redirect('/teacher/lectures');
 });
 // Phan Huy teacher route-profile
 router.get('/profile', async function (req, res) {
     const userid = req.query.id;
     const teacher = await teachersService.findById(userid);
     const courses = await coursesService.findByUserId(userid);
+    console.log(courses);
     if (teacher === null) {
         return res.render('/login');
     }
@@ -84,19 +92,10 @@ router.get('/profile', async function (req, res) {
     });
 });
 
-router.get('/addCourse', function (req, res) {
-    res.render('vwTeacher/addCourse');
+router.get('/lectures', function (req, res) {
+    res.render('vwTeacher/editProfile');
+
 });
-
-router.post('/addCourse', async function (req, res) {
-    // console.log(req.body);
-    const ret = await categoryService.add(req.body);
-    // console.log(ret);
-    res.render('vwTeacher/addCourse');
-});
-
-
-
 
 
 

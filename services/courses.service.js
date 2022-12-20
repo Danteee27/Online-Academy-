@@ -24,10 +24,22 @@ export default {
         console.log(list);
         return list[0].amount;
     },
+    addImage(image, id) {
+        return db('courses').where('courseID', id).update({image: image});
+    },
 
     add(course)
     {
         return db('courses').insert(course);
+    },
+
+    async findMaxId() {
+        const sql = `SELECT \`AUTO_INCREMENT\`
+                     FROM INFORMATION_SCHEMA.TABLES
+                     WHERE TABLE_SCHEMA = 'qlkh'
+                       AND TABLE_NAME = 'courses'`;
+        const ret = await db.raw(sql);
+        return ret[0];
     },
 
     update(courseID, course)
