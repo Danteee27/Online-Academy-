@@ -142,6 +142,7 @@ router.get('/detail', async function (req, res) {
     res.locals.lcTitle = course.courseName + " | " + res.locals.lcTitle;
 
     const feedbackList = await feedbackService.findByCourseIDWithLimit(courseID, 4);
+    const totalFb = await feedbackService.countByCourseID(courseID);
 
     for (let i = 0; i < feedbackList.length; i++) {
         const star = [];
@@ -163,33 +164,32 @@ router.get('/detail', async function (req, res) {
         lecture,
         recommendItem: recommendList,
         feedback: feedbackList,
-        isInWishList
+        emptyFbList: feedbackList.length === 0,
+        isInWishList,
+        totalFb
     })
 });
 
-router.post('/detail', async function (req, res) {
-    const courseID = await req.body.id;
-    const userID = await req.body.userID;
-    // const prevPage = await req.body.prevPage;
+router.post('/wishlist', async function (req, res) {
+    const courseID = req.query.id;
+    const userID = req.query.userID;
 
     const isInWishList = await wishlistService.isInWishList(userID, courseID);
     if (isInWishList === true) {
         await wishlistService.del(userID, courseID);
+        res.json(false);
     } else {
         await wishlistService.add({
             userID,
             courseID
         });
+        res.json(true);
     }
-    // const curPage = req.headers.referer;
-    // req.headers.referer = prevPage;
-    // res.redirect(curPage);
-    res.redirect('back');
 });
 
 router.post('/buy-now', async function (req, res) {
-    const courseID = await req.body.id;
-    const userID = await req.body.userID;
+    const courseID = req.query.id;
+    const userID = req.query.userID;
 
     await myCourseService.add({
         userID,
@@ -204,11 +204,12 @@ router.post('/buy-now', async function (req, res) {
 });
 
 router.post('/moreFB', async function (req, res) {
+    const courseID = req.query.id;
     var limit = 4;
-    var offset = parseInt(await req.fields.offset);
+    var offset = parseInt(req.fields.offset);
     console.log(offset);
 
-    var list = await feedbackService.findByCourseIDWithLimitOffset(2, limit, offset);
+    var list = await feedbackService.findByCourseIDWithLimitOffset(courseID, limit, offset);
     for (let i = 0; i < list.length; i++) {
         const star = [];
         for (let j = 1; j <= 5; j++) {

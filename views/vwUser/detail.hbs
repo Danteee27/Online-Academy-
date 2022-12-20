@@ -2,11 +2,14 @@
 <script>
 
   var offset = 4;
+  var courseID = {{course.courseID}};
+  var userID = {{lcUserID}};
+  var totalFb = {{totalFb}};
 
   function getMoreFeedback() {
     var ajax = new XMLHttpRequest();
 
-    ajax.open("POST", "http://localhost:3000/course/moreFB", true);
+    ajax.open("POST", `http://localhost:3000/course/moreFB?id=${courseID}`, true);
 
     ajax.onreadystatechange = function () {
       if (this.readyState == 4) {
@@ -46,6 +49,10 @@
           document.getElementById("data").innerHTML += html;
           var limit = 4;
           offset = offset + limit;
+          if (offset === totalFb) {
+            $("#show-more").addClass("disabled");
+            return;
+          }
         }
       }
     };
@@ -54,7 +61,34 @@
     ajax.send(formData);
   }
 
+  function addToWishlist() {
+    var ajax = new XMLHttpRequest();
 
+    ajax.open("POST", `http://localhost:3000/course/wishlist?id=${courseID}&userID=${userID}`, true);
+    ajax.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        if (this.status == 200) {
+          var data = JSON.parse(this.responseText);
+          if (data === true) {
+            $("#add-to-wishlist").addClass("fa-heart");
+            $("#add-to-wishlist").removeClass("fa-heart-o");
+          }
+          else {
+            $("#add-to-wishlist").addClass("fa-heart-o");
+            $("#add-to-wishlist").removeClass("fa-heart");
+          }
+        }
+      }
+    };
+    ajax.send();
+  }
+
+  function buyNow() {
+    var ajax = new XMLHttpRequest();
+
+    ajax.open("POST", `http://localhost:3000/course/buy-now?id=${courseID}&userID=${userID}`, true);
+    ajax.send();
+  }
 </script>
 {{/section}}
 
@@ -106,17 +140,9 @@
             {{/if}}
           </div>
           <div class="d-flex mt-3">
-            <form action="/course/buy-now" method="post">
-              <input type="hidden" name="id" value="{{course.courseID}}"/>
-              <input type="hidden" name="userID" value="{{lcUserID}}"/>
-              <button class="buy-now text-center text-dark" type="submit"><h5 style="font-weight: 500;">Buy now</h5></button>
-            </form>
-            <form id="wish-list" method="POST">
-              {{!-- <input type="hidden" name="prevPage" value="{{prevPage}}"/> --}}
-              <input type="hidden" name="id" value="{{course.courseID}}"/>
-              <input type="hidden" name="userID" value="{{lcUserID}}"/>
-              <button class="course-add-to-wishlist" type="submit">
-                <i class="fa fa-heart{{#unless isInWishList}}-o{{/unless}} fa-lg"></i>
+              <button class="buy-now text-center text-dark" onclick="buyNow();location.reload();"><h5 style="font-weight: 500;">Buy now</h5></button>
+              <button class="course-add-to-wishlist" onclick="addToWishlist();">
+                <i id="add-to-wishlist" class="fa fa-heart{{#unless isInWishList}}-o{{/unless}} fa-lg"></i>
               </button>
             </form>
           </div>
@@ -246,7 +272,7 @@
       <a id="show-more" type="button" class="btn btn-outline-dark mt-3 mb-3 {{#unless hasNextFb}}disabled{{/unless}}" href="/course/detail?catID={{course.catID}}&id={{course.courseID}}&fbID={{nextFbID}}#show-more">Show more</a>
     </div> --}}
     <div class="text-center">
-      <a id="show-more" type="button" class="btn btn-outline-dark mt-3 mb-3" onclick="getMoreFeedback();">Show more</a>
+      <a id="show-more" type="button" class="btn btn-outline-dark mt-3 mb-3" onclick="getMoreFeedback();" {{#if emptyFbList}}hidden{{/if}}>Show more</a>
     </div>
   </div>
 </div>
