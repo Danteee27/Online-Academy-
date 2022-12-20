@@ -1,6 +1,8 @@
 import express from 'express';
+
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+
 import usersService from "../services/users.service.js";
 import coursesService from "../services/courses.service.js";
 
@@ -16,15 +18,16 @@ router.get('/profile', async function (req, res) {
     const userid = req.query.id;
     const user = await usersService.findById(userid);
     const courses = await coursesService.findByUserId(userid);
+
     if (user === null) {
         return res.render('/login');
     }
     res.render('vwTeacher/profile', {
-        layout: 'simple',
         user: user,
         courses: courses
     });
 });
+
 
 router.get('/editProfile', async function (req, res) {
     //const userid = req.query.id;
@@ -60,6 +63,9 @@ router.post('/addCourse', async function (req, res) {
 	VALUES ("1", "${courseName}", "1", "${instructor}",1)
 	`;
 });
+
+
+
 
 
 
