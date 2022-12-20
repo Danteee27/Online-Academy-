@@ -173,6 +173,7 @@ body{
     color: rgb(204, 35, 204);
     text-decoration: underline;
 }
+
 .course-instructor {
     color: rgb(204, 35, 204);
     text-decoration: underline;
@@ -205,29 +206,41 @@ body{
 }
 
 .course-title-price-card {
-    margin: 15px 0 15px 65%;
+    margin: 15px 0 15px 72.5%;
 }
 
 .price-box {
-    display: inline-block;
     background-color: orange;
 	border: none;
 	border-radius: 10px;
-	width: 250px;
+	width: 280px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 20px;
+    padding: 20px 0;
     margin-right: 10px;
 }
 
 .buy-now {
-    position: relative;
-    bottom: 10px;
-    vertical-align: middle;
+    border: 0;
     border-radius: 10px;
-    display: inline-block;
     width: 200px;
     padding: 15px;
     background-color: white;
+}
+
+.course-add-to-wishlist {
+    border-radius: 10px;
+    border: 0;
+    padding: 19px 25px;
+    margin-left: 10px;
+    background-color: white;
+}
+
+.course-add-to-wishlist:hover {
+    opacity: 0.8;
+}
+
+.added-to-wishlist {
+    color: black;
 }
 
 .main-des {
@@ -304,3 +317,10 @@ body{
     font-size: 18px;
     font-weight: bold;
 }
+
+.wishlist-header {
+}
+
+.wishlist-body {
+}
+

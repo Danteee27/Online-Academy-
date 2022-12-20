@@ -14,8 +14,13 @@ export default function (app) {
         res.locals.lcCatPage = false;
         res.locals.lcAboutPage = false;
         res.locals.lcContactPage = false;
-        // res.locals.lcCategories = await categoryService.findAll();
+        res.locals.lcWishlistPage = false;
+        res.locals.lcMyCoursePage = false;
+
         res.locals.curCourse;
+
+        res.locals.lcUserID = 1;
+
         next();
     });
 };

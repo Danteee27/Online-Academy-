@@ -51,13 +51,21 @@
         <li class="nav-item">
           <a class="nav-link" href="/">Contact</a>
         </li>
+        <li class="nav-item mt-1">
+          <div class="search-container ml-3">
+            <input type="text" name="search" placeholder="Search..." class="search-input">
+            <a href="#" class="search-btn">
+              <i class="fa fa-search"></i>      
+            </a>
+           </div>
+        </li>
+        <li class="nav-item ml-3 {{#if lcWishlistPage}}active{{/if}}">
+          <a class="nav-link" href="/wishlist">Wishlist</a>
+        </li>
+        <li class="nav-item ml-3 {{#if lcMyCoursePage}}active{{/if}}">
+          <a class="nav-link" href="/my-course">My Courses</a>
+        </li>
       </ul>
-      <div class="search-container ml-3">
-        <input type="text" name="search" placeholder="Search..." class="search-input">
-        <a href="#" class="search-btn">
-          <i class="fa fa-search"></i>      
-        </a>
-      </div>
     </div>
   </nav>
 

@@ -1,9 +1,30 @@
+{{#section 'js'}}
+<script>
+  $('').on('submit', function(e) {
+    alert('a');
+    $.ajax({
+      url: '/course/detail',
+      method: 'POST'
+    });
+  })
+
+
+</script>
+{{/section}}
+
+<p class="card-header d-flex aPath">
+  <a class="aPath" href="javascript:;">{{fieldName}}</a>
+  <span>&nbsp;&nbsp;❯&nbsp;&nbsp;</span>
+  <a class="aPath" href="/course/category/{{course.catID}}">{{catName}}</a>
+</p>
+
+{{#if empty}}
+<div class="m-5"
+  <p class="card-title">No data</p>
+  <p class="card-text">Please return next time.</p>
+</div>
+{{else}}
 <div class="card">
-  <p class="card-header d-flex aPath">
-    <a class="aPath" href="javascript:;">{{fieldName}}</a>
-    <span>&nbsp;&nbsp;❯&nbsp;&nbsp;</span>
-    <a class="aPath" href="/course/category/{{course.catID}}">{{catName}}</a>
-  </p>
 
   <div class="bg-dark">
     <div class="course-card-body">
@@ -38,9 +59,22 @@
               <span class="price" style="font-size: 30px;">₫{{format_number course.price}}</span>
             {{/if}}
           </div>
-          <div class="buy-now text-center text-dark" type="button">
-            <h5 style="font-weight: 500;">Buy now</h5>
+          <div class="d-flex mt-3">
+            <form action="/course/buy-now" method="post">
+              <input type="hidden" name="id" value="{{course.courseID}}"/>
+              <input type="hidden" name="userID" value="{{lcUserID}}"/>
+              <button class="buy-now text-center text-dark" type="submit"><h5 style="font-weight: 500;">Buy now</h5></button>
+            </form>
+            <form id="wish-list" method="POST">
+              {{!-- <input type="hidden" name="prevPage" value="{{prevPage}}"/> --}}
+              <input type="hidden" name="id" value="{{course.courseID}}"/>
+              <input type="hidden" name="userID" value="{{lcUserID}}"/>
+              <button class="course-add-to-wishlist" type="submit">
+                <i class="fa fa-heart{{#unless isInWishList}}-o{{/unless}} fa-lg"></i>
+              </button>
+            </form>
           </div>
+          
         </div>
       </div>
     </div>
@@ -136,7 +170,33 @@
     </h5>
     <div class="row mt-3">
     {{#each feedback}}
-      <div id="{{kebabCase fbID}}" class="col-md-6 p-1">
+      <div class="col-md-6 p-1">
+        <div class="border-top" style="width: 85%;">
+          <div class="m-2 pt-3 pb-3">
+            <div class="feedback-card-header d-flex">
+              <div class="mt-2">
+                <span class="feedback-card-author-avatar">{{avatar}}</span>
+              </div>
+              <div class="ml-3" >
+                <span>{{author}}</span><br>
+                {{#each star}}
+                  <span class="fa fa-star {{#if this}}star-checked{{/if}}"></span>
+                {{/each}}
+                &nbsp;
+                <span>{{dateDayMonthYear date}}</span>
+              </div>
+            </div>
+            <p class="card-text">
+            <h5>{{title}}</h5>
+            <span class="mt-3">{{content}}</span><br>
+            </p>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+
+    {{#each lcMoreFB}}
+      <div class="col-md-6 p-1">
         <div class="border-top" style="width: 85%;">
           <div class="m-2 pt-3 pb-3">
             <div class="feedback-card-header d-flex">
@@ -166,5 +226,5 @@
     </div>
   </div>
 </div>
-
+{{/if}}
 

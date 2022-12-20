@@ -5,6 +5,8 @@ import categoryService from '../services/category.service.js';
 import fieldService from '../services/field.service.js';
 import lectureService from '../services/lecture.service.js';
 import feedbackService from '../services/feedback.service.js';
+import wishlistService from '../services/wishlist.service.js';
+import myCourseService from '../services/my-course.service.js';
 
 const router = express.Router();
 
@@ -21,6 +23,8 @@ router.get('/category/:id', async function (req, res) {
     const catName = await categoryService.findCatNameByCatID(catID);
     const fieldID = await categoryService.findFieldIDByCatID(catID);
     const fieldName = await fieldService.findFieldNameByFieldID(fieldID);
+
+    res.locals.lcTitle = catName + " | " + res.locals.lcTitle;
 
     const limit = 8;
     const total = await courseService.countByCatId(catID);
@@ -86,6 +90,13 @@ router.get('/detail', async function (req, res) {
 
     const catID = req.query.catID;
     const courseID = req.query.id;
+    const userID = res.locals.lcUserID;
+
+    const isInMyCourse = await myCourseService.isInMyCourse(userID, courseID);
+    if (isInMyCourse === true) {
+        return res.redirect(`/lecture/${courseID}`);
+    }
+
 
     res.locals.curCourse = {
         catID,
@@ -98,6 +109,7 @@ router.get('/detail', async function (req, res) {
     const catName = await categoryService.findCatNameByCatID(catID);
     const lecture = await lectureService.findAllByCourseID(courseID);
     const recommendList = await courseService.find5BestSellerCoursesByCatID(courseID, catID);
+    const isInWishList = await wishlistService.isInWishList(1, courseID);
 
     for (let i = 0; i < lecture.length; i++) {
         lecture[i].newLectureID = _.kebabCase(lecture[i].lecName);
@@ -147,6 +159,7 @@ router.get('/detail', async function (req, res) {
     }
 
     res.render('vwUser/detail', {
+        empty: course.length === 0,
         course,
         fieldName,
         catName,
@@ -154,8 +167,56 @@ router.get('/detail', async function (req, res) {
         recommendItem: recommendList,
         feedback: feedbackList,
         nextFbID: +feedbackNum + 1,
-        hasNextFb: +limit < +total
+        hasNextFb: +limit < +total,
+        isInWishList,
+        prevPage: req.headers.referer
     })
+});
+
+router.get('/fb', async function (req, res) {
+    // const id = req.query.id;
+    const list = await feedbackService.findByCourseIDWithLimit(2, 1);
+    if (list.length === 0)
+        res.json(false);
+    res.locals.lcMoreFB = list;
+    console.log(list);
+    res.json(true);
+});
+
+router.post('/detail', async function (req, res) {
+    const courseID = await req.body.id;
+    const userID = await req.body.userID;
+    // const prevPage = await req.body.prevPage;
+
+    const isInWishList = await wishlistService.isInWishList(userID, courseID);
+    if (isInWishList === true) {
+        await wishlistService.del(userID, courseID);
+    } else {
+        await wishlistService.add({
+            userID,
+            courseID
+        });
+    }
+    // const curPage = req.headers.referer;
+    // req.headers.referer = prevPage;
+    // res.redirect(curPage);
+    res.redirect('back');
+});
+
+router.post('/buy-now', async function (req, res) {
+    const courseID = await req.body.id;
+    const userID = await req.body.userID;
+
+    await myCourseService.add({
+        userID,
+        courseID
+    });
+
+    const isInWishList = await wishlistService.isInWishList(userID, courseID);
+    if (isInWishList === true) {
+        await wishlistService.del(userID, courseID);
+    }
+    res.redirect('back');
 });
 
 export default router;

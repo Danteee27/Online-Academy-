@@ -5,6 +5,11 @@ export default {
         return db('courses');
     },
 
+    async findCatID(courseID) {
+        const list = await db('courses').where('courseID', courseID);
+        return list[0].catID;
+    },
+
     findAllByCatID(catID) {
         return db('courses').where('catID', catID);
     },
@@ -18,6 +23,11 @@ export default {
             amount: 'courseID'
         });
         return list[0].amount;
+    },
+
+    async findByID(courseID) {
+        const list = await db('courses').where('courseID', courseID);
+        return list[0];
     },
 
     async findByDetail(catID, id) {

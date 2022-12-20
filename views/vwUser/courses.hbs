@@ -9,8 +9,10 @@
 
   <div class="card-body">
     {{#if this.empty}}
-        <p class="card-title">Không có dữ liệu</p>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <div class="m-5"
+      <p class="card-title">No data</p>
+      <p class="card-text">Please return next time.</p>
+    </div>
     {{else}}
         <div class="row">
         {{#each this.course}}

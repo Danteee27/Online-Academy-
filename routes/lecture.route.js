@@ -23,7 +23,7 @@ router.get('/:id', async function (req, res) {
     // console.log("course : " + couID)
     const lecture = list[0];
     const listLecture = await lectureService.findAllByCourseID(lecture.courseID);
-    if(lecID === 0)
+    if (lecID === 0)
         console.log("okeconde");
     else
         console.log(lecID);
