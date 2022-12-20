@@ -75,7 +75,7 @@ router.post('/addCourse', upload.any(), async function (req,res)  {
     } catch (f) {
         res.send(f.message);
     }
-    res.redirect('/teacher/lectures');
+    res.redirect('/teacher/addLect');
 });
 // Phan Huy teacher route-profile
 router.get('/profile', async function (req, res) {
@@ -92,8 +92,10 @@ router.get('/profile', async function (req, res) {
     });
 });
 
-router.get('/lectures', function (req, res) {
-    res.render('vwTeacher/editProfile');
+router.get('/addLect', function (req, res) {
+    res.render('vwTeacher/addLect', {
+        layout: 'createC'
+    });
 
 });
 

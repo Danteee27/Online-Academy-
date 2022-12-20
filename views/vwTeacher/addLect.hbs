@@ -15,6 +15,8 @@
         
     </head>
 <body>
+    <div class="contents order-2 order-md-1" style="margin-top:50px">
+        <div class="container">
   <div>
     <div class="card">
     <h4 class="card-header">
@@ -28,9 +30,12 @@
         <form style="margin-top: 2em; margin-left: 1em; margin-right: 1em;">
     <div class="form-group">
       <label for="editProName">Article:</label>
-      <input type="email" class="form-control" id="editProName" placeholder="Article name">
+      <input type="text" class="form-control" id="editProName" placeholder="Article name">
     </div>
-
+<div class="form-group">
+      <label for="editProName">ID:</label>
+     <input name="courseID" class="form-control" type="text" placeholder="{{this.courses.courseID}}" value="{{this.courses.courseID}}" readonly/>
+    </div>
   <div class="form-group">
       <label for="editAva">Video:</label>
     <input type="text" class="form-control" id="editAva" placeholder="Video url here (Google Drive, Youtube,...)">
@@ -48,7 +53,6 @@
   
   <form action="/action_page.php">
   <input type="file" id="myFile" name="filename">
-  <input type="submit">
   </form>
   </div>
   <!-- Include the Quill library -->
@@ -60,17 +64,19 @@
     theme: 'snow'
   });
 </script>
-<div>
-  <div class="form-group">
-  <button type="submit" class="btn btn-primary">Finnish</button>
-  </div>
-</div>
+
 </form>
     {{/if}}
     <div class="card-footer text-muted">
-        foooooooooooooooooooter
+    <div>
+  <button type="submit" class="btn btn-primary">Finnish</button>
+  
+</div>
     </div>
 </div>
+</div>
+</div>
+
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
