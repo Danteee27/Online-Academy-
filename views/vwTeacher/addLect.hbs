@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <title>TinyMCE WYSIWYG Bootstrap</title>
+        
+        <!-- TinyMCE CDN -->
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+        
+    </head>
+<body>
+  <div>
+    <div class="card">
+    <h4 class="card-header">
+        Add lecture
+    </h4>
+    {{#if this.empty}}
+        <div class="card-body">
+            No data!
+        </div>
+    {{else}}
+        <form style="margin-top: 2em; margin-left: 1em; margin-right: 1em;">
+    <div class="form-group">
+      <label for="editProName">Article:</label>
+      <input type="email" class="form-control" id="editProName" placeholder="Article name">
+    </div>
+
+  <div class="form-group">
+      <label for="editAva">Video:</label>
+    <input type="text" class="form-control" id="editAva" placeholder="Video url here (Google Drive, Youtube,...)">
+    </div>
+  <div class="form-group">
+    <label for="editProDes">Add description:</label>
+  <div id="editor">
+  <p><br></p>
+  <p><br></p>
+  <p><br></p>
+  </div>
+  </div>
+  <label for="editAva">Other file uptoad (Pdf, Word, Rar...)</label>
+  <div class="form-group">
+  
+  <form action="/action_page.php">
+  <input type="file" id="myFile" name="filename">
+  <input type="submit">
+  </form>
+  </div>
+  <!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+<!-- Initialize Quill editor -->
+<script>
+  var quill = new Quill('#editor', {
+    theme: 'snow'
+  });
+</script>
+<div>
+  <div class="form-group">
+  <button type="submit" class="btn btn-primary">Finnish</button>
+  </div>
+</div>
+</form>
+    {{/if}}
+    <div class="card-footer text-muted">
+        foooooooooooooooooooter
+    </div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js" integrity="sha512-BmM0/BQlqh02wuK5Gz9yrbe7VyIVwOzD1o40yi1IsTjriX/NGF37NyXHfmFzIlMmoSIBXgqDiG1VNU6kB5dBbA==" crossorigin="anonymous"></script>
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</html>

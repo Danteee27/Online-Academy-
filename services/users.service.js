@@ -1,5 +1,6 @@
 import db from '../utils/db.js';
 
+
 export default {
     async findAll()
     {
@@ -21,8 +22,21 @@ export default {
     async teacherCourses(teacherId) {
         return await db('courses').where('teacherNumber', teacherId);
     },
-    addCourse(newCourse) {
-        return db('categories').insert(newCourse);
+    addCourse(ID,Name,LName,rating,studentNum,img,pri,promo,lecNum,des,hid,teacherNum) {
+        return  db('courses').insert({courseName: Name, 
+            courseID:ID, 
+            catID:1, 
+            instructor:LName,
+            rating_num:rating,
+            student_num:studentNum,
+            image:img,
+            price:pri,
+            promotion:promo,
+            lec_num:lecNum,
+            description:des,
+            hidden:hid,
+            teacherNumber:teacherNum
+         }).then(() => {res.json({});}).catch((e)=>console.log(e));
     },
 
 }
