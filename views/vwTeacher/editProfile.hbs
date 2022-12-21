@@ -1,75 +1,161 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <div class="col">
+            <div class="row">
+                <div class="col mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="e-profile">
+                                <div class="row">
+                                    <div class="col-12 col-sm-auto mb-3">
+                                        <div class="mx-auto" style="width: 340px;">
+                                            <div class="d-flex justify-content-center align-items-center rounded-circle" style="height: 340px; background-color: rgb(233, 236, 239);">
+                                                <img src="{{this.teacher.avatar}}" alt="This's avatar" width="350" class="rounded-circle mb-2 img-thumbnail">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                                        <div class="text-center text-sm-left mb-2 mb-sm-0">
+                                            <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">John Smith</h4>
+                                            <p class="mb-0">@johnny.s</p>
+                                            <div class="text-muted"><small>Last seen 2 hours ago</small></div>
+                                            <div class="mt-2">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="fa fa-fw fa-camera"></i>
+                                                    <span>Change Photo</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="text-center text-sm-right">
+                                            <span class="badge badge-secondary">administrator</span>
+                                            <div class="text-muted"><small>Joined 09 Dec 2017</small></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item"><a href="" class="active nav-link">Settings</a></li>
+                                </ul>
+                                <div class="tab-content pt-3">
+                                    <div class="tab-pane active">
+                                        <form class="form" novalidate="">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Full Name</label>
+                                                                <input class="form-control" type="text" name="name" placeholder="John Smith" value="John Smith">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Username</label>
+                                                                <input class="form-control" type="text" name="username" placeholder="johnny.s" value="johnny.s">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Email</label>
+                                                                <input class="form-control" type="text" placeholder="user@example.com">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col mb-3">
+                                                            <div class="form-group">
+                                                                <label>About</label>
+                                                                <textarea class="form-control" rows="5" placeholder="My Bio"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6 mb-3">
+                                                    <div class="mb-2"><b>Change Password</b></div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Current Password</label>
+                                                                <input class="form-control" type="password" placeholder="••••••">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>New Password</label>
+                                                                <input class="form-control" type="password" placeholder="••••••">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
+                                                                <input class="form-control" type="password" placeholder="••••••"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-5 offset-sm-1 mb-3">
+                                                    <div class="mb-2"><b>Keeping in Touch</b></div>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label>Email Notifications</label>
+                                                            <div class="custom-controls-stacked px-2">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="notifications-blog" checked="">
+                                                                    <label class="custom-control-label" for="notifications-blog">Blog posts</label>
+                                                                </div>
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="notifications-news" checked="">
+                                                                    <label class="custom-control-label" for="notifications-news">Newsletter</label>
+                                                                </div>
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <input type="checkbox" class="custom-control-input" id="notifications-offers" checked="">
+                                                                    <label class="custom-control-label" for="notifications-offers">Personal Offers</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col d-flex justify-content-end">
+                                                    <button class="btn btn-primary" type="submit">Save Changes</button>
+                                                </div>
+                                            </div>
+                                        </form>
 
-        <title>TinyMCE WYSIWYG Bootstrap</title>
-        
-        <!-- TinyMCE CDN -->
-        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-        
-    </head>
-<body>
-  <div>
-    <div class="card">
-    <h4 class="card-header">
-        Edit Profile
-    </h4>
-    {{#if this.empty}}
-        <div class="card-body">
-            No data!
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-3 mb-3">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="px-xl-3">
+                                <button class="btn btn-block btn-secondary">
+                                    <i class="fa fa-sign-out"></i>
+                                    <span>Logout</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title font-weight-bold">Support</h6>
+                            <p class="card-text">Get fast, free help from our friendly assistants.</p>
+                            <button type="button" class="btn btn-primary">Contact Us</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    {{else}}
-        <form style="margin-top: 2em; margin-left: 1em; margin-right: 1em;">
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="editProName">Name</label>
-      <input type="email" class="form-control" id="editProName" placeholder="Name">
-    </div>
-    <div class="form-group col-md-6">
-      <label for="editProEmail">Email</label>
-    <input type="text" class="form-control" id="editProEmail" placeholder="Email@">
-    </div>
-  </div>
-  <div class="form-group">
-      <label for="editAva">Avatar image</label>
-    <input type="text" class="form-control" id="editAva" placeholder="img url here">
-    </div>
-  <div class="form-group">
-    <label for="editProDes">Description</label>
-  <div id="editor">
-  <p><br></p>
-  <p><br></p>
-  <p><br></p>
-  </div>
-  </div>
-  <!-- Include the Quill library -->
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
-<!-- Initialize Quill editor -->
-<script>
-  var quill = new Quill('#editor', {
-    theme: 'snow'
-  });
-</script>
-  <div class="form-group">
-  <button type="submit" class="btn btn-primary">Finnish Editing</button>
-  </div>
-</form>
-    {{/if}}
-    <div class="card-footer text-muted">
-        foooooooooooooooooooter
     </div>
 </div>
-</body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js" integrity="sha512-BmM0/BQlqh02wuK5Gz9yrbe7VyIVwOzD1o40yi1IsTjriX/NGF37NyXHfmFzIlMmoSIBXgqDiG1VNU6kB5dBbA==" crossorigin="anonymous"></script>
-    
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-</html>
