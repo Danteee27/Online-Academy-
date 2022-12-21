@@ -1,0 +1,436 @@
+.search-container{
+    background: #fff;
+    height: 30px;
+    border-radius: 30px;
+    padding: 15px 15px 15px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.8s;
+    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.2),
+    inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+}
+
+.search-container .search-input{
+    width: 400px;
+    background: transparent;
+    border: none;
+    outline:none;
+    font-weight: 500;
+    font-size: 16px;
+    transition: 0.8s;
+}
+
+.search-container .search-btn .fa{
+    color: #5cbdbb;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 101%;
+    margin-top: -8px;
+    margin-left: -1px;
+    /* -webkit-border-radius: 0px 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 6px 6px 6px 6px; */
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown:hover>.dropdown-menu {
+    display: block;
+    margin-top: -10px;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: rgb(12, 1, 1); 
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: rgb(4, 0, 255);
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    /* -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px; */
+}
+
+.dropdown-item:hover {
+    color: rgb(4, 0, 255);
+    background-color: white;
+}
+body{
+    height: 100%;
+}
+
+.aPath, .aPath:hover {
+    font-weight: bold;
+    text-decoration: none;
+    color:black;
+}
+
+.course-card {
+    background-color: #fff;
+	border:none;
+	border-radius: 10px;
+    height: 350px;
+	width: 300px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.course-card:hover {
+    transition-duration: 500ms;
+    transform: scale(1.01,1.01)
+}
+
+.course-card:hover>.course-card-img {
+    opacity: 0.8;
+}
+
+.course-card-title {
+    margin-bottom: -1px;
+}
+
+.course-card-img {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 5px;
+}
+
+.course-card-a {
+    color: black;
+}
+
+.course-card-a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.course-card-instructor {
+    color:rgb(160, 164, 147);
+    margin-bottom: -1px;
+}
+
+.star-checked {
+    color: orange;
+}
+
+.rating {
+    font-weight: bold;
+    color: orange;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: -1px;
+}
+
+.old-price {
+    text-decoration: line-through;
+    font-weight: 300;
+    margin-bottom: -1px;
+}
+
+.row {
+    margin: 0 50px;
+}
+
+.course-card-body {
+    padding: 5px;
+}
+
+.course-rating-num {
+    color: rgb(204, 35, 204);
+    text-decoration: underline;
+}
+.course-instructor {
+    color: rgb(204, 35, 204);
+    text-decoration: underline;
+}
+
+.course-img {
+    width: 30%;
+    margin-top: 15px;
+    vertical-align: top;
+    border: 1px solid;
+}
+
+.course-title {
+    margin-top: 10px;
+    margin-left: 15px;
+    display: inline-block;
+    width: 65%;
+    padding: 5px;
+}
+
+.course-title-info {
+    width: 50%;
+}
+
+.course-title-price {
+}
+
+.price-box {
+    background-color: orange;
+	border:none;
+	border-radius: 10px;
+	width: 280px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px 0;
+    margin-right: 10px;
+}
+
+.buy-now {
+    border: 0;
+    border-radius: 10px;
+    width: 200px;
+    padding: 15px;
+    background-color: white;
+}
+
+.buy-now:hover {
+    opacity: 0.8;
+}
+
+.course-add-to-wishlist {
+    border-radius: 10px;
+    border: 0;
+    padding: 19px 25px;
+    margin-left: 10px;
+    background-color: white;
+}
+
+.course-add-to-wishlist:hover {
+    opacity: 0.8;
+}
+
+.added-to-wishlist {
+    color: black;
+}
+
+.course-title-price-card {
+    margin: 15px 0 15px 72.5%;
+}
+
+.main-des {
+    width: 60%;
+    margin: 0 auto;
+    border: 0.5px solid;
+    padding: 30px;
+}
+
+.course-content {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.recommend-container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.recommend-card {
+    display: flex;
+    padding: 10px 15px;
+    border-bottom: 1px solid;
+    margin: 1px 0;
+    flex-direction: row;
+    height: 90px;
+    color: black;
+}
+
+.recommend-card:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.recommend-card img {
+    width: 80px;
+    height: 50px;
+    margin-left: -15px;
+    border: 0.5px solid;
+}
+
+.recommend-card-header {
+    color: black;
+    font-weight: 700;
+}
+
+.recommend-card .rating {
+    color: #b4690e;
+}
+
+.recommend-card-price {
+    font-weight: 700;
+}
+
+.recommend-card-old-price {
+    text-decoration: line-through;
+    font-weight: 300;
+}
+
+.feedback {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.row {
+    margin: 0;
+}
+
+.feedback-card-author-avatar {
+    color: white;
+    background-color: black;
+    padding: 10px 15px;
+    border-radius: 100%;
+    font-size: 18px;
+    font-weight: bold;
+}
+/*.headerUserRating {*/
+/*    background: white;*/
+/*    width: 100%;*/
+/*    font-size: 20px;*/
+/*    color: black;*/
+/*    font-weight: 500;*/
+/*    margin: 5px 0 20px 0;*/
+/*    text-align: center;*/
+/*    transition: all 0.2s ease;*/
+/*}*/
+
+/*.popup {*/
+/*    z-index: 1000;*/
+/*    width: 400px;*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%) scale(0.1);*/
+/*    text-align: center;*/
+/*    padding: 0 30px 30px;*/
+/*    visibility: visible;*/
+/*    transition: transform 0.4s , top 0.4s;*/
+/*}*/
+
+/*.open-popup {*/
+/*    visibility: visible;*/
+/*    top: 50%;*/
+/*    transform: translate(-50%, -50%) scale(1);*/
+/*}*/
+/*.checked{*/
+/*    color: orange;*/
+/*}*/
+.checked{
+    color: orange;
+}
+.userRating {
+    background: #d9a7c7; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #fffcdc, #d9a7c7); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #fffcdc, #d9a7c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    width: 400px;
+    padding: 20px 30px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.userRating .star-widget input {
+    display: none;
+}
+
+.star-widget label {
+    font-size: 40px;
+    color: #444;
+    padding: 10px;
+    float: right;
+    transition: all 0.2s ease;
+}
+
+input:not(:checked) ~ label:hover,
+input:not(:checked) ~ label:hover ~ label {
+    color: orange;
+}
+
+input:checked ~ label {
+    color: orange;
+}
+
+#rate-1:checked ~ form header:before {
+    content: "Awful, not what I expected at all";
+}
+
+#rate-2:checked ~ form header:before {
+    content: "Poor, pretty disappointed";
+}
+
+#rate-3:checked ~ form header:before {
+    content: "Average, could be better";
+}
+
+#rate-4:checked ~ form header:before {
+    content: "Good, what I expected";
+}
+
+#rate-5:checked ~ form header:before {
+    content: "Amazing, above expectations!";
+}
+
+.headerUserRating {
+    background: white;
+    width: 100%;
+    font-size: 20px;
+    color: black;
+    font-weight: 500;
+    margin: 5px 0 20px 0;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.popup {
+    z-index: 1000;
+    width: 400px;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    padding: 0 30px 30px;
+    visibility: hidden;
+    transition: transform 0.4s , top 0.4s;
+}
+
+.open-popup{
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%,-50%) scale(1);
+}

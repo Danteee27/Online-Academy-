@@ -1,19 +1,32 @@
-import categoriesService from '../services/categories.service.js';
-import fieldsService from '../services/fields.service.js';
+import fieldsService from "../services/fields.service.js";
+import categoriesService from "../services/categories.service.js";
 
 export default function (app) {
     app.use(async function (req, res, next) {
+        // Huy - locals Fields to show in navbar
         res.locals.lcFields = await fieldsService.findAll();
-        let fieldLen = res.locals.lcFields.length;
-        for (let i = 0; i < fieldLen; i++) {
+        let fieldsLen = res.locals.lcFields.length;
+        for (let i = 0; i < fieldsLen; i++) {
             res.locals.lcFields[i].lcCategories = await categoriesService.findByFieldID(res.locals.lcFields[i].fieldID);
         }
+
+        // Huy - locals title to show in html title
         res.locals.lcTitle = "Online Academy";
 
+        // Huy - locals to active nav-item in navbar
         res.locals.lcHomePage = false;
         res.locals.lcCatPage = false;
         res.locals.lcAboutPage = false;
         res.locals.lcContactPage = false;
+        res.locals.lcWishlistPage = false;
+        res.locals.lcMyCoursesPage = false;
+
+        // Huy - locals to store current course in order to set html title
+        res.locals.curCourse;
+
+        next();
+    });
+}
         // res.locals.lcCategories = await categoryService.findAll();
         res.locals.curCourse;
         next();
