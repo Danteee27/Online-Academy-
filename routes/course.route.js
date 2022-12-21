@@ -71,7 +71,6 @@ router.get('/category/:id', async function (req, res) {
             list[i].hasPromotion = true;
         list[i].star = star;
     }
-    // console.log(list);
     res.render('vwUser/courses', {
         course: list,
         fieldName,
@@ -94,7 +93,8 @@ router.get('/detail', async function (req, res) {
 
     const isInMyCourse = await myCourseService.isInMyCourse(userID, courseID);
     if (isInMyCourse === true) {
-        return res.redirect(`/lecture/${courseID}`);
+        const lecID = await lectureService.findByCourseID(courseID);
+        return res.redirect(`/lecture/${lecID}`);
     }
 
 
