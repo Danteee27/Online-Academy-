@@ -73,15 +73,13 @@
 
         let popup = document.getElementById("popup");
 
-        $('#popup').on('click', function () {
+        $('#popupBtn').on('click', function () {
            popup.classList.add('open-popup');
-            alert('alooos');
 
         });
 
 
         function openPopup() {
-            alert('assdfa');
             popup.classList.add('open-popup');
         }
 
@@ -167,7 +165,7 @@
                         {{this.lecture.description}}
                     </div>
                     <div role="tabpanel" id="review" class="tab-pane">
-                        <button class="btn-block" type="submit">
+                        <button class="btn-block" type="button" onclick="openPopup()">
                             click me!!
                         </button>
                         <div class="popup" id="popup">
@@ -188,7 +186,9 @@
                                         <div class="textarea" style="height: 100px;width: 100%;overflow: hidden">
                                             <textarea cols="30" style="height: 100%;width: 100%;outline: none;
                                                 border: 1px solid #333; padding: 10px;font-size: 17px; resize: none; border-radius: 5px;
-                                            "></textarea>
+                                            ">
+                                                
+                                            </textarea>
 
                                         </div>
                                         <div class="button">

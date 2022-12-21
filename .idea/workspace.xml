@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a0868c9-05d5-4b25-97b2-f06d08696391" name="Changes" comment="+update review in lecture.hbs&#10;+add starList,tutorialRating,countRateList for render at lecture.route.js">
-      <change afterPath="$PROJECT_DIR$/views/vwStudent/node-modules/rater-js/index.js" afterDir="false" />
+    <list default="true" id="9a0868c9-05d5-4b25-97b2-f06d08696391" name="Changes" comment="+update button for student's review in lecture.hbs&#10;+ custom feedback.service.js&#10;+ continue custom home.hbs&#10;+ update lecture.service.js">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/middlewares/views.mdw.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/views.mdw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/lecture.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/lecture.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/feedback.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/feedback.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/lecture.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/lecture.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/home.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.hbs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/vwStudent/lecture.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/vwStudent/lecture.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,7 +27,6 @@
       </GitPushTagMode>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -174,7 +166,8 @@
     <MESSAGE value="+ create hbs file for student watching video&#10;+ create lecture.route.js&#10;+ create lecture.service.js" />
     <MESSAGE value="+update review in lecture.hbs" />
     <MESSAGE value="+update review in lecture.hbs&#10;+add starList,tutorialRating,countRateList for render at lecture.route.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="+update review in lecture.hbs&#10;+add starList,tutorialRating,countRateList for render at lecture.route.js" />
+    <MESSAGE value="+update button for student's review in lecture.hbs&#10;+ custom feedback.service.js&#10;+ continue custom home.hbs&#10;+ update lecture.service.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="+update button for student's review in lecture.hbs&#10;+ custom feedback.service.js&#10;+ continue custom home.hbs&#10;+ update lecture.service.js" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
