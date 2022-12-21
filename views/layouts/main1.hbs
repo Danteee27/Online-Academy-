@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <!-- CSS only -->
+  <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <title>{{lcTitle}}</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      5Horses
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item {{#if lcHomePage}}active{{/if}}">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown {{#if lcCatPage}}active{{/if}}">
+          <a href="#" id="menu"
+              data-toggle="dropdown" class="nav-link"
+              >Categories</a>
+          <ul class="dropdown-menu">
+            {{#each lcFields}}
+              <li class="dropdown-submenu">
+                  <a href="#" data-toggle="dropdown" class="dropdown-item">{{fieldName}}</a>
+                  <ul class="dropdown-menu">
+                    {{#each lcCategories}}
+                      <li>
+                          <a class="dropdown-item" href="/user-courses/category/{{catID}}">{{catName}}</a>
+                      </li>
+                    {{/each}}
+                  </ul>
+              </li>
+            {{/each}}
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/">Contact</a>
+        </li>
+        <li class="nav-item mt-1">
+          <div class="search-container ml-3">
+            <input type="text" name="search" placeholder="Search..." class="search-input">
+            <a href="#" class="search-btn">
+              <i class="fa fa-search"></i>      
+            </a>
+           </div>
+        </li>
+        <li class="nav-item ml-3 {{#if lcWishlistPage}}active{{/if}}">
+          <a class="nav-link" href="/wishlists">Wishlist</a>
+        </li>
+        <li class="nav-item ml-3 {{#if lcMyCoursePage}}active{{/if}}">
+          <a class="nav-link" href="/my-courses">My Courses</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+    {{{body}}}
+
+  
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+
+  {{{_sections.js}}}
+</body>
+
+</html>

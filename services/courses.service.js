@@ -6,20 +6,17 @@ export default {
     },
 
     async findById(courseID) {
-        const list = db('courses').where('courseID', courseID);
-        if(list.length === 0) {
+        const list = await db('courses').where('courseID', courseID);
+        if (list.length === 0) {
             return null;
         }
 
         return list[0];
     },
 
-    findByCategoryID(catID) {
-        return db('courses').where('catID', catID);
-    async findByCategoryID(catID)
-    {
+    async findByCategoryID(catID) {
         const list = db('courses').where('catID', catID);
-        if(list.length === 0) {
+        if (list.length === 0) {
             return null;
         }
 
@@ -27,7 +24,7 @@ export default {
     },
 
     async countByCategoryID(catID) {
-        const list = db('courses').where('catID', catID).count({
+        const list = await db('courses').where('catID', catID).count({
             amount: 'courseID'
         });
         return list[0].amount;
@@ -35,6 +32,11 @@ export default {
 
     findPageByCatID(catID, limit, offset) {
         return db('courses').where('CatID', catID).limit(limit).offset(offset);
+    },
+
+    async find5BestSellerCoursesByCatID(curCourseID, catID) {
+        const list = await db('courses').where('catID', catID).whereNot('courseID', curCourseID).limit(5).orderBy('student_num', 'desc');
+        return list;
     },
 
     add(course) {

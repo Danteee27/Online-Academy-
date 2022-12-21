@@ -28,7 +28,7 @@ router.get('/category/:id', async function (req, res) {
     res.locals.lcTitle = catName + " | " + res.locals.lcTitle;
 
     const limit = 8;
-    const total = await courseService.countByCatId(catID);
+    const total = await courseService.countByCategoryID(catID);
     let nPages = Math.floor(total / limit);
     if (total % limit > 0) {
         nPages++;
@@ -104,13 +104,14 @@ router.get('/detail', async function (req, res) {
         courseID
     };
 
-    const course = await courseService.findByDetail(catID, courseID);
-    const fieldID = await categoryService.findFieldIDByCatID(catID);
-    const fieldName = await fieldService.findFieldNameByFieldID(fieldID);
-    const catName = await categoryService.findCatNameByCatID(catID);
-    const lecture = await lectureService.findAllByCourseID(courseID);
+    const course = await courseService.findById(courseID);
+    const cat = await categoryService.findById(catID);
+    const fieldID = cat.fieldID;
+    const fieldName = await fieldService.findById(fieldID).fieldName;
+    const catName = cat.catName;
+    const lecture = await lectureService.findByCourseID(courseID);
     const recommendList = await courseService.find5BestSellerCoursesByCatID(courseID, catID);
-    const isInWishList = await wishlistService.isInWishList(1, courseID);
+    const isInWishList = await wishlistService.isInWishList(userID, courseID);
 
     for (let i = 0; i < lecture.length; i++) {
         lecture[i].newLectureID = _.kebabCase(lecture[i].lecName);
@@ -157,7 +158,7 @@ router.get('/detail', async function (req, res) {
         feedbackList[i].avatar = feedbackList[i].author[0];
     }
 
-    res.render('vwUser/detail', {
+    res.render('vwUser/details', {
         empty: course.length === 0,
         course,
         fieldName,

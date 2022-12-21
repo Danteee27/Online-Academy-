@@ -7,7 +7,7 @@ export default function (app) {
         res.locals.lcFields = await fieldsService.findAll();
         let fieldsLen = res.locals.lcFields.length;
         for (let i = 0; i < fieldsLen; i++) {
-            res.locals.lcFields[i].lcCategories = await categoriesService.findByFieldID(res.locals.lcFields[i].fieldID);
+            res.locals.lcFields[i].lcCategories = await categoriesService.findAllByFieldID(res.locals.lcFields[i].fieldID);
         }
 
         // Huy - locals title to show in html title
@@ -24,11 +24,8 @@ export default function (app) {
         // Huy - locals to store current course in order to set html title
         res.locals.curCourse;
 
-        next();
-    });
-}
-        // res.locals.lcCategories = await categoryService.findAll();
-        res.locals.curCourse;
+        res.locals.lcUserID = 1;
+
         next();
     });
 };

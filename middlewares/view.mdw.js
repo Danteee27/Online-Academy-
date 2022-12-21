@@ -6,9 +6,9 @@ import numeral from 'numeral';
 
 export default function (app) {
     app.engine('hbs', engine({
-        // defaultLayout: 'main.hbs'
+        defaultLayout: 'main1.hbs',
         extname: 'hbs',
-        defaultLayout: 'main.hbs',
+        //defaultLayout: 'main.hbs',
         helpers: {
             section: hbs_sections(),
             format_number(val) {

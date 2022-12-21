@@ -7,7 +7,7 @@ export default {
 
     async findById(catID) {
         const list = await db('categories').where('catID', catID);
-        if(list.length === 0) {
+        if (list.length === 0) {
             return null;
         }
 
@@ -16,12 +16,22 @@ export default {
 
     async findByFieldID(fieldID) {
         const list = await db('categories').where('fieldID', fieldID);
-        if(list.length === 0) {
+        if (list.length === 0) {
             return null;
         }
 
         return list[0];
     },
+
+    async findAllByFieldID(fieldID) {
+        const list = await db('categories').where('fieldID', fieldID);
+        if (list.length === 0) {
+            return null;
+        }
+
+        return list;
+    },
+
     async countByFieldID(fieldID) {
         const list = await db('categories').where('fieldID', fieldID).count({
             amount: 'catID'

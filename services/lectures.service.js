@@ -1,42 +1,39 @@
 import db from '../utils/db.js';
 
 export default {
-    async findAll()
-    {
+    async findAll() {
         return await db('lectures');
     },
 
-     findById(lecID) {
+    findById(lecID) {
         return db('lectures').where('lectures', lecID).first();
     },
-    findByCourseID(courseID)
-    {
+    findByCourseID(courseID) {
         return db('lectures').where('courseID', courseID);
-    }
-    ,
-    async countByCourseID(courseID)
-    {
-        const list = db('courses').where('courseID',courseID).count({amount: 'lecID'});
+    },
+    async countByCourseID(courseID) {
+        const list = db('courses').where('courseID', courseID).count({
+            amount: 'lecID'
+        });
         return list[0].amount;
     },
-    add(lecture)
-    {
+    add(lecture) {
         return db('lectures').insert(lecture);
     },
-    update(lecID, lecture)
-    {
+    update(lecID, lecture) {
         return db('lectures').where('lecID', lecID).update(lecture);
     },
-    hide(lecID)
-    {
-        return db('lectures').where('lecID', lecID).update({hidden: 1});
+    hide(lecID) {
+        return db('lectures').where('lecID', lecID).update({
+            hidden: 1
+        });
     },
-    unhide(lecID)
-    {
-        return db('lectures').where('lecID', lecID).update({hidden: 0})
+    unhide(lecID) {
+        return db('lectures').where('lecID', lecID).update({
+            hidden: 0
+        })
     },
-    del(lecID)
-    {
+    del(lecID) {
         return db('lectures').where('lecID', lecID).del();
     }
 
