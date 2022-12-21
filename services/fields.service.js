@@ -6,11 +6,16 @@ export default {
         return await db('fields');
     },
 
-    findById(fieldID) {
-        return db('fields').where('fieldID', fieldID).first();
+    async findById(fieldID) {
+        const list = db('fields').where('fieldID', fieldID).first();
+        if(list.length === 0) {
+            return null;
+        }
+
+        return list[0];
     },
 
-    add(field)
+    async add(field)
     {
         return db('fields').insert(field);
     },

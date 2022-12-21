@@ -1,4 +1,7 @@
 import knexObj from 'knex';
+import dotenv from  'dotenv'
+
+dotenv.config();
 
 const knex = knexObj({
     client: 'mysql2',
@@ -6,8 +9,8 @@ const knex = knexObj({
         host: '127.0.0.1',
         port: 3306,
         user: 'root',
-        password: 'ducanh123!@#',
-        database: 'qlkh'
+        password: process.env.DB_PASSWORD,
+        database: 'qlkh1'
     },
     pool: { min: 0, max: 10 }
 });

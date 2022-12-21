@@ -8,7 +8,7 @@ export default function (app) {
         extname: 'hbs',
         defaultLayout: 'main.hbs',
         helpers: {
-
+            section: hbs_sections()
         }
     }));
     app.set('view engine', 'hbs');

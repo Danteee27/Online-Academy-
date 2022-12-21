@@ -6,12 +6,22 @@ export default {
         return await db('categories');
     },
 
-    findById(catID) {
-        return db('categories').where('catID', catID).first();
+    async findById(catID) {
+        const list = await db('categories').where('catID', catID);
+        if(list.length === 0) {
+            return null;
+        }
+
+        return list[0];
     },
 
-    findByFieldID(fieldID) {
-        return db('categories').where('fieldID', fieldID);
+    async findByFieldID(fieldID) {
+        const list = await db('categories').where('fieldID', fieldID);
+        if(list.length === 0) {
+            return null;
+        }
+
+        return list[0];
     },
     async countByFieldID(fieldID)
     {
