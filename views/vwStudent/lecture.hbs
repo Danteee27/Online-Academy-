@@ -1,6 +1,6 @@
 {{#section 'js'}}
-
     <script>
+
         $('#dropdownbtn').on('click', function (id) {
             if (document.getElementById(id).getAttribute('data-visible') === "true") {
                 document.getElementById(id).style.display = 'none';
@@ -58,16 +58,36 @@
 
         starRating();
 
-        function starProgress() {
-            let list = ['#star20', '#star30', '#star40', '#star50', '#star31', '#star41', '#star51', '#star42', '#star52', '#star53'];
-            for (let item of list)
-            {
-                        $(item).removeClass('fa-star');
-                        $(item).addClass('fa-star-o');
-            }
-        }
-        starProgress();
 
+
+//         $('#userRating').on('click', function () {
+//             $("#userRating").rate();
+//
+// //or for example
+//             var options = {
+//                 max_value: 6,
+//                 step_size: 0.5,
+//             }
+//             $(".rating").rate(options);
+//         })
+
+        let popup = document.getElementById("popup");
+
+        $('#popup').on('click', function () {
+           popup.classList.add('open-popup');
+            alert('alooos');
+
+        });
+
+
+        function openPopup() {
+            alert('assdfa');
+            popup.classList.add('open-popup');
+        }
+
+        function closePopup() {
+            popup.classList.remove('open-popup');
+        }
     </script>
 {{/section}}
 
@@ -147,6 +167,39 @@
                         {{this.lecture.description}}
                     </div>
                     <div role="tabpanel" id="review" class="tab-pane">
+                        <button class="btn-block" type="submit">
+                            click me!!
+                        </button>
+                        <div class="popup" id="popup">
+                            <div class="userRating">
+                                <div class="star-widget">
+                                    <input type="radio" name="rate" id="rate-5">
+                                    <label for="rate-5" class="fa fa-star"></label>
+                                    <input type="radio" name="rate" id="rate-4">
+                                    <label for="rate-4" class="fa fa-star"></label>
+                                    <input type="radio" name="rate" id="rate-3">
+                                    <label for="rate-3" class="fa fa-star"></label>
+                                    <input type="radio" name="rate" id="rate-2">
+                                    <label for="rate-2" class="fa fa-star"></label>
+                                    <input type="radio" name="rate" id="rate-1">
+                                    <label for="rate-1" class="fa fa-star"></label>
+                                    <form action="#">
+                                        <header class="headerUserRating"></header>
+                                        <div class="textarea" style="height: 100px;width: 100%;overflow: hidden">
+                                            <textarea cols="30" style="height: 100%;width: 100%;outline: none;
+                                                border: 1px solid #333; padding: 10px;font-size: 17px; resize: none; border-radius: 5px;
+                                            "></textarea>
+
+                                        </div>
+                                        <div class="button">
+                                            <button type="submit" class="btn btn-dark btn-block mt-1"
+                                                    onclick="closePopup()">Post
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         <h4>Student feedback</h4>
                         <div class="d-flex flex-nowrap">
                             <div class="d-flex flex-column" style="width: 120px;height: 150px;">
@@ -174,22 +227,67 @@
                                                  aria-valuemax="100"></div>
                                         </div>
                                         <div class="col-md-4">
-                                            <span id="star1{{@index}}" class="fa fa-star checked"></span>
-                                            <span id="star2{{@index}}" class="fa fa-star checked"></span>
-                                            <span id="star3{{@index}}" class="fa fa-star checked"></span>
-                                            <span id="star4{{@index}}" class="fa fa-star checked"></span>
-                                            <span id="star5{{@index}}" class="fa fa-star checked"></span>
+                                            {{{printStar @index true}}}
                                         </div>
                                     </div>
+
+                                    <div class="rating"></div>
 
                                 {{/each}}
                             </div>
                         </div>
 
                         <div>
-                        <span class="fa fa-star checked"></span>
-                            {{#each this.starList.1star}}
-                                <span class="fa {{this}} checked"></span>
+                            <div class="userRating bg-light">
+                                <div class="star-widget">
+                                    <input type="radio" name="rate" id="rate-5">
+                                    <label for="rate-5" class="fa fa-star"></label>
+                                    <input type="radio" name="rate" id="rate-4">
+                                    <label for="rate-4" class="fa fa-star"></label>
+                                    <input type="radio" name="rate" id="rate-3">
+                                    <label for="rate-3" class="fa fa-star"></label>
+                                    <input type="radio" name="rate" id="rate-2">
+                                    <label for="rate-2" class="fa fa-star"></label>
+                                    <input type="radio" name="rate" id="rate-1">
+                                    <label for="rate-1" class="fa fa-star"></label>
+                                    <form action="#">
+                                        <header class="headerUserRating"></header>
+                                        <div class="textarea" style="height: 100px;width: 100%;overflow: hidden">
+                                            <textarea cols="30" style="height: 100%;width: 100%;outline: none;
+                                                border: 1px solid #333; padding: 10px;font-size: 17px; resize: none; border-radius: 5px;
+                                            "></textarea>
+
+                                        </div>
+                                        <div class="button">
+                                            <button type="submit" class="btn btn-dark btn-block mt-1">Post</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <h2>Comment</h2>
+                            {{#each this.feedbacks}}
+                                <div class="container border-bottom pb-2">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <div class="d-flex flex-nowrap align-items-center">
+                                                <i class="bi bi-person"></i>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="4.3rem" height="4.3rem"
+                                                     fill="currentColor"
+                                                     class="bi bi-person" viewBox="0 0 16 16">
+                                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-11">
+                                            {{{printStar this.rating false}}}
+                                            <h3>{{this.author}}</h3>
+                                            <div class="text-dark ml-2">
+                                                {{this.content}}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
                             {{/each}}
 
                         </div>

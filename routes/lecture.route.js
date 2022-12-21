@@ -17,43 +17,33 @@ router.get('/:id', async function (req, res) {
 
     const list = await lectureService.findByLectureID(lecID);
     const lecture = list[0];
+    // const lecture = await lectureService.findByLectureID(lecID);
     const listLecture = await lectureService.findAllByCourseID(lecture.courseID);
     const feedbacks = await feedbackService.findByCourseID(lecture.courseID);
 
     let tutorialRating = 0;
-    let countRateList = [0,0,0,0,0];
-    for(let item of feedbacks)
-    {
-        tutorialRating += item.rating/feedbacks.length;
-        countRateList[item.rating] = countRateList[item.rating] + 1.0;
+    let countRateList = [0, 0, 0, 0, 0];
+    for (let item of feedbacks) {
+        tutorialRating += item.rating / feedbacks.length;
+        countRateList[item.rating-1] = countRateList[item.rating-1] + 1.0;
     }
-    tutorialRating = Math.round(tutorialRating*100)/100;
+    tutorialRating = Math.round(tutorialRating * 100) / 100;
 
-    const starList ={
-        "1star":['fa-star','fa-star-o','fa-star-o','fa-star-o','fa-star-o'],
-        "2star":['fa-star','fa-star','fa-star-o','fa-star-o','fa-star-o'],
-        "3star":['fa-star','fa-star','fa-star','fa-star-o','fa-star-o'],
-        "4star":['fa-star','fa-star','fa-star','fa-star','fa-star-o'],
-        "5star":['fa-star','fa-star','fa-star','fa-star','fa-star'],
+    const rating = [1, 2, 3, 4, 5];
+
+
+    for (let item = 0; item < countRateList.length; item++) {
+        countRateList[item] = Math.round(countRateList[item] * 10000 / feedbacks.length) / 100;
+        console.log(countRateList);
+
     }
-
-    const fullStar = `<span class=\"fa fa-star-o\"></span><span class=\"fa fa-star-o\"></span>`;
-
-
-    for(let item =0;item < countRateList.length;item++)
-    {
-        countRateList[item] = Math.round(countRateList[item]*10000/feedbacks.length)/100;
-    }
-
-    console.log(countRateList);
-
 
     res.render('vwStudent/lecture', {
         lectures: listLecture,
         lecture,
         countRateList,
-        starList,
         tutorialRating,
+        feedbacks,
         // fieldName,
         // courseName,
         empty: list.length === 0

@@ -19,5 +19,6 @@ export default {
     findCoureIDByLectureID(lecID)
     {
         return db('lectures').where('lecID',lecID).select('courseID');
-    }
+    },
+
 };
