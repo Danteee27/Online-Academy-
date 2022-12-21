@@ -5,13 +5,9 @@ import activate_locals from './middlewares/locals.mdw.js';
 import activate_session from './middlewares/session.mdw.js';
 import morgan from 'morgan';
 import expressFormidable from 'express-formidable';
-
+import activate_auth from './middlewares/auth.mdw.js';
 import dotenv from 'dotenv';
 dotenv.config();
-
-
-// import bodyParser from 'body-parser';
-// app.use(bodyParser.urlencoded({ extended: false }));
 
 const app = express();
 
@@ -27,6 +23,7 @@ activate_locals(app);
 activate_view(app);
 activate_routes(app);
 activate_session(app);
+activate_auth(app);
 
 const PORT = 3000;
 app.listen(PORT, function () {
