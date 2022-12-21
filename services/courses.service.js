@@ -33,6 +33,11 @@ export default {
         return db('courses').insert(course);
     },
 
+    addLecture(lecture)
+    {
+        return db('lectures').insert(lecture);
+    },
+
     async findMaxId() {
         const sql = `SELECT \`AUTO_INCREMENT\`
                      FROM INFORMATION_SCHEMA.TABLES

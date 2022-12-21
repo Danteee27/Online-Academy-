@@ -61,6 +61,7 @@ router.post('/addCourse', upload.any(), async function (req,res)  {
 
     try {
         const { body, files } = req;
+        const id = body.courseID;
         const ret = await coursesService.add(body);
         console.log(ret);
         //const id = await  coursesService.findMaxId();
@@ -72,10 +73,10 @@ router.post('/addCourse', upload.any(), async function (req,res)  {
         console.log(image);
         await coursesService.addImage(image, ret);
         //res.status(200).send('Form Submitted');
+        res.redirect('/teacher/addLect?=' + id);
     } catch (f) {
         res.send(f.message);
     }
-    res.redirect('/teacher/addLect');
 });
 // Phan Huy teacher route-profile
 router.get('/profile', async function (req, res) {
@@ -92,13 +93,25 @@ router.get('/profile', async function (req, res) {
     });
 });
 
-router.get('/addLect', function (req, res) {
+router.get('/addLect', async function (req, res) {
+    const id = req.query.id;
+    const courses = await coursesService.findById(id);
     res.render('vwTeacher/addLect', {
+        courses: courses,
         layout: 'createC'
     });
-
 });
 
+router.post('/addLect', async function (req, res) {
+    try{
+        const body = req;
+        const ret = await coursesService.addLecture(body);
+        res.redirect('home');
+    }
+ catch (f) {
+    res.send(f.message);
+}}
+);
 
 
 export default router;
