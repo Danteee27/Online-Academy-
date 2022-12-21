@@ -27,3 +27,8 @@ export default function (app) {
         next();
     });
 }
+        // res.locals.lcCategories = await categoryService.findAll();
+        res.locals.curCourse;
+        next();
+    });
+};

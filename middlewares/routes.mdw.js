@@ -5,6 +5,7 @@ import lecturesRoute from "../routes/lectures.route.js";
 import wishlistsRoute from "../routes/wishlists.route.js";
 import myCoursesRoute from "../routes/my-courses.route.js";
 import userCoursesRoute from "../routes/user-courses.route.js";
+import usersRoute from "../routes/users.route.js"
 
 export default function (app) {
     app.get('/', function (req, res) {
@@ -16,6 +17,8 @@ export default function (app) {
         res.render('vwAdmin/index')
     })
 
+
+
     app.use('/courses', coursesRoute);
     app.use('/fields', fieldsRoute);
     app.use('/categories', categoriesRoute);
@@ -23,5 +26,5 @@ export default function (app) {
     app.use('/wishlists', wishlistsRoute);
     app.use('/my-courses', myCoursesRoute);
     app.use('/user-courses', userCoursesRoute);
-
+    app.use('/users', usersRoute);
 }

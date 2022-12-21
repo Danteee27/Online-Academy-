@@ -5,12 +5,25 @@ export default {
         return await db('courses');
     },
 
-    findById(courseID) {
-        return db('courses').where('courseID', courseID).first();
+    async findById(courseID) {
+        const list = db('courses').where('courseID', courseID);
+        if(list.length === 0) {
+            return null;
+        }
+
+        return list[0];
     },
 
     findByCategoryID(catID) {
         return db('courses').where('catID', catID);
+    async findByCategoryID(catID)
+    {
+        const list = db('courses').where('catID', catID);
+        if(list.length === 0) {
+            return null;
+        }
+
+        return list[0];
     },
 
     async countByCategoryID(catID) {
