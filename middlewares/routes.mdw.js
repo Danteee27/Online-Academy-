@@ -18,7 +18,7 @@ const __dirname = dirname(fileURLToPath(
 export default function (app) {
     app.get('/', function (req, res) {
         res.locals.lcHomePage = true;
-        res.render('home');
+        res.render("home");
     });
 
     app.get('/err', function (req, res) {

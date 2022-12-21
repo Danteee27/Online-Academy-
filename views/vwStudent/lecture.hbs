@@ -27,6 +27,18 @@
 
         }
 
+        function checkSquare(id) {
+            if($(id).hasClass("fa-check-square"))
+            {
+                $(id).removeClass("fa-check-square").addClass("fa-square-o");
+            }
+            else
+            {
+                $(id).removeClass("fa-square-o").addClass("fa-check-square");
+            }
+
+        }
+
         function navButton(id) {
 
         }
@@ -86,6 +98,15 @@
         function closePopup() {
             popup.classList.remove('open-popup');
         }
+
+       function taolao(){
+            alert("hello");
+            {{#each this.lectures}}
+                console.log({{lecID}});
+                console.log("every");
+            {{/each}}
+        }
+        taolao();
     </script>
 {{/section}}
 
@@ -134,8 +155,9 @@
             <div class="container">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active font-weight-bold" role="tab" href="#courseContent" data-toggle="tab">Course
-                            content</a>
+                        <a class="nav-link active font-weight-bold" role="tab" href="#courseContent" data-toggle="tab">
+                            Course content
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link font-weight-bold" role="tab" href="#overview" data-toggle="tab">Overview</a>
@@ -150,13 +172,13 @@
                         <div class="list-group">
                             {{#each this.lectures}}
                                 <div class="d-flex flex-nowrap align-items-center border-bottom">
-                                    <div class="mr-3 bg-light"><i class="fa fa-check-square " aria-hidden="true"></i>
+                                    <div class="mr-3 bg-light" onclick="checkSquare('#squareAt{{lecID}}')">
+                                        <i class="fa fa-check-square " aria-hidden="true"  data-lecture = "{{lecID}}" id="squareAt{{lecID}}"></i>
                                     </div>
 
                                     <a href="#"
                                        class="list-group-item list-group-item-action font-weight-bold text-secondary border-0">{{lecName}}</a>
                                 </div>
-
                             {{/each}}
                         </div>
                     </div>
@@ -187,7 +209,7 @@
                                             <textarea cols="30" style="height: 100%;width: 100%;outline: none;
                                                 border: 1px solid #333; padding: 10px;font-size: 17px; resize: none; border-radius: 5px;
                                             ">
-                                                
+
                                             </textarea>
 
                                         </div>
@@ -204,7 +226,7 @@
                         <div class="d-flex flex-nowrap">
                             <div class="d-flex flex-column" style="width: 120px;height: 150px;">
 
-                                <div class="checked font-weight-bold h1">{{this.tutorialRating}}</div>
+                                <div class="checked font-weight-bold display-4">{{this.tutorialRating}}</div>
                                 <div><span id="star1" class="fa fa-star checked"
                                            data-rate="{{this.tutorialRating}}"></span>
                                     <span id="star2" class="fa fa-star checked"
@@ -220,8 +242,8 @@
                             </div>
                             <div class="w-75">
                                 {{#each this.countRateList}}
-                                    <div class="row">
-                                        <div class="progress col-md-8 p-0">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="progress col-md-8 p-0 d-flex align-items-center">
                                             <div class="progress-bar bg-secondary" role="progressbar"
                                                  style="width: {{this}}%" aria-valuenow="0" aria-valuemin="0"
                                                  aria-valuemax="100"></div>
@@ -238,32 +260,7 @@
                         </div>
 
                         <div>
-                            <div class="userRating bg-light">
-                                <div class="star-widget">
-                                    <input type="radio" name="rate" id="rate-5">
-                                    <label for="rate-5" class="fa fa-star"></label>
-                                    <input type="radio" name="rate" id="rate-4">
-                                    <label for="rate-4" class="fa fa-star"></label>
-                                    <input type="radio" name="rate" id="rate-3">
-                                    <label for="rate-3" class="fa fa-star"></label>
-                                    <input type="radio" name="rate" id="rate-2">
-                                    <label for="rate-2" class="fa fa-star"></label>
-                                    <input type="radio" name="rate" id="rate-1">
-                                    <label for="rate-1" class="fa fa-star"></label>
-                                    <form action="#">
-                                        <header class="headerUserRating"></header>
-                                        <div class="textarea" style="height: 100px;width: 100%;overflow: hidden">
-                                            <textarea cols="30" style="height: 100%;width: 100%;outline: none;
-                                                border: 1px solid #333; padding: 10px;font-size: 17px; resize: none; border-radius: 5px;
-                                            "></textarea>
 
-                                        </div>
-                                        <div class="button">
-                                            <button type="submit" class="btn btn-dark btn-block mt-1">Post</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
                             <h2>Comment</h2>
                             {{#each this.feedbacks}}
                                 <div class="container border-bottom pb-2">
