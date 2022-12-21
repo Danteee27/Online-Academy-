@@ -20,9 +20,13 @@ const REFRESH_TOKEN = '1//04yjgGbQzPuYeCgYIARAAGAQSNwF-L9IrodMsWdvsnSvZHNfIen98n
 const router = express.Router();
 const upload = multer();
 
+
+
 const oauth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL);
 oauth2Client.setCredentials({refresh_token: REFRESH_TOKEN});
 const drive = google.drive({version: "v3", auth: oauth2Client});
+
+
 router.get('/', function (req, res) {
     res.render('home');
 });
@@ -34,7 +38,7 @@ router.get('/addCourse', async function (req,res){
     console.teacher;
     res.render('vwTeacher/addCourse', {
         teacher: teacher,
-        layout: 'createC'
+        layout: 'CreateCourseLayout'
     });
 });
 
@@ -64,8 +68,7 @@ router.post('/addCourse', upload.any(), async function (req,res)  {
         const id = body.courseID;
         const ret = await coursesService.add(body);
         console.log(ret);
-        //const id = await  coursesService.findMaxId();
-        //console.log(id)
+        console.log(id)
         var image = null;
         for (let f = 0; f < files.length; f += 1) {
             image = await uploadFile(files[f]);
@@ -73,7 +76,7 @@ router.post('/addCourse', upload.any(), async function (req,res)  {
         console.log(image);
         await coursesService.addImage(image, ret);
         //res.status(200).send('Form Submitted');
-        res.redirect('/teacher/addLect?=' + id);
+        res.redirect('/lectures/add?id=' + ret);
     } catch (f) {
         res.send(f.message);
     }
@@ -93,25 +96,15 @@ router.get('/profile', async function (req, res) {
     });
 });
 
-router.get('/addLect', async function (req, res) {
-    const id = req.query.id;
-    const courses = await coursesService.findById(id);
-    res.render('vwTeacher/addLect', {
-        courses: courses,
-        layout: 'createC'
+router.get('/profile/edit', async function (req, res) {
+   const teacherID = req.query.id;
+   const teacher = await teachersService.findById(teacherID);
+   console.log(teacher);
+    if (teacher === null) {
+        return res.render('/login');
+    }
+    res.render('vwTeacher/editProfile', {
+        teacher: teacher,
     });
 });
-
-router.post('/addLect', async function (req, res) {
-    try{
-        const body = req;
-        const ret = await coursesService.addLecture(body);
-        res.redirect('home');
-    }
- catch (f) {
-    res.send(f.message);
-}}
-);
-
-
 export default router;

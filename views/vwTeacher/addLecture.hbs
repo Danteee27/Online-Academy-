@@ -1,0 +1,147 @@
+<!--Phan Huy create courses view-->
+<div class="d-lg-flex justify-content-lg-center">
+    <div class="contents order-2 order-md-1">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-10 py-5 text-white">
+                    <h1 class="font-weight-bold font-italic">Add some lectures for your course.</h1>
+                    <div class="bg-secondary rounded">
+                        <blockquote
+                                class="mb-0 font-weight-bold d-flex"
+                                style="font: 1.4rem/1.8rem Georgia, serif;
+                            text-align: center;"
+                        >
+                            <q>
+                                Tell me and I forget. Teach me and I remember. Involve me and I learn.
+                            </q>
+                        </blockquote>
+                    </div>
+                    <div class="align-items-center text-center">
+                        <p class="font-italic"><strong>– Benjamin Franklin</strong></p>
+                    </div>
+                    <form
+                            action="/lectures/add"
+                            method="post"
+                            class="mt-3"
+                            enctype="multipart/form-data"
+                    >
+                        <div class="row justify-content-center">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label for="lecName">Lecture Name</label>
+                                    <input
+                                            type="text"
+                                            name="lecName"
+                                            class="form-control"
+                                            placeholder="First setup for this course"
+                                            id="lecName"
+                                            required
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group text-center">
+                                    <label for="instructor">Course ID</label>
+                                    <input
+                                            type="text"
+                                            name="courseID"
+                                            class="form-control"
+                                            value="{{this.courseID}}"
+                                            placeholder="{{this.courseID}}"
+                                            id="courseID"
+                                            readonly
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <div class="form-group">
+                                    {{#if this.empty}}
+                                        <label for="lecorderlist">Lecture order list</label>
+                                        <ul class="list-group">
+                                        </ul>
+                                    {{else}}
+                                    <label for="lecorderlist">Lecture order list</label>
+                                    <ul class="list-group" id="lecOrderlist">
+                                        <li class="list-group-item">{{listLect.lecName}}</li>
+                                    {{#each this.listLect}}
+                                        <li class="list-group-item">{{listLect.lecName}}</li>
+                                    {{/each}}
+                                    </ul>
+                                    {{/if}}
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="order">Choose order</label>
+                                    <input
+                                            type="text"
+                                            name="order"
+                                            class="form-control"
+                                            placeholder="Order like 1, 2, 3,..."
+                                            id="order"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <div class="form-group first">
+                                    <label for="Files" style="font-size: 32px;" class="font-weight-bold mb-3">Lecture video</label>
+                                    <div class="file-upload">
+                                        <button
+                                                class="file-upload-btn"
+                                                type="button"
+                                                onclick="$('.file-upload-input').trigger(
+                                            'click' )"
+                                        >Lecture Video Upload</button>
+
+                                        <div class="image-upload-wrap">
+                                            <input
+                                                    class="file-upload-input"
+                                                    name="Files"
+                                                    type="file"
+                                                    onchange="readURL(this);"
+                                                    accept="video/*"
+                                            />
+                                            <div class="drag-text">
+                                                <h3>Drag and drop a file or select add video</h3>
+                                            </div>
+                                        </div>
+                                        <div class="file-upload-content">
+                                            <img class="file-upload-image" src="#" alt="your image" />
+                                            <div class="image-title-wrap">
+                                                <button
+                                                        type="button"
+                                                        onclick="removeUpload()"
+                                                        class="remove-image"
+                                                >Remove
+                                                    <span class="image-title">Uploaded Video</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label for="description" style="font-size: 32px;" class="font-weight-bold mt-3 mb-3">Caption for lectures, resource,..</label>
+                                    <textarea name="description" required>
+                  </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <button type="submit" class="btn btn-outline-light" formaction="/teacher/course?id={{this.courseID}}">
+                                    <i class="fa fa-backward" aria-hidden="true"></i>
+                                    Cancel
+                                </button>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary" formaction="/lectures/add?id={{this.courseID}}">
+                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                    Add lecture
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
