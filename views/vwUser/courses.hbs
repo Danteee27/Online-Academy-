@@ -9,8 +9,10 @@
 
   <div class="card-body">
     {{#if this.empty}}
-        <p class="card-title">Không có dữ liệu</p>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <div class="m-5"
+      <p class="card-title">No data</p>
+      <p class="card-text">Please return next time.</p>
+    </div>
     {{else}}
         <div class="row">
         {{#each this.course}}
@@ -22,7 +24,7 @@
                 <p class="course-card-instructor">{{instructor}}</p>
                 <span class="rating">{{rating}}</span>
                 {{#each star}}
-                <span class="fa fa-star{{#if starHalf}}-half-o star-checked{{/if}} {{#if star}}star-checked{{/if}}"></span>
+                  <span class="fa {{#if starHalf}}fa-star-half-o star-checked{{/if}} {{#if star}}fa-star star-checked{{else}}fa-star-o star-checked{{/if}}"></span>
                 {{/each}}
                 <span>&nbsp;({{format_number rating_num}})</span><br>
                 {{#if hasPromotion}}

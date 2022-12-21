@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import axios from 'axios';
 import asyncErr from 'express-async-errors';
+import expressFormidable from 'express-formidable';
 
 import activate_locals_middleware from './middlewares/locals.mdw.js';
 import activate_views_middleware from './middlewares/views.mdw.js';
@@ -15,6 +16,7 @@ app.use(express.urlencoded({
 }));
 app.use(express.static('public'));
 app.use(express.urlencoded());
+app.use(expressFormidable());
 
 activate_locals_middleware(app);
 activate_views_middleware(app);

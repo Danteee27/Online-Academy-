@@ -8,7 +8,9 @@ import express from "express";
 
 import categoryRoute from '../routes/category.route.js';
 import courseRoute from '../routes/course.route.js';
-import lectureRoute from "../routes/lecture.route.js";
+import lectureRoute from '../routes/lecture.route.js';
+import wishlistRoute from '../routes/wishlist.route.js';
+import myCourseRoute from '../routes/my-course.route.js';
 
 const __dirname = dirname(fileURLToPath(
     import.meta.url));
@@ -26,5 +28,7 @@ export default function (app) {
     app.use('/public', express.static('public'));
     app.use('/course', courseRoute);
     app.use('/lecture', lectureRoute);
+    app.use('/wishlist', wishlistRoute);
+    app.use('/my-course', myCourseRoute);
 
 }

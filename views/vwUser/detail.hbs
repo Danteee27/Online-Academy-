@@ -1,42 +1,152 @@
-<div class="card">
-  <p class="card-header d-flex aPath">
-    <a class="aPath" href="javascript:;">{{fieldName}}</a>
-    <span>&nbsp;&nbsp;❯&nbsp;&nbsp;</span>
-    <a class="aPath" href="/course/category/{{course.catID}}">{{catName}}</a>
-  </p>
+{{#section 'js'}}
+<script>
 
-  <div class="card-body course-card-body bg-dark">
-    <img class="course-img m-3 border-light" src="https://drive.google.com/uc?export=view&id={{course.image}}">
-    <div class="course-title text-light m-3">
-      <h1 class="card-title">{{course.courseName}}</h1>
-      <p class="card-text">{{course.tinydes}}</p>
-      <div class="course-title-info">
-        <p class="card-text">
-          <span class="rating">{{course.rating}}</span>&nbsp;
-          {{#each course.star}}
-              <span class="fa fa-star{{#if starHalf}}-half-o star-checked{{/if}} {{#if star}}star-checked{{/if}}"></span>
-          {{/each}}
-          &nbsp;
-          <span class="course-rating-num">({{format_number course.rating_num}} ratings)</span>
-          &nbsp;
-          <span>{{format_number course.student_num}} students</span>
-        </p>
-        <p class="card-text">Instructor: <span class="course-instructor">{{course.instructor}}</span></p>
-        <p class="card-text">Last updated <span>{{dateMonthYear course.update}}</span></p>
+  var offset = 4;
+  var courseID = {{course.courseID}};
+  var userID = {{lcUserID}};
+  var totalFb = {{totalFb}};
+
+  function getMoreFeedback() {
+    var ajax = new XMLHttpRequest();
+
+    ajax.open("POST", `http://localhost:3000/course/moreFB?id=${courseID}`, true);
+
+    ajax.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        if (this.status == 200) {
+          var data = JSON.parse(this.responseText);
+          var html = "";
+          for (var a = 0; a < data.length; a++) {
+            html += "<div class=\"col-md-6 p-1\">";
+            html += "<div class=\"border-top\" style=\"width: 85%;\">";
+            html += "<div class=\"m-2 pt-3 pb-3\">";
+            html += "<div class=\"feedback-card-header d-flex\">";
+            html += "<div class=\"mt-2\">";
+            html += "<span class=\"feedback-card-author-avatar\">" + data[a].avatar + "</span>";
+            html += "</div>";
+            html += "<div class=\"ml-3\">";
+            html += "<span>" + data[a].author +"</span><br>";
+            for (var i = 0; i < 5; i++) {
+              if (data[a].star[i] === true) {
+                html += "<span class=\"fa fa-star star-checked\"></span>";
+              }
+              else {
+                html += "<span class=\"fa fa-star\"></span>";
+              }
+            }
+            html += "&nbsp;";
+            html += "<span>" + data[a].date + "</span>"
+            html += "</div>";
+            html += "</div>";
+            html += "<p class=\"card-text\">";
+            html += "<h5>" + data[a].title + "</h5>";
+            html += "<span class=\"mt-3\">" + data[a].content + "</span><br>";
+            html += "</p>";
+            html += "</div>";
+            html += "</div>";
+            html += "</div>";
+          }
+          document.getElementById("data").innerHTML += html;
+          var limit = 4;
+          offset = offset + limit;
+          if (offset === totalFb) {
+            $("#show-more").addClass("disabled");
+            return;
+          }
+        }
+      }
+    };
+    var formData = new FormData();
+    formData.append("offset", offset);
+    ajax.send(formData);
+  }
+
+  function addToWishlist() {
+    var ajax = new XMLHttpRequest();
+
+    ajax.open("POST", `http://localhost:3000/course/wishlist?id=${courseID}&userID=${userID}`, true);
+    ajax.onreadystatechange = function () {
+      if (this.readyState == 4) {
+        if (this.status == 200) {
+          var data = JSON.parse(this.responseText);
+          if (data === true) {
+            $("#add-to-wishlist").addClass("fa-heart");
+            $("#add-to-wishlist").removeClass("fa-heart-o");
+          }
+          else {
+            $("#add-to-wishlist").addClass("fa-heart-o");
+            $("#add-to-wishlist").removeClass("fa-heart");
+          }
+        }
+      }
+    };
+    ajax.send();
+  }
+
+  function buyNow() {
+    var ajax = new XMLHttpRequest();
+
+    ajax.open("POST", `http://localhost:3000/course/buy-now?id=${courseID}&userID=${userID}`, true);
+    ajax.send();
+  }
+</script>
+{{/section}}
+
+<p class="card-header d-flex aPath">
+  <a class="aPath" href="javascript:;">{{fieldName}}</a>
+  <span>&nbsp;&nbsp;❯&nbsp;&nbsp;</span>
+  <a class="aPath" href="/course/category/{{course.catID}}">{{catName}}</a>
+</p>
+
+{{#if empty}}
+<div class="m-5"
+  <p class="card-title">No data</p>
+  <p class="card-text">Please return next time.</p>
+</div>
+{{else}}
+<div class="card">
+
+  <div class="bg-dark">
+    <div class="course-card-body">
+      <div class="course-title text-light">
+        <h1 class="card-title">{{course.courseName}}</h1>
+        <p class="card-text">{{course.tinydes}}</p>
+        <div class="course-title-info">
+          <p class="card-text">
+            <span class="rating">{{course.rating}}</span>&nbsp;
+            {{#each course.star}}
+                <span class="fa {{#if starHalf}}fa-star-half-o star-checked{{/if}} {{#if star}}fa-star star-checked{{else}}fa-star-o star-checked{{/if}}"></span>
+            {{/each}}
+            &nbsp;
+            <span class="course-rating-num">({{format_number course.rating_num}} ratings)</span>
+            &nbsp;
+            <span>{{format_number course.student_num}} students</span>
+          </p>
+          <p class="card-text">Instructor: <span class="course-instructor">{{course.instructor}}</span></p>
+          <p class="card-text">Last updated <span>{{dateMonthYear course.update}}</span></p>
+        </div>
+        
       </div>
-      <div class="course-title-price">
+      <img class="course-img border-light" src="https://drive.google.com/uc?export=view&id={{course.image}}">
+
+      <div class="course-title-price mt-2">
         <div class="course-title-price-card">
           <div class="price-box text-dark text-center">
             {{#if course.hasPromotion}}
-              <span class="price">₫{{format_number course.promotion}}</span><br>
-              <span class="old-price">₫{{format_number course.price}}</span><br>
+              <span class="price" style="font-size: 30px;">₫{{format_number course.promotion}}</span><br>
+              <span class="old-price" style="font-size: 24px;">₫{{format_number course.price}}</span>
             {{else}}
-              <span class="price">₫{{format_number course.price}}</span><br>
+              <span class="price" style="font-size: 30px;">₫{{format_number course.price}}</span>
             {{/if}}
           </div>
-          <div class="buy-now text-center text-dark" type="button">
-            <h5>Buy now</h5>
+          <div class="d-flex mt-3">
+              <button class="buy-now text-center text-dark" onclick="buyNow();location.reload();"><h5 style="font-weight: 500;">Buy now</h5></button>
+              <button class="course-add-to-wishlist" onclick="addToWishlist();">
+                <i id="add-to-wishlist" class="fa fa-heart{{#unless isInWishList}}-o{{/unless}} fa-lg"></i>
+              </button>
+            </form>
           </div>
+          
         </div>
       </div>
     </div>
@@ -84,7 +194,10 @@
           <div class="d-inline ml-4" style="width: 325px;">
             <span class="recommend-card-header">{{courseName}}</span>
             <br>
-            <span>{{lec_num}} lectures</span>
+            <span><i>{{lec_num}} lectures</i></span>
+            &nbsp;
+            <i class="fa fa-minus"></i>
+            &nbsp;
             <span>Update {{dateMonthYear update}}</span>
           </div>
           <div class="d-inline ml-5 mr-3" style="width: 100px;">
@@ -127,15 +240,14 @@
       <i class="fa fa-circle"></i>
       {{format_number course.rating_num}} ratings
     </h5>
-    
     <div class="row mt-3">
     {{#each feedback}}
       <div class="col-md-6 p-1">
-        <div class="border border-dark">
-          <div class="m-2">
+        <div class="border-top" style="width: 85%;">
+          <div class="m-2 pt-3 pb-3">
             <div class="feedback-card-header d-flex">
               <div class="mt-2">
-                <span class="feedback-card-author-avatar">N</span>
+                <span class="feedback-card-author-avatar">{{avatar}}</span>
               </div>
               <div class="ml-3" >
                 <span>{{author}}</span><br>
@@ -146,7 +258,7 @@
                 <span>{{dateDayMonthYear date}}</span>
               </div>
             </div>
-            <p class="card-text w-50">
+            <p class="card-text">
             <h5>{{title}}</h5>
             <span class="mt-3">{{content}}</span><br>
             </p>
@@ -155,7 +267,14 @@
       </div>
     {{/each}}
     </div>
+    <div id="data" class="row"></div>
+    {{!-- <div class="text-center">
+      <a id="show-more" type="button" class="btn btn-outline-dark mt-3 mb-3 {{#unless hasNextFb}}disabled{{/unless}}" href="/course/detail?catID={{course.catID}}&id={{course.courseID}}&fbID={{nextFbID}}#show-more">Show more</a>
+    </div> --}}
+    <div class="text-center">
+      <a id="show-more" type="button" class="btn btn-outline-dark mt-3 mb-3" onclick="getMoreFeedback();" {{#if emptyFbList}}hidden{{/if}}>Show more</a>
+    </div>
   </div>
 </div>
-
+{{/if}}
 

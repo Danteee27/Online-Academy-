@@ -5,6 +5,8 @@ import categoryService from '../services/category.service.js';
 import fieldService from '../services/field.service.js';
 import lectureService from '../services/lecture.service.js';
 import feedbackService from '../services/feedback.service.js';
+import wishlistService from '../services/wishlist.service.js';
+import myCourseService from '../services/my-course.service.js';
 
 const router = express.Router();
 
@@ -21,6 +23,8 @@ router.get('/category/:id', async function (req, res) {
     const catName = await categoryService.findCatNameByCatID(catID);
     const fieldID = await categoryService.findFieldIDByCatID(catID);
     const fieldName = await fieldService.findFieldNameByFieldID(fieldID);
+
+    res.locals.lcTitle = catName + " | " + res.locals.lcTitle;
 
     const limit = 8;
     const total = await courseService.countByCatId(catID);
@@ -86,6 +90,18 @@ router.get('/detail', async function (req, res) {
 
     const catID = req.query.catID;
     const courseID = req.query.id;
+    const userID = res.locals.lcUserID;
+
+    const isInMyCourse = await myCourseService.isInMyCourse(userID, courseID);
+    if (isInMyCourse === true) {
+        return res.redirect(`/lecture/${courseID}`);
+    }
+
+
+    res.locals.curCourse = {
+        catID,
+        courseID
+    };
 
     const course = await courseService.findByDetail(catID, courseID);
     const fieldID = await categoryService.findFieldIDByCatID(catID);
@@ -93,7 +109,7 @@ router.get('/detail', async function (req, res) {
     const catName = await categoryService.findCatNameByCatID(catID);
     const lecture = await lectureService.findAllByCourseID(courseID);
     const recommendList = await courseService.find5BestSellerCoursesByCatID(courseID, catID);
-    const feedbackList = await feedbackService.findByCourseID(courseID);
+    const isInWishList = await wishlistService.isInWishList(1, courseID);
 
     for (let i = 0; i < lecture.length; i++) {
         lecture[i].newLectureID = _.kebabCase(lecture[i].lecName);
@@ -125,6 +141,9 @@ router.get('/detail', async function (req, res) {
     course.star = star;
     res.locals.lcTitle = course.courseName + " | " + res.locals.lcTitle;
 
+    const feedbackList = await feedbackService.findByCourseIDWithLimit(courseID, 4);
+    const totalFb = await feedbackService.countByCourseID(courseID);
+
     for (let i = 0; i < feedbackList.length; i++) {
         const star = [];
         for (let j = 1; j <= 5; j++) {
@@ -134,17 +153,83 @@ router.get('/detail', async function (req, res) {
                 star.push(false);
         }
         feedbackList[i].star = star;
+        feedbackList[i].avatar = feedbackList[i].author[0];
     }
 
-
     res.render('vwUser/detail', {
+        empty: course.length === 0,
         course,
         fieldName,
         catName,
         lecture,
         recommendItem: recommendList,
-        feedback: feedbackList
+        feedback: feedbackList,
+        emptyFbList: feedbackList.length === 0,
+        isInWishList,
+        totalFb
     })
 });
+
+router.post('/wishlist', async function (req, res) {
+    const courseID = req.query.id;
+    const userID = req.query.userID;
+
+    const isInWishList = await wishlistService.isInWishList(userID, courseID);
+    if (isInWishList === true) {
+        await wishlistService.del(userID, courseID);
+        res.json(false);
+    } else {
+        await wishlistService.add({
+            userID,
+            courseID
+        });
+        res.json(true);
+    }
+});
+
+router.post('/buy-now', async function (req, res) {
+    const courseID = req.query.id;
+    const userID = req.query.userID;
+
+    await myCourseService.add({
+        userID,
+        courseID
+    });
+
+    const isInWishList = await wishlistService.isInWishList(userID, courseID);
+    if (isInWishList === true) {
+        await wishlistService.del(userID, courseID);
+    }
+    res.redirect('back');
+});
+
+router.post('/moreFB', async function (req, res) {
+    const courseID = req.query.id;
+    var limit = 4;
+    var offset = parseInt(req.fields.offset);
+    console.log(offset);
+
+    var list = await feedbackService.findByCourseIDWithLimitOffset(courseID, limit, offset);
+    for (let i = 0; i < list.length; i++) {
+        const star = [];
+        for (let j = 1; j <= 5; j++) {
+            if (j <= +list[i].rating)
+                star.push(true);
+            else
+                star.push(false);
+        }
+        list[i].star = star;
+        list[i].avatar = list[i].author[0];
+        const event = new Date(list[i].date);
+        const options = {
+            day: 'numeric',
+            month: 'numeric',
+            year: 'numeric'
+        };
+        list[i].date = event.toLocaleDateString("en-US", options);
+    }
+
+    res.json(list);
+})
 
 export default router;
