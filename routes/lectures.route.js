@@ -74,7 +74,7 @@ router.get('/users/:id', async function (req, res) {
         feedbacks,
         // fieldName,
         // courseName,
-        empty: list.length === 0,
+        empty: lecture.length === 0,
         layout: 'main1'
     });
 });
