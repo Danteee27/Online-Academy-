@@ -15,6 +15,9 @@ export default {
     findByLectureID(lecID) {
         return db('lectures').where('lecID', lecID);
     },
+    findAllByCourseID(couID) {
+        return db('lectures').where('courseID', couID);
+    },
     async countByCourseID(courseID) {
         const list = db('courses').where('courseID', courseID).count({
             amount: 'lecID'
