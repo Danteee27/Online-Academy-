@@ -3,6 +3,18 @@ import categoriesService from "../services/categories.service.js";
 
 export default function (app) {
     app.use(async function (req, res, next) {
+
+
+        if (typeof req.session.auth === 'undefined') {
+            req.session.auth = false;
+        }
+
+        res.locals.auth = req.session.auth;
+        res.locals.authUser = req.session.authUser;
+        next();
+    });
+
+    app.use(async function (req, res, next) {
         // Huy - locals Fields to show in navbar
         res.locals.lcFields = await fieldsService.findAll();
         let fieldsLen = res.locals.lcFields.length;

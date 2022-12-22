@@ -20,6 +20,15 @@ export default function (app) {
     });
 
     app.get('/admin', function (req, res) {
+
+        if(req.session.authUser != null) {
+            if(req.session.authUser.role !== 'ROLE.ADMIN')
+            {
+                res.redirect('/');
+            }
+        }
+
+
         res.render('vwAdmin/index')
     });
 

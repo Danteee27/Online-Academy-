@@ -17,7 +17,9 @@ export default {
         if (list.length === 0)
             return null;
         return list[0];
-    },
+    }
+
+    ,
     async addAVA(image, id) {
         return await db('teachers').where('teacherID', id).update({avatar:image});
     },

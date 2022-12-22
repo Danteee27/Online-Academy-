@@ -5,7 +5,6 @@ import multer from 'multer';
 import {
     google
 } from 'googleapis';
-import FormData from "form-data";
 
 
 import coursesService from "../services/courses.service.js";
@@ -96,9 +95,19 @@ router.post('/addCourse', upload.any(), async function (req, res) {
 });
 // Phan Huy teacher route-profile
 router.get('/profile', async function (req, res) {
+
+
     const userid = req.query.id;
     const teacher = await teachersService.findById(userid);
     const courses = await coursesService.findByUserId(userid);
+    if(req.session.authUser == null)
+    {
+        return res.redirect('/');
+    }
+    if(req.session.authUser.role !== 'ROLE.TEACHER' || req.session.authUser.email !== teacher.email )
+    {
+        res.redirect('/');
+    }
     //var doc = new DOMParser().parseFromString(teacher.description, "text/xml");
     //console.log(doc);
     console.log(courses);

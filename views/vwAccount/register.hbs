@@ -19,8 +19,8 @@
 
         $(document).ready(function(e)
         {
-            console.log("register");
             $('#frmRegister').on('submit', function (e) {
+                console.log("register pressed");
                 e.preventDefault();
 
                 const email = $('#txtEmail').val();
@@ -116,13 +116,9 @@
                             <!-- Register buttons -->
                             <div class="text-center">
                                 <p>or sign up with:</p>
-                                <button type="button" class="btn btn-link btn-floating mx-1">
-                                    <i class="fa fa-facebook-official"></i>
-                                </button>
-
-                                <button type="button" class="btn btn-link btn-floating mx-1 text-danger">
+                                <a href="/google" class="btn btn-primary btn-floating mx-1 text-danger">
                                     <i class="fa fa-google"></i>
-                                </button>
+                                </a>
 
 
                             </div>
@@ -132,7 +128,7 @@
             </div>
 
             <div class="col-lg-6 mb-5 mb-lg-0">
-                <img src="/public/imgs/logo2.jpg"
+                <img src="/imgs/logo2.jpg"
                      alt="" />
             </div>
         </div>
