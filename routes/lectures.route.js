@@ -36,8 +36,8 @@ router.get('/:id', async function (req, res) {
     const userID = res.locals.lcUserID;
 
 
-    const list = await lecturesService.findByLectureID(lecID);
-    const lecture = list[0];
+    const lecture = await lecturesService.findById(lecID);
+    //const lecture = list[0];
     // const lecture = await lectureService.findByLectureID(lecID);
     const listLecture = await lecturesService.findAllByCourseID(lecture.courseID);
     for (let i = 0; i < listLecture.length; i++) {
@@ -144,6 +144,7 @@ router.get('/add', async function (req, res) {
     res.render('vwTeacher/addLecture', {
         layout: 'LectureLayout',
         courseID: courseID,
+        lectures: lectures,
     });
     console.log(courseID);
 });
