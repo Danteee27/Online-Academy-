@@ -14,6 +14,9 @@ export default {
         else
             return true;
     },
+    async setDate(userID, lecID) {
+
+    },
     add(entity) {
         return db('user-lectures').insert(entity);
     },

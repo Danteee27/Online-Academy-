@@ -30,10 +30,11 @@ const drive = google.drive({
     auth: oauth2Client
 });
 
-router.get('/:id', async function (req, res) {
+router.get('/users/:id', async function (req, res) {
     const lecID = req.params.id || 0;
 
     const userID = res.locals.lcUserID;
+
 
 
     const list = await lecturesService.findByLectureID(lecID);
