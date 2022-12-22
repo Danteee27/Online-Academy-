@@ -6,10 +6,9 @@ import usersService from '../services/users.service.js';
 const router = express.Router();
 
 router.get('/register', (req, res) => {
-    res.render('vwAccount/register',
-        {
-            layout:false
-        });
+    res.render('vwAccount/register', {
+        layout: false
+    });
 })
 
 router.post('/register', async function (req, res) {
@@ -26,23 +25,18 @@ router.post('/register', async function (req, res) {
         role: 'ROLE.USER'
     }
     await usersService.add(user);
-    res.render('vwAccount/register',
-        {
-            layout:false
-        });
+    res.render('vwAccount/register', {
+        layout: false
+    });
 });
 
-router.get('/login', async function(req, res) {
-    res.render('vwAccount/login',
-        {
-            layout: false
-        })
+router.get('/login', async function (req, res) {
+    res.render('vwAccount/login', {
+        layout: false
+    })
 })
 
 router.post('/login', async function (req, res) {
-
-
-
     const user = await usersService.findByEmail(req.body.email);
 
     if (user === null) {

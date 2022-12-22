@@ -23,7 +23,8 @@ router.get('/category/:id', async function (req, res) {
     const cat = await categoryService.findById(catID);
     const catName = cat.catName;
     const fieldID = cat.fieldID;
-    const fieldName = await fieldService.findById(fieldID).fieldName;
+    const field = await fieldService.findById(fieldID);
+    const fieldName = field.fieldName;
 
     res.locals.lcTitle = catName + " | " + res.locals.lcTitle;
 

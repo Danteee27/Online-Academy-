@@ -1,8 +1,4 @@
 import express from 'express';
-import morgan from 'morgan';
-import bodyParser from 'body-parser'
-
-
 import activate_routes from './middlewares/routes.mdw.js';
 import activate_view from './middlewares/view.mdw.js';
 import activate_locals from './middlewares/locals.mdw.js';
@@ -11,18 +7,21 @@ import morgan from 'morgan';
 import expressFormidable from 'express-formidable';
 import activate_auth from './middlewares/auth.mdw.js';
 import dotenv from 'dotenv';
+import bodyParser from 'body-parser'
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.urlencoded({
     extended: true
 }));
 app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(expressFormidable());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 activate_locals(app);
 activate_view(app);
