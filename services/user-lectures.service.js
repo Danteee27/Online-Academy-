@@ -4,8 +4,9 @@ export default {
     findAll() {
         return db('user-lectures');
     },
-    findByDetail(userID, lecID) {
-        return db('user-lectures').where('userID', userID).where('lecID', lecID);
+    async findByDetail(userID, lecID) {
+        const list = await db('user-lectures').where('userID', userID).where('lecID', lecID);
+        return list[0];
     },
     async getStatus(userID, lecID) {
         const list = await db('user-lectures').where('userID', userID).where('lecID', lecID);
@@ -13,6 +14,12 @@ export default {
             return false;
         else
             return true;
+    },
+    async setDate(userID, lecID) {
+        var now = new Date();
+        await db('user-lectures').where('userID', userID).where('lecID', lecID).update(
+            'date', now
+        )
     },
     add(entity) {
         return db('user-lectures').insert(entity);

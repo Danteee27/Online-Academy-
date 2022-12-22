@@ -10,6 +10,7 @@ import myCourseService from '../services/my-courses.service.js';
 import {
     format
 } from 'morgan';
+import userLecturesService from '../services/user-lectures.service.js';
 
 const router = express.Router();
 
@@ -98,8 +99,18 @@ router.get('/detail', async function (req, res) {
 
     const isInMyCourse = await myCourseService.isInMyCourse(userID, courseID);
     if (isInMyCourse === true) {
-        const lecture = await lectureService.findByCourseID(courseID);
-        return res.redirect(`/lectures/${lecture.lecID}`);
+        const lectures = await lectureService.findAllByCourseID(courseID);
+        let max = await userLecturesService.findByDetail(userID, lectures[0].lecID);
+        let lecID = lectures[0].lecID;
+        for (let i = 1; i < lectures.length; i++) {
+            let temp = await userLecturesService.findByDetail(userID, lectures[i].lecID);
+            if (temp.date > max.date) {
+                max = temp;
+                lecID = lectures[i].lecID;
+            }
+        }
+        console.log(lecID);
+        return res.redirect(`/lectures/users/${lecID}`);
     }
 
 
