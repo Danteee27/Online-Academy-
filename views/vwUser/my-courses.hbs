@@ -1,0 +1,50 @@
+<div class="my-course-container">
+
+    <h1 class="card-header">
+        <i class="fa fa-code"></i>
+        My Courses
+    </h1>
+
+    {{#if empty}}
+    <div class="m-5"
+        <p class="card-title">No data</p>
+        <p class="card-text">Please return next time.</p>
+    </div>
+    {{else}}
+    <div class="">
+        <div class="my-course-body ml-3 mr-3">
+            <div class="row">
+            {{#each course}}
+            <div class="col-sm-3 mb-3 mt-3" type="button">
+                <a class="course-card-a" href="/user-courses/detail?catID={{catID}}&id={{courseID}}">
+                <div class="course-card" style="height: 280px;">
+                    <img class= "course-card-img" src="https://drive.google.com/uc?export=view&id={{image}}" alt="">
+                    <h5 class="course-card-title">{{courseName}}</h5>
+                    <p class="course-card-instructor">{{instructor}}</p>
+                </div>
+                </a>
+            </div>
+            {{/each}}
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item {{#unless hasPrevPage}}disabled{{/unless}}">
+                    <a class="page-link" href="?page={{this.prevPage}}">Previous</a>
+                    </li>
+                {{#each pageNumbers}}
+                    <li class="page-item  {{#if isCurrent}}active{{/if}}">
+                    <a class="page-link" href="{{#if isCurrent}}javascript:;{{else}}?page={{value}}{{/if}}">
+                        {{value}}
+                    </a>
+                    </li>
+                {{/each}}
+                    <li class="page-item {{#unless hasNextPage}}disabled{{/unless}}">
+                    <a class="page-link" href="?page={{nextPage}}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    {{/if}}
+    
+</div>

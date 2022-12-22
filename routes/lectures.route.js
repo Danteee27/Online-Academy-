@@ -1,11 +1,12 @@
 import express from 'express';
 import lecturesService from "../services/lectures.service.js";
+import feedbacksService from "../services/feedbacks.service.js";
 
 import multer from 'multer';
-import {google} from 'googleapis';
-import FormData from "form-data";
-
-
+import {
+    google
+} from 'googleapis';
+// import FormData from "form-data";
 
 import * as stream from 'stream';
 
@@ -20,15 +21,60 @@ const upload = multer();
 
 
 const oauth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL);
-oauth2Client.setCredentials({refresh_token: REFRESH_TOKEN});
-const drive = google.drive({version: "v3", auth: oauth2Client});
+oauth2Client.setCredentials({
+    refresh_token: REFRESH_TOKEN
+});
+const drive = google.drive({
+    version: "v3",
+    auth: oauth2Client
+});
 
-router.get('/', async function(req, res) {
+router.get('/:id', async function (req, res) {
+    const lecID = req.params.id || 0;
+
+
+    const list = await lecturesService.findByLectureID(lecID);
+    const lecture = list[0];
+    // const lecture = await lectureService.findByLectureID(lecID);
+    const listLecture = await lecturesService.findAllByCourseID(lecture.courseID);
+    const feedbacks = await feedbacksService.findByCourseID(lecture.courseID);
+
+    let tutorialRating = 0.0;
+    let countRateList = [0, 0, 0, 0, 0];
+    for (let item of feedbacks) {
+        tutorialRating += item.rating / feedbacks.length;
+        countRateList[item.rating - 1] = countRateList[item.rating - 1] + 1.0;
+    }
+    tutorialRating = Math.round(tutorialRating * 100) / 100;
+    tutorialRating = tutorialRating.toFixed(1);
+    console.log(tutorialRating);
+
+    const rating = [1, 2, 3, 4, 5];
+
+
+    for (let item = 0; item < countRateList.length; item++) {
+        countRateList[item] = Math.round(countRateList[item] * 10000 / feedbacks.length) / 100;
+    }
+
+    res.render('vwStudent/lectures', {
+        lectures: listLecture,
+        lecture,
+        countRateList,
+        tutorialRating,
+        feedbacks,
+        // fieldName,
+        // courseName,
+        empty: list.length === 0,
+        layout: 'main1'
+    });
+});
+
+router.get('/', async function (req, res) {
     const list = await lecturesService.findAll();
     res.json(list);
 })
 
-router.get('/view/:id', async function(req, res) {
+router.get('/view/:id', async function (req, res) {
     const id = req.params.id || 0;
     const list = await lecturesService.findByCourseID(id);
 
@@ -42,7 +88,9 @@ const uploadFile = async (fileObject) => {
     const bufferStream = new stream.PassThrough();
     bufferStream.end(fileObject.buffer);
     console.log(bufferStream);
-    const { data } = await drive.files.create({
+    const {
+        data
+    } = await drive.files.create({
         requestBody: {
             name: fileObject.originalname,
             parents: ['1NZUxjhw6Rcol373vpiX7pEJRU6hGomJx'],
@@ -56,10 +104,13 @@ const uploadFile = async (fileObject) => {
     console.log(`Uploaded file ${data.name} ${data.id}`);
     return data.id;
 };
-router.post('/add', upload.any(), async function (req,res)  {
+router.post('/add', upload.any(), async function (req, res) {
 
     try {
-        const { body, files } = req;
+        const {
+            body,
+            files
+        } = req;
         const id = body.courseID;
         const ret = await lecturesService.add(body);
         console.log(ret);

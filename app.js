@@ -21,8 +21,6 @@ app.use(express.urlencoded({
 app.use(express.static('public'));
 app.use(morgan('dev'));
 
-//app.use(expressFormidable());
-
 activate_locals(app);
 activate_view(app);
 activate_routes(app);

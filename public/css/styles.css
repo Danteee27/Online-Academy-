@@ -434,3 +434,15 @@ input:checked ~ label {
     top: 50%;
     transform: translate(-50%,-50%) scale(1);
 }
+
+.gradient-home{
+    background: #d9a7c7;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #fffcdc, #d9a7c7);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #fffcdc, #d9a7c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-text-trans
+{
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.2);
+}

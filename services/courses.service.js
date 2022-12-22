@@ -33,7 +33,9 @@ export default {
         return list[0].amount;
     },
     addImage(image, id) {
-        return db('courses').where('courseID', id).update({image: image});
+        return db('courses').where('courseID', id).update({
+            image: image
+        });
     },
 
     findPageByCatID(catID, limit, offset) {
@@ -50,8 +52,7 @@ export default {
         return db('courses').insert(course);
     },
 
-    addLecture(lecture)
-    {
+    addLecture(lecture) {
         return db('lectures').insert(lecture);
     },
 
@@ -64,14 +65,13 @@ export default {
         return ret[0];
     },
 
-    update(courseID, course)
-    {
-        return db('courses').where('courseID',courseID).update(course);
-    }
-    ,
-    hide(courseID)
-    {
-        return db('courses').where('courseID',courseID).update({hidden: 1});
+    update(courseID, course) {
+        return db('courses').where('courseID', courseID).update(course);
+    },
+    hide(courseID) {
+        return db('courses').where('courseID', courseID).update({
+            hidden: 1
+        });
     },
     unhide(courseID) {
         return db('courses').where('courseID', courseID).update({
