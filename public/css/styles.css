@@ -446,3 +446,32 @@ input:checked ~ label {
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0, 0.2);
 }
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    font-size: 8px;
+}
+
+.carousel-control-prev-cs,
+.carousel-control-next-cs {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 15%;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+    background: none;
+    border: 0;
+    opacity: 0.2;
+    transition: opacity 0.15s ease;
+}

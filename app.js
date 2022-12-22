@@ -6,6 +6,7 @@ import activate_routes from './middlewares/routes.mdw.js';
 import activate_view from './middlewares/view.mdw.js';
 import activate_locals from './middlewares/locals.mdw.js';
 import activate_session from './middlewares/session.mdw.js';
+import activate_error from './middlewares/error.mdw.js';
 import morgan from 'morgan';
 import expressFormidable from 'express-formidable';
 import activate_auth from './middlewares/auth.mdw.js';
@@ -30,8 +31,10 @@ activate_locals(app);
 activate_view(app);
 activate_auth(app);
 activate_routes(app);
+activate_error(app);
 
-const PORT = 3000;
+
+const PORT = 3100;
 app.listen(PORT, function () {
     console.log(`Listening at http://localhost:${PORT}`);
 })
