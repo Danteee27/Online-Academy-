@@ -1,6 +1,7 @@
 import express from 'express';
 import lecturesService from "../services/lectures.service.js";
 import feedbacksService from "../services/feedbacks.service.js";
+import userLecturesService from "../services/user-lectures.service.js";
 
 import multer from 'multer';
 import {
@@ -32,11 +33,19 @@ const drive = google.drive({
 router.get('/:id', async function (req, res) {
     const lecID = req.params.id || 0;
 
+    const userID = res.locals.lcUserID;
+
 
     const list = await lecturesService.findByLectureID(lecID);
     const lecture = list[0];
     // const lecture = await lectureService.findByLectureID(lecID);
     const listLecture = await lecturesService.findAllByCourseID(lecture.courseID);
+    for (let i = 0; i < listLecture.length; i++) {
+        const status = await userLecturesService.getStatus(userID, listLecture[i].lecID);
+        listLecture[i].isCompleted = status;
+        if (listLecture[i].lecID === +lecID)
+            listLecture[i].isActive = true;
+    }
     const feedbacks = await feedbacksService.findByCourseID(lecture.courseID);
 
     let tutorialRating = 0.0;
@@ -137,8 +146,18 @@ router.get('/add', function (req, res) {
     console.log(courseID);
 });
 
+router.post('/user-lectures/update', async function (req, res) {
+    const userID = req.query.userID;
+    const lecID = req.query.lecID;
+    const isChecked = req.query.status;
 
+    console.log(isChecked);
 
-
+    await userLecturesService.update(
+        userID,
+        lecID,
+        isChecked
+    );
+});
 
 export default router;
