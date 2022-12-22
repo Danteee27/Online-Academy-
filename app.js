@@ -1,4 +1,5 @@
 import express from 'express';
+import morgan from 'morgan';
 import activate_routes from './middlewares/routes.mdw.js';
 import activate_view from './middlewares/view.mdw.js';
 import activate_locals from './middlewares/locals.mdw.js';
