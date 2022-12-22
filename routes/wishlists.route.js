@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/", async function (req, res) {
     res.locals.lcWishlistPage = true;
     res.locals.lcTitle = "Wishlist | " + res.locals.lcTitle;
-    const userID = res.locals.lcUserID;
+    const userID = res.locals.authUser.userID;
 
     const total = await wishlistService.countByUserID(userID);
     const limit = 8;

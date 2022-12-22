@@ -9,7 +9,7 @@ router.get("/", async function (req, res) {
     res.locals.lcMyCoursePage = true;
     res.locals.lcTitle = "My Courses | " + res.locals.lcTitle;
 
-    const userID = res.locals.lcUserID;
+    const userID = res.locals.authUser.userID;
 
     const total = await myCourseService.countByUserID(userID);
     const limit = 8;

@@ -8,46 +8,42 @@ export default function (app) {
 
 
     app.engine('hbs', engine({
-        defaultLayout: 'main1.hbs',
+        //defaultLayout: 'main1.hbs',
         extname: 'hbs',
-        //defaultLayout: 'main.hbs',
+        defaultLayout: 'main1.hbs',
         helpers: {
             section: hbs_sections(),
-            'ifCond' : function(v1, operator, v2, options){
-                switch (operator) {
-                    case '==':
-                        return (v1 == v2) ? options.fn(this) : options.inverse(this);
-                    case '===':
-                        return (v1 === v2) ? options.fn(this) : options.inverse(this);
-                    case '<':
-                        return (v1 < v2) ? options.fn(this) : options.inverse(this);
-                    case '<=':
-                        return (v1 <= v2) ? options.fn(this) : options.inverse(this);
-                    case '>':
-                        return (v1 > v2) ? options.fn(this) : options.inverse(this);
-                    case '>=':
-                        return (v1 >= v2) ? options.fn(this) : options.inverse(this);
-                    case '&&':
-                        return (v1 && v2) ? options.fn(this) : options.inverse(this);
-                    case '||':
-                        return (v1 || v2) ? options.fn(this) : options.inverse(this);
-                    default:
-                        return options.inverse(this);
+            'ifCond': function (v1, operator, v2, options) {
+                    switch (operator) {
+                        case '==':
+                            return (v1 == v2) ? options.fn(this) : options.inverse(this);
+                        case '===':
+                            return (v1 === v2) ? options.fn(this) : options.inverse(this);
+                        case '<':
+                            return (v1 < v2) ? options.fn(this) : options.inverse(this);
+                        case '<=':
+                            return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+                        case '>':
+                            return (v1 > v2) ? options.fn(this) : options.inverse(this);
+                        case '>=':
+                            return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+                        case '&&':
+                            return (v1 && v2) ? options.fn(this) : options.inverse(this);
+                        case '||':
+                            return (v1 || v2) ? options.fn(this) : options.inverse(this);
+                        default:
+                            return options.inverse(this);
+                    }
                 }
-            }
 
-            ,
-            isAdmin(authUser)
-            {
-                if(authUser !== null) {
+                ,
+            isAdmin(authUser) {
+                if (authUser !== null) {
                     return authUser.role === 'ROLE.ADMIN' || 0;
-                }
-                else
-                {
+                } else {
                     return false;
                 }
-            }
-            ,
+            },
             format_number(val) {
                 return numeral(val).format('0,0');
             },
