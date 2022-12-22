@@ -1,3 +1,6 @@
+
+
+
 import coursesRoute from "../routes/courses.route.js";
 import fieldsRoute from "../routes/fields.route.js";
 import categoriesRoute from "../routes/categories.route.js";
@@ -7,6 +10,9 @@ import myCoursesRoute from "../routes/my-courses.route.js";
 import userCoursesRoute from "../routes/user-courses.route.js";
 import usersRoute from "../routes/users.route.js"
 
+import teachersRoute from "../routes/teachers.route.js";
+
+
 export default function (app) {
     app.get('/', function (req, res) {
         res.locals.lcHomePage = true;
@@ -15,7 +21,9 @@ export default function (app) {
 
     app.get('/admin', function (req, res) {
         res.render('vwAdmin/index')
-    })
+    });
+
+
 
 
 
@@ -27,4 +35,7 @@ export default function (app) {
     app.use('/my-courses', myCoursesRoute);
     app.use('/user-courses', userCoursesRoute);
     app.use('/users', usersRoute);
+    
+    app.use('/teacher', teachersRoute);
+    app.use('/lectures', lecturesRoute);
 }

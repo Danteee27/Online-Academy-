@@ -22,12 +22,18 @@ export default {
 
         return list[0];
     },
+    async findByUserId(userID) {
+        return db('courses').whereRaw('hidden = ?', [0]).where('teacherNumber', userID);
+    },
 
     async countByCategoryID(catID) {
         const list = await db('courses').where('catID', catID).count({
             amount: 'courseID'
         });
         return list[0].amount;
+    },
+    addImage(image, id) {
+        return db('courses').where('courseID', id).update({image: image});
     },
 
     findPageByCatID(catID, limit, offset) {
@@ -44,8 +50,28 @@ export default {
         return db('courses').insert(course);
     },
 
-    update(courseID, course) {
-        return db('courses').where('courseID', courseID).update(course);
+    addLecture(lecture)
+    {
+        return db('lectures').insert(lecture);
+    },
+
+    async findMaxId() {
+        const sql = `SELECT \`AUTO_INCREMENT\`
+                     FROM INFORMATION_SCHEMA.TABLES
+                     WHERE TABLE_SCHEMA = 'qlkh'
+                       AND TABLE_NAME = 'courses'`;
+        const ret = await db.raw(sql);
+        return ret[0];
+    },
+
+    update(courseID, course)
+    {
+        return db('courses').where('courseID',courseID).update(course);
+    }
+    ,
+    hide(courseID)
+    {
+        return db('courses').where('courseID',courseID).update({hidden: 1});
     },
     hide(courseID) {
         return db('courses').where('courseID', courseID).update({
@@ -60,5 +86,7 @@ export default {
     del(courseID) {
         return db('courses').where('courseID', courseID).del();
     }
+
+
 
 }

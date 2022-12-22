@@ -35,7 +35,10 @@ export default {
     },
     del(lecID) {
         return db('lectures').where('lecID', lecID).del();
-    }
+    },
+    addVideoID(video, id) {
+        return db('lectures').where('lecID', id).update({videoURL: video});
+    },
 
 
 }

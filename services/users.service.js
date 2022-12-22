@@ -6,46 +6,36 @@ export default {
         return await db('users');
     },
 
-    async findById(userID) {
-        const list = await db('users').where('userID', userID);
-        if(list.length === 0)
+    async findById(id) {
+        const list = await db('users').where('userID', id);
+        if (list.length === 0)
             return null;
+
         return list[0];
     },
-    async findByEmail(email) {
-        const list = await db('users').where('email', email);
-        console.log(list.length);
-        if(list.length === 0)
-            return null;
-        return list[0];
-    }
-    ,
 
-    add(user)
+    async findByCategoryID(catID)
     {
-        return db('users').insert(user);
+        return await db('courses').where('catID',catID);
     },
-
-    update(userID, user)
-    {
-        return db('users').where('userID',userID).update(user);
-    }
-    ,
-    ban(userID)
-    {
-
-        return db('users').where('userID',userID).update({banned: 1});
+    async teacherCourses(teacherId) {
+        return await db('courses').where('teacherNumber', teacherId);
     },
-    unban(userID)
-    {
-        return db('users').where('userID',userID).update({banned: 0});
-
-    }
-    ,
-    del(userID)
-    {
-        return db('users').where('userID',userID).del();
-    }
-
+    addCourse(ID,Name,LName,rating,studentNum,img,pri,promo,lecNum,des,hid,teacherNum) {
+        return  db('courses').insert({courseName: Name, 
+            courseID:ID, 
+            catID:1, 
+            instructor:LName,
+            rating_num:rating,
+            student_num:studentNum,
+            image:img,
+            price:pri,
+            promotion:promo,
+            lec_num:lecNum,
+            description:des,
+            hidden:hid,
+            teacherNumber:teacherNum
+         }).then(() => {res.json({});}).catch((e)=>console.log(e));
+    },
 
 }

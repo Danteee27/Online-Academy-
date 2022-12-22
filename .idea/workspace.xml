@@ -1,8 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="9a0868c9-05d5-4b25-97b2-f06d08696391" name="Changes" comment="Full admin route and service, register, login auth, update routes and services">
       <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+    <list default="true" id="9a0868c9-05d5-4b25-97b2-f06d08696391" name="Changes" comment="Directories init">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/0959ffcf-87b1-4dcd-b725-3b5f2e0a6723.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/0959ffcf-87b1-4dcd-b725-3b5f2e0a6723/storage_v2/_src_/schema/coursedata.RUp-lA.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/0959ffcf-87b1-4dcd-b725-3b5f2e0a6723/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/0959ffcf-87b1-4dcd-b725-3b5f2e0a6723/storage_v2/_src_/schema/mysql.osA4Bg.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/0959ffcf-87b1-4dcd-b725-3b5f2e0a6723/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/389de0f6-21d0-4298-ad24-aa051b7a34c5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/389de0f6-21d0-4298-ad24-aa051b7a34c5/storage_v2/_src_/schema/coursedata.RUp-lA.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/389de0f6-21d0-4298-ad24-aa051b7a34c5/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/389de0f6-21d0-4298-ad24-aa051b7a34c5/storage_v2/_src_/schema/mysql.osA4Bg.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/389de0f6-21d0-4298-ad24-aa051b7a34c5/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/css/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/imgs/background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/profiles.route.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/teachers.route.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/users.route.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/profiles.service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/teachers.service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/users.service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/layouts/simple.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/vwTeacher/add.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/vwTeacher/courses.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/vwTeacher/profile.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Online Academy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Online Academy.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/middlewares/routes.mdw.js" beforeDir="false" afterPath="$PROJECT_DIR$/middlewares/routes.mdw.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/courses.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/services/courses.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/home.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/home.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/layouts/main.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/views/layouts/main.hbs" afterDir="false" />
+    <list default="true" id="9a0868c9-05d5-4b25-97b2-f06d08696391" name="Changes" comment="Update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils/db.js" afterDir="false" />
@@ -45,6 +85,17 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;E:\\IntelliJ IDEA 2022.2.3\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "E:\\IntelliJ IDEA 2022.2.3\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external"
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
@@ -66,6 +117,19 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Lenovo\OneDrive\Desktop\Workspace\Online Academy\views\vwAdmin\vwCategory" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Desktop\Web\Online-Academy-\views\vwTeacher" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="app.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/app.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.app.js" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="RunManager">
     <configuration name="start" type="NodeJSConfigurationType" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
@@ -86,6 +150,9 @@
       <workItem from="1671085686187" duration="37380000" />
       <workItem from="1671444966652" duration="21956000" />
       <workItem from="1671603584562" duration="18189000" />
+      <workItem from="1671085686187" duration="8451000" />
+      <workItem from="1671283810027" duration="23636000" />
+      <workItem from="1671085686187" duration="37128000" />
     </task>
     <task id="LOCAL-00001" summary="First commit - Init project">
       <created>1670846200947</created>
