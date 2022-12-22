@@ -9,7 +9,7 @@
   function getMoreFeedback() {
     var ajax = new XMLHttpRequest();
 
-    ajax.open("POST", `http://localhost:3000/user-courses/moreFB?id=${courseID}`, true);
+    ajax.open("POST", `http://localhost:3000/user-courses/moreFB?id=${courseID}&offset=${offset}`, true);
 
     ajax.onreadystatechange = function () {
       if (this.readyState == 4) {
@@ -56,9 +56,7 @@
         }
       }
     };
-    var formData = new FormData();
-    formData.append("offset", offset);
-    ajax.send(formData);
+    ajax.send();
   }
 
   function addToWishlist() {
@@ -80,13 +78,6 @@
         }
       }
     };
-    ajax.send();
-  }
-
-  function buyNow() {
-    var ajax = new XMLHttpRequest();
-
-    ajax.open("POST", `http://localhost:3000/user-courses/buy-now?id=${courseID}&userID=${userID}`, true);
     ajax.send();
   }
 </script>
@@ -140,7 +131,11 @@
             {{/if}}
           </div>
           <div class="d-flex mt-3">
-              <button class="buy-now text-center text-dark" onclick="buyNow();location.reload();"><h5 style="font-weight: 500;">Buy now</h5></button>
+            <form action="/user-courses/buy-now" method="post">
+              <input type="hidden" id="courseID" name="courseID" value="{{course.courseID}}">
+              <input type="hidden" id="userID" name="userID" value="{{lcUserID}}"> 
+              <button class="buy-now text-center text-dark" type="submit"><h5 style="font-weight: 500;">Buy now</h5></button>
+            </form>
               <button class="course-add-to-wishlist" onclick="addToWishlist();">
                 <i id="add-to-wishlist" class="fa fa-heart{{#unless isInWishList}}-o{{/unless}} fa-lg"></i>
               </button>

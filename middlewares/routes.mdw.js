@@ -16,7 +16,7 @@ import teachersRoute from "../routes/teachers.route.js";
 export default function (app) {
     app.get('/', function (req, res) {
         res.locals.lcHomePage = true;
-        res.render('home');
+        res.render('home',{layout:'main1'});
     });
 
     app.get('/admin', function (req, res) {

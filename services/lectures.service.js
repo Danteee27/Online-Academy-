@@ -8,11 +8,21 @@ export default {
     findById(lecID) {
         return db('lectures').where('lectures', lecID).first();
     },
-    findByCourseID(courseID) {
+    async findByCourseID(courseID) {
+        const list = await db('lectures').where('courseID', courseID);
+        return list[0];
+    },
+    async findAllByCourseID(courseID) {
         return db('lectures').where('courseID', courseID);
     },
+    findByLectureID(lecID) {
+        return db('lectures').where('lecID', lecID);
+    },
+    findAllByCourseID(couID) {
+        return db('lectures').where('courseID', couID);
+    },
     async countByCourseID(courseID) {
-        const list = db('courses').where('courseID', courseID).count({
+        const list = await db('courses').where('courseID', courseID).count({
             amount: 'lecID'
         });
         return list[0].amount;
@@ -37,7 +47,9 @@ export default {
         return db('lectures').where('lecID', lecID).del();
     },
     addVideoID(video, id) {
-        return db('lectures').where('lecID', id).update({videoURL: video});
+        return db('lectures').where('lecID', id).update({
+            videoURL: video
+        });
     },
 
 

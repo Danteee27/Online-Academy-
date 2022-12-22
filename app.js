@@ -7,8 +7,6 @@ import activate_routes from './middlewares/routes.mdw.js';
 import activate_view from './middlewares/view.mdw.js';
 import activate_locals from './middlewares/locals.mdw.js';
 import activate_session from './middlewares/session.mdw.js';
-import morgan from 'morgan';
-import expressFormidable from 'express-formidable';
 import activate_auth from './middlewares/auth.mdw.js';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -22,7 +20,6 @@ app.use(express.urlencoded({
 }));
 app.use(express.static('public'));
 app.use(morgan('dev'));
-app.use(expressFormidable());
 
 activate_locals(app);
 activate_view(app);

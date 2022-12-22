@@ -3,13 +3,14 @@
 import express from 'express';
 import multer from 'multer';
 import {google} from 'googleapis';
-import FormData from "form-data";
+//import FormData from "form-data";
 
 
 import coursesService from "../services/courses.service.js";
 import teachersService from "../services/teachers.service.js";
 import * as stream from 'stream';
-import db from "../utils/db.js";
+import categoriesService from "../services/categories.service.js";
+
 
 
 
@@ -24,21 +25,29 @@ const upload = multer();
 
 
 const oauth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL);
-oauth2Client.setCredentials({refresh_token: REFRESH_TOKEN});
-const drive = google.drive({version: "v3", auth: oauth2Client});
+oauth2Client.setCredentials({
+    refresh_token: REFRESH_TOKEN
+});
+const drive = google.drive({
+    version: "v3",
+    auth: oauth2Client
+});
 
 
 router.get('/', function (req, res) {
     res.render('home');
 });
 
-router.get('/addCourse', async function (req,res){
+router.get('/addCourse', async function (req, res) {
     const teachID = req.query.id;
-    console.log(teachID);
+    //console.log(teachID);
     const teacher = await teachersService.findById(teachID);
-    console.teacher;
+    //console.teacher;
+    const categories = await categoriesService.findAll();
+    console.log(categories);
     res.render('vwTeacher/addCourse', {
         teacher: teacher,
+        categories: categories,
         layout: 'CreateCourseLayout'
     });
 });
@@ -48,7 +57,9 @@ const uploadFile = async (fileObject) => {
     const bufferStream = new stream.PassThrough();
     bufferStream.end(fileObject.buffer);
     console.log(bufferStream);
-    const { data } = await drive.files.create({
+    const {
+        data
+    } = await drive.files.create({
         requestBody: {
             name: fileObject.originalname,
             parents: ['1NZUxjhw6Rcol373vpiX7pEJRU6hGomJx'],
@@ -62,10 +73,13 @@ const uploadFile = async (fileObject) => {
     console.log(`Uploaded file ${data.name} ${data.id}`);
     return data.id;
 };
-router.post('/addCourse', upload.any(), async function (req,res)  {
+router.post('/addCourse', upload.any(), async function (req, res) {
 
     try {
-        const { body, files } = req;
+        const {
+            body,
+            files
+        } = req;
         const id = body.courseID;
         const ret = await coursesService.add(body);
         console.log(ret);
@@ -100,10 +114,10 @@ router.get('/profile', async function (req, res) {
 });
 
 router.get('/profile/edit', async function (req, res) {
-   const teacherID = req.query.id;
-   const teacher = await teachersService.findById(teacherID);
-   //console.log(teacher);
-   //console.log(teacherID)
+    const teacherID = req.query.id;
+    const teacher = await teachersService.findById(teacherID);
+    //console.log(teacher);
+    //console.log(teacherID)
     if (teacher === null) {
         return res.render('/login');
     }
@@ -113,12 +127,15 @@ router.get('/profile/edit', async function (req, res) {
 });
 
 
-router.post('/profile/edit', upload.any(), async function (req,res)  {
+router.post('/profile/edit', upload.any(), async function (req, res) {
 
     try {
         const id = req.query.id;
         //console.log(id);
-        const {body, files} = req;
+        const {
+            body,
+            files
+        } = req;
         const ret = await teachersService.updateTeacher(body, id);
         //console.log('hello' + ret);
 
@@ -136,9 +153,10 @@ router.post('/profile/edit', upload.any(), async function (req,res)  {
             teachersService.addBG(image[1], id);
         }
         //res.status(200).send('Form Submitted');
-        res.redirect('/teacher/profile?id=' + id);
+        //res.redirect('/teacher/profile?id=' + id);
+        res.redirect('back');
     } catch (f) {
-    res.send(f.message);
+        res.send(f.message);
     }
 });
 
@@ -147,17 +165,25 @@ router.post('/profile/edit', upload.any(), async function (req,res)  {
 router.get('/editCourse', async function (req, res) {
    const courseID = req.query.id;
    const course = await coursesService.findById(courseID);
+   console.log(course.teacherID);
+   const teacher = await teachersService.findById(course.teacherID);
+    const categories = await categoriesService.findAll();
    res.render('vwTeacher/editCourse', {
        layout: 'CreateCourseLayout',
-       course: course
+       teacher: teacher,
+       course: course,
+       categories: categories
    })
 });
 // Phan Huy route post editCourse
-router.post('/editCourse', upload.any(), async function (req,res)  {
+router.post('/editCourse', upload.any(), async function (req, res) {
 
     try {
         const id = req.query.id;
-        const { body, files } = req;
+        const {
+            body,
+            files
+        } = req;
         //console.log(body);
         //console.log(id)
         const ret = await coursesService.update(id, body);
@@ -167,7 +193,7 @@ router.post('/editCourse', upload.any(), async function (req,res)  {
             image = await uploadFile(files[f]);
         }
         console.log(image);
-        if(image !== null) {
+        if (image !== null) {
             await coursesService.addImage(image, id);
         }
         //res.status(200).send('Form Submitted');
@@ -178,14 +204,15 @@ router.post('/editCourse', upload.any(), async function (req,res)  {
 });
 
 // Phan Huy route get editTeacher
-router.get('/delCourse', async function(req, res) {
+router.get('/delCourse', async function (req, res) {
     const id = req.query.id;
     //console.log(id);
     const course = await coursesService.findById(id);
     //console.log('hello java' + course.teacherNumber);
-    if(id !== null) {await coursesService.hide(id);}
+    if (id !== null) {
+        await coursesService.hide(id);
+    }
     res.redirect('/teacher/profile?id=' + course.teacherNumber);
 })
 
 export default router;
-
