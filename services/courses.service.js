@@ -47,6 +47,12 @@ export default {
         return list;
     },
 
+    async updateStudentNum(courseID) {
+        const list = await db('courses').where('courseID', courseID);
+        const student_num = list[0].student_num + 1;
+        return await db('courses').where('courseID', courseID).update('student_num', student_num);
+    },
+
     add(course) {
 
         return db('courses').insert(course);

@@ -1,8 +1,7 @@
 import db from '../utils/db.js';
 
 export default {
-    async findAll()
-    {
+    async findAll() {
         return await db('users');
     },
 
@@ -16,38 +15,37 @@ export default {
     async findByEmail(email) {
         const list = await db('users').where('email', email);
         console.log(list.length);
-        if(list.length === 0)
+        if (list.length === 0)
             return null;
         return list[0];
-    }
-    ,
+    },
 
-    async findByCategoryID(catID)
-    {
-        return await db('courses').where('catID',catID);
+    async findByCategoryID(catID) {
+        return await db('courses').where('catID', catID);
     },
     async teacherCourses(teacherId) {
         return await db('courses').where('teacherNumber', teacherId);
     },
-
-    update(userID, user)
-    {
-        return db('users').where('userID',userID).update(user);
-    }
-    ,
-    ban(userID)
-    {
-
-        return db('users').where('userID',userID).update({banned: 1});
+    async add(entity) {
+        return await db('users').insert(entity);
     },
-    unban(userID)
-    {
-        return db('users').where('userID',userID).update({banned: 0});
 
-    }
-    ,
-    del(userID)
-    {
-        return db('users').where('userID',userID).del();
+    update(userID, user) {
+        return db('users').where('userID', userID).update(user);
+    },
+    ban(userID) {
+
+        return db('users').where('userID', userID).update({
+            banned: 1
+        });
+    },
+    unban(userID) {
+        return db('users').where('userID', userID).update({
+            banned: 0
+        });
+
+    },
+    del(userID) {
+        return db('users').where('userID', userID).del();
     }
 }

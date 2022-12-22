@@ -222,6 +222,7 @@ router.post('/buy-now', async function (req, res) {
             courseID
         });
     }
+    await courseService.updateStudentNum(courseID);
 
     const isInWishList = await wishlistService.isInWishList(userID, courseID);
     if (isInWishList === true) {
