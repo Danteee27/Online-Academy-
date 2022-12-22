@@ -1,9 +1,8 @@
-
 {{#section 'js'}}
     <script>
 
         document.querySelector("textarea").focus(); //set the focus - cursor at end
-        document.querySelector("textarea").setSelectionRange(0,0); // place cursor at start
+        document.querySelector("textarea").setSelectionRange(0, 0); // place cursor at start
 
         var userID = {{authUser.userID}};
 
@@ -37,13 +36,10 @@
         function checkSquare(id, lecID) {
             var status = 0;
 
-            if($(id).hasClass("fa-check-square"))
-            {
+            if ($(id).hasClass("fa-check-square")) {
                 status = 0;
                 $(id).removeClass("fa-check-square").addClass("fa-square-o");
-            }
-            else
-            {
+            } else {
                 status = 1;
                 $(id).removeClass("fa-square-o").addClass("fa-check-square");
             }
@@ -85,7 +81,6 @@
         starRating();
 
 
-
         //         $('#userRating').on('click', function () {
         //             $("#userRating").rate();
         //
@@ -112,6 +107,18 @@
         function closePopup() {
             popup.classList.remove('open-popup');
         }
+
+        function putRatingToForm() {
+
+        }
+
+        $(document).ready(function () {
+            $('input[type=radio]').change(function() {
+                // When any radio button on the page is selected,
+                // then deselect all other radio buttons.
+                $('input[type=radio]:checked').not(this).prop('checked', false);
+            });
+        });
 
     </script>
 {{/section}}
@@ -179,11 +186,13 @@
                             {{#each this.lectures}}
                                 <div class="d-flex flex-nowrap align-items-center border-bottom">
                                     <div class="mr-3 bg-light" onclick="checkSquare('#squareAt{{lecID}}', {{lecID}})">
-                                        <i class="fa fa-{{#if isCompleted}}check-square{{else}}square-o{{/if}} " aria-hidden="true"  data-lecture = "{{lecID}}" id="squareAt{{lecID}}"></i>
+                                        <i class="fa fa-{{#if isCompleted}}check-square{{else}}square-o{{/if}} "
+                                           aria-hidden="true" data-lecture="{{lecID}}" id="squareAt{{lecID}}"></i>
                                     </div>
 
                                     <a href="/lectures/users/{{lecID}}"
-                                       class="list-group-item list-group-item-action font-weight-bold text-secondary border-0 {{#if isActive}}bg-secondary text-light{{/if}}">{{lecName}}</a>
+                                       class="list-group-item list-group-item-action font-weight-bold text-secondary border-0 {{#if
+                                               isActive}}bg-secondary text-light{{/if}}">{{lecName}}</a>
                                 </div>
                             {{/each}}
                         </div>
@@ -196,21 +205,24 @@
                         <button class="btn-block" type="button" onclick="openPopup()">
                             click me!!
                         </button>
-                        <div class="popup" id="popup">
-                            <div class="userRating">
-                                <div class="star-widget">
-                                    <input type="radio" name="rate" id="rate-5">
-                                    <label for="rate-5" class="fa fa-star"></label>
-                                    <input type="radio" name="rate" id="rate-4">
-                                    <label for="rate-4" class="fa fa-star"></label>
-                                    <input type="radio" name="rate" id="rate-3">
-                                    <label for="rate-3" class="fa fa-star"></label>
-                                    <input type="radio" name="rate" id="rate-2">
-                                    <label for="rate-2" class="fa fa-star"></label>
-                                    <input type="radio" name="rate" id="rate-1">
-                                    <label for="rate-1" class="fa fa-star"></label>
-                                    <form action="/user-courses/user-feedback" method="post">
+                        <form action="/user-courses/user-feedback" method="get">
+
+                            <div class="popup" id="popup">
+                                <div class="userRating">
+                                    <div class="star-widget">
+                                        <input type="radio" name="rate5" id="rate-5">
+                                        <label for="rate-5" class="fa fa-star"></label>
+                                        <input type="radio" name="rate4" id="rate-4">
+                                        <label for="rate-4" class="fa fa-star"></label>
+                                        <input type="radio" name="rate3" id="rate-3">
+                                        <label for="rate-3" class="fa fa-star"></label>
+                                        <input type="radio" name="rate2" id="rate-2">
+                                        <label for="rate-2" class="fa fa-star"></label>
+                                        <input type="radio" name="rate1" id="rate-1">
+                                        <label for="rate-1" class="fa fa-star"></label>
+                                        <!--                                    <form action="/user-courses/user-feedback" method="get">-->
                                         <header class="headerUserRating"></header>
+                                        <div id="ratingReview" name="RatingStar"></div>
                                         <div class="textarea" style="height: 100px;width: 100%;overflow: hidden">
                                             <textarea name="review" cols="30" style="height: 100%;width: 100%;outline: none;
                                                 border: 1px solid #333; padding: 10px;font-size: 17px; resize: none; border-radius: 5px;
@@ -223,10 +235,11 @@
                                                     onclick="closePopup()">Post
                                             </button>
                                         </div>
-                                    </form>
+                                        <!--                                    </form>-->
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                         <h4>Student feedback</h4>
                         <div class="d-flex flex-nowrap">
                             <div class="d-flex flex-column" style="width: 120px;height: 150px;">
