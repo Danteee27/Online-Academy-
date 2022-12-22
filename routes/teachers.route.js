@@ -5,7 +5,6 @@ import multer from 'multer';
 import {
     google
 } from 'googleapis';
-import FormData from "form-data";
 
 
 import coursesService from "../services/courses.service.js";
@@ -101,7 +100,7 @@ router.get('/profile', async function (req, res) {
     const courses = await coursesService.findByUserId(userid);
     //var doc = new DOMParser().parseFromString(teacher.description, "text/xml");
     //console.log(doc);
-    console.log(courses);
+    //console.log(courses);
     if (teacher === null) {
         return res.render('/login');
     }
@@ -206,6 +205,10 @@ router.get('/delCourse', async function (req, res) {
         await coursesService.hide(id);
     }
     res.redirect('/teacher/profile?id=' + course.teacherNumber);
-})
+});
+router.get('/getId', async function (req, res) {
+    const teacher = await teachersService.findByUserId(req.query.id);
+    res.redirect('/teacher/profile?id=' + teacher.teacherID);
+});
 
 export default router;

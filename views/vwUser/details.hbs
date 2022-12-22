@@ -3,7 +3,7 @@
 
   var offset = 4;
   var courseID = {{course.courseID}};
-  var userID = {{lcUserID}};
+  var userID = {{authUser.userID}};
   var totalFb = {{totalFb}};
 
   function getMoreFeedback() {
@@ -133,7 +133,7 @@
           <div class="d-flex mt-3">
             <form action="/user-courses/buy-now" method="post">
               <input type="hidden" id="courseID" name="courseID" value="{{course.courseID}}">
-              <input type="hidden" id="userID" name="userID" value="{{lcUserID}}"> 
+              <input type="hidden" id="userID" name="userID" value="{{authUser.userID}}"> 
               <button class="buy-now text-center text-dark" type="submit"><h5 style="font-weight: 500;">Buy now</h5></button>
             </form>
               <button class="course-add-to-wishlist" onclick="addToWishlist();">

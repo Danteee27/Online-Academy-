@@ -101,7 +101,7 @@ router.get('/detail', async function (req, res) {
 
     const catID = req.query.catID;
     const courseID = req.query.id;
-    const userID = res.locals.lcUserID;
+    const userID = res.locals.authUser.userID;
 
     const isInMyCourse = await myCourseService.isInMyCourse(userID, courseID);
     if (isInMyCourse === true) {
