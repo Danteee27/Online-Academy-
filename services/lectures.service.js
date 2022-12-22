@@ -6,21 +6,18 @@ export default {
     },
 
     findById(lecID) {
-        return db('lectures').where('lectures', lecID).first();
+        return db('lectures').where('lecID', lecID).first();
     },
     async findByCourseID(courseID) {
         const list = await db('lectures').where('courseID', courseID);
         return list[0];
     },
-    async findAllByCourseID(courseID) {
+    findAllByCourseID(courseID) {
         return db('lectures').where('courseID', courseID);
     },
-    findByLectureID(lecID) {
-        return db('lectures').where('lecID', lecID);
-    },
-    findAllByCourseID(couID) {
-        return db('lectures').where('courseID', couID);
-    },
+    // findByLectureID(lecID) {
+    //     return db('lectures').where('lecID', lecID);
+    // },
     async countByCourseID(courseID) {
         const list = await db('courses').where('courseID', courseID).count({
             amount: 'lecID'

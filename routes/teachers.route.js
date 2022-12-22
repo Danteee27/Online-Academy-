@@ -212,7 +212,7 @@ router.get('/delCourse', async function (req, res) {
     if (id !== null) {
         await coursesService.hide(id);
     }
-    res.redirect('/teacher/profile?id=' + course.teacherNumber);
+    res.redirect('/teacher/profile?id=' + course.teacherID);
 })
 
 export default router;
