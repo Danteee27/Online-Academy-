@@ -16,7 +16,9 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(express.urlencoded({
     extended: true
 }));
@@ -34,7 +36,7 @@ activate_routes(app);
 activate_error(app);
 
 
-const PORT = 3100;
+const PORT = 3000;
 app.listen(PORT, function () {
     console.log(`Listening at http://localhost:${PORT}`);
 })
