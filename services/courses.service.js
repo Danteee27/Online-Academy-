@@ -6,12 +6,12 @@ export default {
         return await db('courses');
     },
 
-    findById(courseID) {
+    async findById(courseID) {
         return db('courses').where('courseID', courseID).first();
     },
     //Phan Huy - For show courses of teacher by role and id teacher number is teacher id
     async findByUserId(userID) {
-        return await db('courses').where('teacherNumber', userID);
+        return db('courses').whereRaw('hidden = ?', [0]).where('teacherNumber', userID);
     },
     async findByCategoryID(catID)
     {

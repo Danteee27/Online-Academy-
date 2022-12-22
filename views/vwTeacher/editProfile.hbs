@@ -221,7 +221,7 @@ $(".custom-file-input").on("change", function() {
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label>Change your bio <i class="fa fa-pencil-square" aria-hidden="true"></i></label>
-                                                                <input class="form-control" type="text" name="teacherBio" id="teacherBio" placeholder= "My bio" {{this.teacher.teacherBio}}>
+                                                                <input class="form-control" type="text" name="teacherBio" value="{{this.teacher.teacherBio}}" id="teacherBio" placeholder="{{this.teacher.teacherBio}}">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -229,7 +229,7 @@ $(".custom-file-input").on("change", function() {
                                                         <div class="col mb-3">
                                                             <div class="form-group">
                                                                 <label>Description</label>
-                                                                <textarea class="form-control" name="description" id="description" rows="5" placeholder="" {{this.teacher.description}}></textarea>
+                                                                <textarea class="form-control" name="description" id="description" rows="5">{{{this.teacher.description}}}</textarea>
                                                             </div>
                                                         </div>
                                                     </div>

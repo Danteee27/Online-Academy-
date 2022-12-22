@@ -6,11 +6,11 @@ import {google} from 'googleapis';
 import FormData from "form-data";
 
 
-import categoryService from '../services/users.service.js';
 import coursesService from "../services/courses.service.js";
 import teachersService from "../services/teachers.service.js";
 import * as stream from 'stream';
-import { isGeneratorFunction } from 'util/types';
+import db from "../utils/db.js";
+
 
 
 //Declare for googleapis to up image to drive by Phan Huy
@@ -87,6 +87,8 @@ router.get('/profile', async function (req, res) {
     const userid = req.query.id;
     const teacher = await teachersService.findById(userid);
     const courses = await coursesService.findByUserId(userid);
+    //var doc = new DOMParser().parseFromString(teacher.description, "text/xml");
+    //console.log(doc);
     console.log(courses);
     if (teacher === null) {
         return res.render('/login');
@@ -100,8 +102,8 @@ router.get('/profile', async function (req, res) {
 router.get('/profile/edit', async function (req, res) {
    const teacherID = req.query.id;
    const teacher = await teachersService.findById(teacherID);
-   console.log(teacher);
-   console.log(teacherID)
+   //console.log(teacher);
+   //console.log(teacherID)
     if (teacher === null) {
         return res.render('/login');
     }
@@ -110,33 +112,80 @@ router.get('/profile/edit', async function (req, res) {
     });
 });
 
+
 router.post('/profile/edit', upload.any(), async function (req,res)  {
 
     try {
         const id = req.query.id;
-        console.log(id);
-        const { body, files } = req;
-        console.log(files);
+        //console.log(id);
+        const {body, files} = req;
         const ret = await teachersService.updateTeacher(body, id);
-        console.log(ret);
-        
+        //console.log('hello' + ret);
+
         var image = [];
         for (let f = 0; f < files.length; f += 1) {
             image.push(await uploadFile(files[f]));
         }
-        console.log(image[0]);
-        console.log(image[1]);
-        console.log(id);
-        if(image[0] !== undefined)  {
-        teachersService.addAVA(image[0],id);
+        //console.log(image[0]);
+        //console.log(image[1]);
+        //console.log(id);
+        if (image[0] !== undefined) {
+            teachersService.addAVA(image[0], id);
         }
-        if(image[1] !== undefined)  {
-            teachersService.addBG(image[1],id);
-            }
+        if (image[1] !== undefined) {
+            teachersService.addBG(image[1], id);
+        }
         //res.status(200).send('Form Submitted');
-        res.redirect('/lectures/add?id=' + ret);
+        res.redirect('/teacher/profile?id=' + id);
+    } catch (f) {
+    res.send(f.message);
+    }
+});
+
+
+// Phan Huy route get editCourse
+router.get('/editCourse', async function (req, res) {
+   const courseID = req.query.id;
+   const course = await coursesService.findById(courseID);
+   res.render('vwTeacher/editCourse', {
+       layout: 'CreateCourseLayout',
+       course: course
+   })
+});
+// Phan Huy route post editCourse
+router.post('/editCourse', upload.any(), async function (req,res)  {
+
+    try {
+        const id = req.query.id;
+        const { body, files } = req;
+        //console.log(body);
+        //console.log(id)
+        const ret = await coursesService.update(id, body);
+        //console.log(ret);
+        var image = null;
+        for (let f = 0; f < files.length; f += 1) {
+            image = await uploadFile(files[f]);
+        }
+        console.log(image);
+        if(image !== null) {
+            await coursesService.addImage(image, id);
+        }
+        //res.status(200).send('Form Submitted');
+        res.redirect('/lectures/add?id=' + id);
     } catch (f) {
         res.send(f.message);
     }
 });
+
+// Phan Huy route get editTeacher
+router.get('/delCourse', async function(req, res) {
+    const id = req.query.id;
+    //console.log(id);
+    const course = await coursesService.findById(id);
+    //console.log('hello java' + course.teacherNumber);
+    if(id !== null) {await coursesService.hide(id);}
+    res.redirect('/teacher/profile?id=' + course.teacherNumber);
+})
+
 export default router;
+
