@@ -141,7 +141,7 @@ router.get('/add', async function (req, res) {
     const courseID = req.query.id;
     const lectures = await lecturesService.findByCourseID(courseID);
     console.log(lectures);
-    res.render('vwTeacher/addLecture',{
+    res.render('vwTeacher/addLecture', {
         layout: 'LectureLayout',
         courseID: courseID,
     });
@@ -152,12 +152,6 @@ router.post('/user-lectures/update', async function (req, res) {
     const userID = req.query.userID;
     const lecID = req.query.lecID;
     const isChecked = req.query.status;
-
-    console.log(isChecked);
-        courseID:   courseID,
-        lectures: lectures,
-        });
-})
     await userLecturesService.update(
         userID,
         lecID,
