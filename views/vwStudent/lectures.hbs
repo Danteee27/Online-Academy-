@@ -4,7 +4,7 @@
         document.querySelector("textarea").focus(); //set the focus - cursor at end
         document.querySelector("textarea").setSelectionRange(0,0); // place cursor at start
 
-        var userID = {{lcUserID}};
+        var userID = {{authUser.userID}};
         
 
         $('#dropdownbtn').on('click', function (id) {
@@ -188,7 +188,7 @@
                         </div>
                     </div>
                     <div role="tabpanel" id="overview" class="tab-pane">
-                        <h3>About this course</h3>
+                        <h3>About this lecture</h3>
                         {{this.lecture.description}}
                     </div>
                     <div role="tabpanel" id="review" class="tab-pane">

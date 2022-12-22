@@ -65,8 +65,52 @@
         <li class="nav-item ml-3 {{#if lcMyCoursePage}}active{{/if}}">
           <a class="nav-link" href="/my-courses">My Courses</a>
         </li>
+          {{#ifCond authUser.role "==" "ROLE.ADMIN"}}
+              <li class="nav-item">
+                  <a class="nav-link" href="/admin">Admin Panel</a>
+              </li>
+          {{/ifCond}}
+
+          {{#ifCond authUser.role "==" "ROLE.TEACHER"}}
+              <li class="nav-item">
+                  <a class="nav-link" href="/teacher/getId?id={{authUser.userID}}">Teacher Profile</a>
+              </li>
+          {{/ifCond}}
+
+
+          {{#if auth}}
+              <li class="nav-item dropdown ml-3">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                      Welcome, <b>{{authUser.name}}</b>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right">
+                      <a class="dropdown-item" href="/account/profile">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                          Profile
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <form id="frmLogout" action="/users/logout" method="post"></form>
+                      <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
+                          <i class="fa fa-sign-out" aria-hidden="true"></i>
+                          Logout
+                      </a>
+                  </div>
+              </li>
+          {{else}}
+              <li class="nav-item ml-3">
+                  <a class="nav-link" href="/users/login">Login</a>
+              </li>
+
+              <li class="nav-item ml-3">
+                  <a class="nav-link" href="/users/register">Register</a>
+              </li>
+          {{/if}}
+
+
       </ul>
     </div>
+
+
   </nav>
 
     {{{body}}}

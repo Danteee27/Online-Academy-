@@ -50,26 +50,27 @@ export default function (app) {
 
     app.get('/protected', isLoggedIn,async (req, res) => {
 
-        const existedUser = await usersService.findByEmail(req.user.emails);
-
+        const existedUser = await usersService.findByEmail(req.user.emails[0].value);
+        console.log(existedUser);
         if(existedUser === null)
         {
-
             const user = {
                 name: req.user.displayName,
                 email: req.user.emails[0].value,
-                password: '123',
+                password: '@#!(*!)$&!*(!$828973*(231dsad32',
                 role: 'ROLE.USER'
             }
             await usersService.add(user);
         }
         else
         {
-            console.log('Email already in used');
+            req.session.auth = true;
+            req.session.authUser = existedUser;
+
         }
 
 
-        res.send(`Hello ${req.user.displayName}`);
+        res.redirect('/');
     });
 
     app.get('/logout', (req, res) => {

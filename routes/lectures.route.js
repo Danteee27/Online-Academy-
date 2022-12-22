@@ -33,12 +33,12 @@ const drive = google.drive({
 router.get('/users/:id', async function (req, res) {
     const lecID = req.params.id || 0;
 
-    const userID = res.locals.lcUserID;
+    const userID = res.locals.authUser.userID;
 
+    userLecturesService.setDate(userID, lecID);
 
-
-    const list = await lecturesService.findByLectureID(lecID);
-    const lecture = list[0];
+    const lecture = await lecturesService.findById(lecID);
+    //const lecture = list[0];
     // const lecture = await lectureService.findByLectureID(lecID);
     const listLecture = await lecturesService.findAllByCourseID(lecture.courseID);
     for (let i = 0; i < listLecture.length; i++) {
@@ -74,7 +74,7 @@ router.get('/users/:id', async function (req, res) {
         feedbacks,
         // fieldName,
         // courseName,
-        empty: list.length === 0,
+        empty: lecture.length === 0,
         layout: 'main1'
     });
 });
@@ -140,13 +140,13 @@ router.post('/add', upload.any(), async function (req, res) {
 
 router.get('/add', async function (req, res) {
     const courseID = req.query.id;
-    const lectures = await lecturesService.findByCourseID(courseID);
+    const lectures = await lecturesService.findAllByCourseID(courseID);
     console.log(lectures);
     res.render('vwTeacher/addLecture', {
         layout: 'LectureLayout',
         courseID: courseID,
+        lectures: lectures
     });
-    console.log(courseID);
 });
 
 router.post('/user-lectures/update', async function (req, res) {

@@ -3,7 +3,7 @@
 
   var offset = 4;
   var courseID = {{course.courseID}};
-  var userID = {{lcUserID}};
+  var userID = {{authUser.userID}};
   var totalFb = {{totalFb}};
 
   function getMoreFeedback() {
@@ -86,7 +86,7 @@
 <p class="card-header d-flex aPath">
   <a class="aPath" href="javascript:;">{{fieldName}}</a>
   <span>&nbsp;&nbsp;❯&nbsp;&nbsp;</span>
-  <a class="aPath" href="/course/category/{{course.catID}}">{{catName}}</a>
+  <a class="aPath" href="/user-courses/category/{{course.catID}}">{{catName}}</a>
 </p>
 
 {{#if empty}}
@@ -133,7 +133,7 @@
           <div class="d-flex mt-3">
             <form action="/user-courses/buy-now" method="post">
               <input type="hidden" id="courseID" name="courseID" value="{{course.courseID}}">
-              <input type="hidden" id="userID" name="userID" value="{{lcUserID}}"> 
+              <input type="hidden" id="userID" name="userID" value="{{authUser.userID}}"> 
               <button class="buy-now text-center text-dark" type="submit"><h5 style="font-weight: 500;">Buy now</h5></button>
             </form>
               <button class="course-add-to-wishlist" onclick="addToWishlist();">

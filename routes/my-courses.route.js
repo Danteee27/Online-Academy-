@@ -1,14 +1,20 @@
 import express from 'express';
 import courseService from '../services/courses.service.js';
 import myCourseService from '../services/my-courses.service.js';
+import teachersService from '../services/teachers.service.js';
 
 const router = express.Router();
 
 router.get("/", async function (req, res) {
+    if(req.session.authUser === null)
+    {
+        return res.redirect('/');
+    }
+
     res.locals.lcMyCoursePage = true;
     res.locals.lcTitle = "My Courses | " + res.locals.lcTitle;
 
-    const userID = res.locals.lcUserID;
+    const userID = res.locals.authUser.userID;
 
     const total = await myCourseService.countByUserID(userID);
     const limit = 8;
@@ -31,6 +37,9 @@ router.get("/", async function (req, res) {
     let course = [];
     for (let i = 0; i < list.length; i++) {
         let temp = await courseService.findById(list[i].courseID);
+        let tempTeacher = await teachersService.findById(temp.teacherID);
+        if (tempTeacher !== null)
+            temp.instructor = tempTeacher.teacherName;
         course.push(temp);
     }
 
