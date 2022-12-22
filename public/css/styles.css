@@ -114,7 +114,7 @@ body{
 }
 
 .course-card:hover>.course-card-img {
-    /* opacity: 0.8; */
+    opacity: 0.8;
 }
 
 .course-card-title {
@@ -401,6 +401,7 @@ input:checked ~ label {
     color: orange;
 }
 
+
 #rate-1:checked ~ form header:before {
     content: "Awful, not what I expected at all";
 }
@@ -418,6 +419,27 @@ input:checked ~ label {
 }
 
 #rate-5:checked ~ form header:before {
+    content: "Amazing, above expectations!";
+}
+/*/////*/
+#rate-1:checked ~ header:before {
+    content: "Awful, not what I expected at all";
+}
+
+
+#rate-2:checked ~ header:before {
+    content: "Poor, pretty disappointed";
+}
+
+#rate-3:checked ~ header:before {
+    content: "Average, could be better";
+}
+
+#rate-4:checked ~ header:before {
+    content: "Good, what I expected";
+}
+
+#rate-5:checked ~ header:before {
     content: "Amazing, above expectations!";
 }
 
