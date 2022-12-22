@@ -6,6 +6,11 @@ import teachersService from '../services/teachers.service.js';
 const router = express.Router();
 
 router.get("/", async function (req, res) {
+    if(req.session.authUser === null)
+    {
+        return res.redirect('/');
+    }
+
     res.locals.lcMyCoursePage = true;
     res.locals.lcTitle = "My Courses | " + res.locals.lcTitle;
 
