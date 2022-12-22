@@ -1,7 +1,15 @@
 {{#section 'js'}}
     <script>
 
-        document.querySelector("textarea").focus(); //set the focus - cursor at end
+        var offset = 4;
+        var courseID = {{lecture.courseID}};
+        var totalFb = {{totalFb}};
+
+        if (offset >= totalFb) {
+            $("#show-more").addClass("disabled");
+        }
+
+        //document.querySelector("textarea").focus(); //set the focus - cursor at end
         document.querySelector("textarea").setSelectionRange(0, 0); // place cursor at start
 
         var userID = {{authUser.userID}};
@@ -120,13 +128,64 @@
             });
         });
 
+        function getMoreFeedback() {
+            var ajax = new XMLHttpRequest();
+
+            ajax.open("POST", `http://localhost:3000/user-courses/moreFB?id=${courseID}&offset=${offset}`, true);
+
+            ajax.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                var data = JSON.parse(this.responseText);
+                var html = "";
+                for (var a = 0; a < data.length; a++) {
+                    html += "<div class=\"col-md-6 p-1\">";
+                    html += "<div class=\"border-top\" style=\"width: 85%;\">";
+                    html += "<div class=\"m-2 pt-3 pb-3\">";
+                    html += "<div class=\"feedback-card-header d-flex\">";
+                    html += "<div class=\"mt-2\">";
+                    html += "<span class=\"feedback-card-author-avatar\">" + data[a].avatar + "</span>";
+                    html += "</div>";
+                    html += "<div class=\"ml-3\">";
+                    html += "<span>" + data[a].author +"</span><br>";
+                    for (var i = 0; i < 5; i++) {
+                    if (data[a].star[i] === true) {
+                        html += "<span class=\"fa fa-star star-checked\"></span>";
+                    }
+                    else {
+                        html += "<span class=\"fa fa-star\"></span>";
+                    }
+                    }
+                    html += "&nbsp;";
+                    html += "<span>" + data[a].date + "</span>"
+                    html += "</div>";
+                    html += "</div>";
+                    html += "<p class=\"card-text mt-3\">";
+                    html += "<span>" + data[a].content + "</span><br>";
+                    html += "</p>";
+                    html += "</div>";
+                    html += "</div>";
+                    html += "</div>";
+                }
+                document.getElementById("data").innerHTML += html;
+                var limit = 4;
+                offset = offset + limit;
+                if (offset >= totalFb) {
+                    $("#show-more").addClass("disabled");
+                    return;
+                }
+                }
+            }
+            };
+            ajax.send();
+        }
     </script>
 {{/section}}
 
 <div class="container-fluid" style="height: 700px">
 
     <div class="row">
-        <div class="col-md-12 " style="height: 500px">
+        <div class="col-md-12 mt-1" style="height: 500px">
             <video
                     id="my-video"
                     class="video-js vjs-big-play-centered vjs-captions-menu-item vjs-subtitles-button vjs-fill"
@@ -197,15 +256,15 @@
                             {{/each}}
                         </div>
                     </div>
-                    <div role="tabpanel" id="overview" class="tab-pane">
+                    <div role="tabpanel" id="overview" class="tab-pane mt-3">
                         <h3>About this lecture</h3>
                         {{this.lecture.description}}
                     </div>
                     <div role="tabpanel" id="review" class="tab-pane">
-                        <button class="btn-block" type="button" onclick="openPopup()">
-                            click me!!
+                        <button class="give-feedback btn-block mt-3 mb-3" type="button" onclick="openPopup()">
+                            Give feedback
                         </button>
-                        <form action="/user-courses/user-feedback" method="get">
+                        <form action="/user-courses/user-feedback" method="post">
 
                             <div class="popup" id="popup">
                                 <div class="userRating">
@@ -224,23 +283,27 @@
                                         <header class="headerUserRating"></header>
                                         <div id="ratingReview" name="RatingStar"></div>
                                         <div class="textarea" style="height: 100px;width: 100%;overflow: hidden">
-                                            <textarea name="review" cols="30" style="height: 100%;width: 100%;outline: none;
+                                            <textarea autofocus name="review" cols="30" style="height: 100%;width: 100%;outline: none;
                                                 border: 1px solid #333; padding: 10px;font-size: 17px; resize: none; border-radius: 5px;
                                             ">
 
                                             </textarea>
                                         </div>
+                                        <input type="hidden" name="courseID" value="{{lecture.courseID}}">
                                         <div class="button">
-                                            <button type="submit" class="btn btn-dark btn-block mt-1"
+                                            <button type="submit" class="btn btn-warning btn-block mt-1"
                                                     onclick="closePopup()">Post
                                             </button>
+                                            <a class="btn btn-dark btn-block mt-1"
+                                                    onclick="closePopup()">Cancel
+                                            </a>
                                         </div>
                                         <!--                                    </form>-->
                                     </div>
                                 </div>
                             </div>
                         </form>
-                        <h4>Student feedback</h4>
+                        <h4>Student feedbacks</h4>
                         <div class="d-flex flex-nowrap">
                             <div class="d-flex flex-column" style="width: 120px;height: 150px;">
 
@@ -280,7 +343,38 @@
                         <div>
 
                             <h2>Comment</h2>
-                            {{#each this.feedbacks}}
+                            <div class="row mt-3">
+                            {{#each fbList}}
+                            <div class="col-md-6 p-1">
+                                <div class="border-top" style="width: 85%;">
+                                <div class="m-2 pt-3 pb-3">
+                                    <div class="feedback-card-header d-flex">
+                                    <div class="mt-2">
+                                        <span class="feedback-card-author-avatar">{{avatar}}</span>
+                                    </div>
+                                    <div class="ml-3" >
+                                        <span>{{author}}</span><br>
+                                        {{#each star}}
+                                        <span class="fa fa-star {{#if this}}star-checked{{/if}}"></span>
+                                        {{/each}}
+                                        &nbsp;
+                                        <span>{{dateDayMonthYear date}}</span>
+                                    </div>
+                                    </div>
+                                    <p class="card-text mt-3">
+                                    {{!-- <h5>{{title}}</h5> --}}
+                                    <span>{{content}}</span><br>
+                                    </p>
+                                </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                            </div>
+                            <div id="data" class="row"></div>
+                            <div class="text-center">
+                                <a id="show-more" type="button" class="btn btn-outline-dark mt-3 mb-3" onclick="getMoreFeedback();" {{#if emptyFbList}}hidden{{/if}}>Show more</a>
+                            </div>
+                            {{!-- {{#each this.fbList}}
                                 <div class="container border-bottom pb-2">
                                     <div class="row">
                                         <div class="col-md-1">
@@ -303,7 +397,7 @@
 
                                     </div>
                                 </div>
-                            {{/each}}
+                            {{/each}} --}}
 
                         </div>
                     </div>

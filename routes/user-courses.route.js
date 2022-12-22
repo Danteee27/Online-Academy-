@@ -13,6 +13,7 @@ import {
 import userLecturesService from '../services/user-lectures.service.js';
 import teachersService from '../services/teachers.service.js';
 import categoriesService from '../services/categories.service.js';
+import usersService from '../services/users.service.js';
 
 const router = express.Router();
 
@@ -116,15 +117,14 @@ router.get('/category/:id', async function (req, res) {
 });
 
 router.get('/detail', async function (req, res) {
-    if (req.session.authUser === null) {
-        return res.redirect('/');
-    }
+    // if (req.session.authUser === null) {
+    //     return res.redirect('/');
+    // }
     res.locals.lcCatPage = true;
 
 
     const catID = req.query.catID;
     const courseID = req.query.id;
-    const userID = res.locals.authUser.userID;
 
     const cat = await categoriesService.findByIdWithoutHidden(catID);
     if (cat === null)
@@ -135,6 +135,9 @@ router.get('/detail', async function (req, res) {
     if (field === null)
         return res.redirect('/');
 
+    let userID = 0;
+    if (res.locals.authUser !== null)
+        userID = res.locals.authUser.userID || 0;
     const isInMyCourse = await myCourseService.isInMyCourse(userID, courseID);
     if (isInMyCourse === true) {
         const lecture = await userLecturesService.getMaxDate(userID, courseID);
@@ -312,7 +315,42 @@ router.post('/moreFB', async function (req, res) {
 });
 
 router.post('/user-feedback', async function (req, res) {
-    console.log(req.body);
+    const rate = [];
+    rate.push(req.body.rate1 || 0);
+    rate.push(req.body.rate2 || 0);
+    rate.push(req.body.rate3 || 0);
+    rate.push(req.body.rate4 || 0);
+    rate.push(req.body.rate5 || 0);
+    let rating = 1;
+    for (let i = 0; i < 5; i++)
+        if (rate[i] === 'on') {
+            rating = i + 1;
+            break;
+        }
+    //console.log(rating);
+    const content = req.body.review;
+    const courseID = req.body.courseID;
+    const user = await usersService.findById(req.session.authUser.userID);
+
+    const isCommented = await feedbackService.isCommented(user.userID, courseID);
+    if (isCommented === true)
+        await feedbackService.del(user.userID, courseID);
+
+    await feedbackService.add({
+        userID: user.userID,
+        courseID,
+        author: user.name,
+        content,
+        rating,
+        date: new Date()
+    });
+    const fbList = await feedbackService.findByCourseID(courseID);
+    let totalRating = 0;
+    for (let i = 0; i < fbList.length; i++)
+        totalRating += +fbList[i].rating;
+    await courseService.updateRating(courseID, totalRating / fbList.length);
+    await courseService.updateRatingNum(courseID, fbList.length);
+    return res.redirect('back');
 });
 
 export default router;

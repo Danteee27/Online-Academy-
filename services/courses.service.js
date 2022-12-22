@@ -63,6 +63,15 @@ export default {
         return await db('courses').where('courseID', courseID).update('student_num', student_num);
     },
 
+    updateRatingNum(courseID, rating_num) {
+        return db('courses').where('courseID', courseID).update('rating_num', rating_num);
+    },
+
+    updateRating(courseID, rating) {
+        return db('courses').where('courseID', courseID).update('rating', rating);
+
+    },
+
     add(course) {
 
         return db('courses').insert(course);

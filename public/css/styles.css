@@ -453,6 +453,22 @@ input:checked ~ label {
     transition: all 0.2s ease;
 }
 
+.give-feedback {
+    width: 50%;
+    margin: 0 auto;
+    height: 50px;
+    border-radius: 10px;
+    font-weight: 700;
+    background-color: orange;
+    color: black;
+}
+
+.give-feedback:hover {
+    transform: scale(1.01, 1.02);
+    opacity: 0.6;
+    transition-duration: 500ms;
+}
+
 .popup {
     z-index: 1000;
     width: 400px;

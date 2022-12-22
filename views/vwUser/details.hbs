@@ -38,9 +38,8 @@
             html += "<span>" + data[a].date + "</span>"
             html += "</div>";
             html += "</div>";
-            html += "<p class=\"card-text\">";
-            html += "<h5>" + data[a].title + "</h5>";
-            html += "<span class=\"mt-3\">" + data[a].content + "</span><br>";
+            html += "<p class=\"card-text mt-3\">";
+            html += "<span>" + data[a].content + "</span><br>";
             html += "</p>";
             html += "</div>";
             html += "</div>";
@@ -49,7 +48,7 @@
           document.getElementById("data").innerHTML += html;
           var limit = 4;
           offset = offset + limit;
-          if (offset === totalFb) {
+          if (offset >= totalFb) {
             $("#show-more").addClass("disabled");
             return;
           }
@@ -266,9 +265,9 @@
                 <span>{{dateDayMonthYear date}}</span>
               </div>
             </div>
-            <p class="card-text">
-            <h5>{{title}}</h5>
-            <span class="mt-3">{{content}}</span><br>
+            <p class="card-text mt-3">
+            {{!-- <h5>{{title}}</h5> --}}
+            <span>{{content}}</span><br>
             </p>
           </div>
         </div>

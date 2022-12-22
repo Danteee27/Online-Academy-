@@ -7,6 +7,8 @@ export default {
 
     async findByCourseID(courseID) {
         const list = await db('feedbacks').where('courseID', courseID);
+        if (list.length === 0)
+            return null;
         return list;
     },
 
@@ -23,5 +25,19 @@ export default {
             amount: 'fbID'
         });
         return list[0].amount;
+    },
+
+    async isCommented(userID, courseID) {
+        const list = await db('feedbacks').where('userID', userID).where('courseID', courseID);
+        if (list.length === 0)
+            return false;
+        return true;
+    },
+
+    add(entity) {
+        return db('feedbacks').insert(entity);
+    },
+    del(userID, courseID) {
+        return db('feedbacks').where('userID', userID).where('courseID', courseID).del();
     }
 };
