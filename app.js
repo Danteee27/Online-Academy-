@@ -34,7 +34,7 @@ activate_routes(app);
 activate_error(app);
 
 
-const PORT = 3100;
+const PORT = 3000;
 app.listen(PORT, function () {
     console.log(`Listening at http://localhost:${PORT}`);
 })
