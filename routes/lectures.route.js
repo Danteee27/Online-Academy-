@@ -77,13 +77,15 @@ router.post('/add', upload.any(), async function (req,res)  {
     }
 });
 
-router.get('/add', function (req, res) {
+router.get('/add', async function (req, res) {
     const courseID = req.query.id;
+    const lectures = await lecturesService.findByCourseID(courseID);
+    console.log(lectures);
     res.render('vwTeacher/addLecture',{
         layout: 'LectureLayout',
         courseID:   courseID,
+        lectures: lectures,
         });
-    console.log(courseID);
 })
 
 

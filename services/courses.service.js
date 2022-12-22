@@ -23,7 +23,7 @@ export default {
         return list[0];
     },
     async findByUserId(userID) {
-        return db('courses').whereRaw('hidden = ?', [0]).where('teacherNumber', userID);
+        return db('courses').whereRaw('hidden = ?', [0]).where('teacherID', userID);
     },
 
     async countByCategoryID(catID) {
@@ -72,11 +72,6 @@ export default {
     hide(courseID)
     {
         return db('courses').where('courseID',courseID).update({hidden: 1});
-    },
-    hide(courseID) {
-        return db('courses').where('courseID', courseID).update({
-            hidden: 1
-        });
     },
     unhide(courseID) {
         return db('courses').where('courseID', courseID).update({

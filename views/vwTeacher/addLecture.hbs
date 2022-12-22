@@ -55,19 +55,13 @@
                             </div>
                             <div class="col-md-4 text-center">
                                 <div class="form-group">
-                                    {{#if this.empty}}
-                                        <label for="lecorderlist">Lecture order list</label>
-                                        <ul class="list-group">
-                                        </ul>
-                                    {{else}}
                                     <label for="lecorderlist">Lecture order list</label>
                                     <ul class="list-group" id="lecOrderlist">
-                                        <li class="list-group-item">{{listLect.lecName}}</li>
-                                    {{#each this.listLect}}
-                                        <li class="list-group-item">{{listLect.lecName}}</li>
+                                    {{#each this.lectures}}
+                                    <ul class="list-group" id="lecOrderlist">
+                                        <li class="list-group-item text-black-50">{{lecName}} - Order: {{order}}</li>
                                     {{/each}}
                                     </ul>
-                                    {{/if}}
                                 </div>
                             </div>
                             <div class="col-md-3">
