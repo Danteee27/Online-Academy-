@@ -12,12 +12,12 @@ export default {
         const list = await db('lectures').where('courseID', courseID);
         return list[0];
     },
-    findAllByCourseID(courseID) {
-        return db('lectures').where('courseID', courseID);
+    findByLectureID(lecID) {
+        return db('lectures').where('lecID', lecID);
     },
-    // findByLectureID(lecID) {
-    //     return db('lectures').where('lecID', lecID);
-    // },
+    findAllByCourseID(couID) {
+        return db('lectures').where('courseID', couID);
+    },
     async countByCourseID(courseID) {
         const list = await db('courses').where('courseID', courseID).count({
             amount: 'lecID'

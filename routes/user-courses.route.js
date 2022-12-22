@@ -11,6 +11,7 @@ import {
     format
 } from 'morgan';
 import userLecturesService from '../services/user-lectures.service.js';
+import teachersService from '../services/teachers.service.js';
 
 const router = express.Router();
 
@@ -52,6 +53,11 @@ router.get('/category/:id', async function (req, res) {
     }
     const list = await courseService.findPageByCatID(catID, limit, offset);
     categoryService.addCatNameToCourse(list, catName);
+    for (let i = 0; i < list.length; i++) {
+        let tempTeacher = await teachersService.findById(list[i].teacherID);
+        if (tempTeacher !== null)
+            list[i].instructor = tempTeacher.teacherName;
+    }
 
     for (let i = 0; i < list.length; i++) {
         const star = [];
@@ -99,18 +105,8 @@ router.get('/detail', async function (req, res) {
 
     const isInMyCourse = await myCourseService.isInMyCourse(userID, courseID);
     if (isInMyCourse === true) {
-        const lectures = await lectureService.findAllByCourseID(courseID);
-        let max = await userLecturesService.findByDetail(userID, lectures[0].lecID);
-        let lecID = lectures[0].lecID;
-        for (let i = 1; i < lectures.length; i++) {
-            let temp = await userLecturesService.findByDetail(userID, lectures[i].lecID);
-            if (temp.date > max.date) {
-                max = temp;
-                lecID = lectures[i].lecID;
-            }
-        }
-        console.log(lecID);
-        return res.redirect(`/lectures/users/${lecID}`);
+        const lecture = await userLecturesService.getMaxDate(userID, courseID);
+        return res.redirect(`/lectures/users/${lecture.lecID}`);
     }
 
 
@@ -120,9 +116,12 @@ router.get('/detail', async function (req, res) {
     };
 
     const course = await courseService.findById(courseID);
+    const tempTeacher = await teachersService.findById(course.teacherID);
+    if (tempTeacher !== null)
+        course.instructor = tempTeacher.teacherName;
     const cat = await categoryService.findById(catID);
     const fieldID = cat.fieldID;
-    const fieldName = await fieldService.findById(fieldID).fieldName;
+    const field = await fieldService.findById(fieldID);
     const catName = cat.catName;
     const lecture = await lectureService.findAllByCourseID(courseID);
     const recommendList = await courseService.find5BestSellerCoursesByCatID(courseID, catID);
@@ -176,7 +175,7 @@ router.get('/detail', async function (req, res) {
     res.render('vwUser/details', {
         empty: course.length === 0,
         course,
-        fieldName,
+        fieldName: field.fieldName,
         catName,
         lecture,
         recommendItem: recommendList,
@@ -212,6 +211,17 @@ router.post('/buy-now', async function (req, res) {
         userID,
         courseID
     });
+    const lectureList = await lectureService.findAllByCourseID(courseID);
+    console.log(lectureList);
+    for (let i = 0; i < lectureList.length; i++) {
+        await userLecturesService.add({
+            userID,
+            lecID: lectureList[i].lecID,
+            completed: 0,
+            date: null,
+            courseID
+        });
+    }
 
     const isInWishList = await wishlistService.isInWishList(userID, courseID);
     if (isInWishList === true) {

@@ -5,12 +5,49 @@ import hbs_sections from 'express-handlebars-sections';
 import numeral from 'numeral';
 
 export default function (app) {
+
+
     app.engine('hbs', engine({
         //defaultLayout: 'main1.hbs',
         extname: 'hbs',
         defaultLayout: 'main.hbs',
         helpers: {
             section: hbs_sections(),
+            'ifCond' : function(v1, operator, v2, options){
+                switch (operator) {
+                    case '==':
+                        return (v1 == v2) ? options.fn(this) : options.inverse(this);
+                    case '===':
+                        return (v1 === v2) ? options.fn(this) : options.inverse(this);
+                    case '<':
+                        return (v1 < v2) ? options.fn(this) : options.inverse(this);
+                    case '<=':
+                        return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+                    case '>':
+                        return (v1 > v2) ? options.fn(this) : options.inverse(this);
+                    case '>=':
+                        return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+                    case '&&':
+                        return (v1 && v2) ? options.fn(this) : options.inverse(this);
+                    case '||':
+                        return (v1 || v2) ? options.fn(this) : options.inverse(this);
+                    default:
+                        return options.inverse(this);
+                }
+            }
+
+            ,
+            isAdmin(authUser)
+            {
+                if(authUser !== null) {
+                    return authUser.role === 'ROLE.ADMIN' || 0;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            ,
             format_number(val) {
                 return numeral(val).format('0,0');
             },
@@ -60,4 +97,6 @@ export default function (app) {
     }));
     app.set('view engine', 'hbs');
     app.set('views', './views');
+
+
 }

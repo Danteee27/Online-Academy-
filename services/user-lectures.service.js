@@ -21,6 +21,10 @@ export default {
             'date', now
         )
     },
+    async getMaxDate(userID, courseID) {
+        const list = await db('user-lectures').where('userID', userID).where('courseID', courseID).orderBy('date', 'desc');
+        return list[0];
+    },
     add(entity) {
         return db('user-lectures').insert(entity);
     },
