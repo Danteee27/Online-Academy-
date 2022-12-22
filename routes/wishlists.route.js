@@ -6,6 +6,10 @@ import wishlistService from '../services/wishlists.service.js';
 const router = express.Router();
 
 router.get("/", async function (req, res) {
+    if(req.session.authUser === null)
+    {
+        return res.redirect('/');
+    }
     res.locals.lcWishlistPage = true;
     res.locals.lcTitle = "Wishlist | " + res.locals.lcTitle;
     const userID = res.locals.authUser.userID;
