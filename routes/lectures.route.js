@@ -35,7 +35,7 @@ router.get('/users/:id', async function (req, res) {
 
     const userID = res.locals.lcUserID;
 
-
+    userLecturesService.setDate(userID, lecID);
 
     const list = await lecturesService.findByLectureID(lecID);
     const lecture = list[0];
