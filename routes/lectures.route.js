@@ -57,7 +57,7 @@ router.get('/users/:id', async function (req, res) {
     }
     tutorialRating = Math.round(tutorialRating * 100) / 100;
     tutorialRating = tutorialRating.toFixed(1);
-    console.log(tutorialRating);
+    //console.log(tutorialRating);
 
     const rating = [1, 2, 3, 4, 5];
 

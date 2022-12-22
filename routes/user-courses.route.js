@@ -97,8 +97,7 @@ router.get('/category/:id', async function (req, res) {
 });
 
 router.get('/detail', async function (req, res) {
-    if(req.session.authUser === null)
-    {
+    if (req.session.authUser === null) {
         return res.redirect('/');
     }
     res.locals.lcCatPage = true;
@@ -261,6 +260,10 @@ router.post('/moreFB', async function (req, res) {
     }
 
     res.json(list);
-})
+});
+
+router.post('/user-feedback', async function (req, res) {
+    console.log(req.body);
+});
 
 export default router;

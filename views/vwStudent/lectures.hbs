@@ -15,7 +15,7 @@
             } else {
                 document.getElementById(id).style.display = 'flex';
                 document.getElementById(id).setAttribute('data-visible', 'true');
-                console.log(" not oke");
+                console.log("not oke");
             }
 
         });
@@ -195,28 +195,29 @@
                         <button class="btn-block" type="button" onclick="openPopup()">
                             click me!!
                         </button>
+                        <form action="/user-courses/user-feedback" method="post">
                         <div class="popup" id="popup">
                             <div class="userRating">
                                 <div class="star-widget">
-                                    <input type="radio" name="rate" id="rate-5">
+                                    <input type="radio" name="rate5" id="rate-5">
                                     <label for="rate-5" class="fa fa-star"></label>
-                                    <input type="radio" name="rate" id="rate-4">
+                                    <input type="radio" name="rate4" id="rate-4">
                                     <label for="rate-4" class="fa fa-star"></label>
-                                    <input type="radio" name="rate" id="rate-3">
+                                    <input type="radio" name="rate3" id="rate-3">
                                     <label for="rate-3" class="fa fa-star"></label>
-                                    <input type="radio" name="rate" id="rate-2">
+                                    <input type="radio" name="rate2" id="rate-2">
                                     <label for="rate-2" class="fa fa-star"></label>
-                                    <input type="radio" name="rate" id="rate-1">
+                                    <input type="radio" name="rate1" id="rate-1">
                                     <label for="rate-1" class="fa fa-star"></label>
-                                    <form action="#">
+                                    
                                         <header class="headerUserRating"></header>
                                         <div class="textarea" style="height: 100px;width: 100%;overflow: hidden">
-                                            <textarea cols="30" style="height: 100%;width: 100%;outline: none;
+                                            <textarea name="content" cols="30" style="height: 100%;width: 100%;outline: none;
                                                 border: 1px solid #333; padding: 10px;font-size: 17px; resize: none; border-radius: 5px;
                                             ">
 
                                             </textarea>
-
+                                            <input type="hidden" name="userID" value="{{authUser.userID}}">
                                         </div>
                                         <div class="button">
                                             <button type="submit" class="btn btn-dark btn-block mt-1"
@@ -227,6 +228,7 @@
                                 </div>
                             </div>
                         </div>
+                        </form>
                         <h4>Student feedback</h4>
                         <div class="d-flex flex-nowrap">
                             <div class="d-flex flex-column" style="width: 120px;height: 150px;">
