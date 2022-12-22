@@ -12,6 +12,7 @@ import {
 } from 'morgan';
 import userLecturesService from '../services/user-lectures.service.js';
 import teachersService from '../services/teachers.service.js';
+import categoriesService from '../services/categories.service.js';
 
 const router = express.Router();
 
@@ -25,10 +26,14 @@ router.get('/category/:id', async function (req, res) {
 
     res.locals.lcCatPage = true;
 
-    const cat = await categoryService.findById(catID);
+    const cat = await categoryService.findByIdWithoutHidden(catID);
+    if (cat === null)
+        return res.redirect('/');
     const catName = cat.catName;
     const fieldID = cat.fieldID;
-    const field = await fieldService.findById(fieldID);
+    const field = await fieldService.findByIdWithoutHidden(fieldID);
+    if (field === null)
+        return res.redirect('/');
     const fieldName = field.fieldName;
 
     res.locals.lcTitle = catName + " | " + res.locals.lcTitle;
@@ -82,6 +87,20 @@ router.get('/category/:id', async function (req, res) {
         if (list[i].promotion != 0)
             list[i].hasPromotion = true;
         list[i].star = star;
+        let now = new Date();
+        let then = new Date(list[i].update);
+        let months = (now.getFullYear() - then.getFullYear()) * 12;
+        months -= then.getMonth();
+        months += now.getMonth();
+        if (months <= 1)
+            list[i].isNew = true;
+        else
+            list[i].isNew = false;
+
+        if (+list[i].student_num >= 1000)
+            list[i].isBestseller = true;
+        else
+            list[i].isBestseller = false;
     }
     res.render('vwUser/courses', {
         course: list,
@@ -102,13 +121,25 @@ router.get('/detail', async function (req, res) {
     }
     res.locals.lcCatPage = true;
 
+
     const catID = req.query.catID;
     const courseID = req.query.id;
     const userID = res.locals.authUser.userID;
 
+    const cat = await categoriesService.findByIdWithoutHidden(catID);
+    if (cat === null)
+        return res.redirect('/');
+
+    const fieldID = cat.fieldID;
+    const field = await fieldService.findByIdWithoutHidden(fieldID);
+    if (field === null)
+        return res.redirect('/');
+
     const isInMyCourse = await myCourseService.isInMyCourse(userID, courseID);
     if (isInMyCourse === true) {
         const lecture = await userLecturesService.getMaxDate(userID, courseID);
+        if (lecture === null)
+            return res.redirect('/');
         return res.redirect(`/lectures/users/${lecture.lecID}`);
     }
 
@@ -118,17 +149,36 @@ router.get('/detail', async function (req, res) {
         courseID
     };
 
-    const course = await courseService.findById(courseID);
+    const course = await courseService.findByIdWithoutHidden(courseID);
+    if (course === null)
+        return res.redirect('/');
     const tempTeacher = await teachersService.findById(course.teacherID);
     if (tempTeacher !== null)
         course.instructor = tempTeacher.teacherName;
-    const cat = await categoryService.findById(catID);
-    const fieldID = cat.fieldID;
-    const field = await fieldService.findById(fieldID);
+    if (+course.completed === 0)
+        course.completed = false;
+    else
+        course.completed = true;
+
     const catName = cat.catName;
-    const lecture = await lectureService.findAllByCourseID(courseID);
+    const lecture = await lectureService.findAllByCourseIDWithoutHidden(courseID);
     const recommendList = await courseService.find5BestSellerCoursesByCatID(courseID, catID);
     const isInWishList = await wishlistService.isInWishList(userID, courseID);
+
+    let now = new Date();
+    let then = new Date(course.update);
+    let months = (now.getFullYear() - then.getFullYear()) * 12;
+    months -= then.getMonth();
+    months += now.getMonth();
+    if (months <= 1)
+        course.isNew = true;
+    else
+        course.isNew = false;
+
+    if (+course.student_num >= 1000)
+        course.isBestseller = true;
+    else
+        course.isBestseller = false;
 
     for (let i = 0; i < lecture.length; i++) {
         lecture[i].newLectureID = _.kebabCase(lecture[i].lecName);
@@ -214,8 +264,7 @@ router.post('/buy-now', async function (req, res) {
         userID,
         courseID
     });
-    const lectureList = await lectureService.findAllByCourseID(courseID);
-    console.log(lectureList);
+    const lectureList = await lectureService.findAllByCourseIDWithoutHidden(courseID);
     for (let i = 0; i < lectureList.length; i++) {
         await userLecturesService.add({
             userID,

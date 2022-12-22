@@ -14,6 +14,15 @@ export default {
         return list[0];
     },
 
+    async findByIdWithoutHidden(catID) {
+        const list = await db('categories').where('catID', catID).where('hidden', 0);
+        if (list.length === 0) {
+            return null;
+        }
+
+        return list[0];
+    },
+
     async findByFieldID(fieldID) {
         const list = await db('categories').where('fieldID', fieldID);
         if (list.length === 0) {
@@ -21,6 +30,15 @@ export default {
         }
 
         return list[0];
+    },
+
+    async findAllByFieldIDWithoutHidden(fieldID) {
+        const list = await db('categories').where('fieldID', fieldID).where('hidden', 0);
+        if (list.length === 0) {
+            return null;
+        }
+
+        return list;
     },
 
     async findAllByFieldID(fieldID) {

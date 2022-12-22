@@ -18,6 +18,9 @@ export default {
     findAllByCourseID(couID) {
         return db('lectures').where('courseID', couID);
     },
+    findAllByCourseIDWithoutHidden(couID) {
+        return db('lectures').where('courseID', couID).where('hidden', 0);
+    },
     async countByCourseID(courseID) {
         const list = await db('courses').where('courseID', courseID).count({
             amount: 'lecID'
