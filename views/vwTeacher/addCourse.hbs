@@ -45,7 +45,6 @@
                   <label for="instructor">Instructor</label>
                   <input
                     type="text"
-                    name="instructor"
                     class="form-control"
                     value="{{this.teacher.teacherName}}"
                     placeholder="{{this.teacher.teacherName}}"
@@ -57,22 +56,16 @@
                 <div class="col-md-2">
                     <label for="teacherNumber">Instructor ID:</label>
                     <div class="form-group">
-                        <input class="form-control" name="teacherNumber" type="text" placeholder="{{this.teacher.teacherID}}" value="{{this.teacher.teacherID}}" id="instructorID" readonly/>
+                        <input class="form-control" name="teacherID" type="text" placeholder="{{this.teacher.teacherID}}" value="{{this.teacher.teacherID}}" id="instructorID" readonly/>
                     </div>
                 </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="selectCatID">Categories</label>
                   <select class="form-control" id="selectCatID" name="catID">
-                    <option
-                      class="form-control input-group"
-                      value="1"
-                      name="catID"
-                    >Categories 1</option>
-                    <option class="form-control" value="2">Categories 2</option>
-                    <option class="form-control" value="3">Categories 3</option>
-                    <option class="form-control" value="4">Categories 4</option>
-                    <option class="form-control" value="5">Categories 5</option>
+                    {{#each this.categories}}
+                        <option class="form-control input-group" value="{{catID}}" name="catID">{{catName}}</option>
+                    {{/each}}
                   </select>
                 </div>
               </div>
@@ -103,12 +96,25 @@
                   />
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-2">
                 <label for="lec_num">Number of lectures</label>
                 <div class="form-group">
                   <input class="form-control" name="lec_num" type="number" min="1" step="1" />
                 </div>
               </div>
+                <div class="col-md-10">
+                    <div class="form-group">
+                        <label for="tinydes">Short description</label>
+                        <input
+                                type="text"
+                                name="tinydes"
+                                class="form-control"
+                                placeholder="Short description for your course"
+                                id="tinydes"
+                                required
+                        />
+                    </div>
+                </div>
               </div>
             <div class="row text-center">
               <div class="col-md-12">
@@ -146,8 +152,8 @@
                       </div>
                     </div>
                   </div>
-                    <label for="description" style="font-size: 32px;" class="font-weight-bold mt-3 mb-3">Description</label>
-                  <textarea name="description" required>
+                    <label for="maindes" style="font-size: 32px;" class="font-weight-bold mt-3 mb-3">Description</label>
+                  <textarea name="maindes" required>
                   </textarea>
                 </div>
               </div>

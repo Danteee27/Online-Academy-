@@ -2,16 +2,15 @@
 
 import express from 'express';
 import multer from 'multer';
-import {
-    google
-} from 'googleapis';
+import {google} from 'googleapis';
 //import FormData from "form-data";
 
 
 import coursesService from "../services/courses.service.js";
 import teachersService from "../services/teachers.service.js";
 import * as stream from 'stream';
-import db from "../utils/db.js";
+import categoriesService from "../services/categories.service.js";
+
 
 
 
@@ -41,11 +40,14 @@ router.get('/', function (req, res) {
 
 router.get('/addCourse', async function (req, res) {
     const teachID = req.query.id;
-    console.log(teachID);
+    //console.log(teachID);
     const teacher = await teachersService.findById(teachID);
-    console.teacher;
+    //console.teacher;
+    const categories = await categoriesService.findAll();
+    console.log(categories);
     res.render('vwTeacher/addCourse', {
         teacher: teacher,
+        categories: categories,
         layout: 'CreateCourseLayout'
     });
 });
@@ -161,12 +163,17 @@ router.post('/profile/edit', upload.any(), async function (req, res) {
 
 // Phan Huy route get editCourse
 router.get('/editCourse', async function (req, res) {
-    const courseID = req.query.id;
-    const course = await coursesService.findById(courseID);
-    res.render('vwTeacher/editCourse', {
-        layout: 'CreateCourseLayout',
-        course: course
-    })
+   const courseID = req.query.id;
+   const course = await coursesService.findById(courseID);
+   console.log(course.teacherID);
+   const teacher = await teachersService.findById(course.teacherID);
+    const categories = await categoriesService.findAll();
+   res.render('vwTeacher/editCourse', {
+       layout: 'CreateCourseLayout',
+       teacher: teacher,
+       course: course,
+       categories: categories
+   })
 });
 // Phan Huy route post editCourse
 router.post('/editCourse', upload.any(), async function (req, res) {

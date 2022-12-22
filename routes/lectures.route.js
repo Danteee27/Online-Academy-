@@ -137,9 +137,11 @@ router.post('/add', upload.any(), async function (req, res) {
     }
 });
 
-router.get('/add', function (req, res) {
+router.get('/add', async function (req, res) {
     const courseID = req.query.id;
-    res.render('vwTeacher/addLecture', {
+    const lectures = await lecturesService.findByCourseID(courseID);
+    console.log(lectures);
+    res.render('vwTeacher/addLecture',{
         layout: 'LectureLayout',
         courseID: courseID,
     });
@@ -152,7 +154,10 @@ router.post('/user-lectures/update', async function (req, res) {
     const isChecked = req.query.status;
 
     console.log(isChecked);
-
+        courseID:   courseID,
+        lectures: lectures,
+        });
+})
     await userLecturesService.update(
         userID,
         lecID,

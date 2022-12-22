@@ -73,11 +73,6 @@ export default {
             hidden: 1
         });
     },
-    hide(courseID) {
-        return db('courses').where('courseID', courseID).update({
-            hidden: 1
-        });
-    },
     unhide(courseID) {
         return db('courses').where('courseID', courseID).update({
             hidden: 0

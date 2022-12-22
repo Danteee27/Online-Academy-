@@ -44,37 +44,30 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="instructor">Instructor</label>
+                                    <label for="teacherName">Instructor</label>
                                     <input
                                             type="text"
-                                            name="instructor"
                                             class="form-control"
-                                            value="{{this.course.instructor}}"
-                                            placeholder="{{this.course.instructor}}"
+                                            value="{{this.teacher.teacherName}}"
+                                            placeholder="{{this.teacher.teacherName}}"
                                             id="instructor"
                                             readonly
                                     />
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                <label for="teacherNumber">Instructor ID:</label>
+                                <label for="teacherID">Instructor ID:</label>
                                 <div class="form-group">
-                                    <input class="form-control" name="teacherNumber" type="text" placeholder="{{this.course.teacherNumber}}" value="{{this.course.teacherNumber}}" id="instructorID" readonly/>
+                                    <input class="form-control" name="teacherID" type="text" placeholder="{{this.course.teacherID}}" value="{{this.course.teacherID}}" id="instructorID" readonly/>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="selectCatID">Categories</label>
                                     <select class="form-control" id="selectCatID" name="catID">
-                                        <option
-                                                class="form-control input-group"
-                                                value="{{this.course.catID}}"
-                                                name="catID"
-                                        >Categories 1</option>
-                                        <option class="form-control" value="2">Categories 2</option>
-                                        <option class="form-control" value="3">Categories 3</option>
-                                        <option class="form-control" value="4">Categories 4</option>
-                                        <option class="form-control" value="5">Categories 5</option>
+                                        {{#each this.categories}}
+                                            <option class="form-control input-group" value="{{catID}}" name="catID">{{catName}}</option>
+                                        {{/each}}
                                     </select>
                                 </div>
                             </div>
@@ -90,6 +83,10 @@
                                         <option value="899000" name="catID">899,000VND</option>
                                         <option value="999000" name="catID">999,000VND</option>
                                         <option value="1099000" name="catID">1,099,000VND</option>
+                                        <option value="1599000" name="catID">1,599,000VND</option>
+                                        <option value="1999000" name="catID">1,999,000VND</option>
+                                        <option value="2199000" name="catID">2,199,000VND</option>
+                                        <option value="2999000" name="catID">2,999,000VND</option>
                                     </select>
                                 </div>
                             </div>
@@ -105,10 +102,24 @@
                                     />
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <label for="lec_num">Number of lectures</label>
                                 <div class="form-group">
-                                    <input class="form-control" name="lec_num" type="number" min="1" step="1" />
+                                    <input class="form-control" name="lec_num" value="{{this.course.lec_num}}" type="number" min="1" step="1" />
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label for="tinydes">Short description</label>
+                                    <input
+                                            type="text"
+                                            name="tinydes"
+                                            class="form-control"
+                                            value="{{this.course.tinydes}}"
+                                            placeholder="Short description for your course"
+                                            id="tinydes"
+                                            required
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -149,8 +160,8 @@
                                         </div>
                                     </div>
                                     <label for="description" style="font-size: 32px;" class="font-weight-bold mt-3 mb-3">Description</label>
-                                    <textarea name="description">
-                                        {{{this.course.description}}}
+                                    <textarea name="maindes">
+                                        {{{this.course.maindes}}}
                                     </textarea>
                                 </div>
                             </div>
@@ -165,7 +176,7 @@
                             <div>
                                 <button type="submit" class="btn btn-primary" formaction="/teacher/editCourse?id={{this.course.courseID}}">
                                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                    Add Course
+                                    Next
                                 </button>
                             </div>
                         </div>
