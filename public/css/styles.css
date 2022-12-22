@@ -406,7 +406,6 @@ input:checked ~ label {
 }
 
 .headerUserRating {
-    background: white;
     width: 100%;
     font-size: 20px;
     color: black;
