@@ -9,7 +9,11 @@ export default {
         return db('lectures').where('lectures', lecID).first();
     },
     findByCourseID(courseID) {
-        return db('lectures').where('courseID', courseID);
+        const list =  db('lectures').where('courseID', courseID);
+        return list[0];
+    },
+    findByLectureID(lecID) {
+        return db('lectures').where('lecID', lecID);
     },
     async countByCourseID(courseID) {
         const list = db('courses').where('courseID', courseID).count({
