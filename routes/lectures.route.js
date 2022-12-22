@@ -140,14 +140,13 @@ router.post('/add', upload.any(), async function (req, res) {
 
 router.get('/add', async function (req, res) {
     const courseID = req.query.id;
-    const lectures = await lecturesService.findByCourseID(courseID);
+    const lectures = await lecturesService.findAllByCourseID(courseID);
     console.log(lectures);
     res.render('vwTeacher/addLecture', {
         layout: 'LectureLayout',
         courseID: courseID,
-        lectures: lectures,
+        lectures: lectures
     });
-    console.log(courseID);
 });
 
 router.post('/user-lectures/update', async function (req, res) {

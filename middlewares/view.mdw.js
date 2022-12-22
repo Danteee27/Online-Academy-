@@ -8,9 +8,9 @@ export default function (app) {
 
 
     app.engine('hbs', engine({
-        defaultLayout: 'main1.hbs',
+        //defaultLayout: 'main1.hbs',
         extname: 'hbs',
-        //defaultLayout: 'main.hbs',
+        defaultLayout: 'main.hbs',
         helpers: {
             section: hbs_sections(),
             'ifCond' : function(v1, operator, v2, options){
