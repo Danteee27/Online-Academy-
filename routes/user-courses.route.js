@@ -99,7 +99,7 @@ router.get('/detail', async function (req, res) {
     const isInMyCourse = await myCourseService.isInMyCourse(userID, courseID);
     if (isInMyCourse === true) {
         const lecture = await lectureService.findByCourseID(courseID);
-        return res.redirect(`/lectures/${lecture.lecID}`);
+        return res.redirect(`/lectures/users/${lecture.lecID}`);
     }
 
 

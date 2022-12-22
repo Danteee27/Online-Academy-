@@ -30,10 +30,11 @@ const drive = google.drive({
     auth: oauth2Client
 });
 
-router.get('/:id', async function (req, res) {
+router.get('/users/:id', async function (req, res) {
     const lecID = req.params.id || 0;
 
     const userID = res.locals.lcUserID;
+
 
 
     const list = await lecturesService.findByLectureID(lecID);
@@ -141,7 +142,7 @@ router.get('/add', async function (req, res) {
     const courseID = req.query.id;
     const lectures = await lecturesService.findByCourseID(courseID);
     console.log(lectures);
-    res.render('vwTeacher/addLecture',{
+    res.render('vwTeacher/addLecture', {
         layout: 'LectureLayout',
         courseID: courseID,
     });
@@ -152,12 +153,6 @@ router.post('/user-lectures/update', async function (req, res) {
     const userID = req.query.userID;
     const lecID = req.query.lecID;
     const isChecked = req.query.status;
-
-    console.log(isChecked);
-        courseID:   courseID,
-        lectures: lectures,
-        });
-})
     await userLecturesService.update(
         userID,
         lecID,
