@@ -95,6 +95,15 @@ router.post('/addCourse', upload.any(), async function (req, res) {
 });
 // Phan Huy teacher route-profile
 router.get('/profile', async function (req, res) {
+    if(req.session.authUser === null)
+    {
+        return res.redirect('/');
+    }
+    else if(req.session.authUser.role !== 'ROLE.TEACHER')
+    {
+        return res.redirect('/');
+    }
+
     const userid = req.query.id;
     const teacher = await teachersService.findById(userid);
     const courses = await coursesService.findByUserId(userid);
