@@ -7,6 +7,9 @@ import lectureService from '../services/lectures.service.js';
 import feedbackService from '../services/feedbacks.service.js';
 import wishlistService from '../services/wishlists.service.js';
 import myCourseService from '../services/my-courses.service.js';
+import {
+    format
+} from 'morgan';
 
 const router = express.Router();
 
@@ -95,8 +98,8 @@ router.get('/detail', async function (req, res) {
 
     const isInMyCourse = await myCourseService.isInMyCourse(userID, courseID);
     if (isInMyCourse === true) {
-        const lecID = await lectureService.findByCourseID(courseID);
-        return res.redirect(`/lecture/${lecID}`);
+        const lecture = await lectureService.findByCourseID(courseID);
+        return res.redirect(`/lectures/${lecture.lecID}`);
     }
 
 
@@ -110,7 +113,7 @@ router.get('/detail', async function (req, res) {
     const fieldID = cat.fieldID;
     const fieldName = await fieldService.findById(fieldID).fieldName;
     const catName = cat.catName;
-    const lecture = await lectureService.findByCourseID(courseID);
+    const lecture = await lectureService.findAllByCourseID(courseID);
     const recommendList = await courseService.find5BestSellerCoursesByCatID(courseID, catID);
     const isInWishList = await wishlistService.isInWishList(userID, courseID);
 
@@ -191,8 +194,8 @@ router.post('/wishlist', async function (req, res) {
 });
 
 router.post('/buy-now', async function (req, res) {
-    const courseID = req.query.id;
-    const userID = req.query.userID;
+    const courseID = await req.body.courseID;
+    const userID = await req.body.userID;
 
     await myCourseService.add({
         userID,
@@ -209,8 +212,7 @@ router.post('/buy-now', async function (req, res) {
 router.post('/moreFB', async function (req, res) {
     const courseID = req.query.id;
     var limit = 4;
-    var offset = parseInt(req.fields.offset);
-    console.log(offset);
+    var offset = req.query.offset;
 
     var list = await feedbackService.findByCourseIDWithLimitOffset(courseID, limit, offset);
     for (let i = 0; i < list.length; i++) {

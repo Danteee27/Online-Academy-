@@ -3,10 +3,10 @@ import lecturesService from "../services/lectures.service.js";
 import feedbacksService from "../services/feedbacks.service.js";
 
 import multer from 'multer';
-import {google} from 'googleapis';
-import FormData from "form-data";
-
-
+import {
+    google
+} from 'googleapis';
+// import FormData from "form-data";
 
 import * as stream from 'stream';
 
@@ -21,8 +21,13 @@ const upload = multer();
 
 
 const oauth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL);
-oauth2Client.setCredentials({refresh_token: REFRESH_TOKEN});
-const drive = google.drive({version: "v3", auth: oauth2Client});
+oauth2Client.setCredentials({
+    refresh_token: REFRESH_TOKEN
+});
+const drive = google.drive({
+    version: "v3",
+    auth: oauth2Client
+});
 
 router.get('/:id', async function (req, res) {
     const lecID = req.params.id || 0;
@@ -38,7 +43,7 @@ router.get('/:id', async function (req, res) {
     let countRateList = [0, 0, 0, 0, 0];
     for (let item of feedbacks) {
         tutorialRating += item.rating / feedbacks.length;
-        countRateList[item.rating-1] = countRateList[item.rating-1] + 1.0;
+        countRateList[item.rating - 1] = countRateList[item.rating - 1] + 1.0;
     }
     tutorialRating = Math.round(tutorialRating * 100) / 100;
     tutorialRating = tutorialRating.toFixed(1);
@@ -64,12 +69,12 @@ router.get('/:id', async function (req, res) {
     });
 });
 
-router.get('/', async function(req, res) {
+router.get('/', async function (req, res) {
     const list = await lecturesService.findAll();
     res.json(list);
 })
 
-router.get('/view/:id', async function(req, res) {
+router.get('/view/:id', async function (req, res) {
     const id = req.params.id || 0;
     const list = await lecturesService.findByCourseID(id);
 
@@ -83,7 +88,9 @@ const uploadFile = async (fileObject) => {
     const bufferStream = new stream.PassThrough();
     bufferStream.end(fileObject.buffer);
     console.log(bufferStream);
-    const { data } = await drive.files.create({
+    const {
+        data
+    } = await drive.files.create({
         requestBody: {
             name: fileObject.originalname,
             parents: ['1NZUxjhw6Rcol373vpiX7pEJRU6hGomJx'],
@@ -97,10 +104,13 @@ const uploadFile = async (fileObject) => {
     console.log(`Uploaded file ${data.name} ${data.id}`);
     return data.id;
 };
-router.post('/add', upload.any(), async function (req,res)  {
+router.post('/add', upload.any(), async function (req, res) {
 
     try {
-        const { body, files } = req;
+        const {
+            body,
+            files
+        } = req;
         const id = body.courseID;
         const ret = await lecturesService.add(body);
         console.log(ret);
@@ -120,10 +130,10 @@ router.post('/add', upload.any(), async function (req,res)  {
 
 router.get('/add', function (req, res) {
     const courseID = req.query.id;
-    res.render('vwTeacher/addLecture',{
+    res.render('vwTeacher/addLecture', {
         layout: 'LectureLayout',
-        courseID:   courseID,
-        });
+        courseID: courseID,
+    });
     console.log(courseID);
 });
 
