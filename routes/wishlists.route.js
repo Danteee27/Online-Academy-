@@ -1,5 +1,6 @@
 import express from 'express';
 import courseService from '../services/courses.service.js';
+import teachersService from '../services/teachers.service.js';
 import wishlistService from '../services/wishlists.service.js';
 
 const router = express.Router();
@@ -29,6 +30,9 @@ router.get("/", async function (req, res) {
     let course = [];
     for (let i = 0; i < wishlist.length; i++) {
         let temp = await courseService.findById(wishlist[i].courseID);
+        let tempTeacher = await teachersService.findById(temp.teacherID);
+        if (tempTeacher !== null)
+            temp.instructor = tempTeacher.teacherName;
         course.push(temp);
     }
     for (let i = 0; i < course.length; i++) {

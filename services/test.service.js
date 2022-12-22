@@ -14,7 +14,7 @@ export default {
     hideCourse(courseID)
     {
         return db('courses').where('courseID', courseID).update('hidden',1);
-    },
+    }
     getRating(rating,courseID)
     {
         const rating_num = db('courses').where('cousreID', courseID).select('rating_num');

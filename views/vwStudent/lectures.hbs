@@ -1,6 +1,12 @@
 {{#section 'js'}}
     <script>
 
+        document.querySelector("textarea").focus(); //set the focus - cursor at end
+        document.querySelector("textarea").setSelectionRange(0,0); // place cursor at start
+
+        var userID = {{lcUserID}};
+        
+
         $('#dropdownbtn').on('click', function (id) {
             if (document.getElementById(id).getAttribute('data-visible') === "true") {
                 document.getElementById(id).style.display = 'none';
@@ -27,16 +33,23 @@
 
         }
 
-        function checkSquare(id) {
+        function checkSquare(id, lecID) {
+            var status = 0;
+
             if($(id).hasClass("fa-check-square"))
-            {
+            {   
+                status = 0;
                 $(id).removeClass("fa-check-square").addClass("fa-square-o");
             }
             else
-            {
+            {   
+                status = 1;
                 $(id).removeClass("fa-square-o").addClass("fa-check-square");
             }
 
+            var ajax = new XMLHttpRequest();
+            ajax.open("POST", `http://localhost:3000/lectures/user-lectures/update?userID=${userID}&lecID=${lecID}&status=${status}`, true);
+            ajax.send();
         }
 
         function navButton(id) {
@@ -164,18 +177,18 @@
                         <div class="list-group">
                             {{#each this.lectures}}
                                 <div class="d-flex flex-nowrap align-items-center border-bottom">
-                                    <div class="mr-3 bg-light" onclick="checkSquare('#squareAt{{lecID}}')">
-                                        <i class="fa fa-check-square " aria-hidden="true"  data-lecture = "{{lecID}}" id="squareAt{{lecID}}"></i>
+                                    <div class="mr-3 bg-light" onclick="checkSquare('#squareAt{{lecID}}', {{lecID}})">
+                                        <i class="fa fa-{{#if isCompleted}}check-square{{else}}square-o{{/if}} " aria-hidden="true"  data-lecture = "{{lecID}}" id="squareAt{{lecID}}"></i>
                                     </div>
 
-                                    <a href="#"
-                                       class="list-group-item list-group-item-action font-weight-bold text-secondary border-0">{{lecName}}</a>
+                                    <a href="/lectures/users/{{lecID}}"
+                                       class="list-group-item list-group-item-action font-weight-bold text-secondary border-0 {{#if isActive}}bg-secondary text-light{{/if}}">{{lecName}}</a>
                                 </div>
                             {{/each}}
                         </div>
                     </div>
                     <div role="tabpanel" id="overview" class="tab-pane">
-                        <h3>About this course</h3>
+                        <h3>About this lecture</h3>
                         {{this.lecture.description}}
                     </div>
                     <div role="tabpanel" id="review" class="tab-pane">
