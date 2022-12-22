@@ -97,6 +97,10 @@ router.get('/category/:id', async function (req, res) {
 });
 
 router.get('/detail', async function (req, res) {
+    if(req.session.authUser === null)
+    {
+        return res.redirect('/');
+    }
     res.locals.lcCatPage = true;
 
     const catID = req.query.catID;
