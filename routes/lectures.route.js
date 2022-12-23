@@ -49,6 +49,12 @@ router.get('/users/:id', async function (req, res) {
     if (course === null)
         return res.redirect('/');
 
+    if (course.views === null)
+        course.views = 0;
+
+    course.views += 1;
+    await coursesService.update(course.courseID, course);
+
     res.locals.lcTitle = course.courseName + " | " + res.locals.lcTitle;
     const listLecture = await lecturesService.findAllByCourseID(lecture.courseID);
     for (let i = 0; i < listLecture.length; i++) {
@@ -57,6 +63,9 @@ router.get('/users/:id', async function (req, res) {
         if (listLecture[i].lecID === +lecID)
             listLecture[i].isActive = true;
     }
+
+    const views = lecture.views + 0;
+
     const feedbacks = await feedbacksService.findByCourseID(lecture.courseID);
 
     let tutorialRating = 0.0;

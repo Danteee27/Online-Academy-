@@ -86,6 +86,7 @@
     color: rgb(4, 0, 255);
     background-color: white;
 }
+
 body{
     height: 100%;
 }
@@ -235,9 +236,11 @@ body{
 
 .buy-now:hover {
     opacity: 0.8;
+    text-decoration: none;
 }
 
 .course-add-to-wishlist {
+    color: black;
     border-radius: 10px;
     border: 0;
     padding: 19px 25px;
@@ -247,6 +250,7 @@ body{
 
 .course-add-to-wishlist:hover {
     opacity: 0.8;
+    text-decoration: none;
 }
 
 .added-to-wishlist {
@@ -426,7 +430,6 @@ input:checked ~ label {
     content: "Awful, not what I expected at all";
 }
 
-
 #rate-2:checked ~ header:before {
     content: "Poor, pretty disappointed";
 }
@@ -493,6 +496,10 @@ input:checked ~ label {
     background: -webkit-linear-gradient(to right, #fffcdc, #d9a7c7);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #fffcdc, #d9a7c7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+.gradient-home-gr-bl
+{
+    background: linear-gradient(125deg,#6a89cc,#b8e994);
+}
 
 .bg-text-trans
 {
@@ -529,4 +536,29 @@ input:checked ~ label {
     transition: opacity 0.15s ease;
 }
 
+.unstyled-list {
+    margin-left: -15px;
+    list-style: none;
+}
+
+.instructor-name {
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: underline; 
+    color: rgb(195, 16, 195); 
+    text-underline-offset: 0.4rem;
+    margin-bottom: 5px;
+}
+
+.instructor-name:hover {
+    text-decoration: underline; 
+    color: rgb(195, 16, 195); 
+    text-underline-offset: 0.4rem;
+}
+
+.instructor-bio {
+    font-size: 20px;
+    font-weight: 300;
+    color: grey;
+}
 

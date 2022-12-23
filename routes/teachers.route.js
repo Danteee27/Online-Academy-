@@ -94,6 +94,31 @@ router.post('/addCourse', upload.any(), async function (req, res) {
         res.send(f.message);
     }
 });
+
+router.get('/public', async function (req, res) {
+    const teacherID = req.query.id;
+    
+    const teacher = await teachersService.findById(teacherID);
+
+    await teachersService.updateCourseNum(teacherID);
+    await teachersService.updateRating(teacherID);
+    //await teachersService.updateStudentNum(teacherID);
+    await teachersService.updateReviews(teacherID);
+
+    if (teacher === null) {
+        return res.render('/login');
+    }
+
+    const courses = await coursesService.findByUserId(teacherID);
+    //var doc = new DOMParser().parseFromString(teacher.description, "text/xml");
+    //console.log(doc);
+    //console.log(courses);
+    
+    res.render('vwTeacher/public', {
+        teacher: teacher,
+        courses: courses
+    });
+});
 // Phan Huy teacher route-profile
 router.get('/profile', async function (req, res) {
     if(req.session.authUser === null)

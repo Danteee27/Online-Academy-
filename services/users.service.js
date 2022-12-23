@@ -31,6 +31,7 @@ export default {
     },
 
     update(userID, user) {
+
         return db('users').where('userID', userID).update(user);
     },
     ban(userID) {

@@ -14,6 +14,7 @@ import userLecturesService from '../services/user-lectures.service.js';
 import teachersService from '../services/teachers.service.js';
 import categoriesService from '../services/categories.service.js';
 import usersService from '../services/users.service.js';
+import coursesService from '../services/courses.service.js';
 
 const router = express.Router();
 
@@ -117,11 +118,7 @@ router.get('/category/:id', async function (req, res) {
 });
 
 router.get('/detail', async function (req, res) {
-    // if (req.session.authUser === null) {
-    //     return res.redirect('/');
-    // }
     res.locals.lcCatPage = true;
-
 
     const catID = req.query.catID;
     const courseID = req.query.id;
@@ -155,9 +152,15 @@ router.get('/detail', async function (req, res) {
     const course = await courseService.findByIdWithoutHidden(courseID);
     if (course === null)
         return res.redirect('/');
-    const tempTeacher = await teachersService.findById(course.teacherID);
-    if (tempTeacher !== null)
-        course.instructor = tempTeacher.teacherName;
+
+    if (course.views === null)
+        course.views = 0;
+
+    course.views += 1;
+    await coursesService.update(courseID, course);
+    const teacher = await teachersService.findById(course.teacherID);
+    if (teacher !== null)
+        course.instructor = teacher.teacherName;
     if (+course.completed === 0)
         course.completed = false;
     else
@@ -235,10 +238,12 @@ router.get('/detail', async function (req, res) {
         catName,
         lecture,
         recommendItem: recommendList,
+        teacher,
         feedback: feedbackList,
         emptyFbList: feedbackList.length === 0,
         isInWishList,
-        totalFb
+        totalFb,
+        userID
     })
 });
 
@@ -274,10 +279,18 @@ router.post('/buy-now', async function (req, res) {
             lecID: lectureList[i].lecID,
             completed: 0,
             date: null,
-            courseID
+            courseID,
         });
     }
-    await courseService.updateStudentNum(courseID);
+    const course = await coursesService.findByIdWithoutHidden(courseID);
+    if (course.student_num === null)
+        course.student_num = 0;
+    if (course.weekStudentNum === null)
+        course.weekStudentNum = 0;
+
+    course.student_num += 1;
+    course.weekStudentNum += 1;
+    await courseService.update(courseID, course);
 
     const isInWishList = await wishlistService.isInWishList(userID, courseID);
     if (isInWishList === true) {
