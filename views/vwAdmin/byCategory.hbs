@@ -1,12 +1,12 @@
 <div class="card">
     <h4 class="card-header d-flex justify-content-between">
         Categories
-        <a class="btn btn-sm btn-outline-primary" href="/categories/add/{{this.fieldID}}" role="button">
+        <a class="btn btn-sm btn-outline-primary" href="/admin/categories/add/{{this.fieldID}}" role="button">
             <i class="fa fa-plus" aria-hidden="true"></i>
             Add Category
         </a>
 
-        <a class="btn btn-outline-success" href="/fields" role="button">
+        <a class="btn btn-outline-success" href="/admin/fields" role="button">
             <i class="fa fa-backward" aria-hidden="true"></i>
             Fields
         </a>
@@ -22,8 +22,10 @@
                 <tr>
                     <th>#</th>
                     <th>Category</th>
-                    <th>Hidden</th>
-                    <th>&nbsp;</th>
+                    <th class ="text-center">Hidden</th>
+                    <th class ="text-center">Courses</th>
+                    <th class ="text-center">Edit</th>
+                    <th class ="text-center">View</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,15 +33,16 @@
                     <tr>
                         <td scope="row">{{catID}}</td>
                         <td>{{catName}}</td>
-                        <td>{{#if hidden}} true {{else}} false {{/if}}</td>
-                        <td class="text-right">
-                            <a class="btn btn-primary btn-sm" href="/categories/edit?id={{catID}}" role="button" title="Edit Category">
+                        <td class ="text-center">{{#if hidden}} true {{else}} false {{/if}}</td>
+                        <td class="text-center">{{course_num}}</td>
+                        <td class ="text-center">
+                            <a class="btn btn-primary btn-sm" href="/admin/categories/edit?id={{catID}}" role="button" title="Edit Category">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
                         </td>
-                        <td class="text-right">
-                            <a class="btn btn-primary btn-sm" href="/courses/view/{{catID}}" role="button" title="View Category">
-                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        <td class ="text-center">
+                            <a class="btn btn-primary btn-sm" href="/admin/courses/view/{{catID}}" role="button" title="View Category">
+                            <i class="fa fa-forward" aria-hidden="true"></i>
                             </a>
                         </td>
                     </tr>
@@ -49,6 +52,6 @@
         </div>
     {{/if}}
     <div class="card-footer text-muted">
-        2 days ago
+        CAN'T DELETE CATEGORIES WHICH HAS COURSES
     </div>
 </div>

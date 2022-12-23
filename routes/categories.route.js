@@ -14,6 +14,8 @@ router.get('/view/:id', async function(req, res) {
     const id = req.params.id || 0;
     const list = await categoriesService.findByFieldID(id);
 
+    console.log(list);
+
     res.render('vwAdmin/byCategory', {
         list: list,
         empty: list.length === 0,
@@ -51,7 +53,7 @@ router.post('/unhide', async function(req, res) {
 
 
     const ret = await categoriesService.unhide(catID);
-    res.redirect('/categories/view/' + cat.fieldID);
+    res.redirect('/admin/categories/view/' + cat.fieldID);
 
 })
 
@@ -63,7 +65,7 @@ router.post('/hide', async function(req, res) {
 
 
     const ret = await categoriesService.hide(catID);
-    res.redirect('/categories/view/' + cat.fieldID);
+    res.redirect('/admin/categories/view/' + cat.fieldID);
 
 })
 
@@ -79,7 +81,7 @@ router.post('/del', async function(req, res) {
     if(existed == false) {
 
         const ret = await categoriesService.del(catID);
-        res.redirect('/categories/view/' + cat.fieldID);
+        res.redirect('/admin/categories/view/' + cat.fieldID);
     }
     else
     {
@@ -91,7 +93,7 @@ router.get('/edit', async function (req, res) {
     const id = req.query.id || 0;
     const category = await categoriesService.findById(id);
     if (category === null) {
-        return res.redirect('/categories/' + id);
+        return res.redirect('/admin/categories/' + id);
     }
 
     res.render('vwAdmin/vwCategory/edit', {
@@ -105,7 +107,7 @@ router.post('/edit', async function(req, res) {
     const cat = await categoriesService.findById(catID);
 
 
-    res.redirect('/categories/view/' + cat.fieldID);
+    res.redirect('/admin/categories/view/' + cat.fieldID);
 })
 
 
