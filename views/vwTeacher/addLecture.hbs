@@ -3,8 +3,9 @@
     <div class="contents order-2 order-md-1">
         <div class="container">
             <div class="row align-items-center justify-content-center">
-                <div class="col-md-10 py-5 text-white">
-                    <h1 class="font-weight-bold font-italic">Add some lectures for your course.</h1>
+                <div class="col-md-10 py-5 text-white text-center">
+                    <h1 class="font-weight-bold font-italic">Add some lectures for {{this.course.courseName}}.</h1>
+                    <img class="card-img pb-5" style="height: 300px; width: 400px" src="https://drive.google.com/uc?export=view&id={{this.course.image}}">
                     <div class="bg-secondary rounded">
                         <blockquote
                                 class="mb-0 font-weight-bold d-flex"
@@ -46,8 +47,8 @@
                                             type="text"
                                             name="courseID"
                                             class="form-control"
-                                            value="{{this.courseID}}"
-                                            placeholder="{{this.courseID}}"
+                                            value="{{this.course.courseID}}"
+                                            placeholder="{{this.course.courseID}}"
                                             id="courseID"
                                             readonly
                                     />
