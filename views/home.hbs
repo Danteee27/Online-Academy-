@@ -2,12 +2,14 @@
 
     <div class="row">
         <div class="col-12 bg-transparent gradient-home">
-            <img class="img-thumbnail float-right mt-3 p-0 border-0" style="width: 500px;height: 350px" src="/imgs/posterHome.png" alt="posterHome">
+            <img class="img-thumbnail float-right mt-3 p-0 border-0" style="width: 500px;height: 350px"
+                 src="/imgs/posterHome.png" alt="posterHome">
 
             <div class="jumbotron jumbotron-fluid mt-4 gradient-home">
                 <div class="container">
                     <h1 class="display-4">Slow and steady</h1>
-                    <p class="lead">Try learning just 5–10 minutes a day. Continue your course and reach your peak potential.</p>
+                    <p class="lead">Try learning just 5–10 minutes a day. Continue your course and reach your peak
+                        potential.</p>
                 </div>
             </div>
 
@@ -194,162 +196,24 @@
                 <h4 class="bg-light">Khóa học được xem nhiều nhất</h4>
                 <div id="cardslider2" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active">
-                            <div class="card-deck">
-                                <div class="card" style="height: 20rem">
-                                    <img class="card-img-top" src="/imgs/1.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a longer card with supporting text below as a
-                                            natural
-                                            lead-in to additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="card" style="height: 20rem">
-                                    <img class="card-img-top" src="/imgs/1.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural
-                                            lead-in to additional content. This card has even longer content than the
-                                            first to
-                                            show that equal height action.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="card" style="height: 20rem">
-                                    <img class="card-img-top" src="/imgs/1.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural
-                                            lead-in to additional content. This card has even longer content than the
-                                            first to
-                                            show that equal height action.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="card" style="height: 20rem">
-                                    <img class="card-img-top" src="/imgs/1.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural
-                                            lead-in to additional content. This card has even longer content than the
-                                            first to
-                                            show that equal height action.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
+                        {{#each this.listSubDescCourses}}
+                            <div class="carousel-item {{#ifCond @index '==' '1'}} active {{/ifCond}}">
+                                <div class="card-deck">
+                                    {{#each this}}
+                                        <div class="card" style="height: 20rem">
+                                            <img class="card-img-top" src="https://drive.google.com/uc?export=view&id={{this.image}}" alt="Card image cap">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{this.courseName}}</h5>
+                                                <p class="card-text"> {{this.tinydes}}</p>
+                                                <p class="card-text"><small class="text-muted">Last updated 3 mins
+                                                    ago</small>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    {{/each}}
                                 </div>
                             </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="card-deck">
-                                <div class="card" style="height: 20rem">
-                                    <img class="card-img-top" src="/imgs/1.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a longer card with supporting text below as a
-                                            natural
-                                            lead-in to additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="card" style="height: 20rem">
-                                    <img class="card-img-top" src="/imgs/1.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This card has supporting text below as a natural lead-in to
-                                            additional content.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="card" style="height: 20rem">
-                                    <img class="card-img-top" src="/imgs/1.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural
-                                            lead-in to additional content. This card has even longer content than the
-                                            first to
-                                            show that equal height action.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="card" style="height: 20rem">
-                                    <img class="card-img-top" src="/imgs/1.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural
-                                            lead-in to additional content. This card has even longer content than the
-                                            first to
-                                            show that equal height action.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item ">
-                            <div class="card-deck">
-                                <div class="card" style="height: 20rem">
-                                    <img class="card-img-top" src="/imgs/1.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a longer card with supporting text below as a
-                                            natural
-                                            lead-in to additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="card" style="height: 20rem">
-                                    <img class="card-img-top" src="/imgs/1.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This card has supporting text below as a natural lead-in to
-                                            additional content.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="card" style="height: 20rem">
-                                    <img class="card-img-top" src="/imgs/1.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural
-                                            lead-in to additional content. This card has even longer content than the
-                                            first to
-                                            show that equal height action.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="card" style="height: 20rem">
-                                    <img class="card-img-top" src="/imgs/1.jpg" alt="Card image cap">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a
-                                            natural
-                                            lead-in to additional content. This card has even longer content than the
-                                            first to
-                                            show that equal height action.</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {{/each}}
                     </div>
                     <button class="carousel-control-prev bg-secondary" style="width: 2%" type="button"
                             data-target="#cardslider2" data-slide="prev">
@@ -711,6 +575,11 @@
                     </button>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+
         </div>
     </div>
 

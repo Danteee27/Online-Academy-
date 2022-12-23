@@ -13,12 +13,35 @@ import usersAdminRoute from "../routes/admin-user.route.js"
 
 import teachersRoute from "../routes/teachers.route.js";
 import {errorFunc} from "express-fileupload/lib/utilities.js";
+import coursesService from "../services/courses.service.js";
+// import {login} from "passport/lib/http/request.js";
 
 
 export default function (app) {
-    app.get('/', function (req, res) {
+    app.get('/', async function (req, res) {
         res.locals.lcHomePage = true;
-        res.render('home',{layout:'main1'});
+        const listDescendingCourses = await coursesService.getAllDescending(10);
+        function splitArrayToListSubArray(array,n)
+        {
+            const chunkSize = n;
+            let list = [];
+            for (let i = 0; i < array.length; i += chunkSize) {
+                list.push( array.slice(i, i + chunkSize));
+                // do whatever
+            }
+            if((array.length % n) !== 0)
+            {
+                list[list.length-1].push(...array.slice(0,array.length % n))
+            }
+            return list;
+        }
+        const listSubDescCourses = splitArrayToListSubArray(listDescendingCourses,4);
+        console.log(listSubDescCourses);
+        res.render('home',{
+            listDescendingCourses,
+            listSubDescCourses,
+            layout:'main1'
+        });
     });
 
     app.get('/err', function (req, res) {

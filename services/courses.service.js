@@ -78,8 +78,8 @@ export default {
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
 
-        today = yyyy +'/'+ mm + '/' + dd;
-        return db('courses').where('courseID', courseID).update({update:today});
+        today = yyyy + '/' + mm + '/' + dd;
+        return db('courses').where('courseID', courseID).update({update: today});
     },
 
     add(course) {
@@ -117,15 +117,17 @@ export default {
     del(courseID) {
         return db('courses').where('courseID', courseID).del();
     },
-    updateView(numberView, id)
-    {
+    updateView(numberView, id) {
         return db('courses').where('courseID', id).update({
             views: numberView
         });
+    },
+    async getAllDescending(limit) {
+        return await db('courses').orderBy('views', 'desc').limit(limit);
+    },
+    async getAllAscending(limit) {
+        return await db('courses').orderBy('views', 'asc').limit(limit);
     }
-
-
-
 
 
 }

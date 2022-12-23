@@ -88,6 +88,20 @@ export default function (app) {
                 if (isIndexFromZero)
                     return n <= 5 ? listStar[n + 1] : listStar[0];
                 return n <= 5 ? listStar[n] : listStar[0]
+            },
+            /**
+             * @param array
+             * @param n
+             * @return a list sub array with size = n
+             */
+            splitArrayToListSubArray(array,n)
+            {
+                const chunkSize = n;
+                let list = [];
+                for (let i = 0; i < array.length; i += chunkSize) {
+                    list.push( array.slice(i, i + chunkSize));
+                    // do whatever
+                }
             }
         }
     }));
