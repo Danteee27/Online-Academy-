@@ -1,3 +1,4 @@
+import knex from 'knex';
 import db from '../utils/db.js';
 
 export default {
@@ -156,8 +157,22 @@ export default {
 
     async getNewestCourses(limit) {
         return await db('courses').orderBy('date', 'desc').limit(limit);
-    }
+    },
 
+    // FULL-TEXT SEARCH
+    async fulltextSearch(searchStr, limit, offset) {
+        const sql = "select * from courses where match(courseName, tinydes) against ('" + searchStr + "' IN NATURAL LANGUAGE MODE) limit " + limit + " offset " + offset;
+        const list = await db.raw(sql);
+        if (list[0].length === 0)
+            return null;
+        return list[0];
+    },
+
+    async fulltextSearchResCount(searchStr) {
+        const sql = "select * from courses where match(courseName, tinydes) against ('" + searchStr + "' IN NATURAL LANGUAGE MODE)";
+        const list = await db.raw(sql);
+        return list[0].length;
+    }
 
 
 }

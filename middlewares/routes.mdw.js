@@ -5,8 +5,9 @@ import lecturesRoute from "../routes/lectures.route.js";
 import wishlistsRoute from "../routes/wishlists.route.js";
 import myCoursesRoute from "../routes/my-courses.route.js";
 import userCoursesRoute from "../routes/user-courses.route.js";
-import usersRoute from "../routes/users.route.js"
-import usersAdminRoute from "../routes/admin-user.route.js"
+import usersRoute from "../routes/users.route.js";
+import usersAdminRoute from "../routes/admin-user.route.js";
+import searchRoute from "../routes/search.route.js";
 
 import teachersRoute from "../routes/teachers.route.js";
 import {
@@ -75,4 +76,5 @@ export default function (app) {
     app.use('/admin/users', usersAdminRoute);
     app.use('/teacher', teachersRoute);
     app.use('/lectures', lecturesRoute);
+    app.use('/search', searchRoute);
 }

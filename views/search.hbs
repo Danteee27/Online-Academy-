@@ -1,0 +1,137 @@
+{{#section 'js'}}
+<script>
+
+    var offset = 8;
+    var value = document.getElementById('value').value;
+    var totalRes = {{totalRes}};
+    if (offset >= totalRes) 
+        $("#show-more").addClass("disabled");
+    
+    function getMore() {
+        var ajax = new XMLHttpRequest();
+
+        ajax.open("POST", `http://localhost:3000/search/getMore?value=${value}&offset=${offset}`, true);
+        
+        
+        
+        ajax.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    var data = JSON.parse(this.responseText);
+                    var html = "";
+                    for (var a = 0; a < data.length; a++) {
+                        html += "<li class=\"list-group-item\">";
+                        html += "<a class=\"course-card-a\" href=\"/user-courses/detail?catID=" + data[a].catID + "&id=" + data[a].courseID + "\">";
+                        html += "<div class=\"media\">";
+                        html += '<img width="260" height="145" class="mr-3"';
+                        html += 'src="https://drive.google.com/uc?export=view&id=' + data[a].image + '">';
+                        html += '<div class="media-body">';
+                        html += '<h3 class="course-card-title">' + data[a].courseName + '</h3>';
+                        html += '<p class="course-card-instructor">' + data[a].instructor + '</p>';
+                        html += '<span class="rating">' + data[a].rating + '</span>';
+                        for (let i = 0; i < data[a].star.length; i++) {
+                            if (data[a].star[i].starHalf === true) {
+                                html += '<span class="fa fa-star-half-o star-checked"></span>';
+                            }
+                            else if (data[a].star[i].star === true) {
+                                html += '<span class="fa fa-star star-checked"></span>';
+                            }
+                            else {
+                                html += '<span class="fa fa-star-o star-checked"></span>';
+                            }            
+                        }    
+                        html +=  '<span>&nbsp;(' + data[a].rating_num + ')</span><br>';
+                        if (data[a].hasPromotion === true) {
+                            html += '<span class="price">₫' + data[a].promotion + '</span><br>';
+                            html += '<span class="old-price">₫'+ data[a].price +'</span>';
+                        }                
+                        else {
+                            html += '<span class="price">₫'+ data[a].price + '</span>';
+                        }                                    
+                        html += '<br><p class="mt-1">';
+                        if (data[a].isBestseller === true) {
+                            html += '<span class="bestseller">Bestseller</span>';
+                        }
+                        if (data[a].isNew === true) {
+                            html += ' <span class="new">New</span>';
+                        }                    
+                        html += '</p>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</a>';
+                        html += '</li>';
+                    } 
+                    document.getElementById("data").innerHTML += html;
+                    offset = offset + 8;
+                    if (offset >= totalRes) {
+                        $("#show-more").addClass("disabled");
+                        return;
+                    }
+                }
+            }
+        }
+        ajax.send();
+    }
+    
+
+
+</script>
+{{/section}}
+
+<div class="card ">
+    <input id="value" type="hidden" value="{{searchStr}}">
+    <div class="card-body">
+        {{#if empty}}
+            <div class="m-5">
+                <p class="card-title">No data</p>
+                <p class="card-text">Please return next time.</p>
+            </div>
+        {{else}}
+            <ul id="data" class="list-group list-group-flush justify-content-center">
+                {{#each course}}
+                    <li class="list-group-item">
+                        <a class="course-card-a " href="/user-courses/detail?catID={{catID}}&id={{courseID}}">
+                            <div class="media">
+                                <img width="260" height="145" class="mr-3"
+                                     src="https://drive.google.com/uc?export=view&id={{image}}">
+
+
+                                <div class="media-body">
+                                    <h3 class="course-card-title">{{courseName}}</h3>
+                                    <p class="course-card-instructor">{{instructor}}</p>
+                                    <span class="rating">{{rating}}</span>
+                                    {{#each star}}
+                                        <span class="fa {{#if starHalf}}fa-star-half-o star-checked{{/if}} {{#if
+                                                star}}fa-star star-checked{{else}}fa-star-o star-checked{{/if}}">
+
+                                        </span>
+                                    {{/each}}
+                                    <span>&nbsp;({{format_number rating_num}})</span><br>
+                                    {{#if hasPromotion}}
+                                        <span class="price">₫{{format_number promotion}}</span><br>
+                                        <span class="old-price">₫{{format_number price}}</span>
+                                    {{else}}
+                                        <span class="price">₫{{format_number price}}</span>
+                                    {{/if}}
+                                    <br>
+                                    <p class="mt-1">
+                                        {{#if isBestseller}}
+                                            <span class="bestseller">Bestseller</span>
+                                        {{/if}}
+                                        {{#if isNew}}
+                                            <span class="new">New</span>
+                                        {{/if}}
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                {{/each}}
+            </ul>
+            {{!-- <div id="data"></div> --}}
+            <div class="text-center">
+                <a id="show-more" type="button" class="btn btn-outline-dark mt-3 mb-3" onclick="getMore();">Show more</a>
+            </div>
+        {{/if}}
+    </div>
+</div>
