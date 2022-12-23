@@ -51,10 +51,7 @@ router.get('/users/:id', async function (req, res) {
 
     if (course.views === null)
         course.views = 0;
-    if (course.curViews === null)
-        course.curViews = 0
 
-    course.curViews += 1;
     course.views += 1;
     await coursesService.update(course.courseID, course);
 
