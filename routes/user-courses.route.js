@@ -153,10 +153,13 @@ router.get('/detail', async function (req, res) {
     if (course === null)
         return res.redirect('/');
 
-    if (course.view === null)
-        course.view = 1;
-    else
-        course.views += 1;
+    if (course.views === null)
+        course.views = 0;
+    if (course.curViews === null)
+        course.curViews = 0
+
+    course.curViews += 1;
+    course.views += 1;
     await coursesService.update(courseID, course);
     const teacher = await teachersService.findById(course.teacherID);
     if (teacher !== null)
