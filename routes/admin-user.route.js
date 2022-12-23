@@ -51,12 +51,14 @@ router.post('/ban', async (req, res) => {
     const userID = req.body.userID || 0;
     await usersService.ban(userID);
 
+    res.redirect('/admin/users');
 })
 
 router.post('/unban', async (req, res) => {
     const userID = req.body.userID || 0;
     await usersService.unban(userID);
 
+    res.redirect('/admin/users');
 })
 
 export default router;
