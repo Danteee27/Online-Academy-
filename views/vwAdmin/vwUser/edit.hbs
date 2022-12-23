@@ -1,0 +1,38 @@
+<form method="post">
+    <div class="card">
+        <h4 class="card-header">
+            Edit User
+        </h4>
+        <div class="card-body">
+            <div class="form-group">
+                <label for="txtUserID">#</label>
+                <input name="userID" type="text" class="form-control" id="userID" value="{{this.user.userID}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="txtName">Name</label>
+                <input name="name" type="text" class="form-control" id="txtName" autofocus placeholder="" value="{{this.user.name}}">
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <a class="btn btn-outline-success" href="/admin/users" role="button">
+                <i class="fa fa-backward" aria-hidden="true"></i>
+                List
+            </a>
+            <button type="submit" class="btn btn-danger" formaction="/admin/users/ban">
+                <i class="fa fa-ban" aria-hidden="true"></i>
+                Ban
+            </button>
+            <button type="submit" class="btn btn-danger" formaction="/admin/users/ban">
+                Unban
+            </button>
+            <button type="submit" class="btn btn-danger" formaction="/admin/users/del">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                Delete
+            </button>
+            <button type="submit" class="btn btn-primary" formaction="/admin/users/edit">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Save
+            </button>
+        </div>
+    </div>
+</form>

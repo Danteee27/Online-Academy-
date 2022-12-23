@@ -1,10 +1,6 @@
 <div class="card">
     <h4 class="card-header d-flex justify-content-between">
-        Fields
-        <a class="btn btn-sm btn-outline-primary" href="/admin/fields/add" role="button">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-            Add Field
-        </a>
+        Users
     </h4>
     {{#if this.empty}}
         <div class="card-body">
@@ -16,28 +12,32 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Fields</th>
-                    <th class ="text-center">Hidden </th>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Role </th>
+                    <th class ="text-center">Banned</th>
                     <th class ="text-center">Edit</th>
-                    <th class ="text-center">View</th>
+                    <th class="text-center">View</th>
 
                 </tr>
                 </thead>
                 <tbody>
                 {{#each this.list}}
                     <tr>
-                        <td scope="row">{{fieldID}}</td>
-                        <td>{{fieldName}}</td>
-                        <td class ="text-center">{{#if hidden}} true {{else}} false{{/if}}</td>
+                        <td scope="row">{{userID}}</td>
+                        <td>{{name}}</td>
+                        <td>{{email}}</td>
+                        <td>{{role}}</td>
+                        <td class ="text-center">{{#if banned}} true {{else}} false{{/if}}</td>
                         <td class ="text-center">
-                            <a class="btn btn-primary btn-sm" href="/admin/fields/edit?id={{fieldID}}" role="button" title="Edit Field">
+                            <a class="btn btn-primary btn-sm" href="/admin/users/edit?id={{userID}}" role="button" title="Edit User">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
                         </td>
 
                         <td class ="text-center">
-                            <a class="btn btn-primary btn-sm" href="/admin/categories/view/{{fieldID}}" role="button" title="View Field">
-                            <i class="fa fa-forward" aria-hidden="true"></i>
+                            <a class="btn btn-primary btn-sm" href="/admin/users/view/{{userID}}" role="button" title="View User">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
                             </a>
                         </td>
 
@@ -48,6 +48,6 @@
         </div>
     {{/if}}
     <div class="card-footer text-muted">
-        
+        ADMIN AND TEACHERS CAN'T BE DELETED. CONTACT OWNER TO DO SUCH THINGS
     </div>
 </div>

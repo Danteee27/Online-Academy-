@@ -41,7 +41,7 @@ router.post('/unhide', async function(req, res) {
 
     const ret = await fieldsService.unhide(fieldID);
 
-    res.redirect('/fields');
+    res.redirect('/admin/fields');
 
 })
 
@@ -52,7 +52,7 @@ router.post('/hide', async function(req, res) {
 
     const ret = await fieldsService.hide(fieldID);
 
-    res.redirect('/fields');
+    res.redirect('/admin/fields');
 
 })
 
@@ -77,7 +77,7 @@ router.post('/del', async function(req, res) {
     if(existed == false) {
         console.log(fieldID);
         const ret = await fieldsService.del(fieldID);
-        res.redirect('/fields');
+        res.redirect('/admin/fields');
     }
     else
     {
@@ -89,7 +89,7 @@ router.get('/edit', async function (req, res) {
     const id = req.query.id || 0;
     const field = await fieldsService.findById(id);
     if (field === null) {
-        return res.redirect('/fields');
+        return res.redirect('/admin/fields');
     }
 
     res.render('vwAdmin/vwField/edit', {
@@ -101,7 +101,7 @@ router.post('/edit', async function(req, res) {
     const fieldID = req.body.fieldID || 0;
     const affected_rows = await fieldsService.update(req.body.fieldID, req.body)
 
-    res.redirect('/fields');
+    res.redirect('/admin/fields');
 })
 
 
