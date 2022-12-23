@@ -68,7 +68,7 @@ export default {
         return await db('teachers').where('teacherID', id).update({
             avatar: image
         });
-    },
+    }, 
     async addBG(image, id) {
         return await db('teachers').where('teacherID', id).update({
             bground: image
