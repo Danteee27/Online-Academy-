@@ -90,6 +90,15 @@ export default {
         return db('courses').where('courseID', courseID).update({update:today});
     },
 
+    async checkCompleted(id) {
+        const list = await db('lectures').where('courseID', id);
+        if (list.length === await db('courses').where('courseID', id).select('lec_num'))
+        {
+            return await db('courses').where('courseID', id).update({completed:1});
+        }
+        return;
+    },
+    
     add(course) {
 
         return db('courses').insert(course);
