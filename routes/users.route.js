@@ -85,4 +85,27 @@ router.post('/logout', async function (req, res) {
     res.redirect(url);
 });
 
+router.get('/settings/:id', async (req, res) => {
+    const user = await usersService.findById(req.params.id);
+
+    res.render('vwAccount/settings', { user: user});
+})
+
+router.get('/profile/:id', async (req, res) => {
+    const user = await usersService.findByEmail(req.params.id);
+
+    res.render('vwAccount/profile',{
+        user,
+
+    });
+})
+
+router.get('/profile-settings/:id', async (req, res) => {
+    const user = await usersService.findByEmail(req.params.id);
+
+    res.render('vwAccount/profile-settings', {
+        user,
+    })
+})
+
 export default router;

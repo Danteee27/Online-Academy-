@@ -25,35 +25,40 @@ export default {
     async updateStudentNum(teacherID)
     {
         const list = await db('courses').where('teacherID', teacherID).andWhere('hidden', 0);
-        var temp=0;
+        let x=0;
         for (let i = 0; i < list.length; i++)
         {
-            temp = temp + list[i].student_num;
+            
+            x = parseInt(x) + parseInt(list[i].student_num);
         }
-        return await db('teachers').where('teacherID', teacherID).update({ totals_stu: temp });
+        return await db('teachers').where('teacherID', teacherID).update({ totals_stu: x });
     },
 
     async updateRating(teacherID)
     {
         const list = await db('courses').where('teacherID', teacherID).andWhere('hidden', 0);
-        var temp=0;
+        var temp =0;
+        var x = parseFloat(temp);
         for (let i = 0; i < list.length; i++)
         {
-            temp = temp + list[i].rating;
+            
+            x = parseFloat(x) + parseFloat(list[i].rating);
         }
-        var res = temp/(list.length);
-        return await db('teachers').where('teacherID', teacherID).update({ rating: res });
+        x = parseFloat(parseFloat(x) / parseFloat(list.length));
+        return await db('teachers').where('teacherID', teacherID).update({ rating: x });
     },
-
+    
     async updateReviews(teacherID)
     {
         const list = await db('courses').where('teacherID', teacherID).andWhere('hidden', 0);
-        var temp=0;
+        var temp =0;
+        var x = parseInt(temp);
         for (let i = 0; i < list.length; i++)
         {
-            temp = temp + list[i].rating_num;
+            
+            x = parseInt(x) + parseInt(list[i].rating_num);
         }
-        return await db('teachers').where('teacherID', teacherID).update({ reviews: temp });
+        return await db('teachers').where('teacherID', teacherID).update({ reviews: x });
     },
 
     async updateCourseNum(teacherID)

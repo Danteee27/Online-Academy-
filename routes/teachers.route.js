@@ -105,20 +105,23 @@ router.get('/profile', async function (req, res) {
     }
 
     const userid = req.query.id;
+    
     const teacher = await teachersService.findById(userid);
+
+    await teachersService.updateCourseNum(userid);
+    await teachersService.updateRating(userid);
+    //await teachersService.updateStudentNum(userid);
+    await teachersService.updateReviews(userid);
+
+    if (teacher === null) {
+        return res.render('/login');
+    }
+
     const courses = await coursesService.findByUserId(userid);
     //var doc = new DOMParser().parseFromString(teacher.description, "text/xml");
     //console.log(doc);
     //console.log(courses);
-    if (teacher === null) {
-        return res.render('/login');
-    }
     
-    await teachersService.updateCourseNum(userid);
-    await teachersService.updateRating(userid);
-    await teachersService.updateStudentNum(userid);
-    await teachersService.updateReviews(userid);
-
     res.render('vwTeacher/profile', {
         teacher: teacher,
         courses: courses
@@ -165,8 +168,8 @@ router.post('/profile/edit', upload.any(), async function (req, res) {
             teachersService.addBG(image[1], id);
         }
         //res.status(200).send('Form Submitted');
-        //res.redirect('/teacher/profile?id=' + id);
-        res.redirect('back');
+        res.redirect('/teacher/profile?id=' + id);
+        //res.redirect('back');
     } catch (f) {
         res.send(f.message);
     }
@@ -194,6 +197,9 @@ router.post('/editCourse', upload.any(), async function (req, res) {
         //console.log(body);
         //console.log(id)
         const ret = await coursesService.update(id, body);
+        if (body !== undefined) {
+           await coursesService.updateDate(id);
+        }
         //console.log(ret);
         var image = null;
         for (let f = 0; f < files.length; f += 1) {

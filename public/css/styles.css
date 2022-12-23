@@ -455,7 +455,7 @@ input:checked ~ label {
 
 .give-feedback {
     width: 50%;
-    margin: 0 auto;
+    margin-left: 20%;
     height: 50px;
     border-radius: 4px;
     font-weight: 700;
