@@ -42,7 +42,7 @@ router.get('/', function (req, res) {
 
 router.get('/addCourse', async function (req, res) {
     const teachID = req.query.id;
-    console.log(teachID);
+    //console.log(teachID);
     const teacher = await teachersService.findById(teachID);
     const categories = await categoriesService.findAll();
     res.render('vwTeacher/addCourse', {
@@ -82,13 +82,13 @@ router.post('/addCourse', upload.any(), async function (req, res) {
         } = req;
         const id = body.courseID;
         const ret = await coursesService.add(body);
-        console.log(ret);
-        console.log(id)
+        //console.log(ret);
+        //console.log(id)
         var image = null;
         for (let f = 0; f < files.length; f += 1) {
             image = await uploadFile(files[f]);
         }
-        console.log(image);
+        //console.log(image);
         await coursesService.addImage(image, ret);
         //res.status(200).send('Form Submitted');
         res.redirect('/lectures/add?id=' + ret);
@@ -126,10 +126,12 @@ router.get('/profile', async function (req, res) {
     const teacherID = req.query.id;
     if(req.session.authUser === null)
     {
+        //console.log('role fix1');
         return res.redirect('/');
     }
     else if(req.session.authUser.role !== 'ROLE.TEACHER')
     {
+        //console.log('role fix');
         return res.redirect('/');
     }
 
@@ -138,10 +140,9 @@ router.get('/profile', async function (req, res) {
     if(req.session.authUser.userID !== teacher.userID) {
         res.redirect('/public?id=' + teacherID);
     }
-
     if (teacher === null) {
         const  userID = req.session.authUser.userID;
-        return res.render('/profile/add?id='+ userID);
+        res.redirect('/profile/add?id='+ userID);
     }
     if(teacher.numCourses !== 0 && teacher.numCourses !== null) {
         await teachersService.updateCourseNum(teacherID);
@@ -287,10 +288,15 @@ router.get('/getId', async function (req, res) {
 
 router.get('/profile/add', async function (req, res) {
     const userID = req.query.id;
-    if(req.session.authUser === null)
+    console.log(userID);
+    const auth = req.session.authUser
+    console.log(auth.userID);
+    if(auth.authUser === null)
     {
-        return res.redirect('/');
-    } else if(req.session.authUser.userID !== userID) {
+        //console.log('bughere');
+        res.redirect('/');
+    } else if(+auth.userID !== +userID) {
+        //console.log('bughere1');
         res.redirect('/');
     }
     const teacher = await teachersService.findByUserId(userID);
