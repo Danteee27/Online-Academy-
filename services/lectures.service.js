@@ -58,5 +58,12 @@ export default {
         });
     },
 
+    updateView(numberView, id)
+    {
+        return db('lectures').where('lecID', id).update({
+            views: numberView
+        });
+    }
+
 
 }
