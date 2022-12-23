@@ -86,26 +86,101 @@ router.post('/logout', async function (req, res) {
 });
 
 router.get('/settings/:id', async (req, res) => {
-    const user = await usersService.findById(req.params.id);
+    if(req.session.authUser === null)
+    {
+        return res.redirect('/');
+    }
+
+    if(req.session.authUser.userID != req.params.id)
+    {
+        return res.redirect('/');
+    }
+
+        const user = await usersService.findById(req.params.id);
 
     res.render('vwAccount/settings', { user: user});
 })
 
+router.post('/settings', async (req, res) => {
+
+    const userID = req.body.userID;
+    const ret = await usersService.update(userID, req.body);
+
+    res.locals.authUser.name = req.body.name;
+    res.redirect('/users/settings/' + userID);
+})
+
+
 router.get('/profile/:id', async (req, res) => {
-    const user = await usersService.findByEmail(req.params.id);
+    const user = await usersService.findById(req.params.id);
 
     res.render('vwAccount/profile',{
         user,
-
     });
 })
 
 router.get('/profile-settings/:id', async (req, res) => {
-    const user = await usersService.findByEmail(req.params.id);
+    if(req.session.authUser === null)
+    {
+        return res.redirect('/');
+    }
+
+    if(req.session.authUser.userID != req.params.id)
+    {
+        return res.redirect('/');
+    }
+    const user = await usersService.findById(req.params.id);
 
     res.render('vwAccount/profile-settings', {
         user,
     })
 })
+
+router.post('/profile-settings', async (req, res) => {
+    const userID = req.body.userID;
+    const ret = await usersService.update(userID, req.body);
+
+    res.locals.authUser.introduction = req.body.introduction;
+    res.redirect('/users/profile-settings/' + userID);
+})
+
+router.get('/change-password/:id', async (req, res) =>{
+    if(req.session.authUser === null) {
+        return res.redirect('/');
+    }
+
+
+    const user = await usersService.findById(req.params.id);
+
+    res.render('vwAccount/change-password',{user});
+})
+
+router.post('/change-password', async (req, res) => {
+    const userID = req.body.userID;
+
+    const user = await usersService.findById(userID);
+    if(user === null) {
+        return res.redirect('/');
+    }
+    const ret = bcrypt.compareSync(req.body.oldPassword, user.password) && req.body.newPassword === req.body.confirmPassword;
+    if (ret === false) {
+        return res.render('vwAccount/change-password', {
+            err_message: 'Invalid password.'
+        });
+    }
+    else
+    {
+        user.password = bcrypt.hashSync(req.body.newPassword, 10);
+        await usersService.update(userID, user);
+
+        res.redirect('/users/settings/' + userID);
+        return res.render('vwAccount/settings', {
+            user
+        })
+    }
+
+})
+
+
 
 export default router;

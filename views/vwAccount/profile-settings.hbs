@@ -1,0 +1,36 @@
+<form method="post">
+    <div class="card">
+        <h4 class="card-header">
+            Account settings
+        </h4>
+        <div class="card-body">
+            <div class="form-group">
+                <input name="userID" type="text" class="form-control" id="txtUserID" value="{{this.user.userID}}" readonly hidden>
+            </div>
+            <div class="form-group">
+                <label for="txtEmail">Email</label>
+                <input name="email" type="text" class="form-control" id="txtEmail" value="{{this.user.email}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="txtName">Name</label>
+                <input name="name" type="text" class="form-control" id="txtName"  value="{{this.user.name}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="txtRole">Role</label>
+                <input name="role" type="text" class="form-control" id="role"  value="{{this.user.name}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="txtIntroduction">Introduction</label>
+                <input name="introduction" type="text" class="form-control" id="txtIntroduction" autofocus value="{{this.user.introduction}}">
+            </div>
+
+
+        </div>
+        <div class="card-footer text-muted">
+            <button type="submit" class="btn btn-primary" formaction="/users/profile-settings">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Save
+            </button>
+        </div>
+    </div>
+</form>
