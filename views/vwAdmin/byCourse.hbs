@@ -1,7 +1,7 @@
 <div class="card">
     <h4 class="card-header d-flex justify-content-between">
         Courses
-        <a class="btn btn-outline-success" href="/categories/view/{{fieldID}}" role="button">
+        <a class="btn btn-outline-success" href="/admin/categories/view/{{fieldID}}" role="button">
             <i class="fa fa-backward" aria-hidden="true"></i>
             Courses
         </a>
@@ -18,8 +18,9 @@
                     <th>#</th>
                     <th>Courses</th>
                     <th>Hidden </th>
-                    <th> </th>
-                    <th></th>
+                    <th class="text-center">Lectures</th>
+                    <th class ="text-center">Edit</th>
+                    <th class ="text-center">View</th>
 
                 </tr>
                 </thead>
@@ -29,13 +30,14 @@
                         <td scope="row">{{courseID}}</td>
                         <td>{{courseName}}</td>
                         <td>{{#if hidden}} true {{else}} false{{/if}}</td>
-                        <td class="text-right">
-                            <a class="btn btn-primary btn-sm" href="/courses/edit?id={{courseID}}" role="button" title="Edit Category">
+                        <td class ="text-center">{{lec_num}}</td>
+                        <td class ="text-center">
+                            <a class="btn btn-primary btn-sm" href="/admin/courses/edit?id={{courseID}}" role="button" title="Edit Category">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                             </a>
                         </td>
 
-                        <td class="text-right">
+                        <td class ="text-center">
                             <a class="btn btn-primary btn-sm" href="/lectures/view/{{courseID}}" role="button" title="Edit Category">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                             </a>
@@ -48,6 +50,5 @@
         </div>
     {{/if}}
     <div class="card-footer text-muted">
-        2 days ago
     </div>
 </div>

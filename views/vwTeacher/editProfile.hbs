@@ -132,11 +132,11 @@
     </script>
 </head>
 <body>
-     <div class="col">
-            <div class="row">
+     <div class="col" style="width: 90%; margin-left:5%">
+            <div class="row" >
                 <div class="col mb-3" style="">
                     <div class="card" style="align-items: center;">
-                        <div class="card-body" style="width: 80%;">
+                        <div class="card-body" >
                             <div class="e-profile">
                                 <div class="row" style="background-image: url(https://drive.google.com/uc?export=view&id={{this.teacher.bground}}); margin-bottom:2%">
                                     <div class="col-12 col-sm-auto mb-3">
@@ -148,9 +148,9 @@
                                     </div>
                                     <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                                         <div class="text-center text-sm-left mb-2 mb-sm-0">
-                                            <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{this.teacher.teacherName}}</h4>
-                                            <p class="mb-0">@khangnhat</p>
-                                            <div class="text-muted"><small>Last seen 2 hours ago</small></div>
+                                            <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap" style="text-shadow:2px 2px black; color: white">{{this.teacher.teacherName}}</h4>
+                                            <p class="mb-0" style=" color: white">@khangnhat</p>
+                                            <div class="text-muted" style="color: gray"><small>Last seen 2 hours ago</small></div>
                                             <form
             action="/teacher/profile/edit"
             method="post"
@@ -183,7 +183,7 @@ $(".custom-file-input").on("change", function() {
                                         </div>
                                         <div class="text-center text-sm-right">
                                             <span class="badge badge-secondary">Teacher</span>
-                                            <div class="text-muted"><small>Joined 20 Dec 2022</small></div>
+                                            <div class="text-muted"><small style="text-shadow:2px 2px black; color: gray">Joined 20 Dec 2022</small></div>
                                         </div>
                                     </div>
                                 </div>
