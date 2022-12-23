@@ -89,23 +89,21 @@ router.get('/users/:id', async function (req, res) {
             }
             fbList[i].star = star;
             fbList[i].avatar = fbList[i].author[0];
-
-            res.render('vwStudent/lectures', {
-                lectures: listLecture,
-                lecture,
-                countRateList,
-                tutorialRating,
-                fbList,
-                // fieldName,
-                // courseName,
-                empty: lecture.length === 0,
-                layout: 'main1',
-                totalFb: feedbacks.length
-            });
         }
+
+        res.render('vwStudent/lectures', {
+            lectures: listLecture,
+            lecture,
+            countRateList,
+            tutorialRating,
+            fbList,
+            // fieldName,
+            // courseName,
+            empty: lecture.length === 0,
+            totalFb: feedbacks.length
+        });
     }
 });
-
 
 router.get('/', async function (req, res) {
     const list = await lecturesService.findAll();

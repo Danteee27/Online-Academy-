@@ -117,6 +117,7 @@
             });
         });
 
+        
         function getMoreFeedback() {
             var ajax = new XMLHttpRequest();
 
@@ -168,6 +169,7 @@
             };
             ajax.send();
         }
+        
     </script>
 {{/section}}
 
@@ -250,7 +252,43 @@
                         {{this.lecture.description}}
                     </div>
                     <div role="tabpanel" id="review" class="tab-pane">
-                        <button class="give-feedback btn-block mt-3 mb-3 float-right w-25" type="button" onclick="openPopup()">
+                        <h4>Student feedbacks</h4>
+                        <div class="d-flex flex-nowrap">
+                            <div class="d-flex flex-column" style="width: 120px;height: 150px;">
+
+                                <div class="checked font-weight-bold display-4">{{this.tutorialRating}}</div>
+                                <div><span id="star1" class="fa fa-star checked"
+                                           data-rate="{{this.tutorialRating}}"></span>
+                                    <span id="star2" class="fa fa-star checked"
+                                          data-rate="{{this.tutorialRating}}"></span>
+                                    <span id="star3" class="fa fa-star checked"
+                                          data-rate="{{this.tutorialRating}}"></span>
+                                    <span id="star4" class="fa fa-star checked"
+                                          data-rate="{{this.tutorialRating}}"></span>
+                                    <span id="star5" class="fa fa-star checked"
+                                          data-rate="{{this.tutorialRating}}"></span>
+                                </div>
+                                <div class="checked">Tutorial rating</div>
+                            </div>
+                            <div class="w-75">
+                                {{#each this.countRateList}}
+                                    <div class="row d-flex align-items-center">
+                                        <div class="progress col-md-8 p-0 d-flex align-items-center">
+                                            <div class="progress-bar bg-secondary" role="progressbar"
+                                                 style="width: {{this}}%" aria-valuenow="0" aria-valuemin="0"
+                                                 aria-valuemax="100"></div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            {{{printStar @index true}}}
+                                        </div>
+                                    </div>
+
+                                    <div class="rating"></div>
+
+                                {{/each}}
+                            </div>
+                        </div>
+                        <button class="give-feedback btn-block mb-5 w-25" type="button" onclick="openPopup()">
                             Give feedback
                         </button>
                         <form action="/user-courses/user-feedback" method="post">
@@ -292,42 +330,6 @@
                                 </div>
                             </div>
                         </form>
-                        <h4>Student feedbacks</h4>
-                        <div class="d-flex flex-nowrap">
-                            <div class="d-flex flex-column" style="width: 120px;height: 150px;">
-
-                                <div class="checked font-weight-bold display-4">{{this.tutorialRating}}</div>
-                                <div><span id="star1" class="fa fa-star checked"
-                                           data-rate="{{this.tutorialRating}}"></span>
-                                    <span id="star2" class="fa fa-star checked"
-                                          data-rate="{{this.tutorialRating}}"></span>
-                                    <span id="star3" class="fa fa-star checked"
-                                          data-rate="{{this.tutorialRating}}"></span>
-                                    <span id="star4" class="fa fa-star checked"
-                                          data-rate="{{this.tutorialRating}}"></span>
-                                    <span id="star5" class="fa fa-star checked"
-                                          data-rate="{{this.tutorialRating}}"></span>
-                                </div>
-                                <div class="checked">Tutorial rating</div>
-                            </div>
-                            <div class="w-75">
-                                {{#each this.countRateList}}
-                                    <div class="row d-flex align-items-center">
-                                        <div class="progress col-md-8 p-0 d-flex align-items-center">
-                                            <div class="progress-bar bg-secondary" role="progressbar"
-                                                 style="width: {{this}}%" aria-valuenow="0" aria-valuemin="0"
-                                                 aria-valuemax="100"></div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            {{{printStar @index true}}}
-                                        </div>
-                                    </div>
-
-                                    <div class="rating"></div>
-
-                                {{/each}}
-                            </div>
-                        </div>
 
                         <div>
 
