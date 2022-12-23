@@ -114,7 +114,7 @@ router.get('/profile', async function (req, res) {
         return res.render('/login');
     }
     await teachersService.updateCourseNum(userid);
-    //await teachersService.updateRating(userid);
+    await teachersService.updateRating(userid);
     await teachersService.updateStudentNum(userid);
     await teachersService.updateReviews(userid);
     res.render('vwTeacher/profile', {
