@@ -1,5 +1,6 @@
 import knexObj from 'knex';
 import dotenv from 'dotenv'
+// import asyncErr from 'express-async-errors';
 
 dotenv.config();
 
