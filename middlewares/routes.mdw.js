@@ -11,12 +11,17 @@ import userCoursesRoute from "../routes/user-courses.route.js";
 import usersRoute from "../routes/users.route.js"
 
 import teachersRoute from "../routes/teachers.route.js";
+import {errorFunc} from "express-fileupload/lib/utilities.js";
 
 
 export default function (app) {
     app.get('/', function (req, res) {
         res.locals.lcHomePage = true;
         res.render('home',{layout:'main1'});
+    });
+
+    app.get('/err', function (req, res) {
+        throw new Error('Error!!!');
     });
 
     app.get('/admin', function (req, res) {
