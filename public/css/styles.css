@@ -236,9 +236,11 @@ body{
 
 .buy-now:hover {
     opacity: 0.8;
+    text-decoration: none;
 }
 
 .course-add-to-wishlist {
+    color: black;
     border-radius: 10px;
     border: 0;
     padding: 19px 25px;
@@ -248,6 +250,7 @@ body{
 
 .course-add-to-wishlist:hover {
     opacity: 0.8;
+    text-decoration: none;
 }
 
 .added-to-wishlist {

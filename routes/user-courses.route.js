@@ -239,7 +239,8 @@ router.get('/detail', async function (req, res) {
         feedback: feedbackList,
         emptyFbList: feedbackList.length === 0,
         isInWishList,
-        totalFb
+        totalFb,
+        userID
     })
 });
 
@@ -275,7 +276,7 @@ router.post('/buy-now', async function (req, res) {
             lecID: lectureList[i].lecID,
             completed: 0,
             date: null,
-            courseID
+            courseID,
         });
     }
     await courseService.updateStudentNum(courseID);
