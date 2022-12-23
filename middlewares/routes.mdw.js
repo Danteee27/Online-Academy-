@@ -1,6 +1,3 @@
-
-
-
 import coursesRoute from "../routes/courses.route.js";
 import fieldsRoute from "../routes/fields.route.js";
 import categoriesRoute from "../routes/categories.route.js";
@@ -12,8 +9,11 @@ import usersRoute from "../routes/users.route.js"
 import usersAdminRoute from "../routes/admin-user.route.js"
 
 import teachersRoute from "../routes/teachers.route.js";
-import {errorFunc} from "express-fileupload/lib/utilities.js";
+import {
+    errorFunc
+} from "express-fileupload/lib/utilities.js";
 import coursesService from "../services/courses.service.js";
+import categoriesService from "../services/categories.service.js";
 // import {login} from "passport/lib/http/request.js";
 
 
@@ -21,31 +21,30 @@ export default function (app) {
     app.get('/', async function (req, res) {
         res.locals.lcHomePage = true;
         const listDescendingCourses = await coursesService.getAllDescending(10);
-        function splitArrayToListSubArray(array,n)
-        {
+
+        function splitArrayToListSubArray(array, n) {
             const chunkSize = n;
             let list = [];
             for (let i = 0; i < array.length; i += chunkSize) {
-                list.push( array.slice(i, i + chunkSize));
+                list.push(array.slice(i, i + chunkSize));
                 // do whatever
             }
-            if((array.length % n) !== 0)
-            {
-                list[list.length-1].push(...array.slice(0,array.length % n))
+            if ((array.length % n) !== 0) {
+                list[list.length - 1].push(...array.slice(0, array.length % n))
             }
             return list;
         }
-        const listSubDescCourses = splitArrayToListSubArray(listDescendingCourses,4);
+        const listSubDescCourses = splitArrayToListSubArray(listDescendingCourses, 4);
 
         const listMostEnrolledCourses = await categoriesService.find5MostEnrolledCourses();
-        const listSubMostEnrolledCourses = splitArrayToListSubArray(listMostEnrolledCourses,4);
+        const listSubMostEnrolledCourses = splitArrayToListSubArray(listMostEnrolledCourses, 4);
         console.log(listSubMostEnrolledCourses);
 
-        res.render('home',{
+        res.render('home', {
             listDescendingCourses,
             listSubDescCourses,
             listSubMostEnrolledCourses,
-            layout:'main1'
+            layout: 'main1'
         });
     });
 
@@ -55,9 +54,8 @@ export default function (app) {
 
     app.get('/admin', function (req, res) {
 
-        if(req.session.authUser != null) {
-            if(req.session.authUser.role !== 'ROLE.ADMIN')
-            {
+        if (req.session.authUser != null) {
+            if (req.session.authUser.role !== 'ROLE.ADMIN') {
                 res.redirect('/');
             }
         }
