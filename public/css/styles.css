@@ -457,10 +457,10 @@ input:checked ~ label {
     width: 50%;
     margin: 0 auto;
     height: 50px;
-    border-radius: 10px;
+    border-radius: 4px;
     font-weight: 700;
-    background-color: orange;
-    color: black;
+    background-color: #222222;
+    color: white;
 }
 
 .give-feedback:hover {
