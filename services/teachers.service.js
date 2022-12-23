@@ -33,10 +33,11 @@ export default {
         let x=0;
         for (let i = 0; i < list.length; i++)
         {
-            
+            if (list[i].student_num !== null){
             x = parseInt(x) + parseInt(list[i].student_num);
+            }
         }
-        return await db('teachers').where('teacherID', teacherID).update({ totals_stu: x });
+        return await db('teachers').where('teacherID', teacherID).update({ totals_stu: parseInt(x) });
     },
 
     async updateRating(teacherID)
@@ -46,11 +47,12 @@ export default {
         var x = parseFloat(temp);
         for (let i = 0; i < list.length; i++)
         {
-            
+            if (list[i].rating !== null){
             x = parseFloat(x) + parseFloat(list[i].rating);
+            }
         }
         x = parseFloat(parseFloat(x) / parseFloat(list.length));
-        return await db('teachers').where('teacherID', teacherID).update({ rating: x });
+        return await db('teachers').where('teacherID', teacherID).update({ rating: parseFloat(x) });
     },
     
     async updateReviews(teacherID)
@@ -60,10 +62,11 @@ export default {
         var x = parseInt(temp);
         for (let i = 0; i < list.length; i++)
         {
-            
+            if (list[i].rating_num !== null){
             x = parseInt(x) + parseInt(list[i].rating_num);
+            }
         }
-        return await db('teachers').where('teacherID', teacherID).update({ reviews: x });
+        return await db('teachers').where('teacherID', teacherID).update({ reviews: parseInt(x) });
     },
 
     async updateCourseNum(teacherID)

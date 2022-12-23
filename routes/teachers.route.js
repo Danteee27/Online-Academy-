@@ -102,15 +102,16 @@ router.get('/public', async function (req, res) {
     
     const teacher = await teachersService.findById(teacherID);
 
-    await teachersService.updateCourseNum(teacherID);
-    await teachersService.updateRating(teacherID);
-    //await teachersService.updateStudentNum(teacherID);
-    await teachersService.updateReviews(teacherID);
-
     if (teacher === null) {
         return res.render('/login');
     }
 
+    if(teacher.numCourses !== 0 && teacher.numCourses !== null) {
+        await teachersService.updateCourseNum(teacherID);
+        await teachersService.updateRating(teacherID);
+        await teachersService.updateStudentNum(teacherID);
+        await teachersService.updateReviews(teacherID);
+    }
     const courses = await coursesService.findByUserId(teacherID);
     //var doc = new DOMParser().parseFromString(teacher.description, "text/xml");
     //console.log(doc);
@@ -147,7 +148,7 @@ router.get('/profile', async function (req, res) {
     if(teacher.numCourses !== 0 && teacher.numCourses !== null) {
         await teachersService.updateCourseNum(teacherID);
         await teachersService.updateRating(teacherID);
-        //await teachersService.updateStudentNum(userid);
+        await teachersService.updateStudentNum(teacherID);
         await teachersService.updateReviews(teacherID);
     }
 
