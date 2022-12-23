@@ -14,6 +14,7 @@ import userLecturesService from '../services/user-lectures.service.js';
 import teachersService from '../services/teachers.service.js';
 import categoriesService from '../services/categories.service.js';
 import usersService from '../services/users.service.js';
+import coursesService from '../services/courses.service.js';
 
 const router = express.Router();
 
@@ -117,11 +118,7 @@ router.get('/category/:id', async function (req, res) {
 });
 
 router.get('/detail', async function (req, res) {
-    // if (req.session.authUser === null) {
-    //     return res.redirect('/');
-    // }
     res.locals.lcCatPage = true;
-
 
     const catID = req.query.catID;
     const courseID = req.query.id;
@@ -155,6 +152,12 @@ router.get('/detail', async function (req, res) {
     const course = await courseService.findByIdWithoutHidden(courseID);
     if (course === null)
         return res.redirect('/');
+
+    if (course.view === null)
+        course.view = 1;
+    else
+        course.views += 1;
+    await coursesService.update(courseID, course);
     const teacher = await teachersService.findById(course.teacherID);
     if (teacher !== null)
         course.instructor = teacher.teacherName;
