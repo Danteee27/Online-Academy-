@@ -65,7 +65,7 @@ router.get('/users/:id', async function (req, res) {
             listLecture[i].isActive = true;
     }
 
-    const views = lecture.views + 0;
+    //const views = lecture.views + 0;
 
     const feedbacks = await feedbacksService.findByCourseID(lecture.courseID);
 
@@ -79,40 +79,44 @@ router.get('/users/:id', async function (req, res) {
         tutorialRating = Math.round(tutorialRating * 100) / 100;
         tutorialRating = tutorialRating.toFixed(1);
         //console.log(tutorialRating);
-
-        const rating = [1, 2, 3, 4, 5];
-
-
-        if (feedbacks != null) {
-            for (let item = 0; item < countRateList.length; item++) {
-                countRateList[item] = Math.round(countRateList[item] * 10000 / feedbacks.length) / 100;
-            }
-        }
-        const fbList = await feedbacksService.findByCourseIDWithLimit(lecture.courseID, 4);
-        for (let i = 0; i < fbList.length; i++) {
-            const star = [];
-            for (let j = 1; j <= 5; j++) {
-                if (j <= +fbList[i].rating)
-                    star.push(true);
-                else
-                    star.push(false);
-            }
-            fbList[i].star = star;
-            fbList[i].avatar = fbList[i].author[0];
-        }
-
-        res.render('vwStudent/lectures', {
-            lectures: listLecture,
-            lecture,
-            countRateList,
-            tutorialRating,
-            fbList,
-            // fieldName,
-            // courseName,
-            empty: lecture.length === 0,
-            totalFb: feedbacks.length
-        });
     }
+
+    const rating = [1, 2, 3, 4, 5];
+
+
+    if (feedbacks != null) {
+        for (let item = 0; item < countRateList.length; item++) {
+            countRateList[item] = Math.round(countRateList[item] * 10000 / feedbacks.length) / 100;
+        }
+    }
+    const fbList = await feedbacksService.findByCourseIDWithLimit(lecture.courseID, 4);
+    for (let i = 0; i < fbList.length; i++) {
+        const star = [];
+        for (let j = 1; j <= 5; j++) {
+            if (j <= +fbList[i].rating)
+                star.push(true);
+            else
+                star.push(false);
+        }
+        fbList[i].star = star;
+        fbList[i].avatar = fbList[i].author[0];
+    }
+
+    let len = 0
+    if (feedbacks != null)
+        len = feedbacks.length;
+
+    res.render('vwStudent/lectures', {
+        lectures: listLecture,
+        lecture,
+        countRateList,
+        tutorialRating,
+        fbList,
+        // fieldName,
+        // courseName,
+        empty: lecture.length === 0,
+        totalFb: len
+    });
 });
 
 router.get('/', async function (req, res) {

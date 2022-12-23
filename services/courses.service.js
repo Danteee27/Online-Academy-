@@ -32,6 +32,15 @@ export default {
         return list;
     },
 
+    async findByCategoryIDWithoutHidden(catID) {
+        const list = db('courses').where('catID', catID).where('hidden', 0);
+        if (list.length === 0) {
+            return null;
+        }
+
+        return list;
+    },
+
     async findByUserId(userID) {
         return db('courses').whereRaw('hidden = ?', [0]).where('teacherID', userID);
     },
@@ -78,8 +87,10 @@ export default {
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
 
-        today = yyyy +'/'+ mm + '/' + dd;
-        return db('courses').where('courseID', courseID).update({update:today});
+        today = yyyy + '/' + mm + '/' + dd;
+        return db('courses').where('courseID', courseID).update({
+            update: today
+        });
     },
 
     add(course) {
@@ -116,7 +127,14 @@ export default {
     },
     del(courseID) {
         return db('courses').where('courseID', courseID).del();
+    },
+    updateView(numberView, id) {
+        return db('courses').where('courseID', id).update({
+            views: numberView
+        });
     }
+
+
 
 
 
