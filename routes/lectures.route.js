@@ -178,7 +178,7 @@ router.get('/add', async function (req, res) {
     const lectures = await lecturesService.findAllByCourseID(courseID);
     console.log(lectures);
     res.render('vwTeacher/addLecture', {
-        layout: 'LectureLayout',
+        layout: 'main1',
         courseID: courseID,
         lectures: lectures
     });

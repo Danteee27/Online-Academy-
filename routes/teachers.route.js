@@ -12,6 +12,7 @@ import teachersService from "../services/teachers.service.js";
 import * as stream from 'stream';
 import db from "../utils/db.js";
 import usersService from "../services/users.service.js";
+import categoriesService from "../services/categories.service.js";
 
 
 
@@ -43,10 +44,11 @@ router.get('/addCourse', async function (req, res) {
     const teachID = req.query.id;
     console.log(teachID);
     const teacher = await teachersService.findById(teachID);
-    console.teacher;
+    const categories = await categoriesService.findAll();
     res.render('vwTeacher/addCourse', {
         teacher: teacher,
-        layout: 'CreateCourseLayout'
+        categories: categories,
+        layout: 'main1'
     });
 });
 
@@ -220,9 +222,11 @@ router.post('/profile/edit', upload.any(), async function (req, res) {
 router.get('/editCourse', async function (req, res) {
     const courseID = req.query.id;
     const course = await coursesService.findById(courseID);
+    const categories = await categoriesService.findAll();
     res.render('vwTeacher/editCourse', {
-        layout: 'CreateCourseLayout',
-        course: course
+        layout: 'main1',
+        course: course,
+        categories: categories,
     })
 });
 // Phan Huy route post editCourse
@@ -310,7 +314,6 @@ router.post('/profile/add', upload.any(), async function (req, res){
             files
         } = req;
         const ret = await teachersService.add(body);
-        console.log('hello' + ret);
         //console.log('hello' + ret);
 
         let image = [];
@@ -334,8 +337,8 @@ router.post('/profile/add', upload.any(), async function (req, res){
     }
 });
 
-router.get('/teacher/public',   function(req, res) {
-    res.render('vwTeacher/public');
+router.get('/about',   function(req, res) {
+    res.render('vwTeacher/about');
 });
 
 
