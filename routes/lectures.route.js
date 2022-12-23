@@ -138,7 +138,7 @@ const uploadFile = async (fileObject) => {
     } = await drive.files.create({
         requestBody: {
             name: fileObject.originalname,
-            parents: ['1NZUxjhw6Rcol373vpiX7pEJRU6hGomJx'],
+            parents: ['10NUhaNUQ_4fH_VJ2YaGMQ3MWFaMqtnmL'],
         },
         media: {
             mimeType: fileObject.mimeType,
