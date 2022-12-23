@@ -14,6 +14,7 @@ import usersAdminRoute from "../routes/admin-user.route.js"
 import teachersRoute from "../routes/teachers.route.js";
 import {errorFunc} from "express-fileupload/lib/utilities.js";
 import coursesService from "../services/courses.service.js";
+import categoriesService from "../services/categories.service.js";
 // import {login} from "passport/lib/http/request.js";
 
 
@@ -36,10 +37,15 @@ export default function (app) {
             return list;
         }
         const listSubDescCourses = splitArrayToListSubArray(listDescendingCourses,4);
-        console.log(listSubDescCourses);
+
+        const listMostEnrolledCourses = await categoriesService.find5MostEnrolledCourses();
+        const listSubMostEnrolledCourses = splitArrayToListSubArray(listMostEnrolledCourses,4);
+        console.log(listSubMostEnrolledCourses);
+
         res.render('home',{
             listDescendingCourses,
             listSubDescCourses,
+            listSubMostEnrolledCourses,
             layout:'main1'
         });
     });
