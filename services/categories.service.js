@@ -1,4 +1,5 @@
 import db from '../utils/db.js';
+import coursesService from './courses.service.js';
 
 export default {
     async findAll() {
@@ -56,6 +57,23 @@ export default {
         });
 
         return list[0].amount;
+    },
+
+    async find5MostEnrolledCourses() {
+        const list = await db('categories').where('hidden', 0);
+        if (list.length === 0)
+            return null;
+        for (const c of list) {
+            c.totalStudent = 0;
+            let courseList = await coursesService.findByCategoryIDWithoutHidden(c.catID);
+            if (courseList === null)
+                continue;
+            for (const x of courseList) {
+                c.totalStudent += (+x.weekStudentNum + +x.lwStudentNum);
+            }
+        }
+        list.sort((a, b) => b.totalStudent - a.totalStudent);
+        return list.slice(0, 5);
     },
 
     add(category) {

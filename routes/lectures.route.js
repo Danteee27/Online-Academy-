@@ -11,6 +11,7 @@ import {
 // import FormData from "form-data";
 
 import * as stream from 'stream';
+import categoriesService from "../services/categories.service.js";
 
 
 //Declare for googleapis to up image to drive by Phan Huy
@@ -64,7 +65,7 @@ router.get('/users/:id', async function (req, res) {
             listLecture[i].isActive = true;
     }
 
-    const views = lecture.views + 0;
+    //const views = lecture.views + 0;
 
     const feedbacks = await feedbacksService.findByCourseID(lecture.courseID);
 
@@ -78,40 +79,44 @@ router.get('/users/:id', async function (req, res) {
         tutorialRating = Math.round(tutorialRating * 100) / 100;
         tutorialRating = tutorialRating.toFixed(1);
         //console.log(tutorialRating);
-
-        const rating = [1, 2, 3, 4, 5];
-
-
-        if (feedbacks != null) {
-            for (let item = 0; item < countRateList.length; item++) {
-                countRateList[item] = Math.round(countRateList[item] * 10000 / feedbacks.length) / 100;
-            }
-        }
-        const fbList = await feedbacksService.findByCourseIDWithLimit(lecture.courseID, 4);
-        for (let i = 0; i < fbList.length; i++) {
-            const star = [];
-            for (let j = 1; j <= 5; j++) {
-                if (j <= +fbList[i].rating)
-                    star.push(true);
-                else
-                    star.push(false);
-            }
-            fbList[i].star = star;
-            fbList[i].avatar = fbList[i].author[0];
-        }
-
-        res.render('vwStudent/lectures', {
-            lectures: listLecture,
-            lecture,
-            countRateList,
-            tutorialRating,
-            fbList,
-            // fieldName,
-            // courseName,
-            empty: lecture.length === 0,
-            totalFb: feedbacks.length
-        });
     }
+
+    const rating = [1, 2, 3, 4, 5];
+
+
+    if (feedbacks != null) {
+        for (let item = 0; item < countRateList.length; item++) {
+            countRateList[item] = Math.round(countRateList[item] * 10000 / feedbacks.length) / 100;
+        }
+    }
+    const fbList = await feedbacksService.findByCourseIDWithLimit(lecture.courseID, 4);
+    for (let i = 0; i < fbList.length; i++) {
+        const star = [];
+        for (let j = 1; j <= 5; j++) {
+            if (j <= +fbList[i].rating)
+                star.push(true);
+            else
+                star.push(false);
+        }
+        fbList[i].star = star;
+        fbList[i].avatar = fbList[i].author[0];
+    }
+
+    let len = 0
+    if (feedbacks != null)
+        len = feedbacks.length;
+
+    res.render('vwStudent/lectures', {
+        lectures: listLecture,
+        lecture,
+        countRateList,
+        tutorialRating,
+        fbList,
+        // fieldName,
+        // courseName,
+        empty: lecture.length === 0,
+        totalFb: len
+    });
 });
 
 router.get('/', async function (req, res) {
@@ -157,17 +162,20 @@ router.post('/add', upload.any(), async function (req, res) {
             files
         } = req;
         const id = body.courseID;
+        console.log(id);
+        const course = await coursesService.findById(id);
+        const catID = course.catID;
         const ret = await lecturesService.add(body);
-        console.log(ret);
-        console.log(id)
         var video = null;
         for (let f = 0; f < files.length; f += 1) {
             video = await uploadFile(files[f]);
         }
         console.log(video);
-        await lecturesService.addVideoID(video, ret);
+        if(video !== undefined) {
+            await lecturesService.addVideoID(video, ret);
+        }
         //res.status(200).send('Form Submitted');
-        res.redirect('/teacher/course?id=' + id);
+        res.redirect('/user-courses/detail?catID='+ catID + '&'+ 'id=' + id);
     } catch (f) {
         res.send(f.message);
     }
@@ -176,10 +184,11 @@ router.post('/add', upload.any(), async function (req, res) {
 router.get('/add', async function (req, res) {
     const courseID = req.query.id;
     const lectures = await lecturesService.findAllByCourseID(courseID);
+    const course = await coursesService.findById(courseID);
     console.log(lectures);
     res.render('vwTeacher/addLecture', {
         layout: 'main1',
-        courseID: courseID,
+        course: course,
         lectures: lectures
     });
 });

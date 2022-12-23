@@ -1,9 +1,10 @@
 import fieldsService from "../services/fields.service.js";
 import categoriesService from "../services/categories.service.js";
+import serverVariablesService from "../services/server-variables.service.js";
+import coursesService from "../services/courses.service.js";
 
 export default function (app) {
     app.use(async function (req, res, next) {
-
 
         if (typeof req.session.auth === 'undefined') {
             req.session.auth = false;
@@ -13,9 +14,28 @@ export default function (app) {
         res.locals.auth = req.session.auth;
         res.locals.authUser = req.session.authUser;
         next();
+
     });
 
     app.use(async function (req, res, next) {
+        const server = await serverVariablesService.findById(1);
+        const then = new Date(server.lastReset);
+        const now = new Date();
+        const diffDays = Math.ceil(Math.abs(now - then) / (1000 * 60 * 60 * 24));
+        if (diffDays > 7) {
+            server.lastReset = now;
+            await serverVariablesService.update(1, server);
+            const courseList = await coursesService.findAll();
+            for (const c of courseList) {
+                if (c.weekStudentNum === null)
+                    c.weekStudentNum = 0;
+                c.lwStudentNum = c.weekStudentNum;
+                c.weekStudentNum = 0;
+                await coursesService.update(c.courseID, c);
+            }
+        }
+
+
         // Huy - locals Fields to show in navbar
         res.locals.lcFields = await fieldsService.findAllWithoutHidden();
         let fieldsLen = res.locals.lcFields.length;
