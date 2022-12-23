@@ -57,6 +57,9 @@ router.get('/users/:id', async function (req, res) {
         if (listLecture[i].lecID === +lecID)
             listLecture[i].isActive = true;
     }
+
+    const views = lecture.views + 0;
+    const increaseView = await lecturesService.updateView(views+1,lecture.lecID);
     const feedbacks = await feedbacksService.findByCourseID(lecture.courseID);
 
     let tutorialRating = 0.0;
