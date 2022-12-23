@@ -282,7 +282,15 @@ router.post('/buy-now', async function (req, res) {
             courseID,
         });
     }
-    await courseService.updateStudentNum(courseID);
+    const course = await coursesService.findByIdWithoutHidden(courseID);
+    if (course.student_num === null)
+        course.student_num = 0;
+    if (course.weekStudentNum === null)
+        course.weekStudentNum = 0;
+
+    course.student_num += 1;
+    course.weekStudentNum += 1;
+    await courseService.update(courseID, course);
 
     const isInWishList = await wishlistService.isInWishList(userID, courseID);
     if (isInWishList === true) {
