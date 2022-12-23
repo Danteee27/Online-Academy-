@@ -533,8 +533,29 @@ input:checked ~ label {
     transition: opacity 0.15s ease;
 }
 
-body{
-
+.unstyled-list {
+    margin-left: -15px;
+    list-style: none;
 }
 
+.instructor-name {
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: underline; 
+    color: rgb(195, 16, 195); 
+    text-underline-offset: 0.4rem;
+    margin-bottom: 5px;
+}
+
+.instructor-name:hover {
+    text-decoration: underline; 
+    color: rgb(195, 16, 195); 
+    text-underline-offset: 0.4rem;
+}
+
+.instructor-bio {
+    font-size: 20px;
+    font-weight: 300;
+    color: grey;
+}
 
