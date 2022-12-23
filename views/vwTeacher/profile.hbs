@@ -36,9 +36,13 @@
     
         </div>
         <div class="px-4 py-3">
-            <h4 id="#about" class="mb-1">About</h4>
+            <h4 id="#about" class="mb-1">About me</h4>
             <div class="p-4 rounded shadow-sm bg-light">
-                {{{this.teacher.description}}}
+                <div><small>Facebook link <i class="fa fa-facebook-square" aria-hidden="true"></i>: <a href="{{this.teacher.fb_link}}">{{this.teacher.fb_link}}</a></small></div>
+                <div><Small>Linkedin <i class="fa fa-linkedin-square" aria-hidden="true"></i>: <a href="{{this.teacher.linkedin}}">{{this.teacher.linkedin}}</a></small></div>
+                <div><Small>Email <i class="fa fa-inbox" aria-hidden="true"></i>: <a href="{{this.teacher.email}}">{{this.teacher.email}}</a></small></div>
+                <div><h5> </h5></div>
+                <div>{{{this.teacher.description}}}</div>
             </div>
         </div>
         <div class="py-4 px-4">
@@ -58,7 +62,7 @@
                                 <div class="row">
                                     {{#each this.courses}}
                                         <div class="col-lg-4 mb-4">
-                                            <a href="/user-courses/detail?catID={{caiID}}&id={{courseID}}">
+                                            <a href="/user-courses/detail?catID={{{catID}}}&id={{{courseID}}}">
                                                 <div class="shadow card" style=" border-style:double" >
                                                         <img src="https://drive.google.com/uc?export=view&id={{image}}" alt="" height="200px" class="card-img-top">
                   
@@ -74,7 +78,7 @@
                                                         </div>
                                                         <div style="display: flex; justify-content:space-between">
                                                             <div></div>
-                                                            <small class="text-dark">last modified {{update}}</small>
+                                                            <small class="text-dark">last modified {{{update}}}</small>
                                                         </div>
                                                         <small>
                                                         {{{description}}}
