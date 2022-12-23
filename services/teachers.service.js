@@ -22,7 +22,48 @@ export default {
         return list[0];
     },
 
+    async updateStudentNum(teacherID)
+    {
+        const list = await db('courses').where('teacherID', teacherID);
+        var temp=0;
+        for (let i = 0; i < list.length; i++)
+        {
+            temp = temp + list[i].student_num;
+        }
+        return await db('teachers').where('teacherID', teacherID).update({ totals_stu: temp });
+    },
 
+    async updateRating(teacherID)
+    {
+        const list = await db('courses').where('teacherID', teacherID);
+        var temp=0;
+        for (let i = 0; i < list.length; i++)
+        {
+            temp = temp + list[i].rating;
+        }
+        temp=temp/list.length;
+        return await db('teachers').where('teacherID', teacherID).update({ rating: temp });
+    },
+
+    async updateReviews(teacherID)
+    {
+        const list = await db('courses').where('teacherID', teacherID);
+        var temp=0;
+        for (let i = 0; i < list.length; i++)
+        {
+            temp = temp + list[i].rating_num;
+        }
+        return await db('teachers').where('teacherID', teacherID).update({ reviews: temp });
+    },
+
+    async updateCourseNum(teacherID)
+    {
+        const list = await db('courses').where('teacherID', teacherID);
+        return await db('teachers').where('teacherID', teacherID).update({ numCourses: list.length });
+    },
+
+
+ 
     async addAVA(image, id) {
         return await db('teachers').where('teacherID', id).update({
             avatar: image
