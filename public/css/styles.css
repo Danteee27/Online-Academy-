@@ -455,12 +455,12 @@ input:checked ~ label {
 
 .give-feedback {
     width: 50%;
-    margin: 0 auto;
+    margin-left: 20%;
     height: 50px;
-    border-radius: 10px;
+    border-radius: 4px;
     font-weight: 700;
-    background-color: orange;
-    color: black;
+    background-color: #222222;
+    color: white;
 }
 
 .give-feedback:hover {
@@ -528,3 +528,5 @@ input:checked ~ label {
     opacity: 0.2;
     transition: opacity 0.15s ease;
 }
+
+

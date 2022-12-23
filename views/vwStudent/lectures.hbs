@@ -3,7 +3,7 @@
 
         var offset = 4;
         var courseID = {{lecture.courseID}};
-        var totalFb = {{totalFb}};
+        let totalFb = {{totalFb}} + 0;
 
         if (offset >= totalFb) {
             $("#show-more").addClass("disabled");
@@ -89,23 +89,12 @@
         starRating();
 
 
-        //         $('#userRating').on('click', function () {
-        //             $("#userRating").rate();
-        //
-        // //or for example
-        //             var options = {
-        //                 max_value: 6,
-        //                 step_size: 0.5,
-        //             }
-        //             $(".rating").rate(options);
-        //         })
-
         let popup = document.getElementById("popup");
 
-        $('#popupBtn').on('click', function () {
-            popup.classList.add('open-popup');
-
-        });
+        // $('#popupBtn').on('click', function () {
+        //     popup.classList.add('open-popup');
+        //
+        // });
 
 
         function openPopup() {
@@ -128,6 +117,7 @@
             });
         });
 
+        
         function getMoreFeedback() {
             var ajax = new XMLHttpRequest();
 
@@ -179,6 +169,7 @@
             };
             ajax.send();
         }
+        
     </script>
 {{/section}}
 
@@ -224,7 +215,7 @@
         <!--            <div class="btn-lg"> lecture 3</div>-->
         <!--        </div>-->
         <div class="col-md-12">
-            <div class="container">
+            <div class="container-fluid">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active font-weight-bold" role="tab" href="#courseContent" data-toggle="tab">
@@ -261,48 +252,6 @@
                         {{this.lecture.description}}
                     </div>
                     <div role="tabpanel" id="review" class="tab-pane">
-                        <button class="give-feedback btn-block mt-3 mb-3" type="button" onclick="openPopup()">
-                            Give feedback
-                        </button>
-                        <form action="/user-courses/user-feedback" method="post">
-
-                            <div class="popup" id="popup">
-                                <div class="userRating">
-                                    <div class="star-widget">
-                                        <input type="radio" name="rate5" id="rate-5">
-                                        <label for="rate-5" class="fa fa-star"></label>
-                                        <input type="radio" name="rate4" id="rate-4">
-                                        <label for="rate-4" class="fa fa-star"></label>
-                                        <input type="radio" name="rate3" id="rate-3">
-                                        <label for="rate-3" class="fa fa-star"></label>
-                                        <input type="radio" name="rate2" id="rate-2">
-                                        <label for="rate-2" class="fa fa-star"></label>
-                                        <input type="radio" name="rate1" id="rate-1">
-                                        <label for="rate-1" class="fa fa-star"></label>
-                                        <!--                                    <form action="/user-courses/user-feedback" method="get">-->
-                                        <header class="headerUserRating"></header>
-                                        <div id="ratingReview" name="RatingStar"></div>
-                                        <div class="textarea" style="height: 100px;width: 100%;overflow: hidden">
-                                            <textarea autofocus name="review" cols="30" style="height: 100%;width: 100%;outline: none;
-                                                border: 1px solid #333; padding: 10px;font-size: 17px; resize: none; border-radius: 5px;
-                                            ">
-
-                                            </textarea>
-                                        </div>
-                                        <input type="hidden" name="courseID" value="{{lecture.courseID}}">
-                                        <div class="button">
-                                            <button type="submit" class="btn btn-warning btn-block mt-1"
-                                                    onclick="closePopup()">Post
-                                            </button>
-                                            <a class="btn btn-dark btn-block mt-1"
-                                                    onclick="closePopup()">Cancel
-                                            </a>
-                                        </div>
-                                        <!--                                    </form>-->
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
                         <h4>Student feedbacks</h4>
                         <div class="d-flex flex-nowrap">
                             <div class="d-flex flex-column" style="width: 120px;height: 150px;">
@@ -339,6 +288,48 @@
                                 {{/each}}
                             </div>
                         </div>
+                        <button class="give-feedback btn-block mb-5 w-25" type="button" onclick="openPopup()">
+                            Give feedback
+                        </button>
+                        <form action="/user-courses/user-feedback" method="post">
+
+                            <div class="popup" id="popup">
+                                <div class="userRating">
+                                    <div class="star-widget">
+                                        <input type="radio" name="rate5" id="rate-5">
+                                        <label for="rate-5" class="fa fa-star"></label>
+                                        <input type="radio" name="rate4" id="rate-4">
+                                        <label for="rate-4" class="fa fa-star"></label>
+                                        <input type="radio" name="rate3" id="rate-3">
+                                        <label for="rate-3" class="fa fa-star"></label>
+                                        <input type="radio" name="rate2" id="rate-2">
+                                        <label for="rate-2" class="fa fa-star"></label>
+                                        <input type="radio" name="rate1" id="rate-1">
+                                        <label for="rate-1" class="fa fa-star"></label>
+                                        <!--                                    <form action="/user-courses/user-feedback" method="get">-->
+                                        <header class="headerUserRating"></header>
+<!--                                        <div id="ratingReview" name="RatingStar"></div>-->
+                                        <div class="textarea" style="height: 100px;width: 100%;overflow: hidden">
+                                            <textarea autofocus name="review" cols="30" style="height: 100%;width: 100%;outline: none;
+                                                border: 1px solid #333; padding: 10px;font-size: 17px; resize: none; border-radius: 5px;
+                                            ">
+
+                                            </textarea>
+                                        </div>
+                                        <input type="hidden" name="courseID" value="{{lecture.courseID}}">
+                                        <div class="button">
+                                            <button type="submit" class="btn btn-warning btn-block mt-1"
+                                                    onclick="closePopup()">Post
+                                            </button>
+                                            <a class="btn btn-dark btn-block mt-1"
+                                                    onclick="closePopup()">Cancel
+                                            </a>
+                                        </div>
+                                        <!--                                    </form>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
 
                         <div>
 

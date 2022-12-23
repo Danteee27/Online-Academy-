@@ -1,5 +1,6 @@
 import knexObj from 'knex';
 import dotenv from 'dotenv'
+// import asyncErr from 'express-async-errors';
 
 dotenv.config();
 
@@ -10,7 +11,7 @@ const knex = knexObj({
         port: 3306,
         user: 'root',
         password: 'root',
-        database: 'qlkh2'
+        database: 'qlkh'
     },
     pool: {
         min: 0,

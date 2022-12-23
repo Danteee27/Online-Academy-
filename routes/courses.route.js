@@ -39,7 +39,7 @@ router.post('/unhide', async function(req, res) {
 
     const ret = await coursesService.unhide(courseID);
 
-    res.redirect('/courses/view/' + course.catID);
+    res.redirect('/admin/courses/view/' + course.catID);
 
 })
 
@@ -52,7 +52,7 @@ router.post('/hide', async function(req, res) {
 
     const ret = await coursesService.hide(courseID);
 
-    res.redirect('/courses/view/' + course.catID);
+    res.redirect('/admin/courses/view/' + course.catID);
 
 })
 
@@ -68,7 +68,7 @@ router.post('/del', async function(req, res) {
 
 
     const ret = await coursesService.del(courseID);
-    res.redirect('/courses/view/' + course.catID);
+    res.redirect('/admin/courses/view/' + course.catID);
 
 
 })
@@ -79,7 +79,7 @@ router.get('/edit', async function (req, res) {
     const cat = await categoriesService.findById(course.catID);
 
     if (course === null) {
-        res.redirect('/courses/view/' + course.catID);
+        res.redirect('/admin/courses/view/' + course.catID);
     }
 
     res.render('vwAdmin/vwCourse/edit', {
@@ -92,7 +92,7 @@ router.post('/edit', async function(req, res) {
     const courseID = req.body.courseID || 0;
     const affected_rows = await coursesService.update(req.body.courseID, req.body)
     const course = await coursesService.findById(courseID);
-    res.redirect('/courses/view/' + course.catID)
+    res.redirect('/admin/courses/view/' + course.catID)
 })
 
 
