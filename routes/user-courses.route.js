@@ -155,9 +155,9 @@ router.get('/detail', async function (req, res) {
     const course = await courseService.findByIdWithoutHidden(courseID);
     if (course === null)
         return res.redirect('/');
-    const tempTeacher = await teachersService.findById(course.teacherID);
-    if (tempTeacher !== null)
-        course.instructor = tempTeacher.teacherName;
+    const teacher = await teachersService.findById(course.teacherID);
+    if (teacher !== null)
+        course.instructor = teacher.teacherName;
     if (+course.completed === 0)
         course.completed = false;
     else
@@ -235,6 +235,7 @@ router.get('/detail', async function (req, res) {
         catName,
         lecture,
         recommendItem: recommendList,
+        teacher,
         feedback: feedbackList,
         emptyFbList: feedbackList.length === 0,
         isInWishList,
