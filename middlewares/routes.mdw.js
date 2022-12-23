@@ -14,7 +14,6 @@ import usersAdminRoute from "../routes/admin-user.route.js"
 import teachersRoute from "../routes/teachers.route.js";
 import {errorFunc} from "express-fileupload/lib/utilities.js";
 import coursesService from "../services/courses.service.js";
-import categoriesService from "../services/categories.service.js";
 // import {login} from "passport/lib/http/request.js";
 
 
