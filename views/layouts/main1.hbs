@@ -59,17 +59,17 @@
         <li class="nav-item ml-3 text-right {{#if lcMyCoursePage}}active{{/if}}">
           <a class="nav-link" href="/my-courses">My Courses</a>
         </li>
+
           {{#ifCond authUser.role "==" "ROLE.ADMIN"}}
               <li class="nav-item">
-                  <a class="nav-link" href="/admin">Admin Panel</a>
+
+                  <a class="nav-link" href="/admin">
+                      Admin Panel
+                      <i class="fa fa-lock" aria-hidden="true"></i>
+                  </a>
               </li>
           {{/ifCond}}
 
-          {{#ifCond authUser.role "==" "ROLE.TEACHER"}}
-              <li class="nav-item">
-                  <a class="nav-link" href="/teacher/getId?id={{authUser.userID}}">Teacher Profile</a>
-              </li>
-          {{/ifCond}}
 
 
           {{#if auth}}
@@ -78,9 +78,8 @@
                       Welcome, <b>{{authUser.name}}</b>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right">
-                      <a class="dropdown-item" href="/users/profile">
-                          <i class="fa fa-user" aria-hidden="true"></i>
-                          Profile
+                      <a class="dropdown-item" href="/wishlists">
+                          Wish list
                       </a>
 
                       <a class="dropdown-item" href="/my-courses">
@@ -96,7 +95,22 @@
                           <i class="fa fa-id-card" aria-hidden="true"></i>
                           Public profile
                       </a>
+                  {{#ifCond authUser.role "==" "ROLE.TEACHER"}}
 
+                    <a class="dropdown-item" href="/teacher/getId?id={{authUser.userID}}">
+                      <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                      Teacher Profile
+                  </a>
+
+                    {{/ifCond}}
+
+                  {{#ifCond authUser.role "==" "ROLE.ADMIN"}}
+                      <a class="dropdown-item" href="/admin">
+                          <i class="fa fa-lock" aria-hidden="true"></i>
+                          Admin Panel
+                      </a>
+
+                  {{/ifCond}}
                       <a class="dropdown-item" href="/users/profile-settings/{{authUser.userID}}">
                           <i class="fa fa-address-book" aria-hidden="true"></i>
                           Profile settings

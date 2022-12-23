@@ -62,6 +62,13 @@ export default function (app) {
             }
             await usersService.add(user);
         }
+        else if(existedUser.banned === 1)
+        {
+            return res.render('vwAccount/login', {
+                layout: false,
+                err_message: 'Your account has been banned. Contact administrator!'
+            });
+        }
         else
         {
             req.session.auth = true;

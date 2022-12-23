@@ -46,6 +46,14 @@ router.post('/login', async function (req, res) {
         });
     }
 
+    if(user.banned === 1)
+    {
+        return res.render('vwAccount/login', {
+            layout: false,
+            err_message: 'Your account has been banned. Contact administrator!'
+        });
+    }
+
     const ret = bcrypt.compareSync(req.body.password, user.password);
     if (ret === false) {
         return res.render('vwAccount/login', {
@@ -180,6 +188,8 @@ router.post('/change-password', async (req, res) => {
     }
 
 })
+
+
 
 
 
