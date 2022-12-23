@@ -65,6 +65,11 @@ export default {
         return list;
     },
 
+    async find5BestSellerCourses(curCourseID) {
+        const list = await db('courses').where('courseID', curCourseID).where('hidden', 0).limit(5).orderBy('student_num', 'desc');
+        return list;
+    },
+
     async updateStudentNum(courseID) {
         const list = await db('courses').where('courseID', courseID);
         const student_num = list[0].student_num + 1;
@@ -86,19 +91,22 @@ export default {
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
 
-        today = yyyy +'/'+ mm + '/' + dd;
-        return db('courses').where('courseID', courseID).update({update:today});
+        today = yyyy + '/' + mm + '/' + dd;
+        return db('courses').where('courseID', courseID).update({
+            update: today
+        });
     },
 
     async checkCompleted(id) {
         const list = await db('lectures').where('courseID', id);
-        if (list.length === await db('courses').where('courseID', id).select('lec_num'))
-        {
-            return await db('courses').where('courseID', id).update({completed:1});
+        if (list.length === await db('courses').where('courseID', id).select('lec_num')) {
+            return await db('courses').where('courseID', id).update({
+                completed: 1
+            });
         }
         return;
     },
-    
+
     add(course) {
 
         return db('courses').insert(course);
@@ -134,8 +142,7 @@ export default {
     del(courseID) {
         return db('courses').where('courseID', courseID).del();
     },
-    updateView(numberView, id)
-    {
+    updateView(numberView, id) {
         return db('courses').where('courseID', id).update({
             views: numberView
         });
@@ -145,9 +152,11 @@ export default {
     },
     async getAllAscending(limit) {
         return await db('courses').orderBy('views', 'asc').limit(limit);
+    },
+
+    async getNewestCourses(limit) {
+        return await db('courses').orderBy('date', 'desc').limit(limit);
     }
-
-
 
 
 
