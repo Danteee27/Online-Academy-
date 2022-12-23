@@ -5,6 +5,10 @@ export default {
         return await db('fields');
     },
 
+    findAllWithoutHidden() {
+        return db('fields').where('hidden', 0);
+    },
+
     async findById(fieldID) {
         const list = await db('fields').where('fieldID', fieldID);
         if (list.length === 0) {
@@ -13,6 +17,16 @@ export default {
 
         return list[0];
     },
+
+    async findByIdWithoutHidden(fieldID) {
+        const list = await db('fields').where('fieldID', fieldID).where('hidden', 0);
+        if (list.length === 0) {
+            return null;
+        }
+
+        return list[0];
+    },
+
 
     async add(field) {
         return db('fields').insert(field);

@@ -16,10 +16,10 @@ export default function (app) {
 
     app.use(async function (req, res, next) {
         // Huy - locals Fields to show in navbar
-        res.locals.lcFields = await fieldsService.findAll();
+        res.locals.lcFields = await fieldsService.findAllWithoutHidden();
         let fieldsLen = res.locals.lcFields.length;
         for (let i = 0; i < fieldsLen; i++) {
-            res.locals.lcFields[i].lcCategories = await categoriesService.findAllByFieldID(res.locals.lcFields[i].fieldID);
+            res.locals.lcFields[i].lcCategories = await categoriesService.findAllByFieldIDWithoutHidden(res.locals.lcFields[i].fieldID);
         }
 
         // Huy - locals title to show in html title

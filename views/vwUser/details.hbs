@@ -38,9 +38,8 @@
             html += "<span>" + data[a].date + "</span>"
             html += "</div>";
             html += "</div>";
-            html += "<p class=\"card-text\">";
-            html += "<h5>" + data[a].title + "</h5>";
-            html += "<span class=\"mt-3\">" + data[a].content + "</span><br>";
+            html += "<p class=\"card-text mt-3\">";
+            html += "<span>" + data[a].content + "</span><br>";
             html += "</p>";
             html += "</div>";
             html += "</div>";
@@ -49,7 +48,7 @@
           document.getElementById("data").innerHTML += html;
           var limit = 4;
           offset = offset + limit;
-          if (offset === totalFb) {
+          if (offset >= totalFb) {
             $("#show-more").addClass("disabled");
             return;
           }
@@ -104,6 +103,12 @@
         <p class="card-text">{{course.tinydes}}</p>
         <div class="course-title-info">
           <p class="card-text">
+            {{#if course.isBestseller}}
+              <span class="bestseller">Bestseller</span>&nbsp;
+            {{/if}}
+            {{#if course.isNew}}
+              <span class="new">New</span>&nbsp;
+            {{/if}}
             <span class="rating">{{course.rating}}</span>&nbsp;
             {{#each course.star}}
                 <span class="fa {{#if starHalf}}fa-star-half-o star-checked{{/if}} {{#if star}}fa-star star-checked{{else}}fa-star-o star-checked{{/if}}"></span>
@@ -114,7 +119,14 @@
             <span>{{format_number course.student_num}} students</span>
           </p>
           <p class="card-text">Instructor: <span class="course-instructor">{{course.instructor}}</span></p>
-          <p class="card-text">Last updated <span>{{dateMonthYear course.update}}</span></p>
+          <p class="card-text">
+            <span>Status: </span>
+            <span class="font-weight-bold text-warning">{{#if course.completed}}Completed{{else}}Not completed{{/if}}</span>
+            &nbsp;
+            <i class="fa fa-minus"></i>
+            &nbsp;
+            Last updated <span>{{dateMonthYear course.update}}</span>
+          </p>
         </div>
         
       </div>
@@ -184,7 +196,7 @@
     <h4>Students also bought</h4>
     {{#each recommendItem}}
       <div type="button">
-        <a href="/course/detail?catID={{catID}}&id={{courseID}}" class="recommend-card">
+        <a href="/user-courses/detail?catID={{catID}}&id={{courseID}}" class="recommend-card">
           <img src="https://drive.google.com/uc?export=view&id={{image}}" alt="">
           <div class="d-inline ml-4" style="width: 325px;">
             <span class="recommend-card-header">{{courseName}}</span>
@@ -253,9 +265,9 @@
                 <span>{{dateDayMonthYear date}}</span>
               </div>
             </div>
-            <p class="card-text">
-            <h5>{{title}}</h5>
-            <span class="mt-3">{{content}}</span><br>
+            <p class="card-text mt-3">
+            {{!-- <h5>{{title}}</h5> --}}
+            <span>{{content}}</span><br>
             </p>
           </div>
         </div>

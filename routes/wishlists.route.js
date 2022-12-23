@@ -6,8 +6,7 @@ import wishlistService from '../services/wishlists.service.js';
 const router = express.Router();
 
 router.get("/", async function (req, res) {
-    if(req.session.authUser === null)
-    {
+    if (req.session.authUser === null) {
         return res.redirect('/');
     }
     res.locals.lcWishlistPage = true;
@@ -33,7 +32,9 @@ router.get("/", async function (req, res) {
 
     let course = [];
     for (let i = 0; i < wishlist.length; i++) {
-        let temp = await courseService.findById(wishlist[i].courseID);
+        let temp = await courseService.findByIdWithoutHidden(wishlist[i].courseID);
+        if (temp === null)
+            continue;
         let tempTeacher = await teachersService.findById(temp.teacherID);
         if (tempTeacher !== null)
             temp.instructor = tempTeacher.teacherName;

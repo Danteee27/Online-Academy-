@@ -10,6 +10,7 @@ import {
 // import FormData from "form-data";
 
 import * as stream from 'stream';
+import coursesService from '../services/courses.service.js';
 
 
 //Declare for googleapis to up image to drive by Phan Huy
@@ -31,15 +32,25 @@ const drive = google.drive({
 });
 
 router.get('/users/:id', async function (req, res) {
+    if (req.session.authUser === null) {
+        return res.redirect('/');
+    }
     const lecID = req.params.id || 0;
 
     const userID = res.locals.authUser.userID;
 
     userLecturesService.setDate(userID, lecID);
 
-    const lecture = await lecturesService.findById(lecID);
-    //const lecture = list[0];
-    // const lecture = await lectureService.findByLectureID(lecID);
+    const lecture = await lecturesService.findByIdWithoutHidden(lecID);
+    if (lecture === null)
+        return res.redirect('/');
+
+    const course = await coursesService.findByIdWithoutHidden(lecture.courseID);
+    if (course === null)
+        return res.redirect('/');
+
+    res.locals.lcTitle = course.courseName + " | " + res.locals.lcTitle;
+
     const listLecture = await lecturesService.findAllByCourseID(lecture.courseID);
     for (let i = 0; i < listLecture.length; i++) {
         const status = await userLecturesService.getStatus(userID, listLecture[i].lecID);
@@ -51,19 +62,35 @@ router.get('/users/:id', async function (req, res) {
 
     let tutorialRating = 0.0;
     let countRateList = [0, 0, 0, 0, 0];
-    for (let item of feedbacks) {
-        tutorialRating += item.rating / feedbacks.length;
-        countRateList[item.rating - 1] = countRateList[item.rating - 1] + 1.0;
+    if (feedbacks != null) {
+        for (let i = 0; i < feedbacks.length; i++) {
+            tutorialRating += feedbacks[i].rating / feedbacks.length;
+            countRateList[feedbacks[i].rating - 1] = countRateList[feedbacks[i].rating - 1] + 1.0;
+        }
     }
     tutorialRating = Math.round(tutorialRating * 100) / 100;
     tutorialRating = tutorialRating.toFixed(1);
-    console.log(tutorialRating);
+    //console.log(tutorialRating);
 
     const rating = [1, 2, 3, 4, 5];
 
+    if (feedbacks != null) {
+        for (let item = 0; item < countRateList.length; item++) {
+            countRateList[item] = Math.round(countRateList[item] * 10000 / feedbacks.length) / 100;
+        }
+    }
 
-    for (let item = 0; item < countRateList.length; item++) {
-        countRateList[item] = Math.round(countRateList[item] * 10000 / feedbacks.length) / 100;
+    const fbList = await feedbacksService.findByCourseIDWithLimit(lecture.courseID, 4);
+    for (let i = 0; i < fbList.length; i++) {
+        const star = [];
+        for (let j = 1; j <= 5; j++) {
+            if (j <= +fbList[i].rating)
+                star.push(true);
+            else
+                star.push(false);
+        }
+        fbList[i].star = star;
+        fbList[i].avatar = fbList[i].author[0];
     }
 
     res.render('vwStudent/lectures', {
@@ -71,11 +98,12 @@ router.get('/users/:id', async function (req, res) {
         lecture,
         countRateList,
         tutorialRating,
-        feedbacks,
+        fbList,
         // fieldName,
         // courseName,
         empty: lecture.length === 0,
-        layout: 'main1'
+        layout: 'main1',
+        totalFb: feedbacks.length
     });
 });
 

@@ -20,6 +20,7 @@
             <a class="course-card-a" href="/user-courses/detail?catID={{catID}}&id={{courseID}}">
             <div class="course-card">
                 <img class= "course-card-img" src="https://drive.google.com/uc?export=view&id={{image}}" alt="">
+                
                 <h5 class="course-card-title">{{courseName}}</h5>
                 <p class="course-card-instructor">{{instructor}}</p>
                 <span class="rating">{{rating}}</span>
@@ -33,6 +34,15 @@
                 {{else}}
                   <span class="price">₫{{format_number price}}</span>
                 {{/if}}
+                <br>
+                <p class="mt-1">
+                {{#if isBestseller}}
+                  <span class="bestseller">Bestseller</span>
+                {{/if}}
+                {{#if isNew}}
+                  <span class="new">New</span>
+                {{/if}}
+                </p>
             </div>
             </a>
           </div>

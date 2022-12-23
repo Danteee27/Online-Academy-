@@ -8,6 +8,12 @@ export default {
     findById(lecID) {
         return db('lectures').where('lecID', lecID).first();
     },
+    async findByIdWithoutHidden(lecID) {
+        const list = await db('lectures').where('lecID', lecID).where('hidden', 0);
+        if (list.length === 0)
+            return null;
+        return list[0];
+    },
     async findByCourseID(courseID) {
         const list = await db('lectures').where('courseID', courseID);
         return list[0];
@@ -17,6 +23,9 @@ export default {
     },
     findAllByCourseID(couID) {
         return db('lectures').where('courseID', couID);
+    },
+    findAllByCourseIDWithoutHidden(couID) {
+        return db('lectures').where('courseID', couID).where('hidden', 0);
     },
     async countByCourseID(courseID) {
         const list = await db('courses').where('courseID', courseID).count({
