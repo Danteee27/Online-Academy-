@@ -48,10 +48,12 @@
         </li>
         <li class="nav-item mt-1">
           <div class="search-container ml-3">
-            <input type="text" name="search" placeholder="Search..." class="search-input">
-            <a href="#" class="search-btn">
-              <i class="fa fa-search"></i>      
-            </a>
+            <form id="search-bar" action="/search/view" method="post">
+              <input type="text" name="search" placeholder="{{curSearch}}" class="search-input" {{#ifCond curSearch "==" "Search..."}}{{else}}value="{{curSearch}}"{{/ifCond}}>
+              <a id="search-button" class="search-btn">
+                <i class="fa fa-search"></i>      
+              </a>
+            </form>
            </div>
         </li>
         <li class="nav-item ml-3  {{#if lcWishlistPage}}active{{/if}}">
@@ -171,6 +173,10 @@
           removeUpload();
       }
   }
+
+  document.getElementById("search-button").onclick = function() {
+    document.getElementById("search-bar").submit();
+}
 
   function removeUpload() {
       $('.file-upload-input').replaceWith($('.file-upload-input').clone());

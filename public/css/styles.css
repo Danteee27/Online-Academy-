@@ -29,6 +29,11 @@
     color: #5cbdbb;
 }
 
+.search-btn {
+    border: 0px;
+    background-color: none;
+}
+
 .dropdown-submenu {
     position: relative;
 }
