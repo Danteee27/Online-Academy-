@@ -121,6 +121,7 @@ router.get('/public', async function (req, res) {
 });
 // Phan Huy teacher route-profile
 router.get('/profile', async function (req, res) {
+    const teacherID = req.query.id;
     if(req.session.authUser === null)
     {
         return res.redirect('/');
@@ -130,10 +131,9 @@ router.get('/profile', async function (req, res) {
         return res.redirect('/');
     }
 
-    const teacherID = req.query.id;
     
     const teacher = await teachersService.findById(teacherID);
-    if(req.session.authUser.userID !== teacher.teacherID) {
+    if(req.session.authUser.userID !== teacher.userID) {
         res.redirect('/public?id=' + teacherID);
     }
 
@@ -170,7 +170,7 @@ router.get('/profile/edit', async function (req, res) {
     if(req.session.authUser === null)
     {
         return res.redirect('/');
-    } else if(req.session.authUser.userID !== teacher.teacherID) {
+    } else if(req.session.authUser.userID !== teacher.userID) {
         res.redirect('/');
     }
     //console.log(teacher);
