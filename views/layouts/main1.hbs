@@ -59,6 +59,7 @@
         <li class="nav-item ml-3 text-right {{#if lcMyCoursePage}}active{{/if}}">
           <a class="nav-link" href="/my-courses">My Courses</a>
         </li>
+
           {{#ifCond authUser.role "==" "ROLE.ADMIN"}}
               <li class="nav-item">
                   <a class="nav-link" href="/admin">Admin Panel</a>
@@ -78,9 +79,8 @@
                       Welcome, <b>{{authUser.name}}</b>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right">
-                      <a class="dropdown-item" href="/users/profile">
-                          <i class="fa fa-user" aria-hidden="true"></i>
-                          Profile
+                      <a class="dropdown-item" href="/wishlists">
+                          Wish list
                       </a>
 
                       <a class="dropdown-item" href="/my-courses">
