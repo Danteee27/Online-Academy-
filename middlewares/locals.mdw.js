@@ -7,6 +7,7 @@ export default function (app) {
 
         if (typeof req.session.auth === 'undefined') {
             req.session.auth = false;
+            res.locals.authUser = null;
         }
 
         res.locals.auth = req.session.auth;
