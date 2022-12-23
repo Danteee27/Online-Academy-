@@ -11,6 +11,7 @@ import coursesService from "../services/courses.service.js";
 import teachersService from "../services/teachers.service.js";
 import * as stream from 'stream';
 import db from "../utils/db.js";
+import usersService from "../services/users.service.js";
 
 
 
@@ -104,20 +105,23 @@ router.get('/profile', async function (req, res) {
         return res.redirect('/');
     }
 
-    const userid = req.query.id;
+    const teacherID = req.query.id;
     
-    const teacher = await teachersService.findById(userid);
-
-    await teachersService.updateCourseNum(userid);
-    await teachersService.updateRating(userid);
-    //await teachersService.updateStudentNum(userid);
-    await teachersService.updateReviews(userid);
+    const teacher = await teachersService.findById(teacherID);
 
     if (teacher === null) {
-        return res.render('/login');
+        const  userID = req.session.authUser.userID;
+        return res.render('/profile/add?id='+ userID);
+    }
+    if(teacher.numCourses !== 0 && teacher.numCourses !== null) {
+        await teachersService.updateCourseNum(teacherID);
+        await teachersService.updateRating(teacherID);
+        //await teachersService.updateStudentNum(userid);
+        await teachersService.updateReviews(teacherID);
     }
 
-    const courses = await coursesService.findByUserId(userid);
+
+    const courses = await coursesService.findByUserId(teacherID);
     //var doc = new DOMParser().parseFromString(teacher.description, "text/xml");
     //console.log(doc);
     //console.log(courses);
@@ -162,10 +166,11 @@ router.post('/profile/edit', upload.any(), async function (req, res) {
         //console.log(image[1]);
         //console.log(id);
         if (image[0] !== undefined) {
-            teachersService.addAVA(image[0], id);
+            await teachersService.addAVA(image[0], id);
         }
         if (image[1] !== undefined) {
-            teachersService.addBG(image[1], id);
+            //teachersService.addBG(image[1], id);
+            await teachersService.addBG(image[1], id);
         }
         //res.status(200).send('Form Submitted');
         res.redirect('/teacher/profile?id=' + id);
@@ -229,7 +234,57 @@ router.get('/delCourse', async function (req, res) {
 });
 router.get('/getId', async function (req, res) {
     const teacher = await teachersService.findByUserId(req.query.id);
-    res.redirect('/teacher/profile?id=' + teacher.teacherID);
+    if(req.session.authUser === null)
+    {
+        return res.redirect('/');
+    }
+    if(teacher === null) {
+        res.redirect('/teacher/profile/add?id=' + req.session.authUser.userID);
+    }
+    else {
+        res.redirect('/teacher/profile?id=' + teacher.teacherID);
+    }
+});
+
+router.get('/profile/add', async function (req, res) {
+    const userID = req.query.id;
+    const user = await usersService.findById(userID);
+    res.render('vwTeacher/addProfile', {
+        user: user,
+   });
+});
+
+// Phan Huy route post add profile
+router.post('/profile/add', upload.any(), async function (req, res){
+    try {
+        const userID = req.query.id;
+        const {
+            body,
+            files
+        } = req;
+        const ret = await teachersService.add(body);
+        console.log('hello' + ret);
+        //console.log('hello' + ret);
+
+        let image = [];
+        for (let f = 0; f < files.length; f += 1) {
+            image.push(await uploadFile(files[f]));
+        }
+        //console.log(image[0]);
+        //console.log(image[1]);
+        //console.log(id);
+        if (image[0] !== undefined) {
+            await teachersService.addAVA(image[0], ret);
+        }
+        if (image[1] !== undefined) {
+            await teachersService.addBG(image[1], ret);
+        }
+        //res.status(200).send('Form Submitted');
+        res.redirect('/teacher/profile?id=' + ret);
+        //res.redirect('back');
+    } catch (f) {
+        res.send(f.message);
+    }
 });
 
 export default router;

@@ -5,7 +5,12 @@ export default {
     async findAll() {
         return await db('teachers');
     },
-
+    async add(entity) {
+        return await db('teachers').insert(entity);
+    },
+    async updateEmail(email, id) {
+        return await db('teachers').where('teacherID', id).update(email);
+    },
     async updateTeacher(teacher, id) {
         return await db('teachers').where('teacherID', id).update(teacher);
     },
