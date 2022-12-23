@@ -116,7 +116,15 @@ export default {
     },
     del(courseID) {
         return db('courses').where('courseID', courseID).del();
+    },
+    updateView(numberView, id)
+    {
+        return db('courses').where('courseID', id).update({
+            views: numberView
+        });
     }
+
+
 
 
 
