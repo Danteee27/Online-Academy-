@@ -133,6 +133,9 @@ router.get('/profile', async function (req, res) {
     const teacherID = req.query.id;
     
     const teacher = await teachersService.findById(teacherID);
+    if(req.session.authUser.userID !== teacher.teacherID) {
+        res.redirect('/public?id=' + teacherID);
+    }
 
     if (teacher === null) {
         const  userID = req.session.authUser.userID;
@@ -159,12 +162,19 @@ router.get('/profile', async function (req, res) {
 
 router.get('/profile/edit', async function (req, res) {
     const teacherID = req.query.id;
+
     const teacher = await teachersService.findById(teacherID);
-    //console.log(teacher);
-    //console.log(teacherID)
     if (teacher === null) {
         return res.render('/login');
     }
+    if(req.session.authUser === null)
+    {
+        return res.redirect('/');
+    } else if(req.session.authUser.userID !== teacher.teacherID) {
+        res.redirect('/');
+    }
+    //console.log(teacher);
+    //console.log(teacherID)
     res.render('vwTeacher/editProfile', {
         teacher: teacher,
     });
@@ -273,10 +283,22 @@ router.get('/getId', async function (req, res) {
 
 router.get('/profile/add', async function (req, res) {
     const userID = req.query.id;
-    const user = await usersService.findById(userID);
-    res.render('vwTeacher/addProfile', {
-        user: user,
-   });
+    if(req.session.authUser === null)
+    {
+        return res.redirect('/');
+    } else if(req.session.authUser.userID !== userID) {
+        res.redirect('/');
+    }
+    const teacher = await teachersService.findByUserId(userID);
+    if(teacher !== null) {
+        res.redirect('/teacher/profile?id=' + teacher.teacherID);
+    }
+    else {
+        const user = await usersService.findById(userID);
+        res.render('vwTeacher/addProfile', {
+            user: user,
+        });
+    }
 });
 
 // Phan Huy route post add profile
@@ -311,5 +333,10 @@ router.post('/profile/add', upload.any(), async function (req, res){
         res.send(f.message);
     }
 });
+
+router.get('/teacher/public',   function(req, res) {
+    res.render('vwTeacher/public');
+});
+
 
 export default router;
