@@ -11,6 +11,7 @@ import {
 // import FormData from "form-data";
 
 import * as stream from 'stream';
+import categoriesService from "../services/categories.service.js";
 
 
 //Declare for googleapis to up image to drive by Phan Huy
@@ -161,17 +162,20 @@ router.post('/add', upload.any(), async function (req, res) {
             files
         } = req;
         const id = body.courseID;
+        console.log(id);
+        const course = await coursesService.findById(id);
+        const catID = course.catID;
         const ret = await lecturesService.add(body);
-        console.log(ret);
-        console.log(id)
         var video = null;
         for (let f = 0; f < files.length; f += 1) {
             video = await uploadFile(files[f]);
         }
         console.log(video);
-        await lecturesService.addVideoID(video, ret);
+        if(video !== undefined) {
+            await lecturesService.addVideoID(video, ret);
+        }
         //res.status(200).send('Form Submitted');
-        res.redirect('/teacher/course?id=' + id);
+        res.redirect('/user-courses/detail?catID='+ catID + '&'+ 'id=' + id);
     } catch (f) {
         res.send(f.message);
     }
@@ -180,10 +184,11 @@ router.post('/add', upload.any(), async function (req, res) {
 router.get('/add', async function (req, res) {
     const courseID = req.query.id;
     const lectures = await lecturesService.findAllByCourseID(courseID);
+    const course = await coursesService.findById(courseID);
     console.log(lectures);
     res.render('vwTeacher/addLecture', {
         layout: 'main1',
-        courseID: courseID,
+        course: course,
         lectures: lectures
     });
 });
