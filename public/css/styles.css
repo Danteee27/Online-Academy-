@@ -86,6 +86,7 @@
     color: rgb(4, 0, 255);
     background-color: white;
 }
+
 body{
     height: 100%;
 }
@@ -425,7 +426,6 @@ input:checked ~ label {
 #rate-1:checked ~ header:before {
     content: "Awful, not what I expected at all";
 }
-
 
 #rate-2:checked ~ header:before {
     content: "Poor, pretty disappointed";
