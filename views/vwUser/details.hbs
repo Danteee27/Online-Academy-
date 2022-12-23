@@ -233,7 +233,39 @@
 <div class="card-body">
   <div class="main-des">
     <h4>Instructor</h4>
-    <p class="card-text">{{course.maindes}}</p>
+    <p class="instructor-name mt-5">
+      <a class="instructor-name" href="javascript:;">
+          Dr. {{teacher.teacherName}}
+      </a>
+    </p>
+    </h5>
+    <p class="instructor-bio">{{teacher.teacherBio}}</p>
+    <div>
+      <div class="d-flex">
+        <a href="javascript:;">
+          <img src="https://drive.google.com/uc?export=view&id={{teacher.avatar}}" width="64" height="64" style="width: 8rem; height: 8rem; border-radius: 50%;" alt="">
+        </a>
+        <ul class="d-block unstyled-list">
+          <li class="mt-2 mb-2">
+            <i class="fa fa-star"></i>
+            <span style="margin-left: 1rem;">{{teacher.rating}} Instructor Rating</span>
+          </li>
+          <li class="mt-2 mb-2">
+            <i class="fa fa-certificate"></i>
+            <span style="margin-left: 1rem;">{{format_number teacher.reviews}} Reviews</span>
+          </li>
+          <li class="mt-2 mb-2">
+            <i class="fa fa-user"></i>
+            <span style="margin-left: 1rem;">{{format_number teacher.totals_stu}} Students</span>
+          </li>
+          <li class="mt-2 mb-2">
+            <i class="fa fa-play-circle"></i>
+            <span style="margin-left: 1rem;">{{format_number teacher.numCourses}} Courses</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <p class="card-text">{{teacher.description}}</p>
   </div>
 </div>
 
