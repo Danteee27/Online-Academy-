@@ -31,7 +31,6 @@ export default {
 
         return list;
     },
-
     async findByCategoryIDWithoutHidden(catID) {
         const list = db('courses').where('catID', catID).where('hidden', 0);
         if (list.length === 0) {
@@ -66,6 +65,11 @@ export default {
         return list;
     },
 
+    async find5BestSellerCourses(curCourseID) {
+        const list = await db('courses').where('courseID', curCourseID).where('hidden', 0).limit(5).orderBy('student_num', 'desc');
+        return list;
+    },
+
     async updateStudentNum(courseID) {
         const list = await db('courses').where('courseID', courseID);
         const student_num = list[0].student_num + 1;
@@ -91,6 +95,16 @@ export default {
         return db('courses').where('courseID', courseID).update({
             update: today
         });
+    },
+
+    async checkCompleted(id) {
+        const list = await db('lectures').where('courseID', id);
+        if (list.length === await db('courses').where('courseID', id).select('lec_num')) {
+            return await db('courses').where('courseID', id).update({
+                completed: 1
+            });
+        }
+        return;
     },
 
     add(course) {
@@ -132,9 +146,17 @@ export default {
         return db('courses').where('courseID', id).update({
             views: numberView
         });
+    },
+    async getAllDescending(limit) {
+        return await db('courses').orderBy('views', 'desc').limit(limit);
+    },
+    async getAllAscending(limit) {
+        return await db('courses').orderBy('views', 'asc').limit(limit);
+    },
+
+    async getNewestCourses(limit) {
+        return await db('courses').orderBy('date', 'desc').limit(limit);
     }
-
-
 
 
 

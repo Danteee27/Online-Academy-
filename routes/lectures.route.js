@@ -175,7 +175,13 @@ router.post('/add', upload.any(), async function (req, res) {
             await lecturesService.addVideoID(video, ret);
         }
         //res.status(200).send('Form Submitted');
+        if (body !== undefined) {
+            await coursesService.updateDate(id);
+            await coursesService.checkCompleted(id);
+        }
+
         res.redirect('/user-courses/detail?catID='+ catID + '&'+ 'id=' + id);
+
     } catch (f) {
         res.send(f.message);
     }
