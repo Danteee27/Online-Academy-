@@ -100,7 +100,7 @@
     <div class="course-card-body">
       <div class="course-title text-light">
         <h1 class="card-title">{{course.courseName}}</h1>
-        <p class="card-text">{{course.tinydes}}</p>
+        <p class="card-text">{{{course.tinydes}}}</p>
         <div class="course-title-info">
           <p class="card-text">
             {{#if course.isBestseller}}
@@ -169,7 +169,7 @@
 <div class="card-body">
   <div class="main-des">
     <h4>Description</h4>
-    <p class="card-text">{{course.maindes}}</p>
+    <p class="card-text">{{{course.maindes}}}</p>
   </div>
 </div>
 
@@ -185,7 +185,7 @@
               </a>
               <div class="collapse" id="{{newLectureID}}">
                 <div class="card card-body">
-                  {{description}}
+                    {{{description}}}
                 </div>
               </div>
           {{/each}}
@@ -270,7 +270,7 @@
         </ul>
       </div>
     </div>
-    <p class="card-text">{{teacher.description}}</p>
+    <p class="card-text">{{{teacher.description}}}</p>
   </div>
 </div>
 
