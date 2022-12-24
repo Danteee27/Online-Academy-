@@ -173,6 +173,7 @@
   </div>
 </div>
 
+
 {{!-- COURSE CONTENT CONTAINER --}}
 <div class="card-body">
   <div class="course-content">
@@ -183,7 +184,30 @@
               <a data-toggle="collapse" href="#{{newLectureID}}" class="list-group-item list-group-item-action font-weight-bold text-secondary bg-light" role="button" aria-expanded="false">
                 {{lecName}}
               </a>
+              
               <div class="collapse" id="{{newLectureID}}">
+                {{#if isPreview}}
+                <div style="height: 465px">
+                  <video
+                    id="my-video"
+                    class="video-js vjs-big-play-centered vjs-captions-menu-item vjs-subtitles-button vjs-fill"
+                    controls
+                    preload="auto"
+                    width="640"
+                    height="264"
+                    data-setup='{"poster":"{{poster}}"}'
+                  >
+                  <source src="https://drive.google.com/uc?export=view&id={{videoURL}}" type="video/mp4"/>
+                  <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a
+                    web browser that
+                    <a href="https://videojs.com/html5-video-support/" target="_blank"
+                    >supports HTML5 video</a
+                    >
+                  </p>
+                  </video>
+                </div>
+                {{/if}}
                 <div class="card card-body">
                     {{{description}}}
                 </div>

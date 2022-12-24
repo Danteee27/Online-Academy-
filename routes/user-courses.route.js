@@ -168,6 +168,8 @@ router.get('/detail', async function (req, res) {
 
     const catName = cat.catName;
     const lecture = await lectureService.findAllByCourseIDWithoutHidden(courseID);
+    if (lecture !== null)
+        lecture[0].isPreview = true;
     const recommendList = await courseService.find5BestSellerCoursesByCatID(courseID, catID);
     const isInWishList = await wishlistService.isInWishList(userID, courseID);
 
