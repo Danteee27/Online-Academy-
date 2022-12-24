@@ -160,13 +160,50 @@ export default {
     },
 
     // FULL-TEXT SEARCH
-    async fulltextSearch(searchStr, limit, offset) {
-        const sql = "select * from courses where match(courseName, tinydes) against ('" + searchStr + "' IN NATURAL LANGUAGE MODE) limit " + limit + " offset " + offset;
+    async fulltextSearch(searchStr, limit, offset, catID) {
+        var sql = "select * from courses where match(courseName, tinydes) against ('" + searchStr + "' IN NATURAL LANGUAGE MODE) limit " + limit + " offset " + offset;
+        if (catID != 0) {
+            sql = "select * from courses where catID = " + catID + " and match(courseName, tinydes) against ('" + searchStr + "' IN NATURAL LANGUAGE MODE) limit " + limit + " offset " + offset;
+        }
         const list = await db.raw(sql);
         if (list[0].length === 0)
             return null;
         return list[0];
     },
+
+    async fulltextSearchHighestRated(searchStr, limit, offset, catID) {
+        var sql = "select * from courses where match(courseName, tinydes) against ('" + searchStr + "' IN NATURAL LANGUAGE MODE) order by rating desc limit " + limit + " offset " + offset;
+        if (catID != 0) {
+            sql = "select * from courses where catID = " + catID + " and match(courseName, tinydes) against ('" + searchStr + "' IN NATURAL LANGUAGE MODE) order by rating desc limit " + limit + " offset " + offset;
+        }
+        const list = await db.raw(sql);
+        if (list[0].length === 0)
+            return null;
+        return list[0];
+    },
+
+    async fulltextSearchNewest(searchStr, limit, offset, catID) {
+        var sql = "select * from courses where match(courseName, tinydes) against ('" + searchStr + "' IN NATURAL LANGUAGE MODE) order by courses.update desc limit " + limit + " offset " + offset;
+        if (catID != 0) {
+            sql = "select * from courses where catID = " + catID + " and match(courseName, tinydes) against ('" + searchStr + "' IN NATURAL LANGUAGE MODE) order by courses.update desc limit " + limit + " offset " + offset;
+        }
+        const list = await db.raw(sql);
+        if (list[0].length === 0)
+            return null;
+        return list[0];
+    },
+
+    async fulltextSearchPrice(searchStr, limit, offset, type, catID) {
+        var sql = "select * from courses where match(courseName, tinydes) against ('" + searchStr + "' IN NATURAL LANGUAGE MODE) order by price " + type + " limit " + limit + " offset " + offset;
+        if (catID != 0) {
+            sql = "select * from courses where catID = " + catID + " and match(courseName, tinydes) against ('" + searchStr + "' IN NATURAL LANGUAGE MODE) order by price " + type + " limit " + limit + " offset " + offset;
+        }
+        const list = await db.raw(sql);
+        if (list[0].length === 0)
+            return null;
+        return list[0];
+    },
+
 
     async fulltextSearchResCount(searchStr) {
         const sql = "select * from courses where match(courseName, tinydes) against ('" + searchStr + "' IN NATURAL LANGUAGE MODE)";

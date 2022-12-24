@@ -2,6 +2,7 @@ import express from 'express';
 import coursesService from '../services/courses.service.js';
 import teachersService from '../services/teachers.service.js';
 import numeral from 'numeral';
+import categoriesService from '../services/categories.service.js';
 
 const router = express.Router();
 
@@ -15,13 +16,46 @@ router.post('/view', function (req, res) {
 })
 
 router.get('/view', async function (req, res) {
+    const max = 100000;
     const searchStr = req.query.value || ' ';
-    const course = await coursesService.fulltextSearch(searchStr, 8, 0);
-    res.locals.curSearch = searchStr;
+    var sortType = req.query.sort || 'most-relevant';
+    const catID = req.query.catID || 0;
+    var totalRes = 0;
+    var course;
+    var temp;
+    switch (sortType) {
+        case 'most-relevant':
+            course = await coursesService.fulltextSearch(searchStr, 8, 0, catID);
+            temp = await coursesService.fulltextSearch(searchStr, max, 0, catID);
+            break;
+        case 'highest-rated':
+            course = await coursesService.fulltextSearchHighestRated(searchStr, 8, 0, catID);
+            temp = await coursesService.fulltextSearchHighestRated(searchStr, max, 0, catID);
+            break;
+        case 'newest':
+            course = await coursesService.fulltextSearchNewest(searchStr, 8, 0, catID);
+            temp = await coursesService.fulltextSearchNewest(searchStr, max, 0, catID);
+            break;
+        case 'price-low-high':
+            course = await coursesService.fulltextSearchPrice(searchStr, 8, 0, 'asc', catID);
+            temp = await coursesService.fulltextSearchPrice(searchStr, max, 0, 'asc', catID);
+            break;
+        case 'price-high-low':
+            course = await coursesService.fulltextSearchPrice(searchStr, 8, 0, 'desc', catID);
+            temp = await coursesService.fulltextSearchPrice(searchStr, max, 0, 'desc', catID);
+            break;
+    }
+    if (temp !== null)
+        totalRes = temp.length
+    res.locals.search = true;
+    res.locals.searchStr = searchStr;
     let len = 0;
     if (course !== null) {
         len = course.length;
         for (const c of course) {
+            const category = await categoriesService.findByIdWithoutHidden(c.catID);
+            if (category !== null)
+                c.catName = category.catName;
             const teacher = await teachersService.findById(c.teacherID);
             if (teacher !== null) {
                 c.instructor = teacher.teacherName;
@@ -64,13 +98,28 @@ router.get('/view', async function (req, res) {
             c.star = star;
         }
     }
-    const totalRes = await coursesService.fulltextSearchResCount(searchStr);
+
+    const categories = await categoriesService.findAllWithoutHidden();
+    for (const c of categories) {
+        if (+c.catID === +catID)
+            c.isSelected = true;
+    }
     res.render('search', {
         course,
         searchStr,
         empty: len === 0,
-        totalRes
+        totalRes,
+        sortType,
+        categories
     })
+});
+
+router.post('/filter', async function (req, res) {
+    const sort = req.body.sort;
+    const category = req.body.category;
+    const searchStr = req.body.searchStr;
+
+    return res.redirect(`/search/view?sort=${sort}&value=${searchStr}&catID=${category}`);
 });
 
 router.post('/getMore', async function (req, res) {

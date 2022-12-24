@@ -6,6 +6,10 @@ export default {
         return await db('categories');
     },
 
+    async findAllWithoutHidden() {
+        return await db('categories').where('hidden', 0);
+    },
+
     async findById(catID) {
         const list = await db('categories').where('catID', catID);
         if (list.length === 0) {

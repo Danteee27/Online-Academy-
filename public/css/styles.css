@@ -567,3 +567,9 @@ input:checked ~ label {
     font-weight: 300;
     color: grey;
 }
+
+.sort-select {
+    padding: 10px 10px;
+}
+
+.sort-select:focus {outline: 0;}

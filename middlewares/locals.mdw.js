@@ -56,7 +56,11 @@ export default function (app) {
 
         // Huy - locals to store current course in order to set html title
         res.locals.curCourse;
-        res.locals.curSearch = "Search...";
+
+        // Huy - locals to store search status and search string
+        res.locals.search = false;
+        res.locals.searchStr = '';
+
         // res.locals.lcUserID = 1;
 
         next();

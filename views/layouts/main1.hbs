@@ -49,7 +49,7 @@
         <li class="nav-item mt-1">
           <div class="search-container ml-3">
             <form id="search-bar" action="/search/view" method="post">
-              <input type="text" name="search" placeholder="{{curSearch}}" class="search-input" {{#ifCond curSearch "==" "Search..."}}{{else}}value="{{curSearch}}"{{/ifCond}}>
+              <input type="text" name="search" placeholder="Search..." class="search-input" {{#if search}}value="{{searchStr}}"{{/if}}>
               <a id="search-button" class="search-btn">
                 <i class="fa fa-search"></i>      
               </a>
@@ -144,6 +144,7 @@
 
 
   </nav>
+
 
     {{{body}}}
 

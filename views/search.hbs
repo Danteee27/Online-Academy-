@@ -1,6 +1,16 @@
 {{#section 'js'}}
 <script>
 
+    $('#sort-select').change(function(e){
+        $('#select-form').submit();
+    })
+
+    $('#category-select').change(function(e){
+        $('#select-form').submit();
+    })
+
+    
+
     var offset = 8;
     var value = document.getElementById('value').value;
     var totalRes = {{totalRes}};
@@ -81,6 +91,31 @@
 <div class="card ">
     <input id="value" type="hidden" value="{{searchStr}}">
     <div class="card-body">
+        <label for="select-form">
+            <span>Sort by</span>&nbsp;
+        </label>
+        <form hidden id="select-form" action="/search/filter" method="post">
+            <input type="hidden" name="searchStr" value="{{searchStr}}">
+        </form>
+        <select id="sort-select" class="sort-select mr-5" name="sort" form="select-form">
+            <option {{#ifCond sortType "==" 'most-relevant'}}selected="selected"{{/ifCond}} value="most-relevant">Most relevant</option>
+            <option {{#ifCond sortType "==" 'highest-rated'}}selected="selected"{{/ifCond}} value="highest-rated">Highest Rated</option>
+            <option {{#ifCond sortType "==" 'newest'}}selected="selected"{{/ifCond}} value="newest">Newest</option>
+            <option {{#ifCond sortType "==" 'price-low-high'}}selected="selected"{{/ifCond}} value="price-low-high">Price (low - high)</option>
+            <option {{#ifCond sortType "==" 'price-high-low'}}selected="selected"{{/ifCond}} value="price-high-low">Price (high - low)</option>
+        </select> 
+
+        <label for="select-form">
+            <span>Category</span>&nbsp;
+        </label>
+        <select id="category-select" class="sort-select" name="category" form="select-form">
+            <option value="">Choose a category</option>
+            {{#each categories}}
+                <option {{#if isSelected}}selected="selected"{{/if}} value="{{catID}}">{{catName}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div class="card-body">
         {{#if empty}}
             <div class="m-5">
                 <h4>Sorry, we couldn't find any results for</h4>
@@ -109,7 +144,10 @@
 
 
                                 <div class="media-body">
-                                    <h3 class="course-card-title">{{courseName}}</h3>
+                                    <h3 class="course-card-title">
+                                        {{courseName}}
+                                        <span style="font-size: 16px; font-weight: normal;"><i>({{catName}})</i></span>
+                                    </h3>
                                     <p class="course-card-instructor">{{instructor}}</p>
                                     <span class="rating">{{rating}}</span>
                                     {{#each star}}
