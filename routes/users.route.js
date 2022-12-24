@@ -25,9 +25,10 @@ router.post('/register', async function (req, res) {
         role: 'ROLE.USER'
     }
     await usersService.add(user);
-    res.render('vwAccount/register', {
-        layout: false
-    });
+    // res.render('vwAccount/register', {
+    //     layout: false
+    // });
+    res.redirect('/users/login');
 });
 
 router.get('/login', async function (req, res) {
@@ -46,8 +47,7 @@ router.post('/login', async function (req, res) {
         });
     }
 
-    if(user.banned === 1)
-    {
+    if (user.banned === 1) {
         return res.render('vwAccount/login', {
             layout: false,
             err_message: 'Your account has been banned. Contact administrator!'
@@ -68,6 +68,7 @@ router.post('/login', async function (req, res) {
     req.session.authUser = user;
 
     const url = req.session.retUrl || '/';
+    //const url = req.headers.referer || '/';
     res.redirect(url);
 });
 
@@ -94,19 +95,19 @@ router.post('/logout', async function (req, res) {
 });
 
 router.get('/settings/:id', async (req, res) => {
-    if(req.session.authUser === null)
-    {
+    if (req.session.authUser === null) {
         return res.redirect('/');
     }
 
-    if(req.session.authUser.userID != req.params.id)
-    {
+    if (req.session.authUser.userID != req.params.id) {
         return res.redirect('/');
     }
 
-        const user = await usersService.findById(req.params.id);
+    const user = await usersService.findById(req.params.id);
 
-    res.render('vwAccount/settings', { user: user});
+    res.render('vwAccount/settings', {
+        user: user
+    });
 })
 
 router.post('/settings', async (req, res) => {
@@ -122,19 +123,17 @@ router.post('/settings', async (req, res) => {
 router.get('/profile/:id', async (req, res) => {
     const user = await usersService.findById(req.params.id);
 
-    res.render('vwAccount/profile',{
+    res.render('vwAccount/profile', {
         user,
     });
 })
 
 router.get('/profile-settings/:id', async (req, res) => {
-    if(req.session.authUser === null)
-    {
+    if (req.session.authUser === null) {
         return res.redirect('/');
     }
 
-    if(req.session.authUser.userID != req.params.id)
-    {
+    if (req.session.authUser.userID != req.params.id) {
         return res.redirect('/');
     }
     const user = await usersService.findById(req.params.id);
@@ -152,22 +151,24 @@ router.post('/profile-settings', async (req, res) => {
     res.redirect('/users/profile-settings/' + userID);
 })
 
-router.get('/change-password/:id', async (req, res) =>{
-    if(req.session.authUser === null) {
+router.get('/change-password/:id', async (req, res) => {
+    if (req.session.authUser === null) {
         return res.redirect('/');
     }
 
 
     const user = await usersService.findById(req.params.id);
 
-    res.render('vwAccount/change-password',{user});
+    res.render('vwAccount/change-password', {
+        user
+    });
 })
 
 router.post('/change-password', async (req, res) => {
     const userID = req.body.userID;
 
     const user = await usersService.findById(userID);
-    if(user === null) {
+    if (user === null) {
         return res.redirect('/');
     }
     const ret = bcrypt.compareSync(req.body.oldPassword, user.password) && req.body.newPassword === req.body.confirmPassword;
@@ -175,9 +176,7 @@ router.post('/change-password', async (req, res) => {
         return res.render('vwAccount/change-password', {
             err_message: 'Invalid password.'
         });
-    }
-    else
-    {
+    } else {
         user.password = bcrypt.hashSync(req.body.newPassword, 10);
         await usersService.update(userID, user);
 

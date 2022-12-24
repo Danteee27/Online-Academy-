@@ -56,14 +56,16 @@
             </form>
            </div>
         </li>
-        <li class="nav-item ml-3  {{#if lcWishlistPage}}active{{/if}}">
+        {{#if auth}}
+          <li class="nav-item ml-3  {{#if lcWishlistPage}}active{{/if}}">
 
-          <a class="nav-link" href="/wishlists">
-              <i class="fa fa-heart-o"></i></a>
-        </li>
-        <li class="nav-item ml-3 text-right {{#if lcMyCoursePage}}active{{/if}}">
-          <a class="nav-link" href="/my-courses">My Courses</a>
-        </li>
+            <a class="nav-link" href="/wishlists">
+                <i class="fa fa-heart-o"></i></a>
+          </li>
+          <li class="nav-item ml-3 text-right {{#if lcMyCoursePage}}active{{/if}}">
+            <a class="nav-link" href="/my-courses">My Courses</a>
+          </li>
+        {{/if}}
 
           {{#ifCond authUser.role "==" "ROLE.ADMIN"}}
               <li class="nav-item">
