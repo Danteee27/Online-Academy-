@@ -83,8 +83,20 @@
     <div class="card-body">
         {{#if empty}}
             <div class="m-5">
-                <p class="card-title">No data</p>
-                <p class="card-text">Please return next time.</p>
+                <h4>Sorry, we couldn't find any results for</h4>
+                <h4>"{{searchStr}}"</h4>
+                <h5 class="mt-5">Try adjusting your search. Here are some ideas:</h5>
+                <ul class="mt-4">
+                    <li>
+                        Make sure all words are spelled correctly
+                    </li>
+                    <li>
+                        Try different search terms
+                    </li>
+                    <li>
+                        Try more general search terms
+                    </li>
+                </ul>
             </div>
         {{else}}
             <ul id="data" class="list-group list-group-flush justify-content-center">

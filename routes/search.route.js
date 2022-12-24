@@ -15,57 +15,60 @@ router.post('/view', function (req, res) {
 })
 
 router.get('/view', async function (req, res) {
-    const searchStr = req.query.value;
+    const searchStr = req.query.value || ' ';
     const course = await coursesService.fulltextSearch(searchStr, 8, 0);
     res.locals.curSearch = searchStr;
-
-    for (const c of course) {
-        const teacher = await teachersService.findById(c.teacherID);
-        if (teacher !== null) {
-            c.instructor = teacher.teacherName;
-        }
-        let now = new Date();
-        let then = new Date(c.update);
-        let months = (now.getFullYear() - then.getFullYear()) * 12;
-        months -= then.getMonth();
-        months += now.getMonth();
-        if (months <= 1)
-            c.isNew = true;
-        else
-            c.isNew = false;
-        if (+c.student_num >= 1000)
-            c.isBestseller = true;
-        else
-            c.isBestseller = false;
-        c.hasPromotion = false;
-        if (c.promotion != 0) {
-            c.hasPromotion = true;
-        }
-        const star = [];
-        for (let j = 1; j <= 5; j++) {
-            if (j <= +c.rating)
-                star.push({
-                    star: true,
-                    starHalf: false
-                });
-            else if (j - +c.rating < 1)
-                star.push({
-                    star: false,
-                    starHalf: true
-                });
+    let len = 0;
+    if (course !== null) {
+        len = course.length;
+        for (const c of course) {
+            const teacher = await teachersService.findById(c.teacherID);
+            if (teacher !== null) {
+                c.instructor = teacher.teacherName;
+            }
+            let now = new Date();
+            let then = new Date(c.update);
+            let months = (now.getFullYear() - then.getFullYear()) * 12;
+            months -= then.getMonth();
+            months += now.getMonth();
+            if (months <= 1)
+                c.isNew = true;
             else
-                star.push({
-                    star: false,
-                    starHalf: false
-                });
+                c.isNew = false;
+            if (+c.student_num >= 1000)
+                c.isBestseller = true;
+            else
+                c.isBestseller = false;
+            c.hasPromotion = false;
+            if (c.promotion != 0) {
+                c.hasPromotion = true;
+            }
+            const star = [];
+            for (let j = 1; j <= 5; j++) {
+                if (j <= +c.rating)
+                    star.push({
+                        star: true,
+                        starHalf: false
+                    });
+                else if (j - +c.rating < 1)
+                    star.push({
+                        star: false,
+                        starHalf: true
+                    });
+                else
+                    star.push({
+                        star: false,
+                        starHalf: false
+                    });
+            }
+            c.star = star;
         }
-        c.star = star;
     }
     const totalRes = await coursesService.fulltextSearchResCount(searchStr);
     res.render('search', {
         course,
         searchStr,
-        empty: course.length === 0,
+        empty: len === 0,
         totalRes
     })
 });
