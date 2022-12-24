@@ -76,10 +76,11 @@
           {{/ifCond}}
 
 
-
+        </ul>
+        </div>
           {{#if auth}}
-              <li class="nav-item dropdown ml-3">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+              <div class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle text-secondary" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
                       Welcome, <b>{{authUser.name}}</b>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right">
@@ -127,20 +128,20 @@
                           Logout
                       </a>
                   </div>
-              </li>
+              </div>
           {{else}}
-              <li class="nav-item ml-3">
-                  <a class="nav-link" href="/users/login">Login</a>
-              </li>
+              <div class="nav-item ml-3">
+                  <a class="nav-link text-secondary" href="/users/login">Login</a>
+              </div>
 
-              <li class="nav-item ml-3">
-                  <a class="nav-link" href="/users/register">Register</a>
-              </li>
+              <div class="nav-item ml-3">
+                  <a class="nav-link text-secondary" href="/users/register">Register</a>
+              </div>
           {{/if}}
 
 
-      </ul>
-    </div>
+      
+    
 
 
   </nav>
