@@ -71,6 +71,15 @@ export default {
         return list;
     },
 
+    async findTopLastestCourse(topN) {
+        const list = await db('courses').where('hidden', 0).orderBy('update', 'desc').limit(topN);
+        return list;
+    },
+    async findTopNumberStudentCourse(topN) {
+        const list = await db('courses').where('hidden', 0).orderBy('student_num', 'desc').limit(topN);
+        return list;
+    },
+
     async updateStudentNum(courseID) {
         const list = await db('courses').where('courseID', courseID);
         const student_num = list[0].student_num + 1;
