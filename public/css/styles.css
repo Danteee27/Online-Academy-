@@ -31,7 +31,8 @@
 
 .search-btn {
     border: 0px;
-    background-color: none;
+    /*background-color: none;*/
+    background-color: rgba(0,0,0,0);
 }
 
 .dropdown-submenu {
@@ -566,4 +567,3 @@ input:checked ~ label {
     font-weight: 300;
     color: grey;
 }
-
