@@ -1,3 +1,28 @@
+{{#section 'js'}}
+    <script>
+
+        var userID = {{authUser.userID}};
+
+        function addToWishList(courseID) {
+            var ajax = new XMLHttpRequest();
+
+            ajax.open("POST", `http://localhost:3000/user-courses/wishlist?id=${courseID}&userID=${userID}`, true);
+            
+            if ($("#add-to-wishlist-" + courseID).hasClass("fa-heart")) {
+                $("#add-to-wishlist-" + courseID).addClass("fa-heart-o");
+                $("#add-to-wishlist-" + courseID).removeClass("fa-heart");
+            }
+            else {
+                $("#add-to-wishlist-" + courseID).addClass("fa-heart");
+                $("#add-to-wishlist-" + courseID).removeClass("fa-heart-o");
+            }
+            
+            ajax.send();
+        }
+
+  </script> 
+{{/section}}
+
 <div class="wishlist-container">
 
     <h1 class="card-header">
@@ -16,23 +41,26 @@
             {{#each course}}
             <div class="col-sm-3 mb-3 mt-3" type="button">
                 <a class="course-card-a" href="/user-courses/detail?catID={{catID}}&id={{courseID}}">
-                <div class="course-card">
-                    <img class= "course-card-img" src="https://drive.google.com/uc?export=view&id={{image}}" alt="">
-                    <h5 class="course-card-title">{{courseName}}</h5>
-                    <p class="course-card-instructor">{{instructor}}</p>
-                    <span class="rating">{{rating}}</span>
-                    {{#each star}}
-                    <span class="fa {{#if starHalf}}fa-star-half-o star-checked{{/if}} {{#if star}}fa-star star-checked{{else}}fa-star-o star-checked{{/if}}"></span>
-                    {{/each}}
-                    <span>&nbsp;({{format_number rating_num}})</span><br>
-                    {{#if hasPromotion}}
-                    <span class="price">₫{{format_number promotion}}</span><br>
-                    <span class="old-price">₫{{format_number price}}</span>
-                    {{else}}
-                    <span class="price">₫{{format_number price}}</span>
-                    {{/if}}
-                </div>
+                    <div class="course-card">
+                        <img class= "course-card-img" src="https://drive.google.com/uc?export=view&id={{image}}" alt="">
+                        <h5 class="course-card-title">{{courseName}}</h5>
+                        <p class="course-card-instructor">{{instructor}}</p>
+                        <span class="rating">{{rating}}</span>
+                        {{#each star}}
+                        <span class="fa {{#if starHalf}}fa-star-half-o star-checked{{/if}} {{#if star}}fa-star star-checked{{else}}fa-star-o star-checked{{/if}}"></span>
+                        {{/each}}
+                        <span>&nbsp;({{format_number rating_num}})</span><br>
+                        {{#if hasPromotion}}
+                        <span class="price">₫{{format_number promotion}}</span><br>
+                        <span class="old-price">₫{{format_number price}}</span>
+                        {{else}}
+                        <span class="price">₫{{format_number price}}</span>
+                        {{/if}}
+                    </div>
                 </a>
+                <button class="wishlist-toggle" onclick="addToWishList({{courseID}});">
+                    <i id="add-to-wishlist-{{courseID}}" class="fa fa-lg fa-heart"></i>
+                </button>
             </div>
             {{/each}}
             </div>

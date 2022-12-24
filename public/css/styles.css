@@ -116,8 +116,8 @@ body{
 }
 
 .course-card:hover {
-    transition-duration: 500ms;
-    transform: scale(1.01,1.01)
+    /* transition-duration: 500ms;
+    transform: scale(1.01,1.01) */
 }
 
 .course-card:hover>.course-card-img {
@@ -573,3 +573,11 @@ input:checked ~ label {
 }
 
 .sort-select:focus {outline: 0;}
+
+.wishlist-toggle {
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+    border: 0;
+    background-color: white;
+}
