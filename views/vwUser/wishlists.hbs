@@ -40,8 +40,8 @@
             <div class="row">
             {{#each course}}
             <div class="col-sm-3 mb-3 mt-3" type="button">
-                <a class="course-card-a" href="/user-courses/detail?catID={{catID}}&id={{courseID}}">
-                    <div class="course-card">
+                <div class="course-card">
+                    <a class="course-card-a" href="/user-courses/detail?catID={{catID}}&id={{courseID}}">
                         <img class= "course-card-img" src="https://drive.google.com/uc?export=view&id={{image}}" alt="">
                         <h5 class="course-card-title">{{courseName}}</h5>
                         <p class="course-card-instructor">{{instructor}}</p>
@@ -56,11 +56,12 @@
                         {{else}}
                         <span class="price">₫{{format_number price}}</span>
                         {{/if}}
+                     </a>
+                        <button class="wishlist-toggle" onclick="addToWishList({{courseID}});">
+                            <i id="add-to-wishlist-{{courseID}}" class="fa fa-lg fa-heart"></i>
+                        </button>
                     </div>
-                </a>
-                <button class="wishlist-toggle" onclick="addToWishList({{courseID}});">
-                    <i id="add-to-wishlist-{{courseID}}" class="fa fa-lg fa-heart"></i>
-                </button>
+                
             </div>
             {{/each}}
             </div>

@@ -38,6 +38,8 @@ router.get("/", async function (req, res) {
         let tempTeacher = await teachersService.findById(temp.teacherID);
         if (tempTeacher !== null)
             temp.instructor = tempTeacher.teacherName;
+        if (+temp.promotion != 0)
+            temp.hasPromotion = true;
         course.push(temp);
     }
     for (let i = 0; i < course.length; i++) {

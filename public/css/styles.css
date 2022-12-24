@@ -108,7 +108,7 @@ body{
     background-color: #fff;
 	border:none;
 	border-radius: 10px;
-    height: 355px;
+    height: 340px;
 	width: 300px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 10px;
@@ -576,8 +576,8 @@ input:checked ~ label {
 
 .wishlist-toggle {
     position: absolute;
-    bottom: 20px;
-    right: 50px;
+    bottom: 10px;
+    right: 10px;
     border: 0;
     background-color: white;
 }
