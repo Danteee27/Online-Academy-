@@ -15,6 +15,7 @@ import teachersService from '../services/teachers.service.js';
 import categoriesService from '../services/categories.service.js';
 import usersService from '../services/users.service.js';
 import coursesService from '../services/courses.service.js';
+import redirecting from '../middlewares/redirecting.mdw.js'
 
 const router = express.Router();
 
@@ -23,7 +24,7 @@ router.get("/", function (req, res) {
     res.render('vwUser/courses');
 });
 
-router.get('/category/:id', async function (req, res) {
+router.get('/category/:id' ,async function (req, res) {
     const catID = req.params.id;
 
     res.locals.lcCatPage = true;
@@ -133,8 +134,12 @@ router.get('/detail', async function (req, res) {
         return res.redirect('/');
 
     let userID = 0;
-    if (res.locals.authUser !== null)
+
+
+
+    if (res.locals.authUser !== null && typeof res.locals.authUser !== 'undefined') {
         userID = res.locals.authUser.userID || 0;
+    }
     const isInMyCourse = await myCourseService.isInMyCourse(userID, courseID);
     if (isInMyCourse === true) {
         const lecture = await userLecturesService.getMaxDate(userID, courseID);
@@ -249,7 +254,7 @@ router.get('/detail', async function (req, res) {
     })
 });
 
-router.post('/wishlist', async function (req, res) {
+router.post('/wishlist',redirecting, async function (req, res) {
     const courseID = req.query.id;
     const userID = req.query.userID;
 
@@ -266,7 +271,7 @@ router.post('/wishlist', async function (req, res) {
     }
 });
 
-router.post('/buy-now', async function (req, res) {
+router.post('/buy-now',redirecting, async function (req, res) {
     const courseID = await req.body.courseID;
     const userID = await req.body.userID;
 

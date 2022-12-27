@@ -11,6 +11,8 @@ export default function (app) {
             res.locals.authUser = null;
         }
 
+
+
         res.locals.auth = req.session.auth;
         res.locals.authUser = req.session.authUser;
         next();

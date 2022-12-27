@@ -108,7 +108,6 @@ router.post('/login', async function (req, res) {
     req.session.authUser = user;
 
     const url = req.session.retUrl || '/';
-    //const url = req.headers.referer || '/';
     res.redirect(url);
 });
 

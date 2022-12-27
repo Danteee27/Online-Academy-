@@ -15,6 +15,7 @@ import {
 } from "express-fileupload/lib/utilities.js";
 import coursesService from "../services/courses.service.js";
 import categoriesService from "../services/categories.service.js";
+import redirecting from "./redirecting.mdw.js";
 // import {login} from "passport/lib/http/request.js";
 
 
@@ -76,12 +77,12 @@ export default function (app) {
     app.use('/admin/courses', coursesRoute);
     app.use('/admin/fields', fieldsRoute);
     app.use('/admin/categories', categoriesRoute);
-    app.use('/wishlists', wishlistsRoute);
-    app.use('/my-courses', myCoursesRoute);
-    app.use('/user-courses', userCoursesRoute);
+    app.use('/wishlists', wishlistsRoute, redirecting);
+    app.use('/my-courses', myCoursesRoute, redirecting);
+    app.use('/user-courses', userCoursesRoute, redirecting);
     app.use('/users', usersRoute);
     app.use('/admin/users', usersAdminRoute);
     app.use('/teacher', teachersRoute);
-    app.use('/lectures', lecturesRoute);
+    app.use('/lectures', lecturesRoute, redirecting);
     app.use('/search', searchRoute);
 }
