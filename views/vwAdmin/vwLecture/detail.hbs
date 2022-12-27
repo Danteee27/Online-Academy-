@@ -1,0 +1,42 @@
+<div class="card">
+    <h4 class="card-header d-flex justify-content-between">
+        View detail lecture
+        <a class="btn btn-outline-success" href="/admin/lectures/admin-view/{{lecture.courseID}}" role="button">
+            <i class="fa fa-backward" aria-hidden="true"></i>
+            Lectures
+        </a>
+    </h4>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+
+                    <th>ID</th>
+                    <th>Name </th>
+                    <th class="text-center">Course ID</th>
+                    <th class ="text-center">Video URL</th>
+                    <th class ="text-center">Order</th>
+                    <th class ="text-center">Description</th>
+                    <th class ="text-center">Hidden</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td scope="row">{{lecture.lecID}}</td>
+                        <td>{{lecture.lecName}}</td>
+                        <td>{{lecture.courseID}}</td>
+                        <td>{{lecture.videoURL}}</td>
+                        <td>{{lecture.order}}</td>
+                        <td>{{lecture.description}}</td>
+                        <td>{{#if hidden}} true {{else}} false{{/if}}</td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    <div class="card-footer text-muted">
+    </div>
+</div>

@@ -77,6 +77,7 @@ export default function (app) {
     app.use('/admin/courses', coursesRoute);
     app.use('/admin/fields', fieldsRoute);
     app.use('/admin/categories', categoriesRoute);
+    app.use('/admin/lectures', lecturesRoute);
     app.use('/wishlists', wishlistsRoute, redirecting);
     app.use('/my-courses', myCoursesRoute, redirecting);
     app.use('/user-courses', userCoursesRoute, redirecting);

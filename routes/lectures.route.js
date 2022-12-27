@@ -119,9 +119,31 @@ router.get('/users/:id', async function (req, res) {
     });
 });
 
-router.get('/', async function (req, res) {
-    const list = await lecturesService.findAll();
-    res.json(list);
+router.get('/admin-view/:id', async function (req, res) {
+    const courseID = req.params.id;
+
+    const list = await lecturesService.findByCourseID(courseID);
+
+
+
+
+
+    res.render('vwAdmin/byLecture',{
+        list: list,
+        empty: list.length === 0,
+        courseID
+    })
+})
+
+router.get('/admin-view/detail/:id', async function (req, res) {
+    const lecID = req.params.id;
+
+    const lec = await lecturesService.findById(lecID);
+    console.log("Lecture:" + lec);
+
+    res.render('vwAdmin/vwLecture/detail',{
+        lecture: lec
+    })
 })
 
 router.get('/view/:id', async function (req, res) {

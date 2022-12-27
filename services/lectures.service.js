@@ -12,11 +12,11 @@ export default {
         const list = await db('lectures').where('lecID', lecID).where('hidden', 0);
         if (list.length === 0)
             return null;
-        return list[0];
+        return list;
     },
     async findByCourseID(courseID) {
         const list = await db('lectures').where('courseID', courseID);
-        return list[0];
+        return list;
     },
     findByLectureID(lecID) {
         return db('lectures').where('lecID', lecID);
