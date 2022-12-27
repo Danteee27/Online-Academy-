@@ -15,6 +15,7 @@
             crossorigin="anonymous"></script>
     <script>
 
+
     </script>
     <title>{{lcTitle}}</title>
 </head>
@@ -30,62 +31,21 @@
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                 {{#if err_message}}
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>Login failed!</strong> {{err_message}}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <strong>An OTP has been sent to {{email}}. </strong> {{err_message}}
+                        {{redo_message}}
                     </div>
                 {{/if}}
-                <form action="/users/login" method="post" id="loginForm" >
-                    <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                        <p class="lead fw-normal mb-0 me-3">Sign in with</p>
-
-                        <a href="#!" class="btn btn-primary btn-floating mx-1">
-                            <i class="fa fa-facebook-official"></i>
-                        </a>
-                        <a href="/google" class="btn btn-primary btn-floating mx-1 text-danger">
-                            <i class="fa fa-google"></i>
-                        </a>
-
-                    </div>
-
-                    <div class="divider d-flex align-items-center my-4">
-                        <p class="text-center fw-bold mx-3 mb-0">Or</p>
-                    </div>
-
-                    <!-- Email input -->
+                <form action="/users/email-verify" method="post" >
+                    <input name ="otpGenerated" type="text" hidden value ={{otpGenerated}}>
+                    <input name ="email" type="text" hidden value ={{email}}>
                     <div class="form-outline mb-4">
-                        <label class="form-label" for="email">Email address</label>
-                        <input name = "email" type="email" id="email" class="form-control form-control-lg"
+                        <input name = "otp" type ="text" class="form-control form-control-lg"
                                placeholder="" />
-
-
                     </div>
-
-                    <!-- Password input -->
-                    <div class="form-outline mb-3">
-                        <label class="form-label" for="password">Password</label>
-                        <input name ="password" type="password" id="password" class="form-control form-control-lg"
-                               placeholder="" />
-
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-center">
-                        <!-- Checkbox -->
-                        <div class="form-check mb-0">
-                            <input class="form-check-input me-2" type="checkbox" value="" id="remember" />
-                            <label class="form-check-label" for="remember">
-                                Remember me
-                            </label>
-                        </div>
-                        <a href="#!" class="text-body">Forgot password?</a>
-                    </div>
-
                     <div class="text-center text-lg-start mt-4 pt-2">
                         <button type="submit" class="btn btn-primary btn-lg"
-                                style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/users/register"
-                                                                                          class="link-danger">Register</a></p>
+                                style="padding-left: 2.5rem; padding-right: 2.5rem;">Submit</button>
+
                     </div>
 
                 </form>

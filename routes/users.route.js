@@ -2,10 +2,14 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 import moment from 'moment';
 import usersService from '../services/users.service.js';
+import OTPGenerator from "../auth/OTPGenerator.js";
+import OTPMailSender from "../auth/OTP-MailSender.js";
 
 const router = express.Router();
 
 router.get('/register', (req, res) => {
+
+
     res.render('vwAccount/register', {
         layout: false
     });
@@ -22,16 +26,47 @@ router.post('/register', async function (req, res) {
         name: req.body.name,
         dob: dob,
         email: req.body.email,
-        role: 'ROLE.USER'
+        role: 'ROLE.USER',
     }
     await usersService.add(user);
-    // res.render('vwAccount/register', {
-    //     layout: false
-    // });
-    res.redirect('/users/login');
+
+
+
+    res.redirect('/users/email-verify/' + req.body.email);
 });
 
+router.get('/email-verify/:email', async (req, res) => {
+    const email = req.params.email;
+    const otp = OTPGenerator.generateOTP();
+    await OTPMailSender.sendMail({
+        to: email,
+        otp: otp,
+    })
+
+    res.render('vwAccount/email-verify', { email: email,otpGenerated: otp, err_message: "Please enter your OTP here:"});
+});
+
+router.post('/email-verify', async (req, res) => {
+    if(req.body.otp === req.body.otpGenerated)
+    {
+        const user = await usersService.findByEmail(req.body.email);
+        await usersService.update(user.userID, {verifyEmail: 1});
+        res.redirect('/users/login');
+        res.render('vwUser/login' , {err_message: "Register completed successfully. You can now login!"});
+    }
+    else
+    {
+        res.render('vwAccount/email-verify', {
+            email: req.body.email,
+            otpGenerated: req.body.otpGenerated,
+            err_message: "Please enter your OTP here:",
+            redo_message: "Incorrect OTP, we have sent another mail, please try again!"
+        });
+    }
+})
+
 router.get('/login', async function (req, res) {
+
     res.render('vwAccount/login', {
         layout: false
     })
@@ -45,6 +80,11 @@ router.post('/login', async function (req, res) {
             layout: false,
             err_message: 'Invalid username or password.'
         });
+    }
+
+    if(user.verifyEmail === 0)
+    {
+        return res.redirect('/users/email-verify/' + user.email);
     }
 
     if (user.banned === 1) {
