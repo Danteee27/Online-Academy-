@@ -21,7 +21,7 @@ export default {
             return null;
         }
 
-        return list;
+        return list[0];
     },
 
     async findByCategoryID(catID) {
