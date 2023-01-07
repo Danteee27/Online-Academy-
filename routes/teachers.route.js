@@ -208,10 +208,12 @@ router.get("/editCourse", async function (req, res) {
   const courseID = req.query.id;
   const course = await coursesService.findById(courseID);
   const categories = await categoriesService.findAll();
+  const teacher = await teachersService.findById(course.teacherID);
   res.render("vwTeacher/editCourse", {
     layout: "main1",
-    course: course,
-    categories: categories,
+    course,
+    teacher,
+    categories,
   });
 });
 // Phan Huy route post editCourse
@@ -264,35 +266,31 @@ router.get("/getId", async function (req, res) {
   }
 });
 
-router.get('/profile/add', async function (req, res) {
-    if(req.session.authUser === null || typeof req.session === 'undefined')
-    {
-        return res.redirect('/');
-    }
+router.get("/profile/add", async function (req, res) {
+  if (req.session.authUser === null || typeof req.session === "undefined") {
+    return res.redirect("/");
+  }
 
-
-    const userID = req.query.id;
-    console.log(userID);
-    const auth = req.session.authUser
-    console.log(auth.userID);
-    if(auth.authUser === null)
-    {
-        //console.log('bughere');
-        res.redirect('/');
-    } else if(+auth.userID !== +userID) {
-        //console.log('bughere1');
-        res.redirect('/');
-    }
-    const teacher = await teachersService.findByUserId(userID);
-    if(teacher !== null) {
-        res.redirect('/teacher/profile?id=' + teacher.teacherID);
-    }
-    else {
-        const user = await usersService.findById(userID);
-        res.render('vwTeacher/addProfile', {
-            user: user,
-        });
-    }
+  const userID = req.query.id;
+  console.log(userID);
+  const auth = req.session.authUser;
+  console.log(auth.userID);
+  if (auth.authUser === null) {
+    //console.log('bughere');
+    res.redirect("/");
+  } else if (+auth.userID !== +userID) {
+    //console.log('bughere1');
+    res.redirect("/");
+  }
+  const teacher = await teachersService.findByUserId(userID);
+  if (teacher !== null) {
+    res.redirect("/teacher/profile?id=" + teacher.teacherID);
+  } else {
+    const user = await usersService.findById(userID);
+    res.render("vwTeacher/addProfile", {
+      user: user,
+    });
+  }
 });
 
 // Phan Huy route post add profile

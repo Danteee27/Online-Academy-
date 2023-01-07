@@ -173,31 +173,29 @@ const uploadFile = async (fileObject) => {
   return data.id;
 };
 router.post("/add", upload.any(), async function (req, res) {
-  try {
-    const { body, files } = req;
-    const id = body.courseID;
-    console.log(id);
-    const course = await coursesService.findById(id);
-    const catID = course.catID;
-    const ret = await lecturesService.add(body);
-    var video = null;
-    for (let f = 0; f < files.length; f += 1) {
-      video = await uploadFile(files[f]);
-    }
-    console.log(video);
-    if (video !== undefined) {
-      await lecturesService.addVideoID(video, ret);
-    }
-    //res.status(200).send('Form Submitted');
-    if (body !== undefined) {
-      await coursesService.updateDate(id);
-      await coursesService.checkCompleted(id);
-    }
-    console.log(body);
-    res.redirect(`/teacher/profile?id=${body.teacherID}`);
-  } catch (f) {
-    res.send(f.message);
+  const { body, files } = req;
+  const teacherID = body.teacherID;
+  delete body.teacherID;
+  const id = body.courseID;
+  console.log(id);
+  const course = await coursesService.findById(id);
+  const catID = course.catID;
+  const ret = await lecturesService.add(body);
+  var video = null;
+  for (let f = 0; f < files.length; f += 1) {
+    video = await uploadFile(files[f]);
   }
+  console.log(video);
+  if (video !== undefined) {
+    await lecturesService.addVideoID(video, ret);
+  }
+  //res.status(200).send('Form Submitted');
+  if (body !== undefined) {
+    await coursesService.updateDate(id);
+    await coursesService.checkCompleted(id);
+  }
+  console.log(body);
+  res.redirect(`/teacher/profile?id=${teacherID}`);
 });
 
 router.get("/add", async function (req, res) {
