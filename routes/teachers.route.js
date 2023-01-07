@@ -291,6 +291,12 @@ router.get('/getId', async function (req, res) {
 });
 
 router.get('/profile/add', async function (req, res) {
+    if(req.session.authUser === null || typeof req.session === 'undefined')
+    {
+        return res.redirect('/');
+    }
+
+
     const userID = req.query.id;
     console.log(userID);
     const auth = req.session.authUser

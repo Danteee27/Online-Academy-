@@ -16,6 +16,7 @@
                     <th>Email</th>
                     <th>Role </th>
                     <th class ="text-center">Banned</th>
+                    <th class ="text-center">Email verification</th>
                     <th class ="text-center">Edit</th>
                     <th class="text-center">View</th>
 
@@ -29,6 +30,7 @@
                         <td>{{email}}</td>
                         <td>{{role}}</td>
                         <td class ="text-center">{{#if banned}} true {{else}} false{{/if}}</td>
+                        <td class ="text-center">{{#if verifyEmail}} verified {{else}} unverified{{/if}}</td>
                         <td class ="text-center">
                             <a class="btn btn-primary btn-sm" href="/admin/users/edit?id={{userID}}" role="button" title="Edit User">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
