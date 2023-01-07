@@ -200,7 +200,7 @@ router.post("/add", upload.any(), async function (req, res) {
 
 router.get("/add", async function (req, res) {
   const courseID = req.query.id;
-  const lectures = await lecturesService.findAllByCourseID(courseID);
+  const lectures = await lecturesService.findAllByCourseIDWithoutHidden(courseID);
   const course = await coursesService.findById(courseID);
   console.log(lectures);
   res.render("vwTeacher/addLecture", {
