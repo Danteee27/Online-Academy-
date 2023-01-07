@@ -1,3 +1,10 @@
+{{#section 'css'}}
+    <style>
+        .swiper-button-next,.swiper-button-prev{
+            color: #d9a7c7;
+        }
+    </style>
+{{/section}}
 {{#section 'js'}}
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
@@ -85,7 +92,7 @@
     <div class="row">
         <div class="col-12">
             <div class="mt-3 ml-3 mr-3 mb-5">
-                <h4 class="bg-light">Khóa học Nổi bật nhất</h4>
+                <h4 class="bg-light">Most Popular Courses</h4>
                 <div class="swiper mySwiper1">
                     <div class="swiper-wrapper">
                         {{#each this.listTopNumberStudentCourses}}
@@ -127,7 +134,7 @@
             </div>
 
             <div class="mt-3 ml-3 mr-3 mb-5">
-                <h4 class="bg-light">Khóa học được xem nhiều nhất</h4>
+                <h4 class="bg-light">Most-viewed Courses</h4>
                 <div class="swiper mySwiper2">
                     <div class="swiper-wrapper">
                         {{#each this.listDescendingCourses}}
@@ -169,7 +176,7 @@
             </div>
 
             <div class="mt-3 ml-3 mr-3 mb-5">
-                <h4 class="bg-light">Khóa học mới nhất</h4>
+                <h4 class="bg-light">Newest Courses</h4>
                 <div class="swiper mySwiper3">
                     <div class="swiper-wrapper">
                         {{#each this.listLastestCourses}}
@@ -211,7 +218,7 @@
             </div>
 
             <div class="mt-3 ml-3 mr-3 mb-5">
-                <h4 class="bg-light">Lĩnh vực hot nhất</h4>
+                <h4 class="bg-light">Most Popular Categories</h4>
                 <div class="swiper mySwiper4">
                     <div class="swiper-wrapper">
                         {{#each this.listMostEnrolledCourses}}

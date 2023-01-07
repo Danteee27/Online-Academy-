@@ -74,6 +74,7 @@ router.get('/login', async function (req, res) {
 
 router.post('/login', async function (req, res) {
     const user = await usersService.findByEmail(req.body.email);
+    console.log(user)
 
     if (user === null) {
         return res.render('vwAccount/login', {

@@ -560,6 +560,33 @@ input:checked ~ label {
 {
     background: linear-gradient(125deg,#6a89cc,#b8e994);
 }
+.gradient-upload-pink{
+    background: #ee9ca7;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ee9ca7, #ffdde1);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ee9ca7, #ffdde1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.gradient-upload-pizelex{
+    background: #114357;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #114357, #F29492);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #114357, #F29492); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.gradient-upload-haikus{
+    background: #fd746c;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #fd746c, #ff9068);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #fd746c, #ff9068); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.glass{
+    color: #ecf0f1;
+    border-radius: 8px;
+    padding: 20px;
+    background: rgba( 255, 255, 255, 0.2 );!important;
+    border: solid 1px rgba(255,255,255,.3);
+    backgroud-clip: padding-box;
+    backdrop-filter: blur(10px );
+}
+
 
 .bg-text-trans
 {
