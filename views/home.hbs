@@ -1,3 +1,20 @@
+{{#section 'js'}}
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 4,
+            spaceBetween: 30,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+    </script>
+{{/section}}
+
+
 <div class="w-100" style="width: 100%">
 
     <div class="row">
@@ -18,188 +35,211 @@
 
     <div class="row">
         <div class="col-12">
+
+            <div class="mt-3 ml-3 mr-3 mb-5">
+                <h4 class="bg-light">test</h4>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        {{#each this.listSubTopNumberStudentCourses}}
+                            <!--                            <div class="swiper-slide"> -->
+                            <!--                                <div class="card-deck">-->
+                            {{#each this}}
+                                <div class="swiper-slide border-0">
+                                    <div class="card border-0 border-white" style="height: 20rem">
+                                        <img class="card-img-top h-50"
+                                             src="https://drive.google.com/uc?export=view&id={{this.image}}" alt="Card
+                                        image cap">
+                                        <div class="card-body h-50">
+                                            <h5 class="card-title">{{this.courseName}}</h5>
+                                            <p class="card-text"> {{this.tinydes}}</p>
+                                            <p class="card-text">
+                                                    <span>
+                                            <div class="checked w-100" style="font-size: medium">
+                                                {{this.rating}}
+                                                {{{printStarByDouble this.rating}}}
+                                                <div class="text-dark">{{this.rating_num}} reviews</div>
+                                            </div>
+                                            </span>
+
+                                            </p>
+                                            <p class="card-text"><small class="text-muted">Last updated 3 mins
+                                                ago</small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{/each}}
+                            <!--                                </div>-->
+                            <!--                            </div>-->
+                        {{/each}}
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+
             <div class="mt-3 ml-3 mr-3 mb-5">
                 <h4 class="bg-light">Khóa học Nổi bật nhất</h4>
-                <div id="cardslider1" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner" role="listbox">
-                        {{#each this.listSubTopNumberStudentCourses}}
-                            <div class="carousel-item {{#ifCond @index '==' '0'}} active {{/ifCond}}">
-                                <div class="card-deck">
-                                    {{#each this}}
-                                        <div class="card" style="height: 20rem">
-                                            <img class="card-img-top" src="https://drive.google.com/uc?export=view&id={{this.image}}" alt="Card image cap">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{this.courseName}}</h5>
-                                                <p class="card-text"> {{this.tinydes}}</p>
-                                                <p class="card-text">
-                                                    <span>
-                                                        <div class="checked w-100" style="font-size: medium">
-                                                            {{this.rating}}
-                                                            {{{printStarByDouble this.rating}}}
-                                                            <div class="text-dark">{{this.rating_num}} reviews </div>
-                                                        </div>
-                                                    </span>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        {{#each this.listTopNumberStudentCourses}}
+                            <div class="swiper-slide border-0">
+                                <div class="card border-0" style="height: 100%">
+                                    <img class="card-img-top"
+                                         src="https://drive.google.com/uc?export=view&id={{this.image}}"
+                                    alt="Card image cap">
+                                    <div class="card-body" style="height: 60%">
+                                        <div class="d-flex justify-content-start">
+                                            <h5 class="card-title text-left">{{this.courseName}}</h5>
+                                        </div>
+                                        <p class="card-text">
+                                        <span>
+                                        <div class="checked w-100 d-flex flex-column"
+                                             style="font-size: medium; height: 30%">
+                                            <div class="d-flex justify-content-start">
+                                                {{this.rating}}&nbsp;
+                                                <div>{{{printStarByDouble this.rating}}} </div>
+                                            </div>
 
-                                                </p>
-                                                <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                    ago</small>
-                                                </p>
+                                            <div class="text-dark d-flex justify-content-start"
+                                                 style="height: 10%">{{this.rating_num}} reviews
                                             </div>
                                         </div>
-                                    {{/each}}
+                                        </span>
+
+                                        </p>
+
+                                    </div>
                                 </div>
                             </div>
                         {{/each}}
                     </div>
-                    <button class="carousel-control-prev bg-secondary" style="width: 2%" type="button"
-                            data-target="#cardslider1" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </button>
-                    <button class="carousel-control-next bg-secondary" style="width: 2%" type="button"
-                            data-target="#cardslider1" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </button>
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
 
             <div class="mt-3 ml-3 mr-3 mb-5">
                 <h4 class="bg-light">Khóa học được xem nhiều nhất</h4>
-                <div id="cardslider2" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner" role="listbox">
-                        {{#each this.listSubDescCourses}}
-                            <div class="carousel-item {{#ifCond @index '==' '0'}} active {{/ifCond}}">
-                                <div class="card-deck">
-                                    {{#each this}}
-                                        <div class="card" style="height: 20rem">
-                                            <img class="card-img-top" src="https://drive.google.com/uc?export=view&id={{this.image}}" alt="Card image cap">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{this.courseName}}</h5>
-                                                <p class="card-text"> {{this.tinydes}}</p>
-                                                <p class="card-text">
-                                                    <span>
-                                                        <div class="checked w-100" style="font-size: medium">
-                                                            {{this.rating}}
-                                                            {{{printStarByDouble this.rating}}}
-                                                            <div class="text-dark">{{this.rating_num}} reviews </div>
-                                                        </div>
-                                                    </span>
-                                                </p>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        {{#each this.listDescendingCourses}}
+                            <div class="swiper-slide border-0">
+                                <div class="card border-0" style="height: 100%">
+                                    <img class="card-img-top"
+                                         src="https://drive.google.com/uc?export=view&id={{this.image}}"
+                                    alt="Card image cap">
+                                    <div class="card-body" style="height: 60%">
+                                        <div class="d-flex justify-content-start">
+                                            <h5 class="card-title text-left">{{this.courseName}}</h5>
+                                        </div>
+                                        <p class="card-text">
+                                        <span>
+                                        <div class="checked w-100 d-flex flex-column"
+                                             style="font-size: medium; height: 30%">
+                                            <div class="d-flex justify-content-start">
+                                                {{this.rating}}&nbsp;
+                                                <div>{{{printStarByDouble this.rating}}} </div>
+                                            </div>
 
-                                                <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                    ago</small>
-                                                </p>
+                                            <div class="text-dark d-flex justify-content-start"
+                                                 style="height: 10%">{{this.rating_num}} reviews
                                             </div>
                                         </div>
-                                    {{/each}}
+                                        </span>
+
+                                        </p>
+
+                                    </div>
                                 </div>
                             </div>
                         {{/each}}
                     </div>
-                    <button class="carousel-control-prev bg-secondary" style="width: 2%" type="button"
-                            data-target="#cardslider2" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </button>
-                    <button class="carousel-control-next bg-secondary" style="width: 2%" type="button"
-                            data-target="#cardslider2" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </button>
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
 
             <div class="mt-3 ml-3 mr-3 mb-5">
                 <h4 class="bg-light">Khóa học mới nhất</h4>
-                <div id="cardslider3" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner" role="listbox">
-                        {{#each this.listSubLastestCourses}}
-                            <div class="carousel-item {{#ifCond @index '==' '0'}} active {{/ifCond}}">
-                                <div class="card-deck">
-                                    {{#each this}}
-                                        <div class="card" style="height: 20rem">
-                                            <img class="card-img-top" src="https://drive.google.com/uc?export=view&id={{this.image}}" alt="Card image cap">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{this.courseName}}</h5>
-                                                <p class="card-text"> {{this.tinydes}}</p>
-                                                <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                    ago</small>
-                                                </p>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        {{#each this.listLastestCourses}}
+                            <div class="swiper-slide border-0">
+                                <div class="card border-0" style="height: 100%">
+                                    <img class="card-img-top"
+                                         src="https://drive.google.com/uc?export=view&id={{this.image}}"
+                                    alt="Card image cap">
+                                    <div class="card-body" style="height: 60%">
+                                        <div class="d-flex justify-content-start">
+                                            <h5 class="card-title text-left">{{this.courseName}}</h5>
+                                        </div>
+                                        <p class="card-text">
+                                        <span>
+                                        <div class="checked w-100 d-flex flex-column"
+                                             style="font-size: medium; height: 30%">
+                                            <div class="d-flex justify-content-start">
+                                                {{this.rating}}&nbsp;
+                                                <div>{{{printStarByDouble this.rating}}} </div>
+                                            </div>
+
+                                            <div class="text-dark d-flex justify-content-start"
+                                                 style="height: 10%">{{this.rating_num}} reviews
                                             </div>
                                         </div>
-                                    {{/each}}
+                                        </span>
+
+                                        </p>
+
+                                    </div>
                                 </div>
                             </div>
                         {{/each}}
                     </div>
-                    <button class="carousel-control-prev bg-secondary" style="width: 2%" type="button"
-                            data-target="#cardslider3" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </button>
-                    <button class="carousel-control-next bg-secondary" style="width: 2%" type="button"
-                            data-target="#cardslider3" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </button>
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
 
             <div class="mt-3 ml-3 mr-3 mb-5">
                 <h4 class="bg-light">Lĩnh vực hot nhất</h4>
-                <div id="cardslider4" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner" role="listbox">
-                        {{#each this.listSubMostEnrolledCourses}}
-                            <div class="carousel-item {{#ifCond @index '==' '0'}} active {{/ifCond}}">
-                                <div class="card-deck">
-                                    {{#each this}}
-                                        <div class="card" style="height: 20rem">
-                                            <img class="card-img-top" src="/imgs/1.jpg" alt="Card image cap">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{this.catName}}</h5>
-                                                <p class="card-text">Total student: {{this.totalStudent}}</p>
-                                                <p class="card-text">
-                                                    <span>
-                                                        <div class="checked w-100" style="font-size: medium">
-                                                            {{this.rating}}
-                                                            {{{printStarByDouble this.rating}}}
-                                                            <div class="text-dark">{{this.rating_num}} reviews </div>
-                                                        </div>
-                                                    </span>
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        {{#each this.listMostEnrolledCourses}}
+                            <div class="swiper-slide border-0">
+                                <div class="card border-0" style="height: 100%">
+                                    <img class="card-img-top"
+                                         src="https://drive.google.com/uc?export=view&id={{this.image}}"
+                                    alt="Card image cap">
+                                    <div class="card-body" style="height: 60%">
+                                        <div class="d-flex justify-content-start">
+                                            <h5 class="card-title text-left">{{this.courseName}}</h5>
+                                        </div>
+                                        <p class="card-text">
+                                        <span>
+                                        <div class="checked w-100 d-flex flex-column"
+                                             style="font-size: medium; height: 30%">
+                                            <div class="d-flex justify-content-start">
+                                                {{this.rating}}&nbsp;
+                                                <div>{{{printStarByDouble this.rating}}} </div>
+                                            </div>
 
-                                                </p>
-                                                <p class="card-text">
-                                                    <small class="text-muted">
-                                                        Last updated 3 mins ago
-                                                    </small>
-                                                </p>
+                                            <div class="text-dark d-flex justify-content-start"
+                                                 style="height: 10%">{{this.rating_num}} reviews
                                             </div>
                                         </div>
-                                    {{/each}}
+                                        </span>
+
+                                        </p>
+
+                                    </div>
                                 </div>
                             </div>
                         {{/each}}
                     </div>
-                    <button class="carousel-control-prev bg-secondary" style="width: 2%" type="button"
-                            data-target="#cardslider4" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </button>
-                    <button class="carousel-control-next bg-secondary" style="width: 2%" type="button"
-                            data-target="#cardslider4" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </button>
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
 
         </div>
     </div>
+</div>
 
 
 </div>
