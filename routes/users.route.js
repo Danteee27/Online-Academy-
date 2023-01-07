@@ -107,6 +107,8 @@ router.post('/login', async function (req, res) {
     req.session.auth = true;
     req.session.authUser = user;
 
+    console.log(req.session.retUrl);
+
     const url = req.session.retUrl || '/';
     res.redirect(url);
 });

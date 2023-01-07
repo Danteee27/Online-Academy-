@@ -9,7 +9,10 @@ export default function (app) {
         if (typeof req.session.auth === 'undefined') {
             req.session.auth = false;
             res.locals.authUser = null;
+            req.session.retUrl = req.originalUrl;
         }
+        if(req.originalUrl !== '/favicon.ico' && req.originalUrl !== '/users/login' && req.originalUrl !== '/users/register')
+             req.session.retUrl = req.originalUrl;
 
 
 
