@@ -229,6 +229,7 @@
                                 <div class="form-group">
                                     <label for="prices">Price</label>
                                     <select class="form-control" id="prices" name="price">
+                                        <option value={{course.price}} selected="selected">{{format_number course.price}}VND</option>
                                         <option value="199000" name="catID">199,000VND</option>
                                         <option value="299000" name="catID">299,000VND</option>
                                         <option value="499000" name="catID">499,000VND</option>
@@ -252,6 +253,7 @@
                                             class="form-control"
                                             placeholder="e.g. 100000VND..."
                                             id="promotion"
+                                            value="0"
                                     />
                                 </div>
                             </div>
