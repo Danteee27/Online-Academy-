@@ -17,7 +17,8 @@
                 <tr>
                     <th>#</th>
                     <th>Courses</th>
-                    <th>Hidden </th>
+                    <th class ="text-center">Teacher ID</th>
+                    <th >Hidden </th>
                     <th class="text-center">Lectures</th>
                     <th class ="text-center">Edit</th>
                     <th class ="text-center">View</th>
@@ -29,6 +30,7 @@
                     <tr>
                         <td scope="row">{{courseID}}</td>
                         <td>{{courseName}}</td>
+                        <td class ="text-center">{{teacherID}}</td>
                         <td>{{#if hidden}} true {{else}} false{{/if}}</td>
                         <td class ="text-center">{{lec_num}}</td>
                         <td class ="text-center">

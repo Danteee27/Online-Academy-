@@ -16,7 +16,7 @@ export default {
     },
 
     async findByIdWithoutHidden(courseID) {
-        const list = await db('courses').where('courseID', courseID).whereNot('hidden', 1);
+        const list = await db('courses').where('courseID', courseID).where('hidden', 0);
         if (list.length === 0) {
             return null;
         }

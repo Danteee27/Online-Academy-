@@ -46,6 +46,8 @@ router.get('/users/:id', async function (req, res) {
     if (lecture === null)
         return res.redirect('/');
 
+
+
     const course = await coursesService.findByIdWithoutHidden(lecture.courseID);
     if (course === null)
         return res.redirect('/');

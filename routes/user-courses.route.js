@@ -275,6 +275,9 @@ router.post('/buy-now',redirecting, async function (req, res) {
     const courseID = await req.body.courseID;
     const userID = await req.body.userID;
 
+    console.log(courseID);
+    console.log(userID);
+
     await myCourseService.add({
         userID,
         courseID

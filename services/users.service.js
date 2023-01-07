@@ -48,5 +48,11 @@ export default {
     },
     del(userID) {
         return db('users').where('userID', userID).del();
+    },
+    setTeacher(userID)
+    {
+        return db('users').where('userID', userID).update({
+            role: 'ROLE.TEACHER'
+        });
     }
 }

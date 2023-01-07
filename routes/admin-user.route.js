@@ -61,4 +61,13 @@ router.post('/unban', async (req, res) => {
     res.redirect('/admin/users');
 })
 
+router.post('/set-teacher', async (req, res) => {
+    const userID = req.body.userID || 0;
+    await usersService.setTeacher(userID);
+
+    res.redirect('/admin/users');
+})
+
+
+
 export default router;
