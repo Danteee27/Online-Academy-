@@ -9,7 +9,7 @@
   function getMoreFeedback() {
     var ajax = new XMLHttpRequest();
 
-    ajax.open("POST", `/user-courses/moreFB?id=${courseID}&offset=${offset}`, true);
+    ajax.open("POST", `https://online-academy-5horses.herokuapp.com/user-courses/moreFB?id=${courseID}&offset=${offset}`, true);
 
     ajax.onreadystatechange = function () {
       if (this.readyState == 4) {
