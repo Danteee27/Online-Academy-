@@ -84,6 +84,9 @@ router.post('/addCourse', upload.any(), async function (req, res) {
         const ret = await coursesService.add(body);
         //console.log(ret);
         //console.log(id)
+        if (body !== undefined) {
+            await coursesService.updateDate(id);
+         }
         var image = null;
         for (let f = 0; f < files.length; f += 1) {
             image = await uploadFile(files[f]);
