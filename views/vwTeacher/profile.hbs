@@ -4,7 +4,7 @@
         <div class="bg-white shadow rounded overflow-hidden">
             <div class="px-3 pt-0 pb-4" style="background-image: url(https://drive.google.com/uc?export=view&id={{this.teacher.bground}})">
                 <div class="media align-items-end">
-                    <div class="mr-3 mt-3">
+                    <div class="mr-3 mt-3" style="width: 350px; height: 350px;">
                         <img style="width: 350px; height: 350px; box-shadow: 2px 2px black;" src="https://drive.google.com/uc?export=view&id={{this.teacher.avatar}}" alt="This's avatar" class="rounded-circle mb-2 img-thumbnail">
                         
                     </div>
@@ -63,7 +63,7 @@
                                     {{#each this.courses}}
                                         <div class="col-lg-4 mb-4">
                                             <a href="/user-courses/detail?catID={{{catID}}}&id={{{courseID}}}">
-                                                <div class="shadow card" style=" border-style:double" >
+                                                <div class="shadow card" style=" border-style:double;" >
                                                         <img src="https://drive.google.com/uc?export=view&id={{image}}" alt="" height="200px" class="card-img-top">
                   
                                                     <div class="card-body" >
@@ -77,12 +77,12 @@
                                                         {{/if}}
                                                         </div>
                                                         <div style="display: flex; justify-content:space-between">
-                                                            <div></div>
-                                                            <p style="overflow: hidden;text-overflow: ellipsis;word-wrap: break-word; "><small class="text-dark">Last modified {{{update}}}</small></p>
+                                                            <div><small class="text-success">Last modified {{{dateDayMonthYear update}}}</small></div>
+                                                            
                                                         </div>
                                                         <p>
-                                                        <small>
-                                                        {{{description}}}
+                                                        <small class="text-dark">
+                                                        {{{tinydes}}}
                                                         </small>
                                                         </p>
                                                         <a href="/lectures/add?id={{courseID}}" class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i>  Upload</a>
