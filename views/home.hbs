@@ -97,33 +97,35 @@
                     <div class="swiper-wrapper">
                         {{#each this.listTopNumberStudentCourses}}
                             <div class="swiper-slide">
-                                <div class="card border-0" style="height: 100%">
-                                    <img class="card-img-top"
-                                         src="https://drive.google.com/uc?export=view&id={{this.image}}"
-                                    alt="Card image cap">
-                                    <div class="card-body" style="height: 60%">
-                                        <div class="d-flex justify-content-start">
-                                            <h5 class="card-title text-left">{{this.courseName}}</h5>
-                                        </div>
-                                        <p class="card-text">
-                                        <span>
-                                        <div class="checked w-100 d-flex flex-column"
-                                             style="font-size: medium; height: 30%">
+                                <a class="course-card-a" href="/user-courses/detail?catID={{this.catID}}&id={{this.courseID}}">
+                                    <div class="card border-0" style="height: 100%">
+                                        <img class="card-img-top"
+                                             src="https://drive.google.com/uc?export=view&id={{this.image}}"
+                                        alt="Card image cap">
+                                        <div class="card-body" style="height: 60%">
                                             <div class="d-flex justify-content-start">
-                                                {{this.rating}}&nbsp;
-                                                <div>{{{printStarByDouble this.rating}}} </div>
+                                                <h5 class="card-title text-left">{{this.courseName}}</h5>
                                             </div>
+                                            <p class="card-text">
+                                                                        <span>
+                                            <div class="checked w-100 d-flex flex-column"
+                                                 style="font-size: medium; height: 30%">
+                                                <div class="d-flex justify-content-start">
+                                                    {{this.rating}}&nbsp;
+                                                    <div>{{{printStarByDouble this.rating}}} </div>
+                                                </div>
 
-                                            <div class="text-dark d-flex justify-content-start"
-                                                 style="height: 10%">{{this.rating_num}} reviews
+                                                <div class="text-dark d-flex justify-content-start"
+                                                     style="height: 10%">{{this.rating_num}} reviews
+                                                </div>
                                             </div>
+                                            </span>
+
+                                            </p>
+
                                         </div>
-                                        </span>
-
-                                        </p>
-
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         {{/each}}
                     </div>
@@ -139,33 +141,35 @@
                     <div class="swiper-wrapper">
                         {{#each this.listDescendingCourses}}
                             <div class="swiper-slide border-0">
-                                <div class="card border-0" style="height: 100%">
-                                    <img class="card-img-top"
-                                         src="https://drive.google.com/uc?export=view&id={{this.image}}"
-                                    alt="Card image cap">
-                                    <div class="card-body" style="height: 60%">
-                                        <div class="d-flex justify-content-start">
-                                            <h5 class="card-title text-left">{{this.courseName}}</h5>
-                                        </div>
-                                        <p class="card-text">
-                                        <span>
-                                        <div class="checked w-100 d-flex flex-column"
-                                             style="font-size: medium; height: 30%">
+                                <a class="course-card-a" href="/user-courses/detail?catID={{this.catID}}&id={{this.courseID}}">
+                                    <div class="card border-0" style="height: 100%">
+                                        <img class="card-img-top"
+                                             src="https://drive.google.com/uc?export=view&id={{this.image}}"
+                                        alt="Card image cap">
+                                        <div class="card-body" style="height: 60%">
                                             <div class="d-flex justify-content-start">
-                                                {{this.rating}}&nbsp;
-                                                <div>{{{printStarByDouble this.rating}}} </div>
+                                                <h5 class="card-title text-left">{{this.courseName}}</h5>
                                             </div>
+                                            <p class="card-text">
+                                                                        <span>
+                                            <div class="checked w-100 d-flex flex-column"
+                                                 style="font-size: medium; height: 30%">
+                                                <div class="d-flex justify-content-start">
+                                                    {{this.rating}}&nbsp;
+                                                    <div>{{{printStarByDouble this.rating}}} </div>
+                                                </div>
 
-                                            <div class="text-dark d-flex justify-content-start"
-                                                 style="height: 10%">{{this.rating_num}} reviews
+                                                <div class="text-dark d-flex justify-content-start"
+                                                     style="height: 10%">{{this.rating_num}} reviews
+                                                </div>
                                             </div>
+                                            </span>
+
+                                            </p>
+
                                         </div>
-                                        </span>
-
-                                        </p>
-
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         {{/each}}
                     </div>
@@ -181,33 +185,35 @@
                     <div class="swiper-wrapper">
                         {{#each this.listLastestCourses}}
                             <div class="swiper-slide border-0">
-                                <div class="card border-0" style="height: 100%">
-                                    <img class="card-img-top"
-                                         src="https://drive.google.com/uc?export=view&id={{this.image}}"
-                                    alt="Card image cap">
-                                    <div class="card-body" style="height: 60%">
-                                        <div class="d-flex justify-content-start">
-                                            <h5 class="card-title text-left">{{this.courseName}}</h5>
-                                        </div>
-                                        <p class="card-text">
-                                        <span>
-                                        <div class="checked w-100 d-flex flex-column"
-                                             style="font-size: medium; height: 30%">
+                                <a class="course-card-a" href="/user-courses/detail?catID={{this.catID}}&id={{this.courseID}}">
+                                    <div class="card border-0" style="height: 100%">
+                                        <img class="card-img-top"
+                                             src="https://drive.google.com/uc?export=view&id={{this.image}}"
+                                        alt="Card image cap">
+                                        <div class="card-body" style="height: 60%">
                                             <div class="d-flex justify-content-start">
-                                                {{this.rating}}&nbsp;
-                                                <div>{{{printStarByDouble this.rating}}} </div>
+                                                <h5 class="card-title text-left">{{this.courseName}}</h5>
                                             </div>
+                                            <p class="card-text">
+                                                                        <span>
+                                            <div class="checked w-100 d-flex flex-column"
+                                                 style="font-size: medium; height: 30%">
+                                                <div class="d-flex justify-content-start">
+                                                    {{this.rating}}&nbsp;
+                                                    <div>{{{printStarByDouble this.rating}}} </div>
+                                                </div>
 
-                                            <div class="text-dark d-flex justify-content-start"
-                                                 style="height: 10%">{{this.rating_num}} reviews
+                                                <div class="text-dark d-flex justify-content-start"
+                                                     style="height: 10%">{{this.rating_num}} reviews
+                                                </div>
                                             </div>
+                                            </span>
+
+                                            </p>
+
                                         </div>
-                                        </span>
-
-                                        </p>
-
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         {{/each}}
                     </div>
@@ -223,33 +229,35 @@
                     <div class="swiper-wrapper">
                         {{#each this.listMostEnrolledCourses}}
                             <div class="swiper-slide border-0">
-                                <div class="card border-0" style="height: 100%">
-                                    <img class="card-img-top"
-                                         src="https://drive.google.com/uc?export=view&id={{this.image}}"
-                                    alt="Card image cap">
-                                    <div class="card-body" style="height: 60%">
-                                        <div class="d-flex justify-content-start">
-                                            <h5 class="card-title text-left">{{this.courseName}}</h5>
-                                        </div>
-                                        <p class="card-text">
-                                        <span>
-                                        <div class="checked w-100 d-flex flex-column"
-                                             style="font-size: medium; height: 30%">
+                                <a class="course-card-a" href="/user-courses/detail?catID={{this.catID}}&id={{this.courseID}}">
+                                    <div class="card border-0" style="height: 100%">
+                                        <img class="card-img-top"
+                                             src="https://drive.google.com/uc?export=view&id={{this.image}}"
+                                        alt="Card image cap">
+                                        <div class="card-body" style="height: 60%">
                                             <div class="d-flex justify-content-start">
-                                                {{this.rating}}&nbsp;
-                                                <div>{{{printStarByDouble this.rating}}} </div>
+                                                <h5 class="card-title text-left">{{this.courseName}}</h5>
                                             </div>
+                                            <p class="card-text">
+                                                                        <span>
+                                            <div class="checked w-100 d-flex flex-column"
+                                                 style="font-size: medium; height: 30%">
+                                                <div class="d-flex justify-content-start">
+                                                    {{this.rating}}&nbsp;
+                                                    <div>{{{printStarByDouble this.rating}}} </div>
+                                                </div>
 
-                                            <div class="text-dark d-flex justify-content-start"
-                                                 style="height: 10%">{{this.rating_num}} reviews
+                                                <div class="text-dark d-flex justify-content-start"
+                                                     style="height: 10%">{{this.rating_num}} reviews
+                                                </div>
                                             </div>
+                                            </span>
+
+                                            </p>
+
                                         </div>
-                                        </span>
-
-                                        </p>
-
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         {{/each}}
                     </div>
