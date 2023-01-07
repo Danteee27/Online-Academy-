@@ -244,7 +244,7 @@ router.post('/editCourse', upload.any(), async function (req, res) {
         //console.log(id)
         const ret = await coursesService.update(id, body);
         if (body !== undefined) {
-           //await coursesService.updateDate(id);
+           await coursesService.updateDate(id);
         }
         //console.log(ret);
         var image = null;
