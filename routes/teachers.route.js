@@ -69,9 +69,9 @@ const uploadFile = async (fileObject) => {
   console.log(`Uploaded file ${data.name} ${data.id}`);
   return data.id;
 };
+
 router.post("/addCourse", upload.any(), async function (req, res) {
   const { body, files } = req;
-  const id = body.courseID;
   if (body.promotion === "") {
     body.promotion = 0;
   }
@@ -88,8 +88,13 @@ router.post("/addCourse", upload.any(), async function (req, res) {
   }
   //console.log(image);
   await coursesService.addImage(image, ret);
+  const list = await coursesService.findAll();
   //res.status(200).send('Form Submitted');
-  res.redirect(`/user-courses/detail?catID=${body.catID}&id=${body.courseID}`);
+  res.redirect(
+    `/user-courses/detail?catID=${body.catID}&id=${
+      list[list.length - 1].courseID
+    }`
+  );
 });
 
 router.get("/public", async function (req, res) {
@@ -120,6 +125,10 @@ router.get("/public", async function (req, res) {
 // Phan Huy teacher route-profile
 router.get("/profile", async function (req, res) {
   const teacherID = req.query.id;
+  await teachersService.updateCourseNum(teacherID);
+  await teachersService.updateRating(teacherID);
+  await teachersService.updateStudentNum(teacherID);
+  await teachersService.updateReviews(teacherID);
   if (req.session.authUser === null) {
     //console.log('role fix1');
     return res.redirect("/");
@@ -135,12 +144,6 @@ router.get("/profile", async function (req, res) {
   if (teacher === null) {
     const userID = req.session.authUser.userID;
     res.redirect("/profile/add?id=" + userID);
-  }
-  if (teacher.numCourses !== 0 && teacher.numCourses !== null) {
-    await teachersService.updateCourseNum(teacherID);
-    await teachersService.updateRating(teacherID);
-    await teachersService.updateStudentNum(teacherID);
-    await teachersService.updateReviews(teacherID);
   }
 
   const courses = await coursesService.findByUserId(teacherID);

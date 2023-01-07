@@ -127,6 +127,14 @@
             &nbsp;
             Last updated <span>{{dateMonthYear course.update}}</span>
           </p>
+          {{#if isOwner}}
+          <a class="detail-edit-button" href="/teacher/editCourse?id={{course.courseID}}">
+            <h5 style="font-weight: 500;">
+              <i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;
+              Edit
+            </h5>
+          </a>
+          {{/if}}
         </div>
         
       </div>
@@ -144,7 +152,11 @@
           </div>
           <div class="d-flex mt-3">
             {{#ifCond userID "==" 0}}
-              <a href="/users/login" class="buy-now text-center text-dark"><h5 style="font-weight: 500;">Buy now</h5></a>
+              <a href="/users/login" class="buy-now text-center text-dark">
+                <h5 style="font-weight: 500;">
+                  Buy now
+                </h5>
+              </a>
               <a href="/users/login" class="course-add-to-wishlist">
                 <i id="add-to-wishlist" class="fa fa-heart{{#unless isInWishList}}-o{{/unless}} fa-lg"></i>
               </a>
