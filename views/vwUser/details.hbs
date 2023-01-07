@@ -61,7 +61,7 @@
   function addToWishlist() {
     var ajax = new XMLHttpRequest();
 
-    ajax.open("POST", `http://localhost:3000/user-courses/wishlist?id=${courseID}&userID=${userID}`, true);
+    ajax.open("POST", `https://online-academy-5horses.herokuapp.com/user-courses/wishlist?id=${courseID}&userID=${userID}`, true);
     ajax.onreadystatechange = function () {
       if (this.readyState == 4) {
         if (this.status == 200) {
