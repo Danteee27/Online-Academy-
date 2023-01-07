@@ -323,15 +323,15 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <div>
-                                <button type="submit" class="btn btn-outline-light" formaction="/teacher/profile?id={{this.course.teacherNumber}}">
+                                <a class="btn btn-outline-light" href="/teacher/profile?id={{this.course.teacherID}}">
                                     <i class="fa fa-backward" aria-hidden="true"></i>
-                                    Cancel
-                                </button>
+                                    Back
+                                </a>
                             </div>
                             <div>
                                 <button type="submit" class="btn btn-primary" formaction="/teacher/editCourse?id={{this.course.courseID}}">
                                     <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                    Next
+                                    Done
                                 </button>
                             </div>
                         </div>

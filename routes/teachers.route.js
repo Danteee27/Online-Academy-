@@ -218,29 +218,25 @@ router.get("/editCourse", async function (req, res) {
 });
 // Phan Huy route post editCourse
 router.post("/editCourse", upload.any(), async function (req, res) {
-  try {
-    const id = req.query.id;
-    const { body, files } = req;
-    //console.log(body);
-    //console.log(id)
-    const ret = await coursesService.update(id, body);
-    if (body !== undefined) {
-      await coursesService.updateDate(id);
-    }
-    //console.log(ret);
-    var image = null;
-    for (let f = 0; f < files.length; f += 1) {
-      image = await uploadFile(files[f]);
-    }
-    console.log(image);
-    if (image !== null) {
-      await coursesService.addImage(image, id);
-    }
-    //res.status(200).send('Form Submitted');
-    res.redirect("/lectures/add?id=" + id);
-  } catch (f) {
-    res.send(f.message);
+  const id = req.query.id;
+  const { body, files } = req;
+  //console.log(body);
+  //console.log(id)
+  const ret = await coursesService.update(id, body);
+  if (body !== undefined) {
+    await coursesService.updateDate(id);
   }
+  //console.log(ret);
+  var image = null;
+  for (let f = 0; f < files.length; f += 1) {
+    image = await uploadFile(files[f]);
+  }
+  console.log(image);
+  if (image !== null) {
+    await coursesService.addImage(image, id);
+  }
+  //res.status(200).send('Form Submitted');
+  res.redirect("/teacher/profile?id=" + body.teacherID);
 });
 
 // Phan Huy route get editTeacher
