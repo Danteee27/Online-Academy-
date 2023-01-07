@@ -19,7 +19,7 @@ import redirecting from "./redirecting.mdw.js";
 export default function (app) {
   app.get("/", async function (req, res) {
     res.locals.lcHomePage = true;
-    const listDescendingCourses = await coursesService.getAllDescending(10);
+
 
     function splitArrayToListSubArray(array, n) {
       const chunkSize = n;
@@ -34,36 +34,40 @@ export default function (app) {
       return list;
     }
 
-    const listSubDescCourses = splitArrayToListSubArray(
-      listDescendingCourses,
-      4
-    );
+    const listDescendingCourses = await coursesService.getAllDescending(10);
+    // const listSubDescCourses = splitArrayToListSubArray(
+    //   listDescendingCourses,
+    //   4
+    // );
 
     const listMostEnrolledCourses =
       await categoriesService.find5MostEnrolledCourses();
-    const listSubMostEnrolledCourses = splitArrayToListSubArray(
-      listMostEnrolledCourses,
-      4
-    );
+    // const listSubMostEnrolledCourses = splitArrayToListSubArray(
+    //   listMostEnrolledCourses,
+    //   4
+    // );
 
     const listLastestCourses = await coursesService.findTopLastestCourse(10);
-    const listSubLastestCourses = splitArrayToListSubArray(
-      listLastestCourses,
-      4
-    );
+    // const listSubLastestCourses = splitArrayToListSubArray(
+    //   listLastestCourses,
+    //   4
+    // );
 
     const listTopNumberStudentCourses =
       await coursesService.findTopNumberStudentCourse(10);
-    const listSubTopNumberStudentCourses = splitArrayToListSubArray(
-      listTopNumberStudentCourses,
-      4
-    );
+    // const listSubTopNumberStudentCourses = splitArrayToListSubArray(
+    //   listTopNumberStudentCourses,
+    //   4
+    // );
     res.render("home", {
       listDescendingCourses,
-      listSubDescCourses,
-      listSubMostEnrolledCourses,
-      listSubLastestCourses,
-      listSubTopNumberStudentCourses,
+      // listSubDescCourses,
+      // listSubMostEnrolledCourses,
+      listMostEnrolledCourses,
+      // listSubLastestCourses,
+      listLastestCourses,
+      // listSubTopNumberStudentCourses,
+      listTopNumberStudentCourses,
       layout: "main1",
     });
   });
