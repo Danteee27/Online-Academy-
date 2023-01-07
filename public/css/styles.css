@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
 .search-container{
     background: #fff;
@@ -90,6 +91,45 @@
 
 .dropdown-item:hover {
     color: rgb(4, 0, 255);
+    background-color: white;
+}
+
+
+.navbar {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #edf0f1;
+}
+
+.navbar li
+{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.navbar li a
+{
+    transition: all 0.3s ease 0s;
+}
+
+.navbar li a:hover
+{
+    color: #0088a9;
+}
+
+
+
+.nav-item:hover {
+    background-color: rgba(0,136,169,1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.navbar li:nth-child(2):hover
+{
     background-color: white;
 }
 

@@ -17,7 +17,7 @@ export default {
             let info = await transporter.sendMail({
                 from: MAIL_SETTINGS.auth.user,
                 to: params.to,
-                subject: 'Hello',
+                subject: '5Horses Online Academy Registering Verification',
                 html: `
       <div
         class="container"

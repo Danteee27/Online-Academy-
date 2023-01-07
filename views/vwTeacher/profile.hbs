@@ -78,11 +78,13 @@
                                                         </div>
                                                         <div style="display: flex; justify-content:space-between">
                                                             <div></div>
-                                                            <small class="text-dark">last modified {{{update}}}</small>
+                                                            <p style="overflow: hidden;text-overflow: ellipsis;word-wrap: break-word; "><small class="text-dark">Last modified {{{update}}}</small></p>
                                                         </div>
+                                                        <p>
                                                         <small>
                                                         {{{description}}}
                                                         </small>
+                                                        </p>
                                                         <a href="/lectures/add?id={{courseID}}" class="btn btn-outline-primary btn-sm"><i class="fa fa-pencil" aria-hidden="true"></i>  Upload</a>
                                                         <a href="/teacher/editCourse?id={{courseID}}" class="btn btn-outline-success btn-sm"><i class="fa fa-cogs" aria-hidden="true"></i>  Edit</a>
                                                         <a href="/teacher/delCourse?id={{courseID}}" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i>  Delete</a>
