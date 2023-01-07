@@ -144,6 +144,7 @@ router.get("/detail", async function (req, res) {
   const course = await courseService.findByIdWithoutHidden(courseID);
   if (course === null) return res.redirect("/");
 
+  if (course.rating === null) course.rating = 0;
   if (course.views === null) course.views = 0;
 
   course.views += 1;
@@ -160,6 +161,7 @@ router.get("/detail", async function (req, res) {
     courseID,
     catID
   );
+  for (const c of recommendList) if (c.rating === null) c.rating = 0;
   const isInWishList = await wishlistService.isInWishList(userID, courseID);
 
   let now = new Date();
