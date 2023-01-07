@@ -276,6 +276,24 @@ body{
     text-decoration: none;
 }
 
+.detail-upload-button {
+    position: absolute;
+    left: 185px;
+    bottom: 20px;
+    border: 0;
+    border-radius: 10px;
+    width: 150px;
+    padding: 15px;
+    background-color: white;
+    text-align: center;
+    color: black;
+}
+
+.detail-upload-button:hover {
+    opacity: 0.8;
+    text-decoration: none;
+}
+
 .price-box {
     background-color: orange;
 	border:none;

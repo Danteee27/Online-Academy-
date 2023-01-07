@@ -195,7 +195,7 @@ router.post("/add", upload.any(), async function (req, res) {
     await coursesService.checkCompleted(id);
   }
   console.log(body);
-  res.redirect(`/teacher/profile?id=${teacherID}`);
+  res.redirect(`/user-courses/detail?catID=${catID}&id=${id}`);
 });
 
 router.get("/add", async function (req, res) {

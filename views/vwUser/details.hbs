@@ -9,7 +9,7 @@
   function getMoreFeedback() {
     var ajax = new XMLHttpRequest();
 
-    ajax.open("POST", `http://localhost:3000/user-courses/moreFB?id=${courseID}&offset=${offset}`, true);
+    ajax.open("POST", `https://online-academy-5horses.herokuapp.com/user-courses/moreFB?id=${courseID}&offset=${offset}`, true);
 
     ajax.onreadystatechange = function () {
       if (this.readyState == 4) {
@@ -61,7 +61,7 @@
   function addToWishlist() {
     var ajax = new XMLHttpRequest();
 
-    ajax.open("POST", `http://localhost:3000/user-courses/wishlist?id=${courseID}&userID=${userID}`, true);
+    ajax.open("POST", `https://online-academy-5horses.herokuapp.com/user-courses/wishlist?id=${courseID}&userID=${userID}`, true);
     ajax.onreadystatechange = function () {
       if (this.readyState == 4) {
         if (this.status == 200) {
@@ -132,6 +132,12 @@
             <h5 style="font-weight: 500;">
               <i class="fa fa-pencil" aria-hidden="true"></i>&nbsp;
               Edit
+            </h5>
+          </a>
+          <a class="detail-upload-button" href="/lectures/add?id={{course.courseID}}">
+            <h5 style="font-weight: 500;">
+              <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;
+              Lecture
             </h5>
           </a>
           {{/if}}

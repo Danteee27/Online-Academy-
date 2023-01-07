@@ -1,0 +1,18 @@
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>node_modules/\r\nutils/\r\napp.js/
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.gitignore b/.gitignore
+--- a/.gitignore	(revision cbb6d7954c5f40376a308f1970303ea283b612a8)
++++ b/.gitignore	(date 1672114591595)
+@@ -1,3 +1,4 @@
+ node_modules/
+ utils/
+-app.js/
+\ No newline at end of file
++app.js/
++.env/
+\ No newline at end of file

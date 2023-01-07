@@ -6,7 +6,7 @@
         function addToWishList(courseID) {
             var ajax = new XMLHttpRequest();
 
-            ajax.open("POST", `http://localhost:3000/user-courses/wishlist?id=${courseID}&userID=${userID}`, true);
+            ajax.open("POST", `https://online-academy-5horses.herokuapp.com/user-courses/wishlist?id=${courseID}&userID=${userID}`, true);
             
             if ($("#add-to-wishlist-" + courseID).hasClass("fa-heart")) {
                 $("#add-to-wishlist-" + courseID).addClass("fa-heart-o");
