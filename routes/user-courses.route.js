@@ -272,6 +272,7 @@ router.post("/buy-now", redirecting, async function (req, res) {
     userID,
     courseID,
   });
+
   const lectureList = await lectureService.findAllByCourseIDWithoutHidden(
     courseID
   );
@@ -291,6 +292,10 @@ router.post("/buy-now", redirecting, async function (req, res) {
   course.student_num += 1;
   course.weekStudentNum += 1;
   await courseService.update(courseID, course);
+
+  const teacher = teachersService.findById(course.teacherID);
+  teacher.totals_stu += 1;
+  await teachersService.update(teacher.teacherID, teacher);
 
   const isInWishList = await wishlistService.isInWishList(userID, courseID);
   if (isInWishList === true) {
