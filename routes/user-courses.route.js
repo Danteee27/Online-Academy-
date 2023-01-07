@@ -348,7 +348,15 @@ router.post("/user-feedback", async function (req, res) {
   const user = await usersService.findById(req.session.authUser.userID);
 
   const isCommented = await feedbackService.isCommented(user.userID, courseID);
-  if (isCommented === true) await feedbackService.del(user.userID, courseID);
+  if (isCommented === true) {
+    await feedbackService.del(user.userID, courseID);
+  } else {
+    const course = await coursesService.findByIdWithoutHidden(courseID);
+    const teacher = await teachersService.findById(course.teacherID);
+    teacher.reviews += 1;
+    await teachersService.update(teacher.teacherID, teacher);
+    await teachersService.updateRating(teacher.teacherID);
+  }
 
   await feedbackService.add({
     userID: user.userID,

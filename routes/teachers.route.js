@@ -125,10 +125,10 @@ router.get("/public", async function (req, res) {
 // Phan Huy teacher route-profile
 router.get("/profile", async function (req, res) {
   const teacherID = req.query.id;
-  await teachersService.updateCourseNum(teacherID);
-  await teachersService.updateRating(teacherID);
-  await teachersService.updateStudentNum(teacherID);
-  await teachersService.updateReviews(teacherID);
+  // await teachersService.updateCourseNum(teacherID);
+  // await teachersService.updateRating(teacherID);
+  // await teachersService.updateStudentNum(teacherID);
+  // await teachersService.updateReviews(teacherID);
   if (req.session.authUser === null) {
     //console.log('role fix1');
     return res.redirect("/");
