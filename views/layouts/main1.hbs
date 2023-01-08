@@ -100,16 +100,22 @@
                           Account settings
                       </a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="/users/profile/{{authUser.userID}}">
+                    {{#ifCond authUser.role "==" "ROLE.TEACHER"}}
+                      <a class="dropdown-item" href="/teacher/getId?view=public&id={{authUser.userID}}">
                           <i class="fa fa-id-card" aria-hidden="true"></i>
                           Public profile
                       </a>
-                  {{#ifCond authUser.role "==" "ROLE.TEACHER"}}
+                  
 
-                    <a class="dropdown-item" href="/teacher/getId?id={{authUser.userID}}">
+                    <a class="dropdown-item" href="/teacher/getId?view=private&id={{authUser.userID}}">
                       <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                       Teacher Profile
                   </a>
+                    {{else}}
+                    <a class="dropdown-item" href="/users/profile/{{authUser.userID}}">
+                          <i class="fa fa-id-card" aria-hidden="true"></i>
+                          Public profile
+                      </a>
 
                     {{/ifCond}}
 
