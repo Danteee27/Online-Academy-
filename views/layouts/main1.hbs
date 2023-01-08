@@ -34,12 +34,12 @@
               >Categories</a>
           <ul class="dropdown-menu">
             {{#each lcFields}}
-              <li class="dropdown-submenu">
+              <li class="d-flex dropdown-submenu">
                   <a href="#" data-toggle="dropdown" class="dropdown-item">{{fieldName}}</a>
                   <ul class="dropdown-menu">
                     {{#each lcCategories}}
                       <li>
-                          <a class="dropdown-item" href="/user-courses/category/{{catID}}">{{catName}}</a>
+                          <a class="dropdown-item" href="/course/category/{{catID}}">{{catName}}</a>
                       </li>
                     {{/each}}
                   </ul>

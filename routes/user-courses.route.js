@@ -92,7 +92,7 @@ router.get("/category/:id", async function (req, res) {
     if (months <= 1) list[i].isNew = true;
     else list[i].isNew = false;
 
-    if (+list[i].student_num >= 1000) list[i].isBestseller = true;
+    if (+list[i].student_num >= 5) list[i].isBestseller = true;
     else list[i].isBestseller = false;
   }
   res.render("vwUser/courses", {
@@ -172,7 +172,7 @@ router.get("/detail", async function (req, res) {
   if (months <= 1) course.isNew = true;
   else course.isNew = false;
 
-  if (+course.student_num >= 1000) course.isBestseller = true;
+  if (+course.student_num >= 5) course.isBestseller = true;
   else course.isBestseller = false;
 
   for (let i = 0; i < lecture.length; i++) {

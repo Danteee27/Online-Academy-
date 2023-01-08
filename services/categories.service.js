@@ -67,7 +67,7 @@ export default {
     return list[0].amount;
   },
 
-  async find5MostEnrolledCourses() {
+  async find5MostEnrolledCategories() {
     // category
     const list = await db("categories").where("hidden", 0);
     if (list.length === 0) return null;

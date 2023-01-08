@@ -713,3 +713,13 @@ input:checked ~ label {
     height: 100%;
     object-fit: cover;
 }
+
+.category-box {
+    border: 1px solid;
+    padding: 20px 40px 10px 40px;
+    border-radius: 20px;
+}
+
+.category-box:hover {
+    background-color: rgb(205, 204, 204);
+}
