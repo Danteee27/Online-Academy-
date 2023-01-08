@@ -259,6 +259,7 @@ router.get("/delCourse", async function (req, res) {
   res.redirect("/teacher/profile?id=" + course.teacherID);
 });
 router.get("/getId", async function (req, res) {
+  const view = req.query.view;
   const teacher = await teachersService.findByUserId(req.query.id);
   if (req.session.authUser === null) {
     return res.redirect("/");
@@ -266,7 +267,10 @@ router.get("/getId", async function (req, res) {
   if (teacher === null) {
     res.redirect("/teacher/profile/add?id=" + req.session.authUser.userID);
   } else {
-    res.redirect("/teacher/profile?id=" + teacher.teacherID);
+    if (view === "private")
+      return res.redirect("/teacher/profile?id=" + teacher.teacherID);
+    if (view === "public")
+      return res.redirect("/teacher/public?id=" + teacher.teacherID);
   }
 });
 
