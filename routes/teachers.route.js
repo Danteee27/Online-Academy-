@@ -42,7 +42,7 @@ router.get("/addCourse", async function (req, res) {
   const teachID = req.query.id;
   //console.log(teachID);
   const teacher = await teachersService.findById(teachID);
-  const categories = await categoriesService.findAll();
+  const categories = await categoriesService.findAllWithoutHidden();
   res.render("vwTeacher/addCourse", {
     teacher: teacher,
     categories: categories,
@@ -212,7 +212,7 @@ router.post("/profile/edit", upload.any(), async function (req, res) {
 router.get("/editCourse", async function (req, res) {
   const courseID = req.query.id;
   const course = await coursesService.findById(courseID);
-  const categories = await categoriesService.findAll();
+  const categories = await categoriesService.findAllWithoutHidden();
   const teacher = await teachersService.findById(course.teacherID);
   res.render("vwTeacher/editCourse", {
     layout: "main1",
