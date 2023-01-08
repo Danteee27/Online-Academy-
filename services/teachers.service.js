@@ -49,11 +49,11 @@ export default {
     var len = list.length;
     if (list.length !== 0) {
       for (let i = 0; i < list.length; i++) {
-        if (list[i].rating !== null && +list[i].rating !== 0) {
+        if (list[i].rating !== null) {
           x = parseFloat(x) + parseFloat(list[i].rating);
         }
-        else
-          len -= 1;
+        if (list[i].rating !== null || +list[i].rating === 0)
+          len = len - 1;
       }
 
       x = parseFloat(parseFloat(x) / parseFloat(len));
