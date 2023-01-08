@@ -295,7 +295,7 @@ router.post("/buy-now", redirecting, async function (req, res) {
 
   const teacher = teachersService.findById(course.teacherID);
   teacher.totals_stu += 1;
-  await teachersService.update(teacher.teacherID, teacher);
+  await teachersService.updateTeacher(teacher.teacherID, teacher);
 
   const isInWishList = await wishlistService.isInWishList(userID, courseID);
   if (isInWishList === true) {
