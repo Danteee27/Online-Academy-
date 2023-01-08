@@ -359,7 +359,7 @@ router.post("/user-feedback", async function (req, res) {
     const course = await coursesService.findByIdWithoutHidden(courseID);
     const teacher = await teachersService.findById(course.teacherID);
     teacher.reviews += 1;
-    await teachersService.update(teacher.teacherID, teacher);
+    await teachersService.updateTeacher(teacher, teacher.teacherID);
     await teachersService.updateRating(teacher.teacherID);
   }
 
