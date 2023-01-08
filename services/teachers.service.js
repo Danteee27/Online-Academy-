@@ -56,7 +56,8 @@ export default {
           len = len - 1;
       }
 
-      x = parseFloat(parseFloat(x) / parseFloat(len));
+      // x = parseFloat(parseFloat(x) / parseFloat(len));
+      x = len;
     }
     return await db("teachers")
       .where("teacherID", teacherID)
