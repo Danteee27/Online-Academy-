@@ -34,6 +34,7 @@ export default function (app) {
     }
 
     const listDescendingCourses = await coursesService.getAllDescending(10);
+
     // const listSubDescCourses = splitArrayToListSubArray(
     //   listDescendingCourses,
     //   4

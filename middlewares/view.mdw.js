@@ -3,7 +3,7 @@ import {
 } from 'express-handlebars';
 import hbs_sections from 'express-handlebars-sections';
 import numeral from 'numeral';
-
+import teacherService from "../services/teachers.service.js";
 export default function (app) {
 
 
@@ -137,7 +137,8 @@ export default function (app) {
                     list.push( array.slice(i, i + chunkSize));
                     // do whatever
                 }
-            }
+            },
+
         }
     }));
     app.set('view engine', 'hbs');
