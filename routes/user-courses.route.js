@@ -293,7 +293,7 @@ router.post("/buy-now", redirecting, async function (req, res) {
   course.weekStudentNum += 1;
   await courseService.update(courseID, course);
 
-  const teacher = teachersService.findById(course.teacherID);
+  const teacher = await teachersService.findById(course.teacherID);
   teacher.totals_stu += 1;
   await teachersService.updateTeacher(teacher.teacherID, teacher);
 
