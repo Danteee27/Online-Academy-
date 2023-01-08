@@ -20,7 +20,6 @@ export default function (app) {
   app.get("/", async function (req, res) {
     res.locals.lcHomePage = true;
 
-
     function splitArrayToListSubArray(array, n) {
       const chunkSize = n;
       let list = [];
@@ -40,8 +39,8 @@ export default function (app) {
     //   4
     // );
 
-    const listMostEnrolledCourses =
-      await categoriesService.find5MostEnrolledCourses();
+    const listMostEnrolledCategories =
+      await categoriesService.find5MostEnrolledCategories();
     // const listSubMostEnrolledCourses = splitArrayToListSubArray(
     //   listMostEnrolledCourses,
     //   4
@@ -63,7 +62,7 @@ export default function (app) {
       listDescendingCourses,
       // listSubDescCourses,
       // listSubMostEnrolledCourses,
-      listMostEnrolledCourses,
+      listMostEnrolledCategories,
       // listSubLastestCourses,
       listLastestCourses,
       // listSubTopNumberStudentCourses,

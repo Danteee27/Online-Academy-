@@ -53,7 +53,7 @@
             }
 
             var ajax = new XMLHttpRequest();
-            ajax.open("POST", `http://localhost:3000/lectures/user-lectures/update?userID=${userID}&lecID=${lecID}&status=${status}`, true);
+            ajax.open("POST", `https://online-academy-5horses.herokuapp.com/lectures/user-lectures/update?userID=${userID}&lecID=${lecID}&status=${status}`, true);
             ajax.send();
         }
 
@@ -121,7 +121,7 @@
         function getMoreFeedback() {
             var ajax = new XMLHttpRequest();
 
-            ajax.open("POST", `http://localhost:3000/user-courses/moreFB?id=${courseID}&offset=${offset}`, true);
+            ajax.open("POST", `https://online-academy-5horses.herokuapp.com/user-courses/moreFB?id=${courseID}&offset=${offset}`, true);
 
             ajax.onreadystatechange = function () {
             if (this.readyState == 4) {

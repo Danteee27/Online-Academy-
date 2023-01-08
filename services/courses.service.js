@@ -1,4 +1,5 @@
 import knex from "knex";
+import teachersService from "./teachers.service.js";
 import db from "../utils/db.js";
 
 export default {
@@ -91,6 +92,20 @@ export default {
       .where("hidden", 0)
       .orderBy("update", "desc")
       .limit(topN);
+
+    for (let c of list) {
+      var teacher = await teachersService.findById(c.teacherID);
+      c.teacherName = teacher.teacherName;
+      if (+c.promotion !== 0) c.hasPromotion = true;
+      if (+c.student_num >= 5) c.isBestseller = true;
+      let now = new Date();
+      let then = new Date(c.update);
+      let months = (now.getFullYear() - then.getFullYear()) * 12;
+      months -= then.getMonth();
+      months += now.getMonth();
+      if (months <= 1) c.isNew = true;
+    }
+
     return list;
   },
   async findTopNumberStudentCourse(topN) {
@@ -98,6 +113,20 @@ export default {
       .where("hidden", 0)
       .orderBy("student_num", "desc")
       .limit(topN);
+
+    for (let c of list) {
+      var teacher = await teachersService.findById(c.teacherID);
+      c.teacherName = teacher.teacherName;
+      if (+c.promotion !== 0) c.hasPromotion = true;
+      if (+c.student_num >= 5) c.isBestseller = true;
+      let now = new Date();
+      let then = new Date(c.update);
+      let months = (now.getFullYear() - then.getFullYear()) * 12;
+      months -= then.getMonth();
+      months += now.getMonth();
+      if (months <= 1) c.isNew = true;
+    }
+
     return list;
   },
 
@@ -182,7 +211,20 @@ export default {
     });
   },
   async getAllDescending(limit) {
-    return await db("courses").orderBy("views", "desc").limit(limit);
+    const list = await db("courses").orderBy("views", "desc").limit(limit);
+    for (let c of list) {
+      var teacher = await teachersService.findById(c.teacherID);
+      c.teacherName = teacher.teacherName;
+      if (+c.promotion !== 0) c.hasPromotion = true;
+      if (+c.student_num >= 5) c.isBestseller = true;
+      let now = new Date();
+      let then = new Date(c.update);
+      let months = (now.getFullYear() - then.getFullYear()) * 12;
+      months -= then.getMonth();
+      months += now.getMonth();
+      if (months <= 1) c.isNew = true;
+    }
+    return list;
   },
   async getAllAscending(limit) {
     return await db("courses").orderBy("views", "asc").limit(limit);

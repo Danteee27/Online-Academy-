@@ -127,10 +127,10 @@ router.get("/public", async function (req, res) {
 // Phan Huy teacher route-profile
 router.get("/profile", async function (req, res) {
   const teacherID = req.query.id;
-  //await teachersService.updateCourseNum(teacherID);
-  //await teachersService.updateRating(teacherID);
-  //await teachersService.updateStudentNum(teacherID);
-  //await teachersService.updateReviews(teacherID);
+  // await teachersService.updateCourseNum(teacherID);
+  // await teachersService.updateRating(teacherID);
+  // await teachersService.updateStudentNum(teacherID);
+  // await teachersService.updateReviews(teacherID);
   if (req.session.authUser === null) {
     //console.log('role fix1');
     return res.redirect("/");
@@ -259,6 +259,7 @@ router.get("/delCourse", async function (req, res) {
   res.redirect("/teacher/profile?id=" + course.teacherID);
 });
 router.get("/getId", async function (req, res) {
+  const view = req.query.view;
   const teacher = await teachersService.findByUserId(req.query.id);
   if (req.session.authUser === null) {
     return res.redirect("/");
@@ -266,7 +267,10 @@ router.get("/getId", async function (req, res) {
   if (teacher === null) {
     res.redirect("/teacher/profile/add?id=" + req.session.authUser.userID);
   } else {
-    res.redirect("/teacher/profile?id=" + teacher.teacherID);
+    if (view === "private")
+      return res.redirect("/teacher/profile?id=" + teacher.teacherID);
+    if (view === "public")
+      return res.redirect("/teacher/public?id=" + teacher.teacherID);
   }
 });
 
