@@ -272,6 +272,7 @@ router.post("/buy-now", redirecting, async function (req, res) {
     userID,
     courseID,
   });
+
   const lectureList = await lectureService.findAllByCourseIDWithoutHidden(
     courseID
   );
@@ -291,6 +292,10 @@ router.post("/buy-now", redirecting, async function (req, res) {
   course.student_num += 1;
   course.weekStudentNum += 1;
   await courseService.update(courseID, course);
+
+  const teacher = await teachersService.findById(course.teacherID);
+  teacher.totals_stu += 1;
+  await teachersService.updateTeacher(teacher, teacher.teacherID);
 
   const isInWishList = await wishlistService.isInWishList(userID, courseID);
   if (isInWishList === true) {
@@ -348,7 +353,15 @@ router.post("/user-feedback", async function (req, res) {
   const user = await usersService.findById(req.session.authUser.userID);
 
   const isCommented = await feedbackService.isCommented(user.userID, courseID);
-  if (isCommented === true) await feedbackService.del(user.userID, courseID);
+  if (isCommented === true) {
+    await feedbackService.del(user.userID, courseID);
+  } else {
+    const course = await coursesService.findByIdWithoutHidden(courseID);
+    const teacher = await teachersService.findById(course.teacherID);
+    teacher.reviews += 1;
+    await teachersService.updateTeacher(teacher, teacher.teacherID);
+    await teachersService.updateRating(teacher.teacherID);
+  }
 
   await feedbackService.add({
     userID: user.userID,
