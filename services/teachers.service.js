@@ -46,14 +46,17 @@ export default {
       .andWhere("hidden", 0);
     var temp = 0;
     var x = parseFloat(temp);
+    var len = list.length;
     if (list.length !== 0) {
       for (let i = 0; i < list.length; i++) {
-        if (list[i].rating !== null) {
+        if (list[i].rating !== null && list[i].rating !== 0) {
           x = parseFloat(x) + parseFloat(list[i].rating);
         }
+        else
+          len -= 1;
       }
 
-      x = parseFloat(parseFloat(x) / parseFloat(list.length));
+      x = parseFloat(parseFloat(x) / parseFloat(len));
     }
     return await db("teachers")
       .where("teacherID", teacherID)
