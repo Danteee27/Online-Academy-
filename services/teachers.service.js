@@ -52,12 +52,11 @@ export default {
         if (list[i].rating !== null) {
           x = parseFloat(x) + parseFloat(list[i].rating);
         }
-        if (list[i].rating !== null || +list[i].rating === 0)
+        if (list[i].rating === null || +list[i].rating === 0)
           len = len - 1;
       }
 
-      // x = parseFloat(parseFloat(x) / parseFloat(len));
-      x = len;
+      x = parseFloat(parseFloat(x) / parseFloat(len));
     }
     return await db("teachers")
       .where("teacherID", teacherID)
