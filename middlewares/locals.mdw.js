@@ -11,7 +11,8 @@ export default function (app) {
             res.locals.authUser = null;
             req.session.retUrl = req.originalUrl;
         }
-        if(req.originalUrl !== '/favicon.ico' && req.originalUrl !== '/users/login' && req.originalUrl !== '/users/register')
+        if(req.originalUrl !== '/favicon.ico' && req.originalUrl !== '/users/login' && req.originalUrl !== '/users/register'
+        && !req.originalUrl.startsWith('/users/email-verify/'))
              req.session.retUrl = req.originalUrl;
 
 
