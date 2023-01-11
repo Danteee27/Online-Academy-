@@ -153,14 +153,14 @@
         });
     </script>
 </head>
-<div class="d-lg-flex justify-content-lg-center" style="font-size: 14px; background-size: cover; height: 100%; width: 100%; background-position: center; background-image: url(https://images.pexels.com/photos/397998/pexels-photo-397998.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)">
+<div class="d-lg-flex justify-content-lg-center gradient-upload-pizelex" style="font-size: 14px; background-size: cover; height: 100%; width: 100%; background-position: center;">
     <div class="contents order-2 order-md-1">
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-md-10 py-5 text-white text-center">
                     <h1 class="font-weight-bold font-italic">Add some lectures for {{this.course.courseName}}.</h1>
                     <img class="card-img pb-5" style="height: 300px; width: 400px" src="https://drive.google.com/uc?export=view&id={{this.course.image}}">
-                    <div class="bg-secondary rounded">
+                    <div class="glass">
                         <blockquote
                                 class="mb-0 font-weight-bold d-flex"
                                 style="font: 1.4rem/1.8rem Georgia, serif;
@@ -237,9 +237,9 @@
                                 <div class="form-group first">
                                     <input name="teacherID" value={{course.teacherID}} hidden />
                                     <label for="Files" style="font-size: 32px;" class="font-weight-bold mb-3">Lecture video</label>
-                                    <div class="file-upload">
+                                    <div class="file-upload glass">
                                         <button
-                                                class="file-upload-btn"
+                                                class="file-upload-btn gradient-upload-haikus"
                                                 type="button"
                                                 onclick="$('.file-upload-input').trigger(
                                             'click' )"

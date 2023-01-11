@@ -12,6 +12,12 @@ const knex = knexObj({
         user: 'b93a85f0da66bc',
         password: 'c61b78f8',
         database: 'heroku_d41916e4c029680'
+        // host: 'localhost',
+        // port: 3306,
+        // user: 'root',
+        // password: 'root',
+        // database: 'qlkh'
+
     },
     pool: {
         min: 0,
