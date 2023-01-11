@@ -723,3 +723,19 @@ input:checked ~ label {
 .category-box:hover {
     background-color: rgb(205, 204, 204);
 }
+
+.progress-border {
+    margin-top: 5px;
+    border: 1px solid;
+}
+
+.progress {
+    height: 2px;
+    background-color: black;
+}
+
+.completed-progress {
+    padding: 5px;
+    background-color: rgb(111, 210, 111);
+    font-weight: 700;
+}

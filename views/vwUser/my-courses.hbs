@@ -16,10 +16,20 @@
             {{#each course}}
             <div class="col-sm-2 mb-3 mt-3" type="button">
                 <a class="course-card-a" href="/user-courses/detail?catID={{catID}}&id={{courseID}}">
-                <div class="course-card" style="height: 280px;">
+                <div class="course-card" style="height: 300px;">
                     <img class= "course-card-img" src="https://drive.google.com/uc?export=view&id={{image}}" alt="">
                     <h5 class="course-card-title">{{courseName}}</h5>
                     <p class="course-card-instructor">{{instructor}}</p>
+                    {{#ifCond progress "==" "100"}}
+                    <div class="mt-1">
+                        <span class="completed-progress">Completed</span>
+                    </div>
+                    {{else}}
+                    <div class="progress-border">
+                        <div class="progress" style="width: {{progress}}%"></div>
+                    </div>
+                    <p class="mt-1">{{progress}}% complete</p>
+                    {{/ifCond}}
                 </div>
                 </a>
             </div>

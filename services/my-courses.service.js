@@ -1,33 +1,48 @@
-import db from '../utils/db.js';
+import db from "../utils/db.js";
 
 export default {
-    findAll() {
-        return db('my-courses');
-    },
+  findAll() {
+    return db("my-courses");
+  },
 
-    async isInMyCourse(userID, courseID) {
-        const list = await db('my-courses').where('userID', userID).where('courseID', courseID);
-        if (list.length === 0)
-            return false;
-        return true;
-    },
+  findAllByCourseID(courseID) {
+    return db("my-courses").where("courseID", courseID);
+  },
 
-    async countByUserID(userID) {
-        const list = await db('my-courses').where('userID', userID).count({
-            amount: 'courseID'
-        });
-        return list[0].amount;
-    },
+  findAllUserIDByCourseID(courseID) {
+    return db("my-courses")
+      .select("userID")
+      .where("courseID", courseID)
+      .distinct();
+  },
 
-    findByUserID(userID, limit, offset) {
-        return db('my-courses').where('userID', userID).limit(limit).offset(offset);
-    },
+  async isInMyCourse(userID, courseID) {
+    const list = await db("my-courses")
+      .where("userID", userID)
+      .where("courseID", courseID);
+    if (list.length === 0) return false;
+    return true;
+  },
 
-    add(userID, courseID) {
-        return db('my-courses').insert(userID, courseID);
-    },
+  async countByUserID(userID) {
+    const list = await db("my-courses").where("userID", userID).count({
+      amount: "courseID",
+    });
+    return list[0].amount;
+  },
 
-    del(userID, courseID) {
-        return db('my-courses').where('userID', userID).where('courseID', courseID).del();
-    }
+  findByUserID(userID, limit, offset) {
+    return db("my-courses").where("userID", userID).limit(limit).offset(offset);
+  },
+
+  add(userID, courseID) {
+    return db("my-courses").insert(userID, courseID);
+  },
+
+  del(userID, courseID) {
+    return db("my-courses")
+      .where("userID", userID)
+      .where("courseID", courseID)
+      .del();
+  },
 };

@@ -1,7 +1,10 @@
 import express from "express";
 import courseService from "../services/courses.service.js";
+import lecturesService from "../services/lectures.service.js";
 import myCourseService from "../services/my-courses.service.js";
 import teachersService from "../services/teachers.service.js";
+import userLecturesService from "../services/user-lectures.service.js";
+import myCoursesService from "../services/my-courses.service.js";
 
 const router = express.Router();
 
@@ -33,17 +36,39 @@ router.get("/", async function (req, res) {
 
   const list = await myCourseService.findByUserID(userID, limit, offset);
 
-  let course = [];
+  let courses = [];
   for (let i = 0; i < list.length; i++) {
-    let temp = await courseService.findByIdWithoutHidden(list[i].courseID);
-    if (temp === null) continue;
-    let tempTeacher = await teachersService.findById(temp.teacherID);
-    if (tempTeacher !== null) temp.instructor = tempTeacher.teacherName;
-    course.push(temp);
+    let course = await courseService.findByIdWithoutHidden(list[i].courseID);
+
+    if (course === null) continue;
+
+    let teacher = await teachersService.findById(course.teacherID);
+    if (teacher !== null) {
+      course.instructor = teacher.teacherName;
+    }
+
+    let lectures = await userLecturesService.findAllByCourseID(
+      userID,
+      list[i].courseID
+    );
+    course.progress = 0;
+    if (lectures.length !== 0) {
+      let completedLec = 0;
+      for (let lecture of lectures) {
+        if (+lecture.completed === 1) {
+          completedLec += 1;
+        }
+      }
+      completedLec = (completedLec / course.lec_num) * 100;
+      course.progress = completedLec.toFixed(0);
+      // console.log("progress " + completedLec);
+    }
+
+    courses.push(course);
   }
 
   res.render("vwUser/my-courses", {
-    course,
+    course: courses,
     pageNumbers,
     empty: list.length === 0,
     prevPage: +page - 1,
