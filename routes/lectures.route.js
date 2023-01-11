@@ -10,6 +10,7 @@ import { google } from "googleapis";
 
 import * as stream from "stream";
 import categoriesService from "../services/categories.service.js";
+import myCoursesService from "../services/my-courses.service.js";
 
 //Declare for googleapis to up image to drive by Phan Huy
 const CLIENT_ID =
@@ -194,13 +195,32 @@ router.post("/add", upload.any(), async function (req, res) {
     await coursesService.updateDate(id);
     await coursesService.checkCompleted(id);
   }
-  console.log(body);
+
+  const userList = await myCoursesService.findAllUserIDByCourseID(id);
+  // console.log(userList);
+  if (userList.length !== 0) {
+    for (let user of userList) {
+      const lecture = await lecturesService.findByCourseID(id);
+      const lecID = lecture[lecture.length - 1].lecID;
+      await userLecturesService.add({
+        userID: user.userID,
+        lecID,
+        completed: 0,
+        courseID: id,
+        date: null,
+      });
+    }
+  }
+
+  // console.log(body);
   res.redirect(`/user-courses/detail?catID=${catID}&id=${id}`);
 });
 
 router.get("/add", async function (req, res) {
   const courseID = req.query.id;
-  const lectures = await lecturesService.findAllByCourseIDWithoutHidden(courseID);
+  const lectures = await lecturesService.findAllByCourseIDWithoutHidden(
+    courseID
+  );
   const course = await coursesService.findById(courseID);
   console.log(lectures);
   res.render("vwTeacher/addLecture", {
