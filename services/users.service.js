@@ -4,7 +4,9 @@ export default {
     async findAll() {
         return await db('users');
     },
-
+    async findByRole(role) {
+      return await db('users').where('role', role);
+    },
     async findById(id) {
         const list = await db('users').where('userID', id);
         if (list.length === 0)

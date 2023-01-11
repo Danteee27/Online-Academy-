@@ -4,6 +4,7 @@ import lecturesService from "../services/lectures.service.js";
 import fieldsService from "../services/fields.service.js";
 import categoriesService from "../services/categories.service.js";
 import CategoriesService from "../services/categories.service.js";
+import teachersService from "../services/teachers.service.js";
 
 
 const router = express.Router();
@@ -17,6 +18,11 @@ router.get('/view/:id', async function(req, res) {
     const id = req.params.id || 0;
     console.log(id);
     const list = await coursesService.findByCategoryID(id);
+
+    for(let i = 0; i < list.length; i++) {
+        let teacher = await teachersService.findById(list[i].teacherID);
+        list[i].teacherName = teacher.teacherName;
+    }
 
     const cat = await categoriesService.findById(id)
 

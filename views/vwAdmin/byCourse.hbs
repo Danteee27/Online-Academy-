@@ -1,3 +1,16 @@
+{{#section 'js'}}
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+{{/section}}
+
 <div class="card">
     <h4 class="card-header d-flex justify-content-between">
         Courses
@@ -11,6 +24,9 @@
             Không có dữ liệu!
         </div>
     {{else}}
+        <p>Filter by text:</p>
+        <input id="myInput" type="text" placeholder="Search.." style="width: 400px">
+        <br><br>
         <div class="card-body">
             <table class="table table-hover">
                 <thead>
@@ -18,6 +34,7 @@
                     <th>#</th>
                     <th>Courses</th>
                     <th class ="text-center">Teacher ID</th>
+                    <th class ="text-center">Teacher Name</th>
                     <th >Hidden </th>
                     <th class="text-center">Lectures</th>
                     <th class ="text-center">Edit</th>
@@ -25,12 +42,13 @@
 
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="myTable">
                 {{#each this.list}}
                     <tr>
                         <td scope="row">{{courseID}}</td>
                         <td>{{courseName}}</td>
                         <td class ="text-center">{{teacherID}}</td>
+                        <td class ="text-center">{{teacherName}}</td>
                         <td>{{#if hidden}} true {{else}} false{{/if}}</td>
                         <td class ="text-center">{{lec_num}}</td>
                         <td class ="text-center">

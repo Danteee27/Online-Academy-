@@ -1,13 +1,84 @@
+{{#section 'js'}}
+    <script>
+        $(document).ready(function(e){
+            $('#f-admin').change(function(e)
+            {
+                let val = $(this).val();
+                $('#myTable tr').each(function() {
+                    var role = $(this).find('#role').text();
+                    if (role == val) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            })
+            $('#f-instructor').change(function(e)
+            {
+                let val = $(this).val();
+                $('#myTable tr').each(function() {
+                    var role = $(this).find('#role').text();
+                    if (role == val) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            })
+            $('#f-student').change(function(e)
+            {
+                let val = $(this).val();
+                $('#myTable tr').each(function() {
+                    var role = $(this).find('#role').text();
+                    if (role == val) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            })
+
+            $('#f-all').change(function(e)
+            {
+                $('#myTable tr').each(function() {
+                        $(this).show();
+                });
+            })
+        })
+
+
+    </script>
+{{/section}}
+
+
 <div class="card">
     <h4 class="card-header d-flex justify-content-between">
         Users
+        <a class="btn btn-outline-success mr-4" href="/admin" role="button">
+            <i class="fa fa-backward" aria-hidden="true"></i>
+            Back
+        </a>
     </h4>
+
     {{#if this.empty}}
         <div class="card-body">
             Không có dữ liệu!
         </div>
     {{else}}
         <div class="card-body">
+            <form id="filter-form" action="/admin/users/filter" method="post">
+            <fieldset>
+                <legend>Role filtering</legend>
+                    <input type="radio" id="f-admin" name="radioText" value="ROLE.ADMIN">
+                    <label for="f-admin">Admin</label>
+                    <input type="radio" id="f-instructor" name="radioText" value="ROLE.TEACHER" >
+                    <label for="f-instructor">Instructor</label>
+                    <input type="radio" id="f-student" name="radioText" value="ROLE.USER" >
+                    <label for="f-student">Student</label>
+                    <input type="radio" id="f-all" name="radioText" value="" checked >
+                    <label for="f-all">All</label>
+            </fieldset>
+            </form>
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -22,13 +93,13 @@
 
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="myTable">
                 {{#each this.list}}
                     <tr>
                         <td scope="row">{{userID}}</td>
                         <td>{{name}}</td>
                         <td>{{email}}</td>
-                        <td>{{role}}</td>
+                        <td id = "role">{{role}}</td>
                         <td class ="text-center">{{#if banned}} true {{else}} false{{/if}}</td>
                         <td class ="text-center">{{#if verifyEmail}} verified {{else}} unverified{{/if}}</td>
                         <td class ="text-center">
