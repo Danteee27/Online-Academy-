@@ -12,7 +12,7 @@ export default function (app) {
             req.session.retUrl = req.originalUrl;
         }
         if(req.originalUrl !== '/favicon.ico' && req.originalUrl !== '/users/login' && req.originalUrl !== '/users/register'
-        && !req.originalUrl.startsWith('/users/email-verify/'))
+        && !req.originalUrl.startsWith('/users/email-verify/') && !req.originalUrl.startsWith('/users/is-available'))
              req.session.retUrl = req.originalUrl;
 
 
